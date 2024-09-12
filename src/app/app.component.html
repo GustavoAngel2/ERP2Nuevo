@@ -2,6 +2,11 @@
   
   <mat-drawer #drawer [mode]="'over'">
     <div class="side-list">
+      <div class="card">
+        <img src="">
+        <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
+        <button (click)="authService.logout(); drawer.toggle();" routerLink="login">Cerrar sesión</button>
+      </div>
       <span>Titulo 1</span>  
       <button>Algo1</button>
       <button>Algo2</button>
@@ -21,9 +26,9 @@
       <span class="example-spacer"></span>
       <span> Administrador de recursos empresariales</span>
       <div class="actions">
-        <span>Hola user!</span>
+        <span>Hola {{actualUser.NombrePersona}}!</span>
         <button routerLink="inicio"><mat-icon>home</mat-icon></button>
-        <button routerLink="login"><mat-icon>exit_to_app</mat-icon></button>
+        <button (click)="this.authService.logout()" routerLink="login"><mat-icon>exit_to_app</mat-icon></button>
       </div>
   </mat-toolbar>
   

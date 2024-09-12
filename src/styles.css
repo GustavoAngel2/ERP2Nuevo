@@ -4,12 +4,24 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html{
-    --mat-toolbar-container-background-color: #5e78eb;
-    --mat-expansion-container-background-color: #5e78eb;
+
+    --red:#e72121;
+    --green:#5de125;
+    --blue:#5e78eb;
+    --orange:#dd8827;
+    --yellow:#f3e51f;
+    --black: #424242;
+    --purple: #420439;
+    --custom: #000000;
+
+    --mat-toolbar-container-background-color: var(--black);
+    --mat-expansion-container-background-color: var(--black);
     --mat-toolbar-standard-height: 64px;
     --mat-toolbar-mobile-height: 56px;
     --mat-sidenav-container-text-color:#fff;
     --mat-sidenav-container-background-color:#424242;
+    --mat-sidenav-content-background-color: #303030;
+    --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
 }
 
 .content{

@@ -42,3 +42,14 @@ mat-drawer{
     display: flex;
     flex-direction: column;
 }
+
+.card{
+    width: calc(100% - 12px);
+    height: 256px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    background-color: #00000048;
+    color:white;
+}

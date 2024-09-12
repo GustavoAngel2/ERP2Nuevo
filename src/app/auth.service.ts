@@ -6,7 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 export interface currentUser {
   Id: string;
   NombreUsuario: string;
-  Rol: string;
+  NombrePersona: string;
   IdRol: string;
 }
 
@@ -27,8 +27,8 @@ export class AuthService {
     return {
       Id: sessionStorage.getItem('Id') ?? '',
       NombreUsuario: sessionStorage.getItem('NombreUsuario') ?? '',
-      Rol: sessionStorage.getItem('Rol') ?? '',
-      IdRol : sessionStorage.getItem('IdRol') ?? ''
+      NombrePersona: sessionStorage.getItem('NombrePersona') ?? '',
+      IdRol : ''
     };
   }
 
@@ -40,8 +40,7 @@ export class AuthService {
           sessionStorage.setItem('Token', response.Response.data.Token);
           this.setIdUsername(response.Response.data.Usuario.Id.toString());
           this.setUsername(response.Response.data.Usuario.NombreUsuario);
-          this.setRol(response.Response.data.Usuario.Rol);
-          this.setIdRol(response.Response.data.Usuario.IdRol);
+          this.setRol(response.Response.data.Usuario.NombrePersona);
           this.updateCurrentUser(response.Response.data.Usuario);
           return response.Response.data;
         } else {
@@ -59,9 +58,8 @@ export class AuthService {
     sessionStorage.removeItem('Token');
     sessionStorage.removeItem('Id');
     sessionStorage.removeItem('NombreUsuario');
-    sessionStorage.removeItem('Rol');
-    sessionStorage.removeItem('IdRol')
-    this.updateCurrentUser({ Id: '', NombreUsuario: '' ,Rol:'', IdRol:''});
+    sessionStorage.removeItem('NombrePersona');
+    this.updateCurrentUser({ Id: '', NombreUsuario: '' ,NombrePersona:'', IdRol:''});
   }
 
   getToken() {
@@ -79,13 +77,10 @@ export class AuthService {
   }
   
   setRol(rol: string) {
-    sessionStorage.setItem('Rol', rol);
+    sessionStorage.setItem('NombrePersona', rol);
     console.log('Rol set in sessionStorage:', rol);
   }
-  setIdRol(Idrol: string) {
-    sessionStorage.setItem('IdRol', Idrol);
-    console.log('IdRol set in sessionStorage:', Idrol);
-  }
+
   getIdUsername(): string {
     return sessionStorage.getItem('Id') ?? '';
   }
@@ -95,10 +90,7 @@ export class AuthService {
   }
 
   getRol():string{
-    return sessionStorage.getItem('Rol') ?? '';
-  }
-  getIdRol():string{
-    return sessionStorage.getItem('IdRol') ?? '';
+    return sessionStorage.getItem('NombrePersona') ?? '';
   }
 
   isLoggedIn(): boolean {

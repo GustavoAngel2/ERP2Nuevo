@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UpdateAlmacen } from './models/almacen.model';
+// import { UpdateAlmacen } from './models/almacen.model';
 import { defaultApiResponse } from './data-models/response.model';
 import { AuthService } from './auth.service';
 
@@ -28,22 +28,23 @@ export class AlmacenesService {
     direccion: string;
     usuario: number;
     encargado: number;
-  }): Observable<ApiResponse> {
+  }): Observable<defaultApiResponse> {
     const body = {
       nombre: AlmacenesData.nombre,
       direccion: AlmacenesData.direccion,
       usuario: AlmacenesData.usuario,
       encargado: AlmacenesData.encargado
     };
-    return this.http.post<ApiResponse>(`${this.apiUrl}/Almacenes/Insert`, body);
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Almacenes/Insert`, body);
   }
+
   //esta funcion borra un almacen pidiendo el id del almacen a borrar
   deleteAlmacenes(Id: number): Observable<any> {
-    
     return this.http.put(`${this.apiUrl}/Almacenes/Delete`, { Id });
   }
+
   //esta funcion sirve para modificar la informacion de un almacen
-  updateAlmacenes(AlmacenesData: UpdateAlmacen): Observable<ApiResponse> {
+  updateAlmacenes(AlmacenesData:any): Observable<defaultApiResponse> {
     const body = {
       id: AlmacenesData.Id,
       nombre: AlmacenesData.Nombre,
@@ -52,6 +53,6 @@ export class AlmacenesService {
       encargado: AlmacenesData.Encargado
     };
     console.log("Enviando solicitud con el siguiente cuerpo:", body);
-    return this.http.put<ApiResponse>(`${this.apiUrl}/Almacenes/Update`, body);
+    return this.http.put<defaultApiResponse>(`${this.apiUrl}/Almacenes/Update`, body);
   }
 }
