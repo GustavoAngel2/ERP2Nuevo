@@ -9,9 +9,9 @@ import { PersonasComponent } from './personas/personas.component';
 const routes: Routes = [
   { path: "", redirectTo: '/login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
-  { path: "inicio", component: InicioComponent, canActivate: [AuthGuard]},
-  { path: "personas", component: PersonasComponent, canActivate: [AuthGuard]},
-  { path: "usuarios", component: UsuariosComponent, canActivate: [AuthGuard]},
+  { path: "inicio", component: InicioComponent },
+  { path: "personas", component: PersonasComponent },
+  { path: "usuarios", component: UsuariosComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 
