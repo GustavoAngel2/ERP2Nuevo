@@ -24,6 +24,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
+    //Componentes
     AppComponent,
     InicioComponent,
     LoginComponent,
@@ -31,13 +32,15 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     UsuariosComponent
   ],
   imports: [
+    //Dependencias
     BrowserModule,
     AppRoutingModule,
     RouterLink,
     FormsModule,
     NgIf,
     HttpClientModule,
-
+    
+    //Materials
     MatIconModule,
     MatToolbarModule,
     MatInputModule,
@@ -49,6 +52,6 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
   providers: [
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] //Interfaz de Inicio
 })
 export class AppModule { }
