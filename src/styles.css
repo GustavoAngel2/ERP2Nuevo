@@ -1,0 +1,58 @@
+/* SilentStyles */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html{
+    --mat-toolbar-container-background-color: #5e78eb;
+    --mat-expansion-container-background-color: #5e78eb;
+    --mat-toolbar-standard-height: 64px;
+    --mat-toolbar-mobile-height: 56px;
+    --mat-sidenav-container-text-color:#fff;
+    --mat-sidenav-container-background-color:#424242;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-strip{
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 128px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.button-strip button{
+    cursor: pointer;
+    width: 128px;
+    height: 128px;
+    border: 0;
+    border-radius: 5px;
+    padding: 4px;
+    background-color: #00000092;
+    color:white;
+    font-size: 16px;
+    transition: .5s;
+}
+
+.button-strip button:hover{
+    background-color: #000000b3;
+    font-size: 24px;
+    transition: .5s;
+}
+
+.button-strip button:active{
+    background-color: #000000d3;
+    transition: .5s;
+}
+
+.section-title{
+    margin-left: 6px;
+}

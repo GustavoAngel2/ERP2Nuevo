@@ -1,0 +1,34 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true" style="position: fixed; left: 0; top: 0; width: 100%; height: 100%;">
+  
+  <mat-drawer #drawer [mode]="'over'">
+    <div class="side-list">
+      <span>Titulo 1</span>  
+      <button>Algo1</button>
+      <button>Algo2</button>
+      <button>Algo3</button>
+      <span>Titulo 2</span>  
+      <button>Algo1</button>
+      <button>Algo2</button>
+      <button>Algo3</button>
+    </div>
+  </mat-drawer>
+  
+  <mat-drawer-content>
+    <mat-toolbar *ngIf="currentUrl != '/login' && currentUrl != '/'">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon> format_list_bulleted</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <span> Administrador de recursos empresariales</span>
+      <div class="actions">
+        <span>Hola user!</span>
+        <button routerLink="inicio"><mat-icon>home</mat-icon></button>
+        <button routerLink="login"><mat-icon>exit_to_app</mat-icon></button>
+      </div>
+  </mat-toolbar>
+  
+  <div style="padding: 10px;">
+    <router-outlet />
+  </div>
+  </mat-drawer-content>
+</mat-drawer-container>

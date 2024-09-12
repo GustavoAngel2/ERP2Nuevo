@@ -1,0 +1,54 @@
+//Funciones angular
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule } from '@angular/common/http';
+//Materiales
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+//Componentes
+import { AppComponent } from './app.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { LoginComponent } from './login/login.component';
+import { PersonasComponent } from './personas/personas.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    InicioComponent,
+    LoginComponent,
+    PersonasComponent,
+    UsuariosComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterLink,
+    FormsModule,
+    NgIf,
+    HttpClientModule,
+
+    MatIconModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSidenavModule,
+    MatExpansionModule
+  ],
+  providers: [
+    provideAnimationsAsync()
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
