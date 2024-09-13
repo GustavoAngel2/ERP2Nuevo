@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-// import { UpdateAlmacen } from './models/almacen.model';
 import { defaultApiResponse } from './data-models/response.model';
 import { AuthService } from './auth.service';
 
@@ -9,50 +8,49 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: "root",
 })
-export class AlmacenesService {
+export class PersonasService {
   //Se especifica la url base de la API
   private apiUrl = "http://localhost:5020/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
-  
-  getAlmacenes(): Observable<any> {
+
+  getPersonas(): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<any>(`${this.apiUrl}/Almacenes/Get`, { headers });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Personas/Get`,{headers});
   }
-
-  //esta funcion se utiliza para insertar un almacen, contiene un cuerpo de nombre, direccion y el usuario (su id) que lo crea
-  insertarAlmacenes(AlmacenesData: {
+  insertarPersona(PersonaData: {
     nombre: string;
+    ApPaterno: string;
+    ApMaterno: string;
     direccion: string;
     usuario: number;
-    encargado: number;
   }): Observable<defaultApiResponse> {
     const body = {
-      nombre: AlmacenesData.nombre,
-      direccion: AlmacenesData.direccion,
-      usuario: AlmacenesData.usuario,
-      encargado: AlmacenesData.encargado
+      nombre: PersonaData.nombre,
+      ApPaterno: PersonaData.ApPaterno,
+      ApMaterno: PersonaData.ApMaterno,
+      direccion: PersonaData.direccion,
+      usuario: PersonaData.usuario,
+      Direccion: PersonaData.direccion,
+      Usuario: PersonaData.usuario,
     };
-    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Almacenes/Insert`, body);
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
   }
-
-  //esta funcion borra un almacen pidiendo el id del almacen a borrar
-  deleteAlmacenes(Id: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/Almacenes/Delete`, { Id });
+  deletePersonas(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
   }
-
-  //esta funcion sirve para modificar la informacion de un almacen
-  updateAlmacenes(AlmacenesData:any): Observable<defaultApiResponse> {
-    const body = {
-      id: AlmacenesData.Id,
-      nombre: AlmacenesData.Nombre,
-      direccion: AlmacenesData.Direccion,
-      usuario: AlmacenesData.Usuario,
-      encargado: AlmacenesData.Encargado
-    };
-    console.log("Enviando solicitud con el siguiente cuerpo:", body);
-    return this.http.put<defaultApiResponse>(`${this.apiUrl}/Almacenes/Update`, body);
-  }
+  // updatePersonas(PersonaData: UpdatePersonas): Observable<defaultApiResponse> {
+  //   const body = {
+  //     id: PersonaData.Id,
+  //     nombre: PersonaData.Nombre,
+  //     apPaterno: PersonaData.ApPaterno,
+  //     apMaterno: PersonaData.ApMaterno,
+  //     direccion: PersonaData.Direccion,
+  //     usuario: PersonaData.Usuario
+  //   };
+  //   console.log("Enviando solicitud con el siguiente cuerpo:", body);
+  //   return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
+  // }
 }

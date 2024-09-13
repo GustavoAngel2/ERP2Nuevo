@@ -17,7 +17,7 @@ export class AppComponent implements OnInit,OnDestroy{
   ngOnInit() {
     // Obtener la URL actual directamente
     this.currentUrl = this.router.url;
-    this.setStyle()
+    this.setStyle('blue')
     // Suscribirse a los cambios de la ruta
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
@@ -43,12 +43,12 @@ export class AppComponent implements OnInit,OnDestroy{
     this.authService.logout();
   }
 
-  setStyle(){
+  setStyle(theme:string){
     const root = document.documentElement.style;
 
     // Cambiar los valores de las variables CSS
-    root.setProperty('--mat-toolbar-container-background-color', 'var(--purple)');
-    root.setProperty('--mat-expansion-container-background-color', 'var(--purple)');
+    root.setProperty('--mat-toolbar-container-background-color', ('var(--' + theme + ')'));
+    root.setProperty('--mat-expansion-container-background-color', ('var(--' + theme + ')'));
     root.setProperty('--mat-toolbar-standard-height', '70px');
     root.setProperty('--mat-toolbar-mobile-height', '60px');
     root.setProperty('--mat-sidenav-container-text-color', '#e0e0e0');

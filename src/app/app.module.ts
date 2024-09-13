@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 //Componentes
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -41,6 +43,12 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     HttpClientModule,
     
     //Materials
+    MatHeaderCell,
+    MatHeaderRow,
+    MatRow,
+    MatPaginator,
+    MatTableModule,
+    MatTable,
     MatIconModule,
     MatToolbarModule,
     MatInputModule,
