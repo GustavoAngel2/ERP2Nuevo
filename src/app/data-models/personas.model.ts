@@ -15,5 +15,13 @@ export interface InsertPersonasModel {
     ApMaterno:string;
     Direccion:string;
     Usuario:number;
-    Pass:string;
+}
+
+export interface UpdatePersonasModel {
+    Id:number
+    Nombre:string;
+    ApPaterno:string
+    ApMaterno:string;
+    Direccion:string;
+    Usuario:number;
 }

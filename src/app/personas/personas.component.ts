@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth.service';
-import { GetPersonasModel } from '../data-models/personas.model';
+import { GetPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
 
 @Component({
   selector: 'app-personas',
@@ -13,7 +13,7 @@ import { GetPersonasModel } from '../data-models/personas.model';
   styleUrl: './personas.component.css'
 })
 export class PersonasComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'ApPaterno','ApMaterno','Direccion', 'FechaAct','FechaReg'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'ApPaterno','ApMaterno','Direccion', 'FechaAct','FechaReg', 'Acciones'];
   dataSource: MatTableDataSource<GetPersonasModel>;
   id: number = 0;
   nombre: string = '';
@@ -76,7 +76,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
       ApPaterno:this.ApPaterno,
       ApMaterno:this.ApMaterno,
       direccion: this.direccion,
-      usuario: parseInt(this.loggedUser.Id,10)  
+      usuario: parseInt(this.loggedUser.Id,10) 
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
@@ -139,31 +139,31 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     this.isModifying = false
   }
 
-  // editar(){
-  //   const persona:UpdatePersonas   = {
-  //     Id: this.id,
-  //     Nombre: this.nombre,
-  //     ApPaterno:this.ApPaterno,
-  //     ApMaterno:this.ApMaterno,
-  //     Direccion: this.direccion,  
-  //     Usuario: parseInt(this.loggedUser.Id,10)
-  //   };
+  editar(){
+    const persona:UpdatePersonasModel   = {
+      Id: this.id,
+      Nombre: this.nombre,
+      ApPaterno:this.ApPaterno,
+      ApMaterno:this.ApMaterno,
+      Direccion: this.direccion,  
+      Usuario: parseInt(this.loggedUser.Id,10)
+    };
 
-  //   this.PersonasService.updatePersonas(persona).subscribe({
-  //     next: (response) => {
-  //       if(response.StatusCode == 200){
-  //         this.toastr.success(response.response.data, 'Personas');
-  //       } else {
-  //         this.toastr.error(response.response.data,'Personas')
-  //       }
-  //       console.log(response);
-  //       this.getData();
-  //       this.limpiar();
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
+    this.PersonasService.updatePersonas(persona).subscribe({
+      next: (response) => {
+        // if(response.StatusCode == 200){
+        //   this.toastr.success(response.response.data, 'Personas');
+        // } else {
+        //   this.toastr.error(response.response.data,'Personas')
+        // }
+        console.log(response);
+        this.getData();
+        this.limpiar();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 }
 

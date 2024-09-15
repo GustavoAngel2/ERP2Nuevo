@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultApiResponse } from './data-models/response.model';
 import { AuthService } from './auth.service';
+import { UpdatePersonasModel } from './data-models/personas.model';
 
 
 @Injectable({
@@ -41,16 +42,16 @@ export class PersonasService {
   deletePersonas(Id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
   }
-  // updatePersonas(PersonaData: UpdatePersonas): Observable<defaultApiResponse> {
-  //   const body = {
-  //     id: PersonaData.Id,
-  //     nombre: PersonaData.Nombre,
-  //     apPaterno: PersonaData.ApPaterno,
-  //     apMaterno: PersonaData.ApMaterno,
-  //     direccion: PersonaData.Direccion,
-  //     usuario: PersonaData.Usuario
-  //   };
-  //   console.log("Enviando solicitud con el siguiente cuerpo:", body);
-  //   return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
-  // }
+  updatePersonas(PersonaData: UpdatePersonasModel): Observable<defaultApiResponse> {
+    const body = {
+      id: PersonaData.Id,
+      nombre: PersonaData.Nombre,
+      apPaterno: PersonaData.ApPaterno,
+      apMaterno: PersonaData.ApMaterno,
+      direccion: PersonaData.Direccion,
+      usuario: PersonaData.Usuario
+    };
+    console.log("Enviando solicitud con el siguiente cuerpo:", body);
+    return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
+  }
 }
