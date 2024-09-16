@@ -36,6 +36,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -70,7 +71,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     });
   }
 
-  insertar(): void {
+  insertar():void {
     const nuevaPersona = {
       nombre: this.nombre,
       ApPaterno:this.ApPaterno,

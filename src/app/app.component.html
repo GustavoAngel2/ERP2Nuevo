@@ -5,7 +5,8 @@
       <div class="card">
         <img src="">
         <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
-        <button (click)="authService.logout(); drawer.toggle();" routerLink="login">Cerrar sesión</button>
+        <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
+        <button (click)="authService.logout(); drawer.toggle();" >Cerrar sesión</button>
       </div>
       <span>Titulo 1</span>  
       <button>Algo1</button>

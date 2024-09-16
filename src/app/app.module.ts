@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { PersonasComponent } from './personas/personas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { AjustesComponent } from './ajustes/ajustes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
     LoginComponent,
     PersonasComponent,
     UsuariosComponent,
-    ProveedoresComponent
+    ProveedoresComponent,
+    AjustesComponent
   ],
   imports: [
     //Dependencias

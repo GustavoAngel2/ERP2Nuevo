@@ -10,8 +10,15 @@ html{
     --blue:#5e78eb;
     --orange:#dd8827;
     --yellow:#f3e51f;
+    --gray: #6f6f6f;
+    --purple: #a4128e;
+    --dark-red:#751010;
+    --dark-green:#205608;
+    --dark-blue:#111e59;
+    --dark-orange:#633c0f;
+    --dark-yellow:#80780f;
     --black: #424242;
-    --purple: #420439;
+    --dark-purple: #4e0443;
     --custom: #000000;
 
     --mat-toolbar-container-background-color: var(--black);

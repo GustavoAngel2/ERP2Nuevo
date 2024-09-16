@@ -9,6 +9,7 @@ export interface GetPersonasModel {
     FechaReg:Date;
     Mensaje:string;
 }
+
 export interface InsertPersonasModel {
     Nombre:string;
     ApPaterno:string
