@@ -17,7 +17,7 @@ export class AppComponent implements OnInit,OnDestroy{
   ngOnInit() {
     // Obtener la URL actual directamente
     this.currentUrl = this.router.url;
-    this.setStyle('blue')
+    this.setStyle('orange')
     // Suscribirse a los cambios de la ruta
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
