@@ -1,7 +1,7 @@
 
 
 <div class="content">
-    <div class="section">
+    <div class="section" style="display: flex; flex-direction: row; gap: 6px; justify-content: space-between;">
         <button class="btn" style="background-color: var(--blue);" (click)="this.setColor('blue')"></button>
         <button class="btn" style="background-color: var(--red);" (click)="this.setColor('red')"></button>
         <button class="btn" style="background-color: var(--green);" (click)="this.setColor('green')"></button>
@@ -20,11 +20,17 @@
               <button>Botón</button>
               <button>Botón</button>
               <button>Botón</button>
-              <button>Botón</button>
-              <button>Botón</button>
             </div>
         </mat-expansion-panel>
+        <button></button>
     </div>
+
+    <div class="section" style="align-items: center; display: flex; flex-direction: column;">
+      <p>Estilo de imagen de perfil</p>
+      <button><mat-icon>account_box</mat-icon> En cuadro</button>
+      <button><mat-icon>account_circle</mat-icon> Circular</button>
+    </div>
+    
 
     <!-- <button class="btn" style="background-color: var(--dark-blue);" (click)="this.setColor('dark-blue')"></button>
     <button class="btn" style="background-color: var(--dark-red);" (click)="this.setColor('dark-red')"></button>
@@ -34,9 +40,8 @@
     <button class="btn" style="background-color: var(--black);" (click)="this.setColor('black')"></button>
     <button class="btn" style="background-color: var(--dark-purple);" (click)="this.setColor('dark-purple')"></button> -->
 </div>
-<br>
-<p>Estilo de imagen de perfil</p>
-<button><mat-icon>account_box</mat-icon> En cuadro</button>
-<button><mat-icon>account_circle</mat-icon> Circular</button>
-<button (click)="save()">Guardar</button>
-<button routerLink="../inicio">Salir sin guardar</button>
+<div class="footer">
+  <button (click)="save()">Guardar</button>
+  <button routerLink="../inicio">Salir sin guardar</button>
+</div>
+
