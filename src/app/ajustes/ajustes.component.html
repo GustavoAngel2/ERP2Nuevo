@@ -1,0 +1,47 @@
+
+
+<div class="content">
+    <div class="section" style="display: flex; flex-direction: row; gap: 6px; justify-content: space-between;">
+        <button class="btn" style="background-color: var(--blue);" (click)="this.setColor('blue')"></button>
+        <button class="btn" style="background-color: var(--red);" (click)="this.setColor('red')"></button>
+        <button class="btn" style="background-color: var(--green);" (click)="this.setColor('green')"></button>
+        <button class="btn" style="background-color: var(--orange);" (click)="this.setColor('orange')"></button>
+        <button class="btn" style="background-color: var(--yellow);" (click)="this.setColor('yellow')"></button>
+        <button class="btn" style="background-color: var(--gray);" (click)="this.setColor('gray')"></button>
+        <button class="btn" style="background-color: var(--purple);" (click)="this.setColor('purple')"></button>
+    </div>
+    
+    <div class="section">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Sección</span> </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="button-strip">
+              <button>Botón</button>
+              <button>Botón</button>
+              <button>Botón</button>
+            </div>
+        </mat-expansion-panel>
+        <button></button>
+    </div>
+
+    <div class="section" style="align-items: center; display: flex; flex-direction: column;">
+      <p>Estilo de imagen de perfil</p>
+      <button><mat-icon>account_box</mat-icon> En cuadro</button>
+      <button><mat-icon>account_circle</mat-icon> Circular</button>
+    </div>
+    
+
+    <!-- <button class="btn" style="background-color: var(--dark-blue);" (click)="this.setColor('dark-blue')"></button>
+    <button class="btn" style="background-color: var(--dark-red);" (click)="this.setColor('dark-red')"></button>
+    <button class="btn" style="background-color: var(--dark-green);" (click)="this.setColor('dark-green')"></button>
+    <button class="btn" style="background-color: var(--dark-orange);" (click)="this.setColor('dark-orange')"></button>
+    <button class="btn" style="background-color: var(--dark-yellow);" (click)="this.setColor('dark-yellow')"></button>
+    <button class="btn" style="background-color: var(--black);" (click)="this.setColor('black')"></button>
+    <button class="btn" style="background-color: var(--dark-purple);" (click)="this.setColor('dark-purple')"></button> -->
+</div>
+<div class="footer">
+  <button (click)="save()">Guardar</button>
+  <button routerLink="../inicio">Salir sin guardar</button>
+</div>
+

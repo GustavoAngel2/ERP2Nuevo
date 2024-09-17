@@ -10,9 +10,17 @@ html{
     --blue:#5e78eb;
     --orange:#f58e18;
     --yellow:#f3e51f;
-    --black: #424242;
-    --purple: #420439;
+    --gray: #424242;
+    --purple: #a4128e;
+    --dark-red:#751010;
+    --dark-green:#205608;
+    --dark-blue:#111e59;
+    --dark-orange:#633c0f;
+    --dark-yellow:#80780f;
+    --dark-gray: #1a1a1a;
+    --dark-purple: #4e0443;
     --custom: #000000;
+    --dark-custom: #000000;
 
     --mat-toolbar-container-background-color: var(--black);
     --mat-expansion-container-background-color: var(--black);
@@ -22,6 +30,32 @@ html{
     --mat-sidenav-container-background-color:#424242;
     --mat-sidenav-content-background-color: #303030;
     --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Estilo de la barra de scroll */
+::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  /* Fondo de la barra de scroll */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Manija de la barra de scroll */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  /* Manija al pasar el mouse */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+
+mat-toolbar, mat-drawer-container, mat-expansion-panel {
+    transition: .5s!important;
 }
 
 .content{
@@ -42,12 +76,7 @@ html{
     height: 40px;
     font-weight: bold;  
     color:black!important;
-    background-color: #ffc7b4;
-    font-family: 'Poppins', sans-serif!important;
-}
-  
-.bg{
-    color:#fff
+    background-color: #ffffff;
 }
   
 .table-container td{
@@ -55,15 +84,12 @@ html{
     width: 100%;
     height: 40px;
     color:rgb(0, 0, 0)!important;
-    font-family: 'Poppins', sans-serif!important;
 }
 
 .button-strip{
-    justify-content: center;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: 128px;
+    height: 148px;
+    overflow-x: auto!important;
     display: flex;
     flex-direction: row;
     gap: 12px;
@@ -72,6 +98,7 @@ html{
 .button-strip button{
     cursor: pointer;
     width: 128px;
+    min-width: 128px;
     height: 128px;
     border: 0;
     border-radius: 5px;

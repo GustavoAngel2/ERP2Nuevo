@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService,currentUser } from '../auth.service';
+import { ERP } from '../erp-settings';
 
 @Component({
   selector: 'app-inicio',
@@ -15,7 +16,7 @@ export class InicioComponent implements OnInit{
     NombrePersona:""
   }
 
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService,private erp: ERP){}
 
   ngOnInit(){
     this.profile = this.authService.getCurrentUser()
