@@ -18,9 +18,7 @@ export class AppComponent implements OnInit,OnDestroy{
 
   ngOnInit() {
     this.erp.loadSettings();
-    // Obtener la URL actual directamente
     this.currentUrl = this.router.url;
-    // Suscribirse a los cambios de la ruta
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();

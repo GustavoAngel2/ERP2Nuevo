@@ -3,19 +3,17 @@
   <mat-drawer #drawer [mode]="'over'">
     <div class="side-list">
       <div class="card">
-        <img src="">
+        <img class="pfp" width="128px" height="128px">
         <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
+        <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
         <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
-        <button (click)="authService.logout(); drawer.toggle();" >Cerrar sesión</button>
+        <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
       </div>
-      <span>Titulo 1</span>  
-      <button>Algo1</button>
-      <button>Algo2</button>
-      <button>Algo3</button>
-      <span>Titulo 2</span>  
-      <button>Algo1</button>
-      <button>Algo2</button>
-      <button>Algo3</button>
+      <span>Administración</span>  
+      <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios Permitidos</button>
+      <button (click)="drawer.toggle()" routerLink="personas">Personas</button>
+      <span>Ventas</span>  
+      <button (click)="drawer.toggle()" routerLink="proveedores">Proveedores</button>
     </div>
   </mat-drawer>
   
