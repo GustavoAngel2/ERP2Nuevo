@@ -87,7 +87,6 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 }
 
 .button-strip{
-    justify-content: center;
     width: 100%;
     height: 148px;
     overflow-x: auto!important;
