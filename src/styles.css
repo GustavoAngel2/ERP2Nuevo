@@ -30,6 +30,7 @@ html{
     --mat-sidenav-container-background-color:#424242;
     --mat-sidenav-content-background-color: #303030;
     --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
+    --button-color: var(--black);
 }
 
 /* Estilo de la barra de scroll */
@@ -123,3 +124,26 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 .section-title{
     margin-left: 6px;
 }
+
+.btn {
+
+    background-color: var(--button-color); /* Cambia el color en hover (azul más intenso) */
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 50px; /* Hace que el botón sea redondo */
+    padding: 15px 70px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.btn:hover {
+    background-color: #87CEEB; /* Azul celeste */
+    color: rgb(74, 74, 74);
+    transition: background-color 0.5s ease;
+}
+
+.btn i.underline {
+    text-decoration: underline;
+}
+

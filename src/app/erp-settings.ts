@@ -15,6 +15,7 @@ export class ERP{
         root.setProperty('--mat-sidenav-container-background-color', '#2b2b2b');
         root.setProperty('--mat-sidenav-content-background-color', ('var(--dark-' + theme + ')'));
         root.setProperty('--mat-sidenav-scrim-color', 'rgba(0, 0, 0, 0.7)');
+        root.setProperty('--button-color', ("var(--"+ theme+")"))
     }
 
     saveSettings(theme:string){
