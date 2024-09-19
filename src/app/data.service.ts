@@ -5,6 +5,7 @@ import { defaultApiResponse } from './data-models/response.model';
 import { AuthService } from './auth.service';
 import { UpdatePersonasModel } from './data-models/personas.model';
 import { updateUsuarioModel } from './data-models/usuario.model';
+import { insertProveedorModel, updateProveedorModel } from './data-models/proveedores.model';
 
 
 @Injectable({
@@ -71,41 +72,43 @@ export class PersonasService {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      return this.http.get<defaultApiResponse>(`${this.apiUrl}/Personas/Get`,{headers});
+      return this.http.get<defaultApiResponse>(`${this.apiUrl}/Proveedores/Get`,{headers});
     }
   
-    insertarProovedor(PersonaData: {
-      nombre: string;
-      ApPaterno: string;
-      ApMaterno: string;
-      direccion: string;
-      usuario: number;
-    }): Observable<defaultApiResponse> {
+    insertarProovedor(ProveedorData: insertProveedorModel): Observable<defaultApiResponse> {
       const body = {
-        nombre: PersonaData.nombre,
-        ApPaterno: PersonaData.ApPaterno,
-        ApMaterno: PersonaData.ApMaterno,
-        direccion: PersonaData.direccion,
-        usuario: PersonaData.usuario,
-        Direccion: PersonaData.direccion,
-        Usuario: PersonaData.usuario,
+        nombre: ProveedorData.nombre,
+        direccion: ProveedorData.direccion,
+        telefono: ProveedorData.telefono,
+        idBanco: ProveedorData.idBanco,
+        plazoPago: ProveedorData.plazoPago,
+        correo: ProveedorData.correo,
+        rfc: ProveedorData.rfc,
+        razonSocial: ProveedorData.razonSocial,
+        clabe: ProveedorData.clabe,
+        usuarioActualiza: ProveedorData.usuarioActualiza
       };
-      return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
+      return this.http.post<defaultApiResponse>(`${this.apiUrl}/Proveedores/Insert`, body);
     }
     deleteProveedor(Id: number): Observable<any> {
-      return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
+      return this.http.put(`${this.apiUrl}/Proveedores/Delete`, { Id });
     }
-    updateProveedor(PersonaData: UpdatePersonasModel): Observable<defaultApiResponse> {
+    updateProveedor(ProveedorData: updateProveedorModel): Observable<defaultApiResponse> {
       const body = {
-        id: PersonaData.Id,
-        nombre: PersonaData.Nombre,
-        apPaterno: PersonaData.ApPaterno,
-        apMaterno: PersonaData.ApMaterno,
-        direccion: PersonaData.Direccion,
-        usuario: PersonaData.Usuario
+        id: ProveedorData.id,
+        nombre: ProveedorData.nombre,
+        direccion: ProveedorData.direccion,
+        telefono: ProveedorData.telefono,
+        idBanco: ProveedorData.idBanco,
+        plazoPago: ProveedorData.plazoPago,
+        correo: ProveedorData.correo,
+        rfc: ProveedorData.rfc,
+        razonSocial: ProveedorData.razonSocial,
+        clabe: ProveedorData.clabe,
+        usuarioActualiza: ProveedorData.usuarioActualiza
       };
       console.log("Enviando solicitud con el siguiente cuerpo:", body);
-      return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
+      return this.http.put<defaultApiResponse>(`${this.apiUrl}/Proveedores/Update`, body);
     }
   }
     //----------------------------------------------------------------------------------------------
