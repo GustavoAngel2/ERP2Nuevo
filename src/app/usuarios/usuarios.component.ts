@@ -3,10 +3,9 @@ import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { UsusariosService } from '../data.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { getUsuarios } from '../data-models/usuario.model';
+import { getUsuariosModel } from '../data-models/usuario.model';
 import { AfterViewInit } from '@angular/core';
 
 @Component({
@@ -16,10 +15,10 @@ import { AfterViewInit } from '@angular/core';
 })
 export class UsuariosComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['Id', 'Nombre', 'NombreP','FechaReg', 'FechaAct', 'Usuario'];
-  dataSource: MatTableDataSource<getUsuarios>;
+  dataSource: MatTableDataSource<getUsuariosModel>;
 
   constructor(private usuariosSerive:UsusariosService){
-    this.dataSource = new MatTableDataSource<getUsuarios>();
+    this.dataSource = new MatTableDataSource<getUsuariosModel>();
   }
 
   ngAfterViewInit() {
@@ -40,7 +39,7 @@ export class UsuariosComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
-    this.dataSource.filterPredicate = (data: getUsuarios, filter: string) => {
+    this.dataSource.filterPredicate = (data: getUsuariosModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) || 
              data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
     };
