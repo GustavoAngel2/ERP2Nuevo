@@ -12,11 +12,11 @@ import { AjustesComponent } from './ajustes/ajustes.component';
 const routes: Routes = [
   { path: "", redirectTo: '/login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
-  { path: "inicio", component: InicioComponent, canActivate:[AuthGuard] },
-  { path: "personas", component: PersonasComponent, canActivate:[AuthGuard] },
-  { path: "usuarios", component: UsuariosComponent, canActivate:[AuthGuard] },
-  { path: "proveedores", component: ProveedoresComponent, canActivate:[AuthGuard] },
-  { path: "ajustes", component: AjustesComponent, canActivate:[AuthGuard]},
+  { path: "inicio", component: InicioComponent },
+  { path: "personas", component: PersonasComponent},
+  { path: "usuarios", component: UsuariosComponent},
+  { path: "proveedores", component: ProveedoresComponent},
+  { path: "ajustes", component: AjustesComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

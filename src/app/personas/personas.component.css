@@ -1,0 +1,22 @@
+button {
+
+    background-color: #0040ff; /* Cambia el color en hover (azul más intenso) */
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 50px; /* Hace que el botón sea redondo */
+    padding: 15px 70px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+button:hover {
+    background-color: #87CEEB; /* Azul celeste */
+    color: rgb(74, 74, 74);
+    transition: background-color 0.5s ease;
+}
+
+button i.underline {
+    text-decoration: underline;
+}
+
