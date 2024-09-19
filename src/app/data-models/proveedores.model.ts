@@ -1,4 +1,4 @@
-export interface ProveedoresModel{
+export interface getProveedoresModel{
     Id:number;
     Nombre:string;
     Direccion:string;
@@ -12,4 +12,31 @@ export interface ProveedoresModel{
     FechaRegistro:string;
     FechaActualiza:string;
     UsuarioActualiza:string;
+}
+
+export interface insertProveedorModel {
+    nombre: string;
+    direccion: string;
+    telefono: string;
+    idBanco: number;
+    plazoPago: number;
+    correo: string;
+    rfc: string;
+    razonSocial: string;
+    clabe: string;
+    usuarioActualiza: number;
+}
+
+export interface updateProveedorModel {
+    id: number;
+    nombre: string;
+    direccion: string;
+    telefono: string;
+    idBanco: number;
+    plazoPago: number;
+    correo: string;
+    rfc: string;
+    razonSocial: string;
+    clabe: string;
+    usuarioActualiza: number;
 }

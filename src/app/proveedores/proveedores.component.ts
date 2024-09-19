@@ -4,7 +4,7 @@ import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
 import { ProveedoresService } from '../data.service';
-import { ProveedoresModel } from '../data-models/proveedores.model';
+import { getProveedoresModel } from '../data-models/proveedores.model';
 import { AuthService,currentUser } from '../auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,8 +17,8 @@ import { MatSort } from '@angular/material/sort';
   styleUrl: './proveedores.component.css'
 })
 export class ProveedoresComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'ApPaterno','ApMaterno','Direccion', 'FechaAct','FechaReg', 'Acciones'];
-  dataSource: MatTableDataSource<ProveedoresModel>;
+  displayedColumns: string[] = ['Id', 'Nombre', 'Direccion','Telefono','IdBanco', 'PlazoPago','Correo', 'RFC', 'RazonSocial', 'CLABE', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza'];
+  dataSource: MatTableDataSource<getProveedoresModel>;
   id: number = 0;
   nombre: string = '';
   ApPaterno : string = '';
@@ -33,7 +33,7 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private proveedoresService: ProveedoresService, public authService: AuthService) {
-    this.dataSource = new MatTableDataSource<ProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.dataSource = new MatTableDataSource<getProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
   ngOnInit() {
@@ -56,7 +56,7 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   }
 
   getData(){
-    this.dataSource.filterPredicate = (data: ProveedoresModel, filter: string) => {
+    this.dataSource.filterPredicate = (data: getProveedoresModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) || 
              data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
     };
