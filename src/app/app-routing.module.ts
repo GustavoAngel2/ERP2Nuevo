@@ -12,60 +12,15 @@ import { EntradasComponent } from './entradas/entradas.component';
 
 
 const routes: Routes = [
-  { 
-    path: "", 
-    redirectTo: '/login', 
-    pathMatch: 'full' 
-  },
-  { 
-    path: "login", 
-    component: LoginComponent, 
-    canActivate:[AuthGuard],
-    title: "Iniciar sesión"
-  },
-  { 
-    path: "inicio",
-    component: InicioComponent, 
-    canActivate:[AuthGuard] ,
-    title: "ERP - Inicio"
-  },
-  { 
-    path: "personas", 
-    component: PersonasComponent, 
-    canActivate:[AuthGuard],
-    title: "ERP - Moduulo personas"
-  },
-  { 
-    path: "usuarios", 
-    component: UsuariosComponent, 
-    canActivate:[AuthGuard],
-    title: "ERP - Modulo de usuarios"
-  },
-  { 
-    path: "proveedores", 
-    component: ProveedoresComponent,
-    canActivate:[AuthGuard],
-    title: "ERP - Modulo de proveedores"
-  },
-  { 
-    path: "ajustes", 
-    component: AjustesComponent, 
-    canActivate:[AuthGuard],
-    title: "Ajustes"
-  },
-  { 
-    path: "articulos", 
-    component:ArticulosComponent, 
-    canActivate:[AuthGuard],
-    title: "ERP - Administrador de articulos"
-  },
-  { 
-    path: "entradas", 
-    component:EntradasComponent, 
-    canActivate:[AuthGuard],
-    title: "ERP - Entradas"
-  },
-
+  { path: "", redirectTo: '/login', pathMatch: 'full' },
+  { path: "login", component: LoginComponent, title: "Iniciar sesión" },
+  { path: "inicio", component: InicioComponent, canActivate:[AuthGuard] , title: "ERP - Inicio" },
+  { path: "personas", component: PersonasComponent, canActivate:[AuthGuard], title: "ERP - Moduulo personas" },
+  { path: "usuarios", component: UsuariosComponent, canActivate:[AuthGuard], title: "ERP - Modulo de usuarios" },
+  { path: "proveedores", component: ProveedoresComponent, canActivate:[AuthGuard], title: "ERP - Modulo de proveedores" },
+  { path: "ajustes", component: AjustesComponent, canActivate:[AuthGuard], title: "Ajustes" },
+  { path: "articulos", component:ArticulosComponent, canActivate:[AuthGuard], title: "ERP - Administrador de articulos" },
+  { path: "entradas", component:EntradasComponent, canActivate:[AuthGuard], title: "ERP - Entradas" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
