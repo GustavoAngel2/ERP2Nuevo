@@ -31,6 +31,9 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+editar: any;
+limpiar: any;
+insertar: any;
 
   constructor(private proveedoresService: ProveedoresService, public authService: AuthService) {
     this.dataSource = new MatTableDataSource<getProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
