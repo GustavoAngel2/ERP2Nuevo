@@ -34,14 +34,14 @@
     </mat-form-field>
 
 </div>
-<button [hidden]="!isModifying"(click)="editar()" class="btn">Update<i class="underline"></i></button>
-<button [hidden]="!isModifying" (click)="limpiar()"  class="btn-cancel "><i class="bi bi-cloud-upload-fill icon"></i>Cancelar</button>
-<button [hidden]="isModifying"(click)="insertar()" class="btn">Insertar<i class="underline"></i></button>
+<button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning">Update<i class="underline"></i></button>
+<button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger">Cancelar</button>
+<button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
 
 <br>
 <div class="table-container">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table class="table" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>

@@ -9,7 +9,7 @@ export class ERP{
 
         root.setProperty('--mat-toolbar-container-background-color', ('var(--' + theme + ')'));
         root.setProperty('--mat-expansion-container-background-color', ('var(--' + theme + ')'));
-        root.setProperty('--mat-sidenav-content-background-color', ('var(--dark-' + theme + ')'));
+        //root.setProperty('--mat-sidenav-content-background-color', ('var(--dark-' + theme + ')'));
         root.setProperty('--button-color', ("var(--"+ theme +")"));
     }
 
