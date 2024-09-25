@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
+import { HighchartsChartModule } from 'highcharts-angular';
 //Materiales
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,6 +18,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 //Componentes
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -49,6 +53,7 @@ import { EntradasComponent } from './entradas/entradas.component';
     FormsModule,
     NgIf,
     HttpClientModule,
+    HighchartsChartModule,
     
     //Materials
     MatHeaderCell,
@@ -63,10 +68,17 @@ import { EntradasComponent } from './entradas/entradas.component';
     MatButtonModule,
     MatFormFieldModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ToastrModule.forRoot({ positionClass: 'inline' })
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideAnimations(),
+    provideToastr({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   bootstrap: [AppComponent] //Interfaz de Inicio
 })

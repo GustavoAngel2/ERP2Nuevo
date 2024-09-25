@@ -6,12 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html{
 
     --red:#e72121;
-    --green:#5de125;
-    --blue:#5e78eb;
+    --green:#4cba1d;
+    --blue:#5166c6;
     --orange:#dd8827;
-    --yellow:#f3e51f;
+    --yellow:#d1c51d;
     --gray: #424242;
-    --purple: #a4128e;
+    --purple: #931380;
     --dark-red:#751010;
     --dark-green:#205608;
     --dark-blue:#111e59;
@@ -93,7 +93,11 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     overflow-x: auto!important;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    padding-top: 10px;
     gap: 12px;
+    border-radius: 6px;
+    background-color: #00000055;
 }
 
 .button-strip button{
@@ -125,6 +129,46 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     margin-left: 6px;
 }
 
-.title,.form-title{
+.title{
     color:#000000
+}
+
+.form-container{
+    width: 512px;
+    height: max-content;
+    background-color: whitesmoke;
+    display:flex;
+    flex-direction: column;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.form-title{
+    width: 100%;
+    padding-top: 16px;
+    padding-left: 16px;
+    background-color: var(--mat-toolbar-container-background-color);
+    color: white;
+}
+
+.form-content{
+    background-color: #fff;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-end{
+    width: 100%;
+    padding: 16px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.bi{
+    font-size: 20px;
 }

@@ -1,0 +1,28 @@
+.window-header{
+  padding-top: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color:white;
+  background-color: var(--mat-toolbar-container-background-color);
+}
+
+.window-content{
+  padding-top: 8%;
+  padding-bottom: 8%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+}
+
+.window-footer-delete{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  padding: 12px;
+  background-color: whitesmoke;
+}
