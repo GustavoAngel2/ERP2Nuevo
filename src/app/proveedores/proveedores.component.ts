@@ -21,10 +21,14 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<getProveedoresModel>;
   id: number = 0;
   nombre: string = '';
-  ApPaterno : string = '';
-  ApMaterno : string = '';
   direccion: string = '';
-  usuario: number = 0;
+  telefono: string = '';
+  idBanco: number = 0;
+  plazoPago: number= 0;
+  correo: string = '';
+  rfc: string = '';
+  razonSocial: string = '';
+  clabe: string = '';
   isModifying:boolean = false;
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -33,7 +37,6 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 editar: any;
 limpiar: any;
-insertar: any;
 
   constructor(private proveedoresService: ProveedoresService, public authService: AuthService) {
     this.dataSource = new MatTableDataSource<getProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
@@ -78,31 +81,36 @@ insertar: any;
     });
   }
 
-  // insertar():void {
-  //   const nuevaPersona = {
-  //     nombre: this.nombre,
-  //     ApPaterno:this.ApPaterno,
-  //     ApMaterno:this.ApMaterno,
-  //     direccion: this.direccion,
-  //     usuario: parseInt(this.loggedUser.Id,10) 
-  //   };
+  insertar():void {
+    const nuevaPersona = {
+      nombre: this.nombre,
+      direccion: this.direccion,
+      telefono: this.telefono,
+      idBanco: this.idBanco,
+      plazoPago: this.plazoPago,
+      correo: this.correo,
+      rfc: this.rfc,
+      razonSocial: this.razonSocial,
+      clabe: this.clabe,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+    };
 
-  //   // Aquí asumo que tienes un método en tu servicio para insertar el departamento
-  //   this.PersonasService.insertarPersona(nuevaPersona).subscribe({
-  //     next: (response) => {
-  //       // if(response.StatusCode == 200){
-  //       //   this.toastr.success(response.response.data, 'Personas');
-  //       // } else {
-  //       //   this.toastr.error(response.response.data,'Personas')
-  //       // }
-  //       this.getData();
-  //     },
-  //     error: (error) => {
-  //       // Manejar el error aquí
-  //       console.error('Hubo un error al insertar el almacen', error);
-  //     }
-  //   });
-  // }
+    // Aquí asumo que tienes un método en tu servicio para insertar el departamento
+    this.proveedoresService.insertarProovedor(nuevaPersona).subscribe({
+      next: (response) => {
+        // if(response.StatusCode == 200){
+        //   this.toastr.success(response.response.data, 'Personas');
+        // } else {
+        //   this.toastr.error(response.response.data,'Personas')
+        // }
+        this.getData();
+      },
+      error: (error) => {
+        // Manejar el error aquí
+        console.error('Hubo un error al insertar el almacen', error);
+      }
+    });
+  }
 
   // abrirDeleteDialog(Id: number, Name: string) {
   //   const dialogRef = this.dialog.open(DeleteMenuComponent, {
