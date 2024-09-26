@@ -134,7 +134,8 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 }
 
 .form-container{
-    width: 512px;
+    width: 720px;
+    margin-left: calc(50% - 360px);
     height: max-content;
     background-color: whitesmoke;
     display:flex;
