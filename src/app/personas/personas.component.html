@@ -18,8 +18,8 @@
         </div>
     </div>
     <div class="form-end">
-        <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning">Update<i class="underline"></i></button>
-        <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger">Cancelar</button>
+        <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+        <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
         <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
     </div>
 </div>
