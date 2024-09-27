@@ -4,12 +4,13 @@ import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
 import { ProveedoresService } from '../data.service';
-import { getProveedoresModel } from '../data-models/proveedores.model';
+import { getProveedoresModel, updateProveedorModel } from '../data-models/proveedores.model';
 import { AuthService,currentUser } from '../auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
-
+import { ToastrService } from 'ngx-toastr';
+import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-proveedores',
@@ -17,25 +18,27 @@ import { MatSort } from '@angular/material/sort';
   styleUrl: './proveedores.component.css'
 })
 export class ProveedoresComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'Direccion','Telefono','IdBanco', 'PlazoPago','Correo', 'RFC', 'RazonSocial', 'CLABE', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'Direccion','Telefono','IdBanco', 'PlazoPago','Correo', 'RFC', 'RazonSocial', 'CLABE', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
   dataSource: MatTableDataSource<getProveedoresModel>;
+
   id: number = 0;
   nombre: string = '';
-  ApPaterno : string = '';
-  ApMaterno : string = '';
   direccion: string = '';
-  usuario: number = 0;
+  telefono: string = '';
+  idBanco: number = 0;
+  plazoPago: number= 0;
+  correo: string = '';
+  rfc: string = '';
+  razonSocial: string = '';
+  clabe: string = '';
   isModifying:boolean = false;
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-editar: any;
-limpiar: any;
-insertar: any;
 
-  constructor(private proveedoresService: ProveedoresService, public authService: AuthService) {
+  constructor(private proveedoresService: ProveedoresService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<getProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
@@ -78,99 +81,120 @@ insertar: any;
     });
   }
 
-  // insertar():void {
-  //   const nuevaPersona = {
-  //     nombre: this.nombre,
-  //     ApPaterno:this.ApPaterno,
-  //     ApMaterno:this.ApMaterno,
-  //     direccion: this.direccion,
-  //     usuario: parseInt(this.loggedUser.Id,10) 
-  //   };
+  insertar():void {
+    const nuevaPersona = {
+      nombre: this.nombre,
+      direccion: this.direccion,
+      telefono: this.telefono,
+      idBanco: this.idBanco,
+      plazoPago: this.plazoPago,
+      correo: this.correo,
+      rfc: this.rfc,
+      razonSocial: this.razonSocial,
+      clabe: this.clabe,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+    };
 
-  //   // Aquí asumo que tienes un método en tu servicio para insertar el departamento
-  //   this.PersonasService.insertarPersona(nuevaPersona).subscribe({
-  //     next: (response) => {
-  //       // if(response.StatusCode == 200){
-  //       //   this.toastr.success(response.response.data, 'Personas');
-  //       // } else {
-  //       //   this.toastr.error(response.response.data,'Personas')
-  //       // }
-  //       this.getData();
-  //     },
-  //     error: (error) => {
-  //       // Manejar el error aquí
-  //       console.error('Hubo un error al insertar el almacen', error);
-  //     }
-  //   });
-  // }
+    // Aquí asumo que tienes un método en tu servicio para insertar el departamento
+    this.proveedoresService.insertarProovedor(nuevaPersona).subscribe({
+      next: (response) => {
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Proveedores');
+        } else {
+          this.toastr.error(response.response.data,'Proveedores')
+        }
+        this.getData();
+        this.limpiar();
+      },
+      error: (error) => {
+        // Manejar el error aquí
+        console.error('Hubo un error al insertar el almacen', error);
+      }
+    });
+  }
 
-  // abrirDeleteDialog(Id: number, Name: string) {
-  //   const dialogRef = this.dialog.open(DeleteMenuComponent, {
-  //     width: '550px',
-  //     data: Name
-  //   });
+  abrirDeleteDialog(Id: number, Name: string) {
+    const dialogRef = this.dialog.open(DeleteMenuComponent, {
+      width: '550px',
+      data: Name
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result == "yes") {
-  //       this.PersonasService.deletePersonas(Id).subscribe({
-  //         next: (response) => {
-  //           if(response.StatusCode == 200){
-  //             this.toastr.success(response.response.data, 'Personas');
-  //           } else {
-  //             this.toastr.error(response.response.data,'Personas')
-  //           }
-  //           this.getData();
-  //         },
-  //         error: (error) => {
-  //           console.error('Hubo un error al eliminar el almacén', error);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "yes") {
+        this.proveedoresService.deleteProveedor(Id).subscribe({
+          next: (response) => {
+            if(response.StatusCode == 200){
+              this.toastr.success(response.response.data, 'Proveedores');
+            } else {
+              this.toastr.error(response.response.data,'Proveedores')
+            }
+            this.getData();
+          },
+          error: (error) => {
+            console.error('Hubo un error al eliminar el almacén', error);
+          }
+        });
+      }
+    });
+  }
 
-  // cargar(elemento:ProveedoresModel){
-  //   this.id = elemento.Id
-  //   this.nombre = elemento.Nombre
-  //   this.ApPaterno = elemento.ApPaterno
-  //   this.ApMaterno = elemento.ApMaterno
-  //   this.direccion = elemento.Direccion
-  //   this.isModifying = true
-  // }
+  cargar(elemento:getProveedoresModel){
+    this.id = elemento.Id
+    this.nombre = elemento.Nombre
+    this.direccion = elemento.Direccion
+    this.telefono = elemento.Telefono
+    this.idBanco=elemento.IdBanco
+    this.plazoPago=elemento.PlazoPago
+    this.correo=elemento.Correo
+    this.rfc=elemento.RFC
+    this.razonSocial=elemento.RazonSocial
+    this.clabe=elemento.CLABE
+    this.isModifying = true
+  }
 
-  // limpiar(){
-  //   this.id = 0
-  //   this.nombre = ''
-  //   this.ApPaterno = ''
-  //   this.ApMaterno = ''
-  //   this.direccion = ''
-  //   this.isModifying = false
-  // }
+  limpiar(){
+    this.id = 0
+    this.nombre = ''
+    this.direccion = ''
+    this.telefono = ''
+    this.idBanco=0
+    this.plazoPago=0
+    this.correo=''
+    this.rfc=''
+    this.razonSocial=''
+    this.clabe=''
+    this.isModifying = false
+  }
 
-  // editar(){
-  //   const persona:UpdatePersonasModel   = {
-  //     Id: this.id,
-  //     Nombre: this.nombre,
-  //     ApPaterno:this.ApPaterno,
-  //     ApMaterno:this.ApMaterno,
-  //     Direccion: this.direccion,  
-  //     Usuario: parseInt(this.loggedUser.Id,10)
-  //   };
+  editar(){
+    const persona:updateProveedorModel   = {
+      id: this.id,
+      nombre: this.nombre,
+      direccion: this.direccion,
+      telefono: this.telefono,
+      idBanco: this.idBanco,
+      plazoPago: this.plazoPago,
+      correo: this.correo,
+      rfc: this.rfc,
+      razonSocial: this.razonSocial,
+      clabe: this.clabe,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+    };
 
-  //   this.PersonasService.updatePersonas(persona).subscribe({
-  //     next: (response) => {
-  //       // if(response.StatusCode == 200){
-  //       //   this.toastr.success(response.response.data, 'Personas');
-  //       // } else {
-  //       //   this.toastr.error(response.response.data,'Personas')
-  //       // }
-  //       console.log(response);
-  //       this.getData();
-  //       this.limpiar();
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
+    this.proveedoresService.updateProveedor(persona).subscribe({
+      next: (response) => {
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Proveedores');
+        } else {
+          this.toastr.error(response.response.data,'Proveedores')
+        }
+        console.log(response);
+        this.getData();
+        this.limpiar();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 }

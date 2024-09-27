@@ -14,7 +14,6 @@ export class AjustesComponent implements OnInit{
 
   ngOnInit(): void {
     this.settings = this.erp.getSettings();
-    console.log(this.settings)
   }
 
   setColor(theme:string){
@@ -23,6 +22,6 @@ export class AjustesComponent implements OnInit{
   }
 
   save(){
-    this.erp.saveSettings(this.color)
+    this.erp.saveSettings(this.color, 'group')
   }
 }

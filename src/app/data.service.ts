@@ -148,9 +148,9 @@ export class PersonasService {
     //   return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
     // }
     
-    // deletePersonas(Id: number): Observable<any> {
-    //   return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
-    // }
+    deleteUsuario(Id: number): Observable<any> {
+      return this.http.put(`${this.apiUrl}/Usuarios/Delete`, { Id });
+    }
     
     updateUsuario(UsuarioData: updateUsuarioModel): Observable<defaultApiResponse> {
       const body = {
