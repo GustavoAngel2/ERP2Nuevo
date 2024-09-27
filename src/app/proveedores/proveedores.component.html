@@ -7,24 +7,53 @@
             <h1 [hidden]="!isModifying">Editando persona con id: {{this.id}}</h1>
         </div>
         <div class="form-content">
-                <input matInput placeholder="Ingresa el nombre del proveedor" [(ngModel)]="nombre">
-                <input matInput placeholder="Ingresa el numero telefonico del proveedor" [(ngModel)]="telefono">
-                <input matInput placeholder="Ingresa el correo electronico del proveedor" [(ngModel)]="correo">
-                <input matInput placeholder="Ingresa el id de banco del proveedor" [(ngModel)]="idBanco">
-                <input matInput placeholder="Ingresa la clabe del proveedor" [(ngModel)]="clabe">
-                <input matInput placeholder="Ingresa el plazo de los pagos" [(ngModel)]="plazoPago">
-                <input matInput placeholder="Ingresa el rfc" [(ngModel)]="rfc">
-                <input matInput placeholder="Ingrese la razon social" [(ngModel)]="razonSocial">
-                <input matInput placeholder="Ingresa la direccion del proveedor" [(ngModel)]="direccion">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-truck"></i></span>
+                <input class="form-control" placeholder="Ingresa el nombre del proveedor" [(ngModel)]="nombre">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
+                <input class="form-control" placeholder="Ingresa el numero telefonico del proveedor" [(ngModel)]="telefono">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                <input class="form-control" placeholder="Ingresa el correo electronico del proveedor" [(ngModel)]="correo">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-bank2"></i></span>
+                <input class="form-control" placeholder="Ingresa el id de banco del proveedor" [(ngModel)]="idBanco">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-bank2"></i></span>
+                <input class="form-control" placeholder="Ingresa la clabe del proveedor" [(ngModel)]="clabe">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-calendar-event-fill"></i></span>
+                <input class="form-control" placeholder="Ingresa el plazo de los pagos" [(ngModel)]="plazoPago">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
+                <input class="form-control" placeholder="Ingresa el rfc" [(ngModel)]="rfc">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                <input class="form-control" placeholder="Ingrese la razon social" [(ngModel)]="razonSocial">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                <input class="form-control" placeholder="Ingresa la direccion del proveedor" [(ngModel)]="direccion">
+            </div>
+        </div>
+        <div class="form-end">
+            <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+            <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
     </div>
 </div>
-
+<br>
 <div class="actionbar">
-        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
-    <button [hidden]="!isModifying"(click)="editar()" class="btn right">Update<i class="underline"></i></button>
-    <button [hidden]="!isModifying" (click)="limpiar()"  class="btn-cancel "><i class="bi bi-cloud-upload-fill icon"></i>Cancelar</button>
-    <button [hidden]="isModifying"(click)="insertar()" class="btn right">Insertar<i class="underline"></i></button>
+    <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
 </div>
 <br>
 <div class="table-container">
@@ -82,13 +111,13 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
             <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
         </ng-container>
-        <!-- <ng-container matColumnDef="Acciones">
+        <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let elemento">
             <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
             <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
         </td>
-        </ng-container> -->
+        </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </table>
