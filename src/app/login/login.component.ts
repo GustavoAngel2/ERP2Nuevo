@@ -29,7 +29,7 @@ export class LoginComponent {
         }
       },
       err => {
-        this.error = 'Error en el servidor. Por favor, inténtelo más tarde.';
+         console.error(err);
       }
     );
   }

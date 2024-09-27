@@ -6,12 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html{
 
     --red:#e72121;
-    --green:#5de125;
-    --blue:#5e78eb;
-    --orange:#f58e18;
-    --yellow:#f3e51f;
+    --green:#4cba1d;
+    --blue:#5166c6;
+    --orange:#dd8827;
+    --yellow:#d1c51d;
     --gray: #424242;
-    --purple: #a4128e;
+    --purple: #931380;
     --dark-red:#751010;
     --dark-green:#205608;
     --dark-blue:#111e59;
@@ -28,7 +28,7 @@ html{
     --mat-toolbar-mobile-height: 56px;
     --mat-sidenav-container-text-color:#fff;
     --mat-sidenav-container-background-color:#424242;
-    --mat-sidenav-content-background-color: #303030;
+    --mat-sidenav-content-background-color: #fff;
     --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
     --button-color: var(--black);
 }
@@ -36,26 +36,26 @@ html{
 /* Estilo de la barra de scroll */
 ::-webkit-scrollbar {
     width: 12px; /* Ancho de la barra de desplazamiento */
-  }
-  
-  /* Fondo de la barra de scroll */
-  ::-webkit-scrollbar-track {
+}
+
+/* Fondo de la barra de scroll */
+::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  
-  /* Manija de la barra de scroll */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Manija de la barra de scroll */
+::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px; /* Bordes redondeados */
-  }
-  
-  /* Manija al pasar el mouse */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-  
+}
 
+/* Manija al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+  
 mat-toolbar, mat-drawer-container, mat-expansion-panel {
+    color: white !important;;
     transition: .5s!important;
 }
 
@@ -93,7 +93,11 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     overflow-x: auto!important;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    padding-top: 10px;
     gap: 12px;
+    border-radius: 6px;
+    background-color: #00000055;
 }
 
 .button-strip button{
@@ -125,25 +129,46 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     margin-left: 6px;
 }
 
-.btn {
-
-    background-color: var(--button-color); /* Cambia el color en hover (azul más intenso) */
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 50px; /* Hace que el botón sea redondo */
-    padding: 15px 70px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.7s ease;
+.title{
+    color:#000000
 }
 
-.btn:hover {
-    background-color: var(--mat-sidenav-container-text-color); /* Azul celeste */
-    color: rgb(74, 74, 74);
-    transition: background-color 0.7s ease;
+.form-container{
+    width: 512px;
+    height: max-content;
+    background-color: whitesmoke;
+    display:flex;
+    flex-direction: column;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-.btn i.underline {
-    text-decoration: underline;
+.form-title{
+    width: 100%;
+    padding-top: 16px;
+    padding-left: 16px;
+    background-color: var(--mat-toolbar-container-background-color);
+    color: white;
 }
 
+.form-content{
+    background-color: #fff;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-end{
+    width: 100%;
+    padding: 16px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.bi{
+    font-size: 20px;
+}

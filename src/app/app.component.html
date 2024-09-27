@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true" style="position: fixed; left: 0; top: 0; width: 100%; height: 100%;">
   
-  <mat-drawer #drawer [mode]="'over'">
+  <mat-drawer #drawer [mode]="'push'">
     <div class="side-list">
       <div class="card">
         <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
@@ -26,8 +26,8 @@
       <span> Administrador de recursos empresariales</span>
       <div class="actions">
         <span>Hola {{actualUser.NombrePersona}}!</span>
-        <button routerLink="inicio"><mat-icon>home</mat-icon></button>
-        <button (click)="this.authService.logout()" routerLink="login"><mat-icon>exit_to_app</mat-icon></button>
+        <a routerLink="inicio"><mat-icon>home</mat-icon></a>
+        <a (click)="this.authService.logout()" routerLink="login"><mat-icon>exit_to_app</mat-icon></a>
       </div>
   </mat-toolbar>
   

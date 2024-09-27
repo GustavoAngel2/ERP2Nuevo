@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService,currentUser } from '../auth.service';
-import { ERP } from '../erp-settings';
+import { AuthService, currentUser } from '../auth.service';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css',
+  styleUrls: ['./inicio.component.css'], // Corrige 'styleUrl' a 'styleUrls'
 })
-export class InicioComponent implements OnInit{
+export class InicioComponent implements OnInit {
+  profile: currentUser = {
+    Id: "",
+    IdRol: "",
+    NombreUsuario: "",
+    NombrePersona: ""
+  };
 
-  profile:currentUser = {
-    Id:"",
-    IdRol:"",
-    NombreUsuario:"",
-    NombrePersona:""
-  }
+  constructor(private authService: AuthService) {}
 
-  constructor(private authService:AuthService,private erp: ERP){}
-
-  ngOnInit(){
-    this.profile = this.authService.getCurrentUser()
+  ngOnInit() {
+    this.profile = this.authService.getCurrentUser();
   }
 }

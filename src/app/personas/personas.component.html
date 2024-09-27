@@ -1,29 +1,26 @@
 <h1 class="title">Modulo Personas</h1>
 
-<div class="form-place">
-    <div class="form-container">
-        <div class="form-title">
-            <h1 [hidden]="isModifying">Registrar persona</h1>
-            <h1 [hidden]="!isModifying">Editando persona con id: {{this.id}}</h1>
+<div class="form-container">
+    <div class="form-title">
+        <h1 [hidden]="isModifying">Registrar persona</h1>
+        <h1 [hidden]="!isModifying">Editando persona con id: {{this.id}}</h1>
+    </div>
+    <div class="form-content">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-person-fill-add" [hidden]="isModifying"></i> <i class="bi bi-person-fill-gear" [hidden]="!isModifying"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="nombre" placeholder="Nombre" aria-label="Nombre">
+            <input type="text" class="form-control" [(ngModel)]="ApPaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" required>
+            <input type="text" class="form-control" [(ngModel)]="ApMaterno" placeholder="Apellido materno" aria-label="Apellido materno" required>
         </div>
-        <div class="form-content">
-            <mat-form-field>
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Ingresa el nombre" [(ngModel)]="nombre">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Apellido Paterno</mat-label>
-                <input matInput placeholder="Ingresa el nombre" [(ngModel)]="ApPaterno">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Apellido Materno</mat-label>
-                <input matInput placeholder="Ingresa el nombre" [(ngModel)]="ApMaterno">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Dirección</mat-label>
-                <input matInput placeholder="Ingresa la direccion" [(ngModel)]="direccion">
-              </mat-form-field>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="direccion" placeholder="Direccion" aria-label="Direccion" required>
         </div>
+    </div>
+    <div class="form-end">
+        <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning">Update<i class="underline"></i></button>
+        <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger">Cancelar</button>
+        <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
     </div>
 </div>
 
@@ -32,16 +29,12 @@
         <mat-label>Filtrar</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
     </mat-form-field>
-
 </div>
-<button [hidden]="!isModifying"(click)="editar()" class="btn">Update<i class="underline"></i></button>
-<button [hidden]="!isModifying" (click)="limpiar()"  class="btn-cancel "><i class="bi bi-cloud-upload-fill icon"></i>Cancelar</button>
-<button [hidden]="isModifying"(click)="insertar()" class="btn">Insertar<i class="underline"></i></button>
 
 <br>
 <div class="table-container">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table class="table" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
@@ -74,7 +67,7 @@
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let elemento">
             <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
-            <!-- <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon> -->
+            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
         </td>
         </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
