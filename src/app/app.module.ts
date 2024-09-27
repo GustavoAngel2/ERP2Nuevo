@@ -76,7 +76,7 @@ import { EntradasComponent } from './entradas/entradas.component';
     provideAnimations(),
     provideToastr({
       timeOut: 10000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
   ],

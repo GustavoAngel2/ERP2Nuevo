@@ -4,6 +4,7 @@ export interface defaultApiResponse {
     fecha: string;
     message: string;
     response: {
-        data: any[];
+        data: any;
+        msg: string;
     };
 }

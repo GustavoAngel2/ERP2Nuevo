@@ -13,14 +13,18 @@ export class ERP{
         root.setProperty('--mat-paginator-container-background-color',('var(--' + theme + ')'));
     }
 
-    saveSettings(theme:string){
+    saveSettings(theme:string, homeStyle:string){
         localStorage.setItem('color', theme);
+        localStorage.setItem('homeStyle', homeStyle);
     }
 
     getSettings(){
         const settings = {
-            color: localStorage.getItem('color') ?? 'blue'
+            color: localStorage.getItem('color') ?? 'blue',
+            homeStyle: localStorage.getItem('homeStyle') ?? 'group',
+            pictureStyle: localStorage.getItem('pictureStyle') ?? 'square'
         }
+        console.log(settings)
         return settings
     }
 
