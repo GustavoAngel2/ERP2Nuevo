@@ -163,3 +163,58 @@ export class PersonasService {
     }
 }
     //----------------------------------------------------------------------------------------------
+
+    @Injectable({
+      providedIn: "root",
+    })
+    export class EntradasService {
+      //Se especifica la url base de la API
+      private apiUrl = "http://localhost:5020/api";
+      constructor(private http: HttpClient,private authService: AuthService) {}
+    
+      getEntradas(): Observable<defaultApiResponse> {
+        const token = this.authService.getToken();
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<defaultApiResponse>(`${this.apiUrl}/Entradas/Get`,{headers});
+      }
+    
+      insertarProovedor(ProveedorData: insertProveedorModel): Observable<defaultApiResponse> {
+        const body = {
+          nombre: ProveedorData.nombre,
+          direccion: ProveedorData.direccion,
+          telefono: ProveedorData.telefono,
+          idBanco: ProveedorData.idBanco,
+          plazoPago: ProveedorData.plazoPago,
+          correo: ProveedorData.correo,
+          rfc: ProveedorData.rfc,
+          razonSocial: ProveedorData.razonSocial,
+          clabe: ProveedorData.clabe,
+          usuarioActualiza: ProveedorData.usuarioActualiza
+        };
+        return this.http.post<defaultApiResponse>(`${this.apiUrl}/Proveedores/Insert`, body);
+      }
+      deleteProveedor(Id: number): Observable<any> {
+        return this.http.put(`${this.apiUrl}/Proveedores/Delete`, { Id });
+      }
+      updateProveedor(ProveedorData: updateProveedorModel): Observable<defaultApiResponse> {
+        const body = {
+          id: ProveedorData.id,
+          nombre: ProveedorData.nombre,
+          direccion: ProveedorData.direccion,
+          telefono: ProveedorData.telefono,
+          idBanco: ProveedorData.idBanco,
+          plazoPago: ProveedorData.plazoPago,
+          correo: ProveedorData.correo,
+          rfc: ProveedorData.rfc,
+          razonSocial: ProveedorData.razonSocial,
+          clabe: ProveedorData.clabe,
+          usuarioActualiza: ProveedorData.usuarioActualiza
+        };
+        console.log("Enviando solicitud con el siguiente cuerpo:", body);
+        return this.http.put<defaultApiResponse>(`${this.apiUrl}/Proveedores/Update`, body);
+      }
+    }
+      //----------------------------------------------------------------------------------------------
+  
