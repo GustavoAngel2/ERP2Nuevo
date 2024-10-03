@@ -31,6 +31,7 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
+import { SucursalesComponent } from './sucursales/sucursales.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { EntradasComponent } from './entradas/entradas.component';
     ProveedoresComponent,
     AjustesComponent,
     ArticulosComponent,
-    EntradasComponent
+    EntradasComponent,
+    SucursalesComponent
   ],
   imports: [
     //Dependencias

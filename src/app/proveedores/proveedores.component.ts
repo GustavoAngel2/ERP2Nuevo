@@ -64,7 +64,8 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   getData(){
     this.dataSource.filterPredicate = (data: getProveedoresModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
+             data.Id.toString().includes(filter) ||
+             data.Telefono.toString().includes(filter)// Puedes añadir más campos si es necesario
     };
     this.proveedoresService.getProveedores().subscribe({
       next: (response) => {
