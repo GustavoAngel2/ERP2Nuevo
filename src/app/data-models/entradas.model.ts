@@ -14,3 +14,16 @@ export interface    entradasInsert{
     usuarioActualiza: number;
     fechaActualiza: Date;
   }
+
+  export interface entradas{
+    Estatus: number;
+    Factura: number;
+    FechaActualiza: Date;
+    FechaEntrega: Date;
+     FechaRegistro: Date;
+     Id: number;
+     Mensaje: string;
+     nullProveedor: string;
+     Surcursal: string;
+     UsuarioActualiza: string
+  }
