@@ -21,9 +21,18 @@ const routes: Routes = [
   { path: "ajustes", component: AjustesComponent, canActivate:[AuthGuard], title: "Ajustes" },
   { path: "articulos", component:ArticulosComponent, canActivate:[AuthGuard], title: "ERP - Administrador de articulos" },
   { path: "entradas", component:EntradasComponent, canActivate:[AuthGuard], title: "ERP - Entradas" },
+  { path: "inicio", component: InicioComponent, title: "ERP - Inicio" },
+  { path: "personas", component: PersonasComponent, title: "ERP - Moduulo personas" },
+  { path: "usuarios", component: UsuariosComponent, title: "ERP - Modulo de usuarios" },
+  { path: "proveedores", component: ProveedoresComponent, title: "ERP - Modulo de proveedores" },
+  { path: "ajustes", component: AjustesComponent, title: "Ajustes" },
+  { path: "articulos", component:ArticulosComponent, title: "ERP - Administrador de articulos" },
+  { path: "entradas", component:EntradasComponent, title: "ERP - Entradas" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
