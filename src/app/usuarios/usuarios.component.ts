@@ -54,5 +54,5 @@ export class UsuariosComponent implements OnInit, AfterViewInit{
         }
       }
     })
-  }
+   }
 }
