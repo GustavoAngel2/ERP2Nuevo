@@ -1,25 +1,21 @@
-<h1 class="title">Modulo de proveedores</h1>
+<h1 class="title">Modulo de sucursales</h1>
 
 <div class="form-place">
     <div class="form-container">
         <div class="form-title">
-            <h1 [hidden]="isModifying">Registrar proveedor</h1>
-            <h1 [hidden]="!isModifying">Editando proveedor con id: {{this.id}}</h1>
+            <h1 [hidden]="isModifying">Registrar sucursal</h1>
+            <h1 [hidden]="!isModifying">Editando sucursal con id: {{this.id}}</h1>
         </div>
         <div class="form-content">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-truck"></i></span>
-                <input class="form-control" placeholder="Proveedor" [(ngModel)]="idProveedor">
+                <input class="form-control" placeholder="Nombre de la sucursal" [(ngModel)]="nombre">
                 <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
-                <input class="form-control" placeholder="Sucursal" [(ngModel)]="idSurcursal">
-            </div>
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text"><i class="bi bi-at"></i></span>
-                <input class="form-control" placeholder="Factura" [(ngModel)]="factura">
+                <input class="form-control" placeholder="Direccion" [(ngModel)]="direccion">
             </div>
         </div>
         <div class="form-end">
-            <!-- <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button> -->
+            <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
             <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
             <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
@@ -43,38 +39,30 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
         </ng-container>
-        <ng-container matColumnDef="Proveedor">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Proveedor}} </td>
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Nombre}} </td>
         </ng-container>
-        <ng-container matColumnDef="Factura">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Factura </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Factura}}</td>
+        <ng-container matColumnDef="Direccion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Direccion}} </td>
         </ng-container>
-        <ng-container matColumnDef="Sucursal">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Surcursal}} </td>
-        </ng-container>
-        <ng-container matColumnDef="FechaEntrega">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Entrega </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaEntrega}} </td>
-        </ng-container>
-        <ng-container matColumnDef="FechaRegistro">
+        <ng-container matColumnDef="FechaReg">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de alta </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaRegistro}} </td>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaReg}} </td>
         </ng-container>
-        <ng-container matColumnDef="FechaActualiza">
+        <ng-container matColumnDef="FechaAct">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaActualiza}} </td>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaAct}} </td>
         </ng-container>
-        <ng-container matColumnDef="UsuarioActualiza">
+        <ng-container matColumnDef="Usuario">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+            <td mat-cell *matCellDef="let persona"> {{persona.Usuario}} </td>
         </ng-container>
         <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let elemento">
-            <!-- <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon> -->
+            <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
             <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
         </td>
         </ng-container>

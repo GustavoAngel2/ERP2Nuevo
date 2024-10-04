@@ -9,6 +9,7 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
+import { SucursalesComponent } from './sucursales/sucursales.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: "ajustes", component: AjustesComponent, canActivate:[AuthGuard], title: "Ajustes" },
   { path: "articulos", component:ArticulosComponent, canActivate:[AuthGuard], title: "ERP - Administrador de articulos" },
   { path: "entradas", component:EntradasComponent, canActivate:[AuthGuard], title: "ERP - Entradas" },
+  { path: "sucursales", component:SucursalesComponent, canActivate:[AuthGuard], title: "ERP - Sucursales" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

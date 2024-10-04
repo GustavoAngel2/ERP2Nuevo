@@ -1,28 +1,30 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService } from '../data.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
+import { MatTableDataSource} from '@angular/material/table';
+import { AuthService,currentUser } from '../auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { AuthService,currentUser } from '../auth.service';
-import { GetPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
-import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
+import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SucursalesService } from '../data.service';
+import { sucursalInsertModel, sucursalModel, sucursalUpdateModel } from '../data-models/sucursales.model';
+
 
 @Component({
-  selector: 'app-personas',
-  templateUrl: './personas.component.html',
-  styleUrl: './personas.component.css'
+  selector: 'app-sucursales',
+  templateUrl: './sucursales.component.html',
+  styleUrl: './sucursales.component.css'
 })
-export class PersonasComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'ApPaterno','ApMaterno','Direccion', 'FechaAct','FechaReg', 'Acciones'];
-  dataSource: MatTableDataSource<GetPersonasModel>;
+export class SucursalesComponent implements OnInit,AfterViewInit {
+  displayedColumns: string[] = ['Id', 'Nombre', 'Direccion','FechaReg','FechaAct', 'Usuario', 'Acciones'];
+  dataSource: MatTableDataSource<sucursalModel>;
+
   id: number = 0;
   nombre: string = '';
-  ApPaterno : string = '';
-  ApMaterno : string = '';
   direccion: string = '';
-  usuario: number = 0;
   isModifying:boolean = false;
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -30,8 +32,8 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private PersonasService: PersonasService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
-    this.dataSource = new MatTableDataSource<GetPersonasModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+  constructor(private sucursalesService:SucursalesService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService){
+    this.dataSource = new MatTableDataSource<sucursalModel>()
   }
 
   ngOnInit() {
@@ -53,16 +55,15 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     }
   }
 
+
   getData(){
-    this.dataSource.filterPredicate = (data: GetPersonasModel, filter: string) => {
+    this.dataSource.filterPredicate = (data: sucursalModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter) || 
-             data.ApPaterno.toLowerCase().includes(filter) ||
-             data.ApMaterno.toLowerCase().includes(filter) // Puedes añadir más campos si es necesario
+             data.Id.toString().includes(filter) ||
+             data.Direccion.toString().includes(filter)// Puedes añadir más campos si es necesario
     };
-    this.PersonasService.getPersonas().subscribe({
-      next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+    this.sucursalesService.getSucursales().subscribe({
+      next: (response) => { 
         if (response && Array.isArray(response)&&response.length>0) {
           this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
         } else {
@@ -76,23 +77,22 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   }
 
   insertar():void {
-    const nuevaPersona = {
+    const nuevaSucursal:sucursalInsertModel = {
       nombre: this.nombre,
-      ApPaterno:this.ApPaterno,
-      ApMaterno:this.ApMaterno,
       direccion: this.direccion,
-      usuario: parseInt(this.loggedUser.Id,10) 
+      idUsuario: parseInt(this.loggedUser.Id,10) 
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
-    this.PersonasService.insertarPersona(nuevaPersona).subscribe({
+    this.sucursalesService.insertarSucursal(nuevaSucursal).subscribe({
       next: (response) => {
         if(response.StatusCode == 200){
-          this.toastr.success(response.response.data, 'Personas');
+          this.toastr.success(response.response.data, 'Proveedores');
         } else {
-          this.toastr.error(response.response.data,'Personas')
+          this.toastr.error(response.response.data,'Proveedores')
         }
         this.getData();
+        this.limpiar();
       },
       error: (error) => {
         // Manejar el error aquí
@@ -109,12 +109,12 @@ export class PersonasComponent implements OnInit, AfterViewInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == "yes") {
-        this.PersonasService.deletePersonas(Id).subscribe({
+        this.sucursalesService.deleteSucursal(Id).subscribe({
           next: (response) => {
             if(response.StatusCode == 200){
-              this.toastr.success(response.response.data, 'Personas');
+              this.toastr.success(response.response.data, 'Proveedores');
             } else {
-              this.toastr.error(response.response.data,'Personas')
+              this.toastr.error(response.response.data,'Proveedores')
             }
             this.getData();
           },
@@ -126,11 +126,9 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     });
   }
 
-  cargar(elemento:GetPersonasModel){
+  cargar(elemento:sucursalModel){
     this.id = elemento.Id
     this.nombre = elemento.Nombre
-    this.ApPaterno = elemento.ApPaterno
-    this.ApMaterno = elemento.ApMaterno
     this.direccion = elemento.Direccion
     this.isModifying = true
   }
@@ -138,28 +136,24 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   limpiar(){
     this.id = 0
     this.nombre = ''
-    this.ApPaterno = ''
-    this.ApMaterno = ''
     this.direccion = ''
     this.isModifying = false
   }
 
   editar(){
-    const persona:UpdatePersonasModel   = {
-      Id: this.id,
-      Nombre: this.nombre,
-      ApPaterno:this.ApPaterno,
-      ApMaterno:this.ApMaterno,
-      Direccion: this.direccion,  
-      Usuario: parseInt(this.loggedUser.Id,10)
+    const persona:sucursalUpdateModel = {
+      id: this.id,
+      nombre: this.nombre,
+      direccion: this.direccion,
+      idUsuario: parseInt(this.loggedUser.Id,10) 
     };
 
-    this.PersonasService.updatePersonas(persona).subscribe({
+    this.sucursalesService.updateSucursal(persona).subscribe({
       next: (response) => {
         if(response.StatusCode == 200){
-          this.toastr.success(response.response.data, 'Personas');
+          this.toastr.success(response.response.data, 'Proveedores');
         } else {
-          this.toastr.error(response.response.data,'Personas')
+          this.toastr.error(response.response.data,'Proveedores')
         }
         console.log(response);
         this.getData();
@@ -171,4 +165,3 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     });
   }
 }
-
