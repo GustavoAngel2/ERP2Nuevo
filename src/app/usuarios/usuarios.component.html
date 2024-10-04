@@ -1,4 +1,4 @@
-<div class="table-container">
+<!-- <div class="table-container">
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 <table class="table" mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="Id">
@@ -25,14 +25,24 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
                 <td mat-cell *matCellDef="let usuario"> {{usuario.Usuario}} </td>
             </ng-container>
-    <!-- <ng-container matColumnDef="Acciones">
+    <ng-container matColumnDef="Acciones">
     <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let elemento">
         <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
         <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
     </td>
-    </ng-container> -->
+    </ng-container> 
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </table>
+</div> -->
+
+<div class="cards-container">
+    <div style="background-color: #000000a0; border-radius: 6px; padding: 6px; text-align: center; width:256px" *ngFor="let item of dataSource.data">
+        <div class="custom-card-info">
+            <h3>{{ item.Nombre }}</h3>
+            <p>ID: {{ item.Id }}</p>
+            <p>Nombre: {{item.NombreP}}</p>
+        </div>
+    </div>
 </div>

@@ -32,6 +32,7 @@ import { AjustesComponent } from './ajustes/ajustes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
+import { BancosComponent } from './bancos/bancos.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { SucursalesComponent } from './sucursales/sucursales.component';
     AjustesComponent,
     ArticulosComponent,
     EntradasComponent,
-    SucursalesComponent
+    SucursalesComponent,
+    BancosComponent
   ],
   imports: [
     //Dependencias
@@ -77,7 +79,7 @@ import { SucursalesComponent } from './sucursales/sucursales.component';
     provideAnimationsAsync(),
     provideAnimations(),
     provideToastr({
-      timeOut: 10000,
+      timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
