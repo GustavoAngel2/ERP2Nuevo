@@ -4,30 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo de Artículos</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="articulos" href="articulos.component.css">
 </head>
 <body>
-    <section class="article-module">
-        <article class="article">
-            <img src="https://via.placeholder.com/300" alt="Imagen del artículo">
-            <h2>Título del Artículo 1</h2>
-            <p>Este es un resumen breve del artículo 1.</p>
-            <a href="#">Leer más</a>
-        </article>
 
-        <article class="article">
-            <img src="https://via.placeholder.com/300" alt="Imagen del artículo">
-            <h2>Título del Artículo 2</h2>
-            <p>Este es un resumen breve del artículo 2.</p>
-            <a href="#">Leer más</a>
-        </article>
+    <section id="articulos">
+        <h1>Artículos</h1>
+        <!-- Aquí se mostrarán los artículos -->
+        <div class="articulos-container">
+            <!-- Ejemplo de artículo -->
+            <div class="articulo">
+                <h2>Título del artículo 1</h2>
+                <p>Descripción del artículo 1.</p>
+                <button class="btn-eliminar">Eliminar</button>
+            </div>
+        </div>
 
-        <article class="article">
-            <img src="https://via.placeholder.com/300" alt="Imagen del artículo">
-            <h2>Título del Artículo 3</h2>
-            <p>Este es un resumen breve del artículo 3.</p>
-            <a href="#">Leer más</a>
-        </article>
+        <!-- Botón para agregar un nuevo artículo -->
+        <button id="btn-agregar">Agregar nuevo artículo</button>
     </section>
+
+    <!-- Archivo JavaScript -->
+    <script src="script.js"> document.addEventListener('DOMContentLoaded', () => {
+            const articulosContainer = document.querySelector('.articulos-container');
+            const btnAgregar = document.getElementById('btn-agregar');
+        
+            // Función para eliminar un artículo
+            const eliminarArticulo = (boton) => {
+                boton.addEventListener('click', () => {
+                    boton.parentElement.remove();
+                });
+            };
+        
+            // Añadir eventos de eliminar a los artículos existentes
+            document.querySelectorAll('.btn-eliminar').forEach(boton => {
+                eliminarArticulo(boton);
+            });
+        
+            // Función para agregar un nuevo artículo
+            btnAgregar.addEventListener('click', () => {
+                const nuevoArticulo = document.createElement('div');
+                nuevoArticulo.classList.add('articulo');
+        
+                nuevoArticulo.innerHTML = `
+                    <h2>Nuevo Artículo</h2>
+                    <p>Descripción del nuevo artículo.</p>
+                    <button class="btn-eliminar">Eliminar</button>
+                `;
+        
+                articulosContainer.appendChild(nuevoArticulo);
+        
+                // Añadir el evento de eliminar al nuevo botón de eliminar
+                eliminarArticulo(nuevoArticulo.querySelector('.btn-eliminar'));
+            });
+        });
+        </script>
 </body>
 </html>
