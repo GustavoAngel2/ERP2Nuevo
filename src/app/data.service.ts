@@ -191,7 +191,7 @@ export class PersonasService {
         return this.http.post<defaultApiResponse>(`${this.apiUrl}/Sucursales/Insert`, body);
       }
       deleteSucursal(Id: number): Observable<any> {
-        return this.http.put(`${this.apiUrl}/Entradas/Delete`, { Id });
+        return this.http.put(`${this.apiUrl}/Sucursales/Delete`, { Id });
       }
       updateSucursal(SucursalData: sucursalUpdateModel): Observable<defaultApiResponse> {
         const body = {
@@ -201,7 +201,7 @@ export class PersonasService {
           idUsuario: SucursalData.idUsuario
         };
         console.log("Enviando solicitud con el siguiente cuerpo:", body);
-        return this.http.put<defaultApiResponse>(`${this.apiUrl}/Proveedores/Update`, body);
+        return this.http.put<defaultApiResponse>(`${this.apiUrl}/Sucursales/Update`, body);
       }
     }
       //----------------------------------------------------------------------------------------------
@@ -249,7 +249,7 @@ export class PersonasService {
             usuarioActualiza: ProveedorData.usuarioActualiza
           };
           console.log("Enviando solicitud con el siguiente cuerpo:", body);
-          return this.http.put<defaultApiResponse>(`${this.apiUrl}/Proveedores/Update`, body);
+          return this.http.put<defaultApiResponse>(`${this.apiUrl}/Entradas/Update`, body);
         }
       }
         //----------------------------------------------------------------------------------------------

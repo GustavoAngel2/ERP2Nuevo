@@ -83,6 +83,7 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
       idUsuario: parseInt(this.loggedUser.Id,10) 
     };
 
+    console.log(nuevaSucursal)
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
     this.sucursalesService.insertarSucursal(nuevaSucursal).subscribe({
       next: (response) => {

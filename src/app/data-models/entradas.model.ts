@@ -17,9 +17,9 @@ export interface entradasUpdateModel{
 export interface entradasModel{
   Estatus: number;
   Factura: number;
-  FechaActualiza: Date;
-  FechaEntrega: Date;
-  FechaRegistro: Date;
+  FechaActualiza: string;
+  FechaEntrega: string;
+  FechaRegistro: string;
   Id: number;
   Mensaje: string;
   nullProveedor: string;
