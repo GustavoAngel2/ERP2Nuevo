@@ -36,13 +36,12 @@
 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </table>
 </div> -->
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 <div class="cards-container">
     <div class="custom-card" *ngFor="let item of dataSource.data">
         <div class="custom-card-info">
             <h3>{{ item.Nombre }}</h3>
             <p>ID: {{ item.Id }}</p>
-            <p>Nombre: {{item.NombreP}}</p>
+            <p>Nombre del responsable: {{item.NombreP}}</p>
             <p>Fecha de alta:{{item.FechaReg}}</p>
         </div>
     </div>
