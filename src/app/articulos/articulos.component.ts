@@ -12,15 +12,15 @@ import { articulos, updateArticuloModel } from '../data-models/articulos.model';
   styleUrls: ['./articulos.component.css']
 })
 export class ArticulosComponent implements OnInit, AfterViewInit {
-  articulo: updateArticuloModel = {
-    Id: 0,
-    Codigo: '', 
-    Descripcion: '',
-    UM: 0,
-    Costo: 0,
-    Precio: 0,
-    Usuario: 0
-  };
+  // articulo: updateArticuloModel = {
+  //   Id: 0,
+  //   Codigo: '', 
+  //   Descripcion: '',
+  //   UM: 0,
+  //   Costo: 0,
+  //   Precio: 0,
+  //   Usuario: 0
+  // };
   datosCargados: boolean = false;
 
   displayedColumns: string[] = ['Id', 'Codigo', 'Descripcion', 'UM', 'Usuario', 'Costo', 'Precio', 'Fecha Registro', 'Fecha Actualiza', 'Acciones'];
@@ -174,25 +174,25 @@ export class ArticulosComponent implements OnInit, AfterViewInit {
   //   });
   // }
 
-  cargarDatos(articulo: updateArticuloModel) {
-    this.articulo.Id = articulo.Id;
-    this.codigo = articulo.Codigo;
-    this.descripcion = articulo.Descripcion;
-    this.um = articulo.UM;
-    this.costo = articulo.Costo;
-    this.precio = articulo.Precio;
-    this.usuario = articulo.Usuario;
-    this.datosCargados = true;
-  }
+  // cargarDatos(articulo: updateArticuloModel) {
+  //   this.articulo.Id = articulo.Id;
+  //   this.codigo = articulo.Codigo;
+  //   this.descripcion = articulo.Descripcion;
+  //   this.um = articulo.UM;
+  //   this.costo = articulo.Costo;
+  //   this.precio = articulo.Precio;
+  //   this.usuario = articulo.Usuario;
+  //   this.datosCargados = true;
+  // }
 
-  limpiar(): void {
-    this.codigo = "";
-    this.descripcion = "";
-    this.um = 0;
-    this.costo = 0;
-    this.precio = 0;
-    this.usuario = 0;
-    this.datosCargados = false;
+  // limpiar(): void {
+  //   this.codigo = "";
+  //   this.descripcion = "";
+  //   this.um = 0;
+  //   this.costo = 0;
+  //   this.precio = 0;
+  //   this.usuario = 0;
+  //   this.datosCargados = false;
 
-  }
+  // }
 }
