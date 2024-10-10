@@ -9,18 +9,24 @@
         <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
         <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
       </div>
+      <div class="card">
       <span> Administración </span>
       <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios Permitidos</button>
       <button (click)="drawer.toggle()" routerLink="sucursales">Sucursales</button>
       <button (click)="drawer.toggle()" routerLink="personas">Personas</button>
       <button (click)="drawer.toggle()" routerLink="entradas">Entradas</button>
+      </div>
+      <div class="card">
       <span> Ventas </span>  
       <button (click)="drawer.toggle()" routerLink="proveedores">Proveedores</button>
       <button (click)="drawer.toggle()" routerLink="articulos">Articulos</button>
       <button (click)="drawer.toggle()" routerLink="compras">Ordenes de compras</button>
+      </div>
+      <div class="card">
       <span> Sistema </span>
       <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios permitidos</button>
       <button (click)="drawer.toggle()" routerLink="bancos">Bancos registrados</button>
+      </div>
     </div>
   </mat-drawer>
   
