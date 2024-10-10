@@ -13,6 +13,7 @@ import { SucursalesComponent } from './sucursales/sucursales.component';
 import { InsumosComponent } from './insumos/insumos.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { BancosComponent } from './bancos/bancos.component';
+import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: "insumos", component:InsumosComponent, canActivate:[AuthGuard], title: "ERP - Insumos" },
   { path: "recetas", component:RecetasComponent, canActivate:[AuthGuard], title: "ERP - Recetas" },
   { path: "bancos", component:BancosComponent, canActivate:[AuthGuard], title: "ERP - Bancos" },
+  { path: "detallecompras", component:DetalleOrdenCompraComponent, canActivate:[AuthGuard], title: "ERP - Ordenes de compras" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
