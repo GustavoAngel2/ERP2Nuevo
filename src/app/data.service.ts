@@ -306,4 +306,107 @@ export class PersonasService {
           }
         }
           //----------------------------------------------------------------------------------------------
+
+          @Injectable({
+            providedIn: "root",
+          })
+          export class PersonasService {
+            //Se especifica la url base de la API
+            private apiUrl = "http://localhost:5020/api";
+            constructor(private http: HttpClient,private authService: AuthService) {}
+          
+            getPersonas(): Observable<defaultApiResponse> {
+              const token = this.authService.getToken();
+              const headers = new HttpHeaders({
+                'Authorization': `Bearer ${token}`
+              });
+              return this.http.get<defaultApiResponse>(`${this.apiUrl}/Personas/Get`,{headers});
+            }
+          
+            insertarPersona(PersonaData: {
+              nombre: string;
+              ApPaterno: string;
+              ApMaterno: string;
+              direccion: string;
+              usuario: number;
+            }): Observable<defaultApiResponse> {
+              const body = {
+                nombre: PersonaData.nombre,
+                ApPaterno: PersonaData.ApPaterno,
+                ApMaterno: PersonaData.ApMaterno,
+                direccion: PersonaData.direccion,
+                usuario: PersonaData.usuario,
+                Direccion: PersonaData.direccion,
+                Usuario: PersonaData.usuario,
+              };
+              return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
+            }
+            deletePersonas(Id: number): Observable<any> {
+              return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
+            }
+            updatePersonas(PersonaData: UpdatePersonasModel): Observable<defaultApiResponse> {
+              const body = {
+                id: PersonaData.Id,
+                nombre: PersonaData.Nombre,
+                apPaterno: PersonaData.ApPaterno,
+                apMaterno: PersonaData.ApMaterno,
+                direccion: PersonaData.Direccion,
+                usuario: PersonaData.Usuario
+              };
+              console.log("Enviando solicitud con el siguiente cuerpo:", body);
+              return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
+            }
+          }
+            //----------------------------------------------------------------------------------------------
+            @Injectable({
+              providedIn: "root",
+            })
+            export class OrdenComprasService {
+              //Se especifica la url base de la API
+              private apiUrl = "http://localhost:5020/api";
+              constructor(private http: HttpClient,private authService: AuthService) {}
+            
+              getOrdenCompras(): Observable<defaultApiResponse> {
+                const token = this.authService.getToken();
+                const headers = new HttpHeaders({
+                  'Authorization': `Bearer ${token}`
+                });
+                return this.http.get<defaultApiResponse>(`${this.apiUrl}/OrdenCompras/Get`,{headers});
+              }
+            
+              insertarCompra(OrdenComprasData:{
+                IdProveedor:number;
+                FechaLlegada: string;
+                IdSucursal:number;
+                idComprador: number;
+                Fecha: Date;
+                Total: number;
+              }): Observable<defaultApiResponse> {
+                const body = {
+                  idProveedor: OrdenComprasData.IdProveedor,
+                  FechaLegada: OrdenComprasData.FechaLlegada,
+                  idSucursal: OrdenComprasData.IdSucursal,
+                  idComprador: OrdenComprasData.idComprador,
+                  Fecha: OrdenComprasData.Fecha,
+                  Total: OrdenComprasData.Total
+                };
+                return this.http.post<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Insert`, body);
+              }
+              deletecCompra(Id: number): Observable<any> {
+                return this.http.put(`${this.apiUrl}/OrdenCompra/Delete`, { Id });
+              }
+              updateProveedor(OrdenCompraData: updateOrdenCompraModel): Observable<defaultApiResponse> {
+                const body = {
+                  id: OrdenComprasData.id,
+                  idProveedor: OrdenComprasData.idProveedor,
+                  FechaLegada: OrdenComprasData.FechaLegada,
+                  idSucursal: OrdenComprasData.idSucursal,
+                  idComprador: OrdenComprasData.idComprador,
+                  Fecha: OrdenComprasData.Fecha,
+                  Total: OrdenComprasData.Total
+                };
+                console.log("Enviando solicitud con el siguiente cuerpo:", body);
+                return this.http.put<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Update`, body);
+              }
+            }
       
