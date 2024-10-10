@@ -11,6 +11,8 @@ import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
 import { InsumosComponent } from './insumos/insumos.component';
+import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
+
 
 
 const routes: Routes = [
@@ -25,6 +27,7 @@ const routes: Routes = [
   { path: "entradas", component:EntradasComponent, canActivate:[AuthGuard], title: "ERP - Entradas" },
   { path: "sucursales", component:SucursalesComponent, canActivate:[AuthGuard], title: "ERP - Sucursales" },
   { path: "insumos", component:InsumosComponent, canActivate:[AuthGuard], title: "ERP - Insumos" },
+  { path: "detallecompras", component:DetalleOrdenCompraComponent, canActivate:[AuthGuard], title: "ERP - Ordenes de compras" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
