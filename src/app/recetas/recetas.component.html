@@ -1,1 +1,143 @@
-<p>recetas works!</p>
+<div class="title-container">
+    <br>
+    <label class="title">Punto de venta</label>
+    <br>
+    <img src="./assets/Almacenes.png" class="module-logo">
+  </div>
+  
+  
+  <div class="form-place" *ngIf="isOnStepOne" >
+  <div class="form-container">
+      <div class="form-content">
+          <mat-form-field>
+              <mat-label>Almacén</mat-label>
+              <mat-select [formControl]="IdSucursalControl" [(ngModel)]="IdSucursal" name="IdSucursal" required>
+                  <mat-option value="0">Seleccione</mat-option>
+                  <mat-option *ngFor="let cod of ComboSucursales" [value]="cod.Id">{{ cod.Nombre }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Cliente1</mat-label>
+            <mat-select [formControl]="IdClienteControl" [(ngModel)]="IdCliente" name="IdCliente" required>
+              <mat-option value="0">Seleccione</mat-option>
+              <mat-option *ngFor="let cod of ComboClientes" [value]="cod.Id">{{ cod.Nombre }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>UUID</mat-label>
+            <input matInput type="text" placeholder="Ingresa una id unica universal" [(ngModel)]="uuid" name="uuid">
+          </mat-form-field>
+          <button (click)="insertarTicket();" class="btn right">Generar ticket<i class="underline"></i></button>
+        </div>
+        
+        
+    </div>
+
+    </div>
+    <br>
+
+    <div class="form-place" *ngIf="isOnStepTwo">
+        <div class="form-container">
+            <div class="form-title">
+            <h1 mat-dialog-title>Nuevo elemento del Ticket</h1>
+        </div>
+        <div class="form-content">
+            <mat-form-field>
+                <mat-label>Ticket</mat-label>
+                <input  matInput [formControl]="IdTicketControl" placeholder="Ingresa el ticket" [(ngModel)]="idTicket" name="idTicket">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>UUID</mat-label>
+                <input matInput disabled="true" type="text" placeholder="Ingresa una id unica universal" [(ngModel)]="uuid" name="uuid">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Articulo" [formControl]="IdArticuloControl" [matAutocomplete]="autoArticulo" [ngModel]="selectedArticulo" [value]="displayArticuloFn(selectedArticulo)" />
+                <mat-autocomplete #autoArticulo="matAutocomplete" (optionSelected)="articuloSelected($event)" [displayWith]="displayArticuloFn">
+                    <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
+                        {{ option.Descripcion}}
+                    </mat-option>
+                  </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Código" [formControl]="CodigoControl" [matAutocomplete]="autoCodigo" [ngModel]="selectedCodigo" [value]="displayArticuloCodFn(selectedCodigo)" />
+                <mat-autocomplete #autoCodigo="matAutocomplete" (optionSelected)="articuloCodSelected($event)" [displayWith]="displayArticuloCodFn">
+                    <mat-option *ngFor="let option of filteredArticulosCod | async" [value]="option">
+                    {{ option.Codigo }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" [formControl]="CantidadControl" placeholder="Ingresa la cantidad" [(ngModel)]="cantidad" name="cantidad">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Precio de venta</mat-label>
+            <input matInput [formControl]="PrecioControl" placeholder="Ingresa el precio de venta" [(ngModel)]="precioVenta" name="precioVenta">
+        </mat-form-field>
+            <button (click)="refrescarPagina()" class="btn">Terminar<i class="underline"></i></button>
+            <button (click)="insertarDetalleTicket();" class="btn">Insertar al Ticket<i class="underline"></i></button>
+        </div>
+    </div>
+  
+  
+  <br>
+  <div class="actionbar">
+      <mat-form-field class="search-bar">
+          <mat-label>Filtrar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+      </mat-form-field>
+      <div class="form-title">
+        <h1 mat-dialog-title style="color: rgb(211, 49, 20);">Total Ticket: {{ totalTicket | currency }}</h1>
+      </div>
+  </div>
+  
+  <br>
+  <div class="table-container">
+    <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="IdTicket">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id del Ticket </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.IdTicket}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Codigo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Codigo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Articulo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Artículo </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Articulo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Cantidad}} </td>
+        </ng-container>
+        <ng-container matColumnDef="PrecioVenta">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio Venta </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.PrecioVenta}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Total}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Usuario}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Estatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Estatus}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let elemento">
+            <mat-icon class="action-btn" (click)="eliminarDetalle(elemento.Id, elemento.Articulo)">delete</mat-icon>
+        </td>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+    </div>
