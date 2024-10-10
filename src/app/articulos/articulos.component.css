@@ -1,57 +1,121 @@
-body {
-    font-family: Arial, sans-serif;
+/* Estilo general */
+body, html {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Fondo blanco para la página */
 }
 
-.article-module {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+/* Estilo del encabezado */
+header {
+    background-color: #ffffff; /* Fondo blanco para el encabezado */
+    color: #000000; /* Texto negro */
+    text-align: center;
+    padding: 15px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Estilo principal */
+main {
     padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-.article {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 
-    0.1);
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
+/* Estilo de la tabla de artículos */
+.articulos table {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #ffffff; /* Fondo blanco para la tabla */
+    color: #00014e; /* Color del texto de la tabla */
+    border-collapse: collapse;
+    margin: 0 auto;
 }
 
-.article:hover {
-    transform: translateY(-10px);
+.articulos th, .articulos td {
+    border: 1px solid #610202; /* Borde rojo para las celdas */
+    padding: 10px;
+    text-align: center;
 }
 
-.article img {
-    width: 100%;
-    height: auto;
+.articulos th {
+    background-color: #ffffff; /* Fondo blanco para el encabezado de la tabla */
+    color: #000000; /* Texto negro */
+    font-weight: bold;
 }
 
-.article h2 {
-    font-size: 1.5em;
-    margin: 15px;
+.articulos td {
+    background-color: #ffffff; /* Fondo blanco para las celdas */
+    color: #000000; /* Texto negro */
 }
 
-.article p {
-    font-size: 1em;
-    margin: 0 15px 15px;
-    color: #555;
-}
-
-.article a {
-    display: inline-block;
-    margin: 0 15px 15px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
+/* Estilo de los botones */
+.btn-editar, .btn-eliminar {
+    padding: 5px;
+    margin: 2px;
+    border: none;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-size: 1.2em; /* Tamaño de fuente para iconos */
+    color: #fff; /* Color del icono */
+    background-color: transparent; /* Sin fondo en el botón */
+    outline: none; /* Sin borde al hacer clic */
+    transition: transform 0.2s; /* Efecto de animación al hacer clic */
 }
 
-.article a:hover {
-    background-color: #0056b3;
+/* Estilo específico para iconos */
+.btn-editar {
+    color: #000000; /* Color verde para Editar */
+}
+
+.btn-editar:hover {
+    color: #000000; /* Color verde más oscuro al pasar el cursor */
+}
+
+.btn-eliminar {
+    color: #000000; /* Color rojo para Eliminar */
+}
+
+.btn-eliminar:hover {
+    color: #000000; /* Color rojo más oscuro al pasar el cursor */
+}
+
+/* Tamaño de los iconos */
+.icono {
+    width: 20px; /* Ajusta según sea necesario */
+    height: 20px; /* Ajusta según sea necesario */
+}
+
+/* Efecto de animación al hacer clic */
+.btn-editar:active, .btn-eliminar:active {
+    transform: scale(0.95); /* Efecto de reducción al hacer clic */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .articulos table, .articulos tbody, .articulos th, .articulos td, .articulos tr {
+        display: block;
+        width: 100%;
+    }
+
+    .articulos tr {
+        margin-bottom: 15px;
+    }
+
+    .articulos td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .articulos td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        text-align: left;
+        font-weight: bold;
+    }
 }
