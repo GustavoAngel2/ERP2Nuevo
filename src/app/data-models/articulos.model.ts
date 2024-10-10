@@ -26,13 +26,16 @@ export interface articulos {
   }
 
   export interface updateArticuloModel{
-    Id: number;
+    Id:number;
     Codigo: string;
     Descripcion: string;
-    UM: number;
-    Costo: number;
-    Precio: number;
-    Usuario: number;
+    Familia:string;
+    UM: string;
+    UltimoCosto:string;
+    PrecioVenta: string;
+    Iva:string;
+    Ieps:string;
+    Usuario: String;
   }
 
    export interface deleteArticuloModel{

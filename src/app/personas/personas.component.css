@@ -1,0 +1,7 @@
+.search-bar{
+
+    background-color: var(--mat-toolbar-container-background-color);
+    color: var(--mat-toolbar-container-background-color);
+    width: 100%;
+
+}
