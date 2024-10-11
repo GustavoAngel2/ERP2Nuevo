@@ -18,7 +18,7 @@ import { insertInsumosModel, insumosModel, updateInsumosModel } from '../data-mo
   styleUrl: './insumos.component.css'
 })
 export class InsumosComponent implements OnInit,AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion','Costo','IdBanco', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion','Costo', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
   dataSource: MatTableDataSource<insumosModel>;
 
   id: number = 0;
