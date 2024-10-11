@@ -1,74 +1,40 @@
-/* Estilo del cuerpo */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    padding: 20px;
     margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
-/* Módulo de Artículos */
-#modulo-articulos {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-h1 {
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
     text-align: center;
-    color: #333;
 }
 
-/* Contenedor de artículos */
-.articulos-container {
-    display: flex;
-    flex-direction: column;
+main {
+    padding: 20px;
+}
+
+.articulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Estilos de cada artículo */
-.articulo {
+article {
+    background-color: white;
     padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.articulo h2 {
-    margin: 0 0 10px;
+article h2 {
+    color: #333;
 }
 
-.articulo p {
-    margin: 0 0 10px;
+article p {
+    color: #555;
 }
 
-.btn-eliminar {
-    padding: 8px 15px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.btn-eliminar:hover {
-    background-color: #c82333;
-}
-
-/* Botón para agregar nuevos artículos */
-#btn-agregar {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#btn-agregar:hover {
-    background-color: #218838;
-}

@@ -58,10 +58,10 @@ export class ArticulosComponent implements OnInit, AfterViewInit {
   //   const nuevoArticulo = {
   //     descripcion: this.descripcion,
   //     codigo: this.codigo,
-  //     UM: this.um, // Cambiar `um` a `UM`
+  //     UM: this.um, // Cambiar um a UM
   //     costo: this.costo,
   //     precio: this.precio,
-  //     Usuario: parseInt(this.loggedInUser.Id, 10) // Cambiar `usuario` a `Usuario`
+  //     Usuario: parseInt(this.loggedInUser.Id, 10) // Cambiar usuario a Usuario
   //   };
   //   this.articulosService.insertarArticulos(nuevoArticulo).subscribe({
   //     next: (response) => {

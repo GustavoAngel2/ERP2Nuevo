@@ -4,60 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo de Artículos</title>
-    <link rel="articulos" href="articulos.component.css">
+    <link rel="stylesheet" href="articulos.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header>
+        <h1>Módulo de Artículos</h1>
+    </header>
+    <main>
+        <section class="articulos">
+            <table id="articulos-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Id Familia</th>
+                        <th>Id UM</th>
+                        <th>Último Costo</th>
+                        <th>Precio Venta</th>
+                        <th>IVA</th>
+                        <th>IEPS</th>
+                        <th>Id Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>34782</td>
+                        <td>Artículo de ejemplo</td>
+                        <td>Familia 1</td>
+                        <td>UM 1</td>
+                        <td>$100</td>
+                        <td>$120</td>
+                        <td>16%</td>
+                        <td>0%</td>
+                        <td>Usuario 1</td>
+                        <td>
+                            <button class="btn-editar" onclick="editarArticulo(this)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-eliminar" onclick="eliminarArticulo(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    <!-- Más filas de artículos pueden ir aquí -->
+                </tbody>
+            </table>
+        </section>
+    </main>
 
-    <section id="articulos">
-        <h1>Artículos</h1>
-        <!-- Aquí se mostrarán los artículos -->
-        <div class="articulos-container">
-            <!-- Ejemplo de artículo -->
-            <div class="articulo">
-                <h2>Título del artículo 1</h2>
-                <p>Descripción del artículo 1.</p>
-                <button class="btn-eliminar">Eliminar</button>
-            </div>
-        </div>
+    <script>
+        // Función para eliminar un artículo
+        function eliminarArticulo(btn) {
+            // Preguntar al usuario si está seguro de eliminar
+            if (confirm("¿Estás seguro de que deseas eliminar este artículo?")) {
+                // Obtener la fila que contiene el botón
+                const row = btn.closest('tr');
+                // Eliminar la fila
+                row.parentNode.removeChild(row);
+            }
+        }
 
-        <!-- Botón para agregar un nuevo artículo -->
-        <button id="btn-agregar">Agregar nuevo artículo</button>
-    </section>
+        // Función para editar un artículo
+        function editarArticulo(btn) {
+            // Obtener la fila que contiene el botón
+            const row = btn.closest('tr');
+            // Obtener celdas de la fila
+            const cells = row.getElementsByTagName('td');
+            
+            // Obtener los valores actuales
+            const id = cells[0].innerText; // Obtener el Id
+            const codigo = cells[1].innerText; // Obtener el Código
+            const descripcion = cells[2].innerText; // Obtener la Descripción
+            const idFamilia = cells[3].innerText; // Obtener Id Familia
+            const idUM = cells[4].innerText; // Obtener Id UM
+            const ultimoCosto = cells[5].innerText; // Obtener Último Costo
+            const precioVenta = cells[6].innerText; // Obtener Precio Venta
+            const iva = cells[7].innerText; // Obtener IVA
+            const ieps = cells[8].innerText; // Obtener IEPS
+            const idUsuario = cells[9].innerText; // Obtener Id Usuario
 
-    <!-- Archivo JavaScript -->
-    <script src="script.js"> document.addEventListener('DOMContentLoaded', () => {
-            const articulosContainer = document.querySelector('.articulos-container');
-            const btnAgregar = document.getElementById('btn-agregar');
-        
-            // Función para eliminar un artículo
-            const eliminarArticulo = (boton) => {
-                boton.addEventListener('click', () => {
-                    boton.parentElement.remove();
-                });
-            };
-        
-            // Añadir eventos de eliminar a los artículos existentes
-            document.querySelectorAll('.btn-eliminar').forEach(boton => {
-                eliminarArticulo(boton);
-            });
-        
-            // Función para agregar un nuevo artículo
-            btnAgregar.addEventListener('click', () => {
-                const nuevoArticulo = document.createElement('div');
-                nuevoArticulo.classList.add('articulo');
-        
-                nuevoArticulo.innerHTML = `
-                    <h2>Nuevo Artículo</h2>
-                    <p>Descripción del nuevo artículo.</p>
-                    <button class="btn-eliminar">Eliminar</button>
-                `;
-        
-                articulosContainer.appendChild(nuevoArticulo);
-        
-                // Añadir el evento de eliminar al nuevo botón de eliminar
-                eliminarArticulo(nuevoArticulo.querySelector('.btn-eliminar'));
-            });
-        });
-        </script>
+            // Solicitar nuevos valores al usuario
+            const nuevoCodigo = prompt("Editar Código", codigo);
+            const nuevaDescripcion = prompt("Editar Descripción", descripcion);
+            const nuevoIdFamilia = prompt("Editar Id Familia", idFamilia);
+            const nuevoIdUM = prompt("Editar Id UM", idUM);
+            const nuevoUltimoCosto = prompt("Editar Último Costo", ultimoCosto);
+            const nuevoPrecioVenta = prompt("Editar Precio Venta", precioVenta);
+            const nuevoIva = prompt("Editar IVA", iva);
+            const nuevoIe = prompt("Editar IEPS", ieps);
+            const nuevoIdUsuario = prompt("Editar Id Usuario", idUsuario);
+
+            // Actualizar celdas con los nuevos valores
+            if (nuevoCodigo !== null) {
+                cells[1].innerText = nuevoCodigo;
+            }
+            if (nuevaDescripcion !== null) {
+                cells[2].innerText = nuevaDescripcion;
+            }
+            if (nuevoIdFamilia !== null) {
+                cells[3].innerText = nuevoIdFamilia;
+            }
+            if (nuevoIdUM !== null) {
+                cells[4].innerText = nuevoIdUM;
+            }
+            if (nuevoUltimoCosto !== null) {
+                cells[5].innerText = nuevoUltimoCosto;
+            }
+            if (nuevoPrecioVenta !== null) {
+                cells[6].innerText = nuevoPrecioVenta;
+            }
+            if (nuevoIva !== null) {
+                cells[7].innerText = nuevoIva;
+            }
+            if (nuevoIe !== null) {
+                cells[8].innerText = nuevoIe;
+            }
+            if (nuevoIdUsuario !== null) {
+                cells[9].innerText = nuevoIdUsuario;
+            }
+        }
+    </script>
 </body>
 </html>
