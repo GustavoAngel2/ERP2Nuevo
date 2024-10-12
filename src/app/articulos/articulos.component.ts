@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService, currentUser } from '../auth.service';
-import { articulos, updateArticuloModel } from '../data-models/articulos.model';
+import { articulos } from '../data-models/articulos.model';
 
 @Component({
   selector: 'app-articulos',
@@ -12,15 +12,7 @@ import { articulos, updateArticuloModel } from '../data-models/articulos.model';
   styleUrls: ['./articulos.component.css']
 })
 export class ArticulosComponent implements OnInit, AfterViewInit {
-  // articulo: updateArticuloModel = {
-  //   Id: 0,
-  //   Codigo: '', 
-  //   Descripcion: '',
-  //   UM: 0,
-  //   Costo: 0,
-  //   Precio: 0,
-  //   Usuario: 0
-  // };
+
   datosCargados: boolean = false;
 
   displayedColumns: string[] = ['Id', 'Codigo', 'Descripcion', 'UM', 'Usuario', 'Costo', 'Precio', 'Fecha Registro', 'Fecha Actualiza', 'Acciones'];
