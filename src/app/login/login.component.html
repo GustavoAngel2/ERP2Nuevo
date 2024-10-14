@@ -7,18 +7,23 @@
 </head>
 <body>
     <div class="login-container">
-        <form class="login-form">
+        <div class="login-form">
+            <img src="./assets/angular.webp" alt="" class="enterprise-logo">
             <h2>Iniciar sesión</h2>
             <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input type="text" [(ngModel)]="username" id="username" name="username" required>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text"><i class="bi bi-person-bounding-box"></i></span>
+                    <input type="text" class="form-control" [(ngModel)]="username" placeholder="Nombre de usuario" aria-label="Nombre de usuario">
+                </div>
             </div>
             <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" [(ngModel)]="userpassword" id="password" name="password" required>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text"><i class="bi bi-input-cursor-text"></i></span>
+                    <input type="password" class="form-control" [(ngModel)]="userpassword" placeholder="Contraseña" aria-label="Contraseña" required>
+                </div>
             </div>
-            <button (click)="login()" type="submit">Entrar</button>
-        </form>
+            <button class="btn btn-outline-primary" (click)="login()" type="submit"><i class="bi bi-box-arrow-in-right"></i>  Iniciar sesión</button>
+        </div>
     </div>
 </body>
 </html>

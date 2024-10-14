@@ -1,0 +1,17 @@
+.cards-container{
+    width: 100%;
+    padding: 6px;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.custom-card{
+    background-color: var(--mat-toolbar-container-background-color);
+    border-radius: 6px;
+    padding: 6px;
+    text-align: center;
+    width:256px;
+}

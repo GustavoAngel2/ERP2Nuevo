@@ -1,6 +1,6 @@
 .actions{
     position: absolute;
-    padding-top: 16px;
+    padding-top: 14px;
     margin-right: 12px;
     height: var(--mat-toolbar-standard-height - 16px);
     top: 0;
@@ -10,22 +10,25 @@
     gap: 12px;
 }
 
-.actions button{
+
+.actions a{
     cursor: pointer;
     border: 0;
     border-radius: 5px;
-    padding: 4px;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-left: 6px;
     background-color: #00000092;
     color:white;
     transition: .5s;
 }
 
-.actions button:hover{
+.actions a:hover{
     background-color: #000000b3;
     transition: .5s;
 }
 
-.actions button:active{
+.actions a:active{
     background-color: #000000d3;
     transition: .5s;
 }
@@ -36,20 +39,39 @@ mat-drawer{
 }
 
 .side-list{
-    width: calc(100% - 20px);
+    width: 100%;
     height: calc(100% - 20px);
     padding: 10px;
-    gap: 6px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+mat-accordion{
+    width: 100%;
 }
 
 .side-list button{
-    color:white;
+    background-color: var(--mat-toolbar-container-background-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
     font-size: 16px;
-    border: 0;
-    background-color: #00000049;
-    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Suaviza la transición */
+}
+
+.side-list button:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    font-size: 19px;
+    cursor: pointer;
+    transition: all 0.5s ease; /* Suaviza la transición */
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.389); /* Efecto sutil de sombra */
+
 }
 
 .side-list span{
@@ -58,15 +80,17 @@ mat-drawer{
     text-align: center;
 }
 
+
 .card{
     align-items: center;
-    width: calc(100% - 32px);
+    width: calc(100% - 16px);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 12px;
     background-color: #00000048;
     color:white;
+    margin-bottom: 10px;
     gap: 6px;
 }
 
@@ -74,6 +98,3 @@ mat-drawer{
     width: 100%;
 }
 
-.pfp{
-    background-color: red;
-}

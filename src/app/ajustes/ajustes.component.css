@@ -10,7 +10,8 @@
     height: 100%;
 }
 
-.btn{
+.btn-settings{
+    margin-top: 38px;
     width: 64px;
     height: 64px;
     border-radius: 0;
@@ -18,6 +19,9 @@
 
 .footer{
     position: fixed;
-    bottom: 0;
-    left: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    bottom: 10px;
+    left: 10px;
 }

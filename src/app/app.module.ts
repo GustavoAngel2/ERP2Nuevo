@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
+import { HighchartsChartModule } from 'highcharts-angular';
 //Materiales
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,6 +18,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 //Componentes
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -25,6 +29,16 @@ import { PersonasComponent } from './personas/personas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
+import { ArticulosComponent } from './articulos/articulos.component';
+import { EntradasComponent } from './entradas/entradas.component';
+import { SucursalesComponent } from './sucursales/sucursales.component';
+import { BancosComponent } from './bancos/bancos.component';
+import { RecetasComponent } from './recetas/recetas.component';
+import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
+import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
+import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
+import { InsumosComponent } from './insumos/insumos.component';
+import { CompradoresComponent } from './compradores/compradores.component';
 
 
 @NgModule({
@@ -36,8 +50,18 @@ import { AjustesComponent } from './ajustes/ajustes.component';
     PersonasComponent,
     UsuariosComponent,
     ProveedoresComponent,
-    AjustesComponent
-    ],
+    AjustesComponent,
+    ArticulosComponent,
+    EntradasComponent,
+    SucursalesComponent,
+    BancosComponent,
+    RecetasComponent,
+    DetalleRecetasComponent,
+    OrdenCompraComponent,
+    DetalleOrdenCompraComponent,
+    InsumosComponent,
+    CompradoresComponent
+  ],
   imports: [
     //Dependencias
     BrowserModule,
@@ -46,6 +70,7 @@ import { AjustesComponent } from './ajustes/ajustes.component';
     FormsModule,
     NgIf,
     HttpClientModule,
+    HighchartsChartModule,
     
     //Materials
     MatHeaderCell,
@@ -60,10 +85,17 @@ import { AjustesComponent } from './ajustes/ajustes.component';
     MatButtonModule,
     MatFormFieldModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ToastrModule.forRoot({ positionClass: 'inline' })
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideAnimations(),
+    provideToastr({
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   bootstrap: [AppComponent] //Interfaz de Inicio
 })

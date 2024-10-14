@@ -1,10 +1,10 @@
-export interface updateUsuario{
+export interface updateUsuarioModel{
     id:number;
     contrasena:string;
     usuario:number;
 }
 
-export interface getUsuarios{
+export interface getUsuariosModel{
     Id:number;
     NombreP:String;
     Nombre: String;

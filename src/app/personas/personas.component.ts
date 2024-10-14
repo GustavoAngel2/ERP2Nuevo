@@ -5,7 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth.service';
-import { GetPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
+import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
+import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-personas',
@@ -20,7 +22,6 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   ApPaterno : string = '';
   ApMaterno : string = '';
   direccion: string = '';
-  usuario: number = 0;
   isModifying:boolean = false;
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -28,7 +29,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private PersonasService: PersonasService, public dialog:MatDialog, public authService: AuthService) {
+  constructor(private PersonasService: PersonasService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<GetPersonasModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
@@ -54,13 +55,16 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   getData(){
     this.dataSource.filterPredicate = (data: GetPersonasModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
+             data.Id.toString().includes(filter) || 
+             data.ApPaterno.toLowerCase().includes(filter) ||
+             data.ApMaterno.toLowerCase().includes(filter) // Puedes añadir más campos si es necesario
     };
     this.PersonasService.getPersonas().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
         if (response && Array.isArray(response)&&response.length>0) {
           this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
+          console.log(response)
         } else {
           console.log('no contiene datos');
         }
@@ -72,22 +76,22 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   }
 
   insertar():void {
-    const nuevaPersona = {
-      nombre: this.nombre,
+    const nuevaPersona:InsertPersonasModel = {
+      Nombre: this.nombre,
       ApPaterno:this.ApPaterno,
       ApMaterno:this.ApMaterno,
-      direccion: this.direccion,
-      usuario: parseInt(this.loggedUser.Id,10) 
+      Direccion: this.direccion,
+      Usuario: parseInt(this.loggedUser.Id,10) 
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
     this.PersonasService.insertarPersona(nuevaPersona).subscribe({
       next: (response) => {
-        // if(response.StatusCode == 200){
-        //   this.toastr.success(response.response.data, 'Personas');
-        // } else {
-        //   this.toastr.error(response.response.data,'Personas')
-        // }
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Personas');
+        } else {
+          this.toastr.error(response.response.data,'Personas')
+        }
         this.getData();
       },
       error: (error) => {
@@ -97,30 +101,30 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     });
   }
 
-  // abrirDeleteDialog(Id: number, Name: string) {
-  //   const dialogRef = this.dialog.open(DeleteMenuComponent, {
-  //     width: '550px',
-  //     data: Name
-  //   });
+  abrirDeleteDialog(Id: number, Name: string) {
+    const dialogRef = this.dialog.open(DeleteMenuComponent, {
+      width: '550px',
+      data: Name
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result == "yes") {
-  //       this.PersonasService.deletePersonas(Id).subscribe({
-  //         next: (response) => {
-  //           if(response.StatusCode == 200){
-  //             this.toastr.success(response.response.data, 'Personas');
-  //           } else {
-  //             this.toastr.error(response.response.data,'Personas')
-  //           }
-  //           this.getData();
-  //         },
-  //         error: (error) => {
-  //           console.error('Hubo un error al eliminar el almacén', error);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "yes") {
+        this.PersonasService.deletePersonas(Id).subscribe({
+          next: (response) => {
+            if(response.StatusCode == 200){
+              this.toastr.success(response.response.data, 'Personas');
+            } else {
+              this.toastr.error(response.response.data,'Personas')
+            }
+            this.getData();
+          },
+          error: (error) => {
+            console.error('Hubo un error al eliminar el almacén', error);
+          }
+        });
+      }
+    });
+  }
 
   cargar(elemento:GetPersonasModel){
     this.id = elemento.Id
@@ -152,11 +156,11 @@ export class PersonasComponent implements OnInit, AfterViewInit{
 
     this.PersonasService.updatePersonas(persona).subscribe({
       next: (response) => {
-        // if(response.StatusCode == 200){
-        //   this.toastr.success(response.response.data, 'Personas');
-        // } else {
-        //   this.toastr.error(response.response.data,'Personas')
-        // }
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Personas');
+        } else {
+          this.toastr.error(response.response.data,'Personas')
+        }
         console.log(response);
         this.getData();
         this.limpiar();

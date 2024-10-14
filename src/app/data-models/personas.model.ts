@@ -7,7 +7,6 @@ export interface GetPersonasModel {
     Usuario:string;
     FechaAct:Date;
     FechaReg:Date;
-    Mensaje:string;
 }
 
 export interface InsertPersonasModel {

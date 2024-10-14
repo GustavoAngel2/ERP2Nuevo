@@ -1,59 +1,35 @@
-import { Component } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { OnInit } from '@angular/core';
-import { UsusariosService } from '../data.service';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { getUsuarios } from '../data-models/usuario.model';
-import { AfterViewInit } from '@angular/core';
+import { UsusariosService } from '../data.service'; // Ajusta la ruta según tu proyecto
+import { getUsuariosModel } from '../data-models/usuario.model'; // Ajusta la ruta según tu proyecto
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
-export class UsuariosComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'NombreP','FechaReg', 'FechaAct', 'Usuario'];
-  dataSource: MatTableDataSource<getUsuarios>;
+export class UsuariosComponent implements OnInit {
+  dataSource = new MatTableDataSource<getUsuariosModel>([]);
 
-  constructor(private usuariosSerive:UsusariosService){
-    this.dataSource = new MatTableDataSource<getUsuarios>();
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  // Método para realizar el filtrado
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  constructor(private usuariosService: UsusariosService) {}
 
   ngOnInit(): void {
-    this.dataSource.filterPredicate = (data: getUsuarios, filter: string) => {
-      return data.Nombre.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
-    };
-
-    this.usuariosSerive.getUsuarios().subscribe({
+    this.usuariosService.getUsuarios().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
+        if (response && Array.isArray(response) && response.length > 0) {
           this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
         } else {
-          console.log('no contiene datos');
+          console.log('No contiene datos');
         }
+      },
+      error: (err) => {
+        console.error('Error al obtener usuarios:', err); // Manejo de errores
       }
-    })
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
