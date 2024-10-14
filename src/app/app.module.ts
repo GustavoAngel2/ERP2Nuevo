@@ -26,6 +26,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
 
+
 @NgModule({
   declarations: [
     //Componentes
@@ -36,7 +37,7 @@ import { AjustesComponent } from './ajustes/ajustes.component';
     UsuariosComponent,
     ProveedoresComponent,
     AjustesComponent
-  ],
+    ],
   imports: [
     //Dependencias
     BrowserModule,
