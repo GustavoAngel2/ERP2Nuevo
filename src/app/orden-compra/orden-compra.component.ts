@@ -9,18 +9,32 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { OrdenComprasService } from '../data.service';
+import { OrdenComprasService, SucursalesService } from '../data.service';
+import { ProveedoresService } from '../data.service';
 import { insertCompraModel, OrdenCompraModel, updateCompraModel } from '../data-models/orden-compra.model';
+import { getProveedoresModel } from '../data-models/proveedores.model';
+import { sucursalModel } from '../data-models/sucursales.model';
 
 @Component({
   selector: 'app-orden-compra',
   templateUrl: './orden-compra.component.html',
   styleUrl: './orden-compra.component.css'
 })
-export class OrdenCompraComponent implements OnInit{
-  displayedColumns: string[] = ['Id', 'Sucursal', 'Proveedor','Comprador','FechaLlegada', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
+export class OrdenCompraComponent implements OnInit, AfterViewInit{
+  displayedColumns: string[] = [
+    "Id",
+    "Proveedor",
+    "Sucursal",
+    "FechaLlegada",
+    "Comprador",
+    "FechaRegistro",
+    "Total",
+    "UsuarioActualiza",
+    "Acciones"
+  ];
   dataSource: MatTableDataSource<OrdenCompraModel>;
-
+  comboProveedores:getProveedoresModel[] = [];
+  comboSucursales:sucursalModel[]=[];
   id: number = 0;
   idProveedor: number = 0;
   fechaLlegada: string = '';
@@ -33,12 +47,20 @@ export class OrdenCompraComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private ordenCompraService: OrdenComprasService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
+  constructor(
+    private proveedoresService:ProveedoresService, 
+    private ordenCompraService: OrdenComprasService, 
+    private sucursalesService:SucursalesService,
+    public dialog:MatDialog, 
+    public authService: AuthService, 
+    private toastr:ToastrService
+  ) {
     this.dataSource = new MatTableDataSource<OrdenCompraModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
   ngOnInit() {
     this.loggedUser = this.authService.getCurrentUser()
+    this.setCombos();
     this.getData()
   }
 
@@ -54,6 +76,35 @@ export class OrdenCompraComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  setCombos(){
+    this.proveedoresService.getProveedores().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response)&&response.length>0) {
+          this.comboProveedores = response;
+        } else {
+          console.log('no contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+    this.sucursalesService.getSucursales().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response)&&response.length>0) {
+          this.comboSucursales = response;
+        } else {
+          console.log('no contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   getData(){
@@ -79,6 +130,7 @@ export class OrdenCompraComponent implements OnInit{
   insertar():void {
     const nuevaPersona: insertCompraModel = {
       id: this.id,
+      fechaLlegada:this.fechaLlegada,
       idComprador: this.idComprador,
       idSucursal: this.idSucursal,
       idProveedor: this.idProveedor,
@@ -172,5 +224,9 @@ export class OrdenCompraComponent implements OnInit{
         console.error(error);
       }
     });
+  }
+
+  dev(){
+    console.log(this.idProveedor)
   }
 }

@@ -44,7 +44,12 @@ mat-drawer{
     padding: 10px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     align-items: center;
+}
+
+mat-accordion{
+    width: 100%;
 }
 
 .side-list button{

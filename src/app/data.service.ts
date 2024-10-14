@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultApiResponse } from './data-models/response.model';
 import { AuthService } from './auth.service';
-import { UpdatePersonasModel } from './data-models/personas.model';
+import { InsertPersonasModel, UpdatePersonasModel } from './data-models/personas.model';
 import { updateUsuarioModel } from './data-models/usuario.model';
 import { insertProveedorModel, updateProveedorModel } from './data-models/proveedores.model';
 import { entradasInsertModel } from './data-models/entradas.model';
@@ -30,27 +30,21 @@ export class PersonasService {
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Personas/Get`,{headers});
   }
 
-  insertarPersona(PersonaData: {
-    nombre: string;
-    ApPaterno: string;
-    ApMaterno: string;
-    direccion: string;
-    usuario: number;
-  }): Observable<defaultApiResponse> {
+  insertarPersona(PersonaData:InsertPersonasModel): Observable<defaultApiResponse> {
     const body = {
-      nombre: PersonaData.nombre,
-      ApPaterno: PersonaData.ApPaterno,
-      ApMaterno: PersonaData.ApMaterno,
-      direccion: PersonaData.direccion,
-      usuario: PersonaData.usuario,
-      Direccion: PersonaData.direccion,
-      Usuario: PersonaData.usuario,
+      nombre: PersonaData.Nombre,
+      apPaterno: PersonaData.ApPaterno,
+      apMaterno: PersonaData.ApMaterno,
+      direccion: PersonaData.Direccion,
+      usuario: PersonaData.Usuario
     };
     return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
   }
+
   deletePersonas(Id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
   }
+  
   updatePersonas(PersonaData: UpdatePersonasModel): Observable<defaultApiResponse> {
     const body = {
       id: PersonaData.Id,
@@ -313,12 +307,13 @@ export class PersonasService {
                 const headers = new HttpHeaders({
                   'Authorization': `Bearer ${token}`
                 });
-                return this.http.get<defaultApiResponse>(`${this.apiUrl}/OrdenCompras/Get`,{headers});
+                return this.http.get<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Get`,{headers});
               }
             
               insertarOrdenCompra(OrdenComprasData:insertCompraModel): Observable<defaultApiResponse> {
                 const body = {
                   idProveedor: OrdenComprasData.idProveedor,
+                  fechaLlegada:OrdenComprasData.fechaLlegada,
                   idSucursal: OrdenComprasData.idSucursal,
                   idComprador: OrdenComprasData.idComprador,
                   usuarioActualiza: OrdenComprasData.usuarioActualiza

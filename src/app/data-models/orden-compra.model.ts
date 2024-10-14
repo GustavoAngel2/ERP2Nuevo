@@ -3,6 +3,7 @@ export interface insertCompraModel{
     idProveedor: number;
     idSucursal: number;
     idComprador: number;
+    fechaLlegada: string;
     usuarioActualiza: number;
 }
 
