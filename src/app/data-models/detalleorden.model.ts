@@ -1,31 +1,30 @@
 export interface detallecomprasInsertModel
 {
-    idOrdenCompra : number,
-    insumo: string,
-    cantidad: number,
-    usuarioActualiza: number;
-  }
+  idOrdenCompra : number,
+  insumo: string,
+  cantidad: number,
+  usuarioActualiza: number;
+}
 
-  export interface detallecomprasGetModel
-  {
-    Id: number,
-    IdOrdenCompra: number,
-    Insumo: number,
-    Cantidad: number,
-    CantidadRecibida: number,
-    Costo: number,
-    CostoRenglon: number,
-    FechaRegistro: number,
-    FechaActualiza: number,
-    UsuarioActualiza: string,
-    Mensaje: string;
-  }
+export interface detallecomprasGetModel
+{
+  Id: number;
+  IdOrdenCompra: number;
+  Insumo: string;
+  Cantidad: number;
+  CantidadRecibida: number;
+  Costo: number;
+  CostoRenglon: string;
+  FechaRegistro: string;
+  FechaActualiza: string;
+  UsuarioActualiza: string;
+}
 
-  export interface detallecoprasUpdateModel
-  {
-    id: number,
-    insumo: string,
-    cantidad: number,
-    usuarioActualiza: number,
-    estatus: number;
-  }
+export interface detallecoprasUpdateModel
+{
+  id: number,
+  idOrdenCompra: number,
+  cantidadRecibida: number,
+  estatus: number,
+  usuarioActualiza: number
+}
