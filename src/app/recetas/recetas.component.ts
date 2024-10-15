@@ -115,14 +115,11 @@ export class RecetasComponent {
         if (response.StatusCode === 200) {
           this.toastr.success(response.response.data, 'Recetas');
   
-          // Obtener el Id de la receta insertada
-          const recetaId = response.response.data; // Asume que el backend devuelve el Id insertado
-          this.IdReceta = recetaId;  // Almacena el Id de la receta
+          const recetaId = response.response.data; 
+          this.IdReceta = recetaId;  
   
-          // Llamar a getData() para cargar los detalles de la receta usando el IdReceta
-          this.getData();  // Llamar con el IdReceta generado
+          this.getData();  
   
-          // Mostrar el formulario de detalle o cualquier otra acción que quieras hacer
           this.isModifying = true;
         } else {
           this.toastr.error(response.response.data, 'Recetas');
