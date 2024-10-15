@@ -39,6 +39,7 @@ import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
 import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 import { InsumosComponent } from './insumos/insumos.component';
 
+
 @NgModule({
   declarations: [
     //Componentes

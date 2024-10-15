@@ -17,6 +17,7 @@ import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orde
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
 
 
+
 const routes: Routes = [
   { path: "", redirectTo: '/login', pathMatch: 'full' },
   { path: "login", component: LoginComponent, title: "Iniciar sesión" },
