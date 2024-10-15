@@ -14,7 +14,6 @@
             <button [hidden]="!isModifying" (click)="editar()"  class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
             <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
             <button [hidden]="isModifying"   (click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
-            <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
         </div>
     </div>
 </div>
@@ -29,7 +28,7 @@
         <span class="input-group-text"><i class="bi bi-truck"></i></span>
         <select class="form-select" [(ngModel)]="Insumo">
             <option value="0">Seleccione un Insumo</option>
-            <option *ngFor="let proveedor of comboInsumos" value="{{proveedor.Insumo}}">{{proveedor.Descripcion}}</option>
+            <option *ngFor="let proveedor of comboInsumos" value="{{proveedor.Id}}">{{proveedor.Descripcion}}</option>
         </select>
     </div>
       <div class="input-group flex-nowrap">
@@ -40,6 +39,7 @@
         <button  class="btn btn-outline-success" (click)="insertarDetalle()">
           <i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle
         </button>
+        <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
       </div>
     </div>
   </div>

@@ -400,9 +400,11 @@ export class RecetasService {
     };
     return this.http.post<defaultApiResponse>(`${this.apiUrl}/Recetas/Insert`, body);
   }
+
   deleteRecetas(Id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/recetas/Delete`, { Id });
   }
+
   updateRecetas(RecetasData: updateRecetasModel): Observable<defaultApiResponse> {
     const body = {
       id: RecetasData.id,
@@ -430,18 +432,18 @@ const headers = new HttpHeaders({
 return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleReceta/Get?idReceta=${Id}`,{headers}, );
 }
 
-insertDetReceta(DetRecetasData: insertDetRecetaModel): Observable<defaultApiResponse> {
-const body = {
-idReceta: DetRecetasData.idReceta,
-insumo:DetRecetasData.insumo,
-cantidad:DetRecetasData.cantidad,
-usuarioActualiza: DetRecetasData.usuarioActualiza
-};
-return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleReceta/Insert`, body);
-}
-deleteDetRecetas(Id: number): Observable<any> {
-return this.http.put(`${this.apiUrl}/DetalleReceta/Delete`, { Id });
-}
+  insertDetReceta(DetRecetasData: insertDetRecetaModel): Observable<defaultApiResponse> {
+    const body = {
+      idReceta: DetRecetasData.idReceta,
+      insumo:DetRecetasData.insumo,
+      cantidad:DetRecetasData.cantidad,
+      usuarioActualiza: DetRecetasData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleReceta/Insert`, body);
+  }
+  deleteDetRecetas(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/DetalleReceta/Delete`, { Id });
+  }
 updateDetRecetas(RecetasData: updateRecetasModel): Observable<defaultApiResponse> {
 const body = {
 id: RecetasData.id,

@@ -37,7 +37,7 @@ export class RecetasComponent {
   dataSource: MatTableDataSource<recetaModel>;
   Id: number = 0;
   IdReceta: number = 0;
-  Insumo:string ='';
+  Insumo:string = '0';
   Cantidad:number =0;
   Nombre: string = '';
   FechaCreacion: string = '';
@@ -98,7 +98,7 @@ export class RecetasComponent {
     });
   }
 
-  getData(): void {
+  getData(id:number): void {
     // Configura el filtro de búsqueda si es necesario
     this.dataSource.filterPredicate = (data: recetaModel, filter: string) => {
       return data.Id.toString().toLowerCase().includes(filter) || 
@@ -106,7 +106,7 @@ export class RecetasComponent {
     };
   
     // Asegúrate de que se esté utilizando el IdReceta correcto al obtener los detalles
-      this.detalleRecetas.getDetRecetas(this.IdReceta).subscribe({
+      this.detalleRecetas.getDetRecetas(id).subscribe({
         next: (response) => {
           console.log('Respuesta del servidor:', response); 
           if (response && Array.isArray(response) && response.length > 0) {
@@ -135,20 +135,20 @@ export class RecetasComponent {
     this.recetasService.insertarReceta(nuevaReceta).subscribe({
       next: (response) => {
         if (response.StatusCode === 200) {
-          this.toastr.success(response.response.data, 'Recetas');
+          this.toastr.success(response.response.msg, 'Recetas');
   
           // Obtener el Id de la receta insertada
-          const recetaId = response.response.data; // Asume que el backend devuelve el Id insertado
-          this.IdReceta = recetaId;  // Almacena el Id de la receta
+          
+          this.IdReceta = response.response.data;  // Almacena el Id de la receta
   
           // Llamar a getData() para cargar los detalles de la receta usando el IdReceta
-          this.getData();  // Llamar con el IdReceta generado
+          this.getData(this.IdReceta);  // Llamar con el IdReceta generado
   
           // Mostrar el formulario de detalle o cualquier otra acción que quieras hacer
           this.isOnStepOne = false;
           this.isOnStepTwo = true;
         } else {
-          this.toastr.error(response.response.data, 'Recetas');
+          this.toastr.error(response.response.msg, 'Recetas');
         }
         this.limpiar();
       },
@@ -166,12 +166,12 @@ export class RecetasComponent {
       cantidad: this.Cantidad,
       usuarioActualiza: parseInt(this.loggedUser.Id, 10)
     };
-  
+    console.log(detalleReceta)
     this.detalleRecetas.insertDetReceta(detalleReceta).subscribe({
       next: (response) => {
         if (response.StatusCode == 200) {
           this.toastr.success(response.response.data, 'Detalle Receta');
-          this.getData()
+          this.getData(this.IdReceta)
           this.limpiar(); // Limpia los campos si es necesario
         } else {
           this.toastr.error(response.response.data, 'Detalle Receta');
@@ -199,7 +199,7 @@ export class RecetasComponent {
             } else {
               this.toastr.error(response.response.data,'Recetas')
             }
-            this.getData();
+            this.getData(this.IdReceta);
           },
           error: (error) => {
             console.error('Hubo un error al eliminar la Receta', error);
@@ -224,7 +224,7 @@ export class RecetasComponent {
           this.toastr.error(response.response.data,'Recetas')
         }
         console.log(response);
-        this.getData();
+        this.getData(this.IdReceta);
         this.limpiar();
       },
       error: (error) => {
