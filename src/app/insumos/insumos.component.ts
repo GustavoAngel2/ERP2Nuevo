@@ -134,7 +134,7 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   cargar(elemento:insumosModel){
     this.id = elemento.Id
     this.insumo = elemento.Insumo
-    this.descripcionInsumo = elemento.DescripcionInsumo
+    this.descripcionInsumo = elemento.Descripcion
     this.costo = this.costo
     this.isModifying = true
   }

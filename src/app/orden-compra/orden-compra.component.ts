@@ -16,7 +16,7 @@ import { getProveedoresModel } from '../data-models/proveedores.model';
 import { sucursalModel } from '../data-models/sucursales.model';
 import { getUsuariosModel } from '../data-models/usuario.model';
 import { insumosModel } from '../data-models/insumos.model';
-import { detallecomprasGetModel } from '../data-models/detalleorden.model';
+import { detallecomprasGetModel, detallecomprasInsertModel } from '../data-models/detalleorden.model';
 
 @Component({
   selector: 'app-orden-compra',
@@ -36,7 +36,17 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     "Acciones"
   ];
   columnasDetalleCompras: string[] = [
-    ""
+    "Id",
+    "IdOrdenCompra",
+    "Insumo",
+    "Cantidad",
+    "CantidadRecibida",
+    "Costo",
+    "CostoRenglon",
+    "FechaRegistro",
+    "FechaActualiza",
+    "UsuarioActualiza",
+    "Acciones"
   ]
   dataSource: MatTableDataSource<OrdenCompraModel>;
   dataSource2: MatTableDataSource<detallecomprasGetModel>;
@@ -142,6 +152,20 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
         console.error(error);
       }
     });
+    this.insumosService.getInsumos().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response)&&response.length>0) {
+          this.comboInsumos = response;
+          console.log(this.comboInsumos)
+        } else {
+          console.log('no contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   getData(){
@@ -180,8 +204,9 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     this.ordenCompraService.insertarOrdenCompra(nuevaPersona).subscribe({
       next: (response) => {
         this.idOrdenCompra = response.response.data
-        this.getData();
         this.limpiar();
+        this.isOnStepOne = false;
+        this.isOnStepTwo = true;
       },
       error: (error) => {
         // Manejar el error aquí
@@ -259,12 +284,12 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
       }
     });
   }
-  getDetalle(){
-    this.ordenCompraService.getOrdenCompras().subscribe({
+  getDetalle(id:number){
+    this.detalleOrdenCompraService.getDetalleOrdenCompras(id).subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
         if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
+          this.dataSource2.data = response; // Asigna los datos al atributo 'data' de dataSource
         } else {
           console.log('no contiene datos');
         }
@@ -273,5 +298,27 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
         console.error(error);
       }
     });
+  }
+
+  insertarDetalleOrden(){
+    const detalle:detallecomprasInsertModel = {
+      idOrdenCompra:this.idOrdenCompra,
+      insumo:this.insumo,
+      cantidad: this.cantidad,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
+    }
+    this.detalleOrdenCompraService.insertarDetalleOrdenCompra(detalle).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.getDetalle(this.idOrdenCompra)
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
+  }
+
+  terminar(){
+    location.reload()
   }
 }

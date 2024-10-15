@@ -41,38 +41,25 @@
 <div class="form-place" [hidden]="!isOnStepTwo">
     <div class="form-container">
         <div class="form-title">
-            <h1 [hidden]="isModifying">Registrar produsctos de la compra</h1>
+            <h1 [hidden]="isModifying">Registrar productos de la compra</h1>
             <h1 [hidden]="!isModifying">Modificando elemento de la compra con el id: {{this.id}}</h1>
         </div>
         <div class="form-content">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-truck"></i></span>
-                <select class="form-select" [(ngModel)]="idProveedor">
-                    <option value="0">Seleccione un proveedor</option>
-                    <option *ngFor="let proveedor of comboProveedores" value="{{proveedor.Id}}">{{proveedor.Nombre}}</option>
-                  </select>
-                <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
-                <select class="form-select" [(ngModel)]="idSucursal">
-                    <option value="0">Seleccione una sucursal</option>
-                    <option *ngFor="let sucursal of comboSucursales" value="{{sucursal.Id}}">{{sucursal.Nombre}}</option>
+                <select class="form-select" [(ngModel)]="insumo">
+                    <option value="0">Seleccione un Insumo</option>
+                    <option *ngFor="let proveedor of comboInsumos" value="{{proveedor.Insumo}}">{{proveedor.Descripcion}}</option>
                 </select>
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-at"></i></span>
-                <select class="form-select" [(ngModel)]="idComprador">
-                    <option value="0">Seleccione un comprador</option>
-                    <option *ngFor="let comprador of comboCompradores" value="{{comprador.Id}}">{{comprador.Nombre}}</option>
-                </select>
-            </div>
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text">Fecha de llegada: </span>
-                <input class="form-control" type="date" [(ngModel)]="fechaLlegada">
+                <input class="form-control" type="number" [(ngModel)]="cantidad">
             </div>
         </div>
         <div class="form-end">
-            <button [hidden]="!isModifying" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
-            <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
-            <button [hidden]="isModifying"  (click)="insertarOrden()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+            <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
+            <button (click)="insertarDetalleOrden()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
     </div>
 </div>
@@ -146,29 +133,37 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
         </ng-container>
-        <ng-container matColumnDef="Proveedor">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.IdProveedor}} </td>
+        <ng-container matColumnDef="IdOrdenCompra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio de compra </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.IdOrdenCompra}} </td>
         </ng-container>
-        <ng-container matColumnDef="Sucursal">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.IdSurcursal}} </td>
+        <ng-container matColumnDef="Insumo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Insumo </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Insumo}} </td>
         </ng-container>
-        <ng-container matColumnDef="Comprador">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Comprador </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.IdComprador}} </td>
+        <ng-container matColumnDef="Cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Cantidad}} </td>
         </ng-container>
-        <ng-container matColumnDef="Total">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Total}} </td>
+        <ng-container matColumnDef="CantidadRecibida">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad recibida </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.CantidadRecibida}} </td>
         </ng-container>
-        <ng-container matColumnDef="FechaLlegada">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de llegada </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaLlegada}} </td>
+        <ng-container matColumnDef="Costo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Costo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="CostoRenglon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo de renglon </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.CostoRenglon}} </td>
         </ng-container>
         <ng-container matColumnDef="FechaRegistro">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de registro </th>
             <td mat-cell *matCellDef="let persona"> {{persona.FechaRegistro}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaActualiza}} </td>
         </ng-container>
         <ng-container matColumnDef="UsuarioActualiza">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>

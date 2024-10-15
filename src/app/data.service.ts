@@ -11,7 +11,6 @@ import { sucursalInsertModel, sucursalUpdateModel } from './data-models/sucursal
 import { insertCompraModel, updateCompraModel } from './data-models/orden-compra.model';
 import { insertInsumosModel, updateInsumosModel } from './data-models/insumos.model';
 import { insertRecetaModel, updateRecetasModel } from './data-models/resetas.model';
-import { UsuariosComponent } from './usuarios/usuarios.component';
 import { detallecomprasInsertModel, detallecoprasUpdateModel } from './data-models/detalleorden.model';
 
 
@@ -380,12 +379,12 @@ export class DetalleOrdenComprasService {
   private apiUrl = "http://localhost:5020/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
-  getDetalleOrdenCompras(): Observable<defaultApiResponse> {
+  getDetalleOrdenCompras(Id:number): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Get`,{headers});
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Get?idOrdenCompra=${Id}`,{headers});
   }
 
   insertarDetalleOrdenCompra(OrdenComprasData:detallecomprasInsertModel): Observable<defaultApiResponse> {

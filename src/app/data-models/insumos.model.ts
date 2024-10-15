@@ -17,7 +17,7 @@ export interface updateInsumosModel{
 
 export interface insumosModel {
     Costo: number
-    DescripcionInsumo: string
+    Descripcion: string
     FechaActualiza: string
     FechaRegistro: string
     Id: number
