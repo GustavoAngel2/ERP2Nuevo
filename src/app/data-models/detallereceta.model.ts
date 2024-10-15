@@ -1,6 +1,6 @@
 export interface insertDetRecetaModel{
-    IdReceta: number ;
-    Insumo: string;
+    idReceta: number ;
+    insumo: string;
     cantidad:number;
     usuarioActualiza: number;
 }

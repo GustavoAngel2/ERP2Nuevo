@@ -34,6 +34,7 @@ export class RecetasComponent {
   ];
   dataSource: MatTableDataSource<recetaModel>;
   Id: number = 0;
+  IdReceta: number = 0;
   Insumo:string ='';
   Cantidad:number =0;
   Nombre: string = '';
@@ -75,49 +76,57 @@ export class RecetasComponent {
     }
   }
 
-  getData(){
+  getData(): void {
+    // Configura el filtro de búsqueda si es necesario
     this.dataSource.filterPredicate = (data: recetaModel, filter: string) => {
       return data.Id.toString().toLowerCase().includes(filter) || 
-             data.Nombre.toString().includes(filter)
+             data.Nombre.toString().includes(filter);
     };
-    this.detalleRecetas.getDetRecetas(this.Id).subscribe({
-      next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
-          console.log('no contiene datos');
+  
+    // Asegúrate de que se esté utilizando el IdReceta correcto al obtener los detalles
+      this.detalleRecetas.getDetRecetas(this.IdReceta).subscribe({
+        next: (response) => {
+          console.log('Respuesta del servidor:', response); 
+          if (response && Array.isArray(response) && response.length > 0) {
+            console.log(response)
+            this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
+          } else {
+            console.log('No contiene datos');
+          }
+        },
+        error: (error) => {
+          console.error(error);
         }
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-  }
+      });
+    } 
+  
+  
 
 
-  insertar():void {
+  insertar(): void {
     const nuevaReceta: insertRecetaModel = {
-      nombre: this.Nombre,   
+      nombre: this.Nombre,
       usuarioRegistra: parseInt(this.loggedUser.Id, 10),
-      usuarioActualiza: parseInt(this.loggedUser.Id, 10)  
+      usuarioActualiza: parseInt(this.loggedUser.Id, 10)
     };
   
     this.recetasService.insertarReceta(nuevaReceta).subscribe({
       next: (response) => {
-        if (response.StatusCode == 200) {
+        if (response.StatusCode === 200) {
           this.toastr.success(response.response.data, 'Recetas');
-          
+  
           // Obtener el Id de la receta insertada
           const recetaId = response.response.data; // Asume que el backend devuelve el Id insertado
-          this.Id = recetaId;  // Asignamos el Id para usarlo en el formulario de detalle
+          this.IdReceta = recetaId;  // Almacena el Id de la receta
   
-          // Aquí podrías mostrar el formulario de detalle de receta o redirigir al usuario
-          this.isModifying = true; // Mostrar el formulario de detalle con el nuevo Id
+          // Llamar a getData() para cargar los detalles de la receta usando el IdReceta
+          this.getData();  // Llamar con el IdReceta generado
+  
+          // Mostrar el formulario de detalle o cualquier otra acción que quieras hacer
+          this.isModifying = true;
         } else {
           this.toastr.error(response.response.data, 'Recetas');
         }
-        this.getData();
         this.limpiar();
       },
       error: (error) => {
@@ -125,11 +134,12 @@ export class RecetasComponent {
       }
     });
   }
+  
 
   insertarDetalle(): void {
     const detalleReceta: insertDetRecetaModel = {
-      IdReceta: this.Id,
-      Insumo: this.Insumo,
+      idReceta: this.IdReceta,
+      insumo: this.Insumo,
       cantidad: this.Cantidad,
       usuarioActualiza: parseInt(this.loggedUser.Id, 10)
     };
@@ -138,6 +148,7 @@ export class RecetasComponent {
       next: (response) => {
         if (response.StatusCode == 200) {
           this.toastr.success(response.response.data, 'Detalle Receta');
+          this.getData()
           this.limpiar(); // Limpia los campos si es necesario
         } else {
           this.toastr.error(response.response.data, 'Detalle Receta');

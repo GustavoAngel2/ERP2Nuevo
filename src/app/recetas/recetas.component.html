@@ -21,12 +21,12 @@
 
 <div class="form-container" >
     <div class="form-title">
-      <h1>Registrar Detalle para la Receta con ID: {{ Id }}</h1>
+      <h1>Registrar Detalle para la Receta con ID: {{ IdReceta }}</h1>
     </div>
     <div class="form-content">
       <div class="input-group flex-nowrap">
         <span class="input-group-text"><i class="bi bi-at"></i></span>
-        <input class="form-control" placeholder="IdReceta" [(ngModel)]="Id" readonly>
+        <input class="form-control" placeholder="IdReceta" [(ngModel)]="IdReceta" readonly>
       </div>
       <div class="input-group flex-nowrap">
         <span class="input-group-text"><i class="bi bi-at"></i></span>
@@ -37,7 +37,7 @@
         <input class="form-control" placeholder="Cantidad" [(ngModel)]="Cantidad">
       </div>
       <div class="form-end">
-        <button  class="btn btn-outline-success">
+        <button  class="btn btn-outline-success" (click)="insertarDetalle()">
           <i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle
         </button>
       </div>

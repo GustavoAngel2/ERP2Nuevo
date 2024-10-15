@@ -394,9 +394,9 @@ export class PersonasService {
     
       insertDetReceta(DetRecetasData: insertDetRecetaModel): Observable<defaultApiResponse> {
         const body = {
-          IdReceta: DetRecetasData.IdReceta,
-          Insumo:DetRecetasData.Insumo,
-          Cantidad:DetRecetasData.cantidad,
+          idReceta: DetRecetasData.idReceta,
+          insumo:DetRecetasData.insumo,
+          cantidad:DetRecetasData.cantidad,
           usuarioActualiza: DetRecetasData.usuarioActualiza
         };
         return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleReceta/Insert`, body);
