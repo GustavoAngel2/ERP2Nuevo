@@ -38,7 +38,6 @@ import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.compo
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
 import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 import { InsumosComponent } from './insumos/insumos.component';
-import { CompradoresComponent } from './compradores/compradores.component';
 
 
 @NgModule({
@@ -59,8 +58,7 @@ import { CompradoresComponent } from './compradores/compradores.component';
     DetalleRecetasComponent,
     OrdenCompraComponent,
     DetalleOrdenCompraComponent,
-    InsumosComponent,
-    CompradoresComponent
+    InsumosComponent
   ],
   imports: [
     //Dependencias

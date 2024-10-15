@@ -9,11 +9,14 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { OrdenComprasService, SucursalesService } from '../data.service';
+import { DetalleOrdenComprasService, InsumosService, OrdenComprasService, SucursalesService, UsusariosService } from '../data.service';
 import { ProveedoresService } from '../data.service';
 import { insertCompraModel, OrdenCompraModel, updateCompraModel } from '../data-models/orden-compra.model';
 import { getProveedoresModel } from '../data-models/proveedores.model';
 import { sucursalModel } from '../data-models/sucursales.model';
+import { getUsuariosModel } from '../data-models/usuario.model';
+import { insumosModel } from '../data-models/insumos.model';
+import { detallecomprasGetModel, detallecomprasInsertModel } from '../data-models/detalleorden.model';
 
 @Component({
   selector: 'app-orden-compra',
@@ -21,7 +24,7 @@ import { sucursalModel } from '../data-models/sucursales.model';
   styleUrl: './orden-compra.component.css'
 })
 export class OrdenCompraComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = [
+  columnasCompas: string[] = [
     "Id",
     "Proveedor",
     "Sucursal",
@@ -32,15 +35,42 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     "UsuarioActualiza",
     "Acciones"
   ];
+  columnasDetalleCompras: string[] = [
+    "Id",
+    "IdOrdenCompra",
+    "Insumo",
+    "Cantidad",
+    "CantidadRecibida",
+    "Costo",
+    "CostoRenglon",
+    "FechaRegistro",
+    "FechaActualiza",
+    "UsuarioActualiza",
+    "Acciones"
+  ]
   dataSource: MatTableDataSource<OrdenCompraModel>;
+  dataSource2: MatTableDataSource<detallecomprasGetModel>;
+
   comboProveedores:getProveedoresModel[] = [];
-  comboSucursales:sucursalModel[]=[];
+  comboSucursales:sucursalModel[] = [];
+  comboCompradores:getUsuariosModel[] = [];
+  comboInsumos:insumosModel[] = [];
+
   id: number = 0;
   idProveedor: number = 0;
   fechaLlegada: string = '';
   idSucursal: number = 0;
   idComprador: number = 0;
+
+  idOrdenCompra : number = 0
+  insumo: string = ''
+  cantidad: number = 0
+  usuarioActualiza: number = 0;
+
   isModifying:boolean = false;
+  isOnStepOne:boolean = true;
+  isOnStepTwo:boolean = false;
+  isOnDetail:boolean = false;
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
@@ -51,11 +81,15 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     private proveedoresService:ProveedoresService, 
     private ordenCompraService: OrdenComprasService, 
     private sucursalesService:SucursalesService,
+    private usuariosService:UsusariosService,
+    private detalleOrdenCompraService:DetalleOrdenComprasService,
+    private insumosService:InsumosService,
     public dialog:MatDialog, 
     public authService: AuthService, 
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<OrdenCompraModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.dataSource2 = new MatTableDataSource<detallecomprasGetModel>
   }
 
   ngOnInit() {
@@ -105,11 +139,38 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
         console.error(error);
       }
     });
+    this.usuariosService.getUsuarios().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response)&&response.length>0) {
+          this.comboCompradores = response;
+        } else {
+          console.log('no contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+    this.insumosService.getInsumos().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response)&&response.length>0) {
+          this.comboInsumos = response;
+          console.log(this.comboInsumos)
+        } else {
+          console.log('no contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   getData(){
     this.dataSource.filterPredicate = (data: OrdenCompraModel, filter: string) => {
-      return data.id.toString().toLowerCase().includes(filter) || 
+      return data.Id.toString().toLowerCase().includes(filter) || 
              data.Fecha.toString().includes(filter)
     };
     this.ordenCompraService.getOrdenCompras().subscribe({
@@ -127,7 +188,7 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     });
   }
 
-  insertar():void {
+  insertarOrden():void {
     const nuevaPersona: insertCompraModel = {
       id: this.id,
       fechaLlegada:this.fechaLlegada,
@@ -137,16 +198,15 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
       usuarioActualiza: parseInt(this.loggedUser.Id,10)  
     }
 
+    console.log(nuevaPersona)
+
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
     this.ordenCompraService.insertarOrdenCompra(nuevaPersona).subscribe({
       next: (response) => {
-        if(response.StatusCode == 200){
-          this.toastr.success(response.response.data, 'Proveedores');
-        } else {
-          this.toastr.error(response.response.data,'Proveedores')
-        }
-        this.getData();
+        this.idOrdenCompra = response.response.data
         this.limpiar();
+        this.isOnStepOne = false;
+        this.isOnStepTwo = true;
       },
       error: (error) => {
         // Manejar el error aquí
@@ -181,16 +241,15 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
   }
 
   cargar(elemento:OrdenCompraModel){
-    this.id = elemento.id
-    this.idComprador = elemento.idComprador
-    this.idProveedor = elemento.idProveedor
-    this.idSucursal = elemento.idSucursal
-    this.fechaLlegada = ''
+    this.id = elemento.Id
+    this.idComprador = elemento.IdComprador
+    this.idProveedor = elemento.IdProveedor
+    this.idSucursal = elemento.IdSucursal
+    this.fechaLlegada = elemento.FechaLegada
     this.isModifying = true
   }
 
   limpiar(){
-    this.id = 0
     this.id = 0
     this.idComprador = 0
     this.idProveedor = 0
@@ -205,10 +264,10 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
       idComprador:this.idComprador,
       idProveedor:this.idProveedor,
       idSucursal:this.idSucursal,
-      FechaLegada:this.fechaLlegada,
+      fechaLlegada:this.fechaLlegada,
       usuarioActualiza: parseInt(this.loggedUser.Id,10) 
     };
-
+    console.log(persona)
     this.ordenCompraService.updateOrdenCompra(persona).subscribe({
       next: (response) => {
         if(response.StatusCode == 200){
@@ -225,8 +284,41 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
       }
     });
   }
+  getDetalle(id:number){
+    this.detalleOrdenCompraService.getDetalleOrdenCompras(id).subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response)&&response.length>0) {
+          this.dataSource2.data = response; // Asigna los datos al atributo 'data' de dataSource
+        } else {
+          console.log('no contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 
-  dev(){
-    console.log(this.idProveedor)
+  insertarDetalleOrden(){
+    const detalle:detallecomprasInsertModel = {
+      idOrdenCompra:this.idOrdenCompra,
+      insumo:this.insumo,
+      cantidad: this.cantidad,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
+    }
+    this.detalleOrdenCompraService.insertarDetalleOrdenCompra(detalle).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.getDetalle(this.idOrdenCompra)
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
+  }
+
+  terminar(){
+    location.reload()
   }
 }
