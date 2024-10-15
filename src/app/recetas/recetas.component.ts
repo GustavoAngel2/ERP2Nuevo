@@ -9,11 +9,11 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { InsumosService, RecetasService } from '../data.service';
+import { ArticulosService, RecetasService } from '../data.service';
 import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models/recetas.model';
 import { insertDetRecetaModel } from '../data-models/detallereceta.model';
 import { DetalleRecetasService } from '../data.service';
-import { insumosModel } from '../data-models/insumos.model';
+import { articulosModel } from '../data-models/articulos.model';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { insumosModel } from '../data-models/insumos.model';
   templateUrl: './recetas.component.html',
   styleUrl: './recetas.component.css'
 })
-export class RecetasComponent {
+export class RecetasComponent implements OnInit,AfterViewInit{
   displayedColumns: string[] = [
     "Id",
     "IdReceta",
@@ -33,7 +33,7 @@ export class RecetasComponent {
     "UsuarioAct",
     "Acciones"
   ];
-  comboInsumos: insumosModel[] = [];
+  comboArticulos: articulosModel[] = [];
   dataSource: MatTableDataSource<recetaModel>;
   Id: number = 0;
   IdReceta: number = 0;
@@ -52,7 +52,7 @@ export class RecetasComponent {
 
   constructor(
     private recetasService: RecetasService,
-    private insumosService: InsumosService,
+    private articulosService:ArticulosService,
     private detalleRecetas: DetalleRecetasService,
     public dialog:MatDialog, 
     public authService: AuthService, 
@@ -82,12 +82,12 @@ export class RecetasComponent {
   }
 
   setCombos(){
-    this.insumosService.getInsumos().subscribe({
+    this.articulosService.getArticulos().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
         if (response && Array.isArray(response) && response.length > 0) {
           console.log(response)
-          this.comboInsumos = response; // Asigna los datos al atributo 'data' de dataSource
+          this.comboArticulos = response; // Asigna los datos al atributo 'data' de dataSource
         } else {
           console.log('No contiene datos');
         }
