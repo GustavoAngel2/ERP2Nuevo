@@ -9,10 +9,11 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RecetasService } from '../data.service';
+import { InsumosService, RecetasService } from '../data.service';
 import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models/recetas.model';
 import { insertDetRecetaModel } from '../data-models/detallereceta.model';
 import { DetalleRecetasService } from '../data.service';
+import { insumosModel } from '../data-models/insumos.model';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class RecetasComponent {
     "UsuarioAct",
     "Acciones"
   ];
+  comboInsumos: insumosModel[] = [];
   dataSource: MatTableDataSource<recetaModel>;
   Id: number = 0;
   IdReceta: number = 0;
@@ -40,6 +42,8 @@ export class RecetasComponent {
   Nombre: string = '';
   FechaCreacion: string = '';
   FechaActualiza: string = '';
+  isOnStepOne:boolean = true;
+  isOnStepTwo:boolean = false;
   isModifying:boolean = false;
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
@@ -48,6 +52,7 @@ export class RecetasComponent {
 
   constructor(
     private recetasService: RecetasService,
+    private insumosService: InsumosService,
     private detalleRecetas: DetalleRecetasService,
     public dialog:MatDialog, 
     public authService: AuthService, 
@@ -58,8 +63,8 @@ export class RecetasComponent {
 
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
-    this.getData()
+    this.loggedUser = this.authService.getCurrentUser();
+    this.setCombos();
   }
 
   ngAfterViewInit() {
@@ -74,6 +79,23 @@ export class RecetasComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  setCombos(){
+    this.insumosService.getInsumos().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response); 
+        if (response && Array.isArray(response) && response.length > 0) {
+          console.log(response)
+          this.comboInsumos = response; // Asigna los datos al atributo 'data' de dataSource
+        } else {
+          console.log('No contiene datos');
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   getData(): void {
@@ -109,7 +131,7 @@ export class RecetasComponent {
       usuarioRegistra: parseInt(this.loggedUser.Id, 10),
       usuarioActualiza: parseInt(this.loggedUser.Id, 10)
     };
-  
+    console.log(nuevaReceta)
     this.recetasService.insertarReceta(nuevaReceta).subscribe({
       next: (response) => {
         if (response.StatusCode === 200) {
@@ -123,7 +145,8 @@ export class RecetasComponent {
           this.getData();  // Llamar con el IdReceta generado
   
           // Mostrar el formulario de detalle o cualquier otra acción que quieras hacer
-          this.isModifying = true;
+          this.isOnStepOne = false;
+          this.isOnStepTwo = true;
         } else {
           this.toastr.error(response.response.data, 'Recetas');
         }
@@ -222,5 +245,7 @@ export class RecetasComponent {
     this.isModifying = false
   }
 
-
+  terminar(){
+    location.reload()
+  }
 }
