@@ -89,7 +89,7 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<OrdenCompraModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
-    this.dataSource2 = new MatTableDataSource<detallecomprasGetModel>
+    this.dataSource2 = new MatTableDataSource<detallecomprasGetModel>();
   }
 
   ngOnInit() {
@@ -112,7 +112,10 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     }
   }
 
+
+
   setCombos(){
+
     this.proveedoresService.getProveedores().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
@@ -171,7 +174,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
   getData(){
     this.dataSource.filterPredicate = (data: OrdenCompraModel, filter: string) => {
       return data.Id.toString().toLowerCase().includes(filter) || 
-             data.Fecha.toString().includes(filter)
+      data.IdComprador.toString().includes(filter)|| 
+      data.IdProveedor.toString().includes(filter)
     };
     this.ordenCompraService.getOrdenCompras().subscribe({
       next: (response) => {

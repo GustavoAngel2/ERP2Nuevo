@@ -5,20 +5,24 @@
     <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Colores</span> </mat-panel-title>
   </mat-expansion-panel-header>
   <div class="button-strip">
-    <button class="btn-settings" style="background-color: var(--blue);" (click)="this.setColor('blue')"></button>
-    <button class="btn-settings" style="background-color: var(--red);" (click)="this.setColor('red')"></button>
-    <button class="btn-settings" style="background-color: var(--green);" (click)="this.setColor('green')"></button>
-    <button class="btn-settings" style="background-color: var(--orange);" (click)="this.setColor('orange')"></button>
-    <button class="btn-settings" style="background-color: var(--yellow);" (click)="this.setColor('yellow')"></button>
-    <button class="btn-settings" style="background-color: var(--gray);" (click)="this.setColor('gray')"></button>
-    <button class="btn-settings" style="background-color: var(--purple);" (click)="this.setColor('purple')"></button>
-<!--<button class="btn" style="background-color: var(--dark-blue);" (click)="this.setColor('dark-blue')"></button>
-    <button class="btn" style="background-color: var(--dark-red);" (click)="this.setColor('dark-red')"></button>
-    <button class="btn" style="background-color: var(--dark-green);" (click)="this.setColor('dark-green')"></button>
-    <button class="btn" style="background-color: var(--dark-orange);" (click)="this.setColor('dark-orange')"></button>
-    <button class="btn" style="background-color: var(--dark-yellow);" (click)="this.setColor('dark-yellow')"></button>
-    <button class="btn" style="background-color: var(--black);" (click)="this.setColor('black')"></button>
-    <button class="btn" style="background-color: var(--dark-purple);" (click)="this.setColor('dark-purple')"></button>-->
+    <button class="btn-settings" style="background-color: var(--blue);" (click)="this.setColorSystem('blue')"></button>
+    <button class="btn-settings" style="background-color: var(--red);" (click)="this.setColorSystem('red')"></button>
+    <button class="btn-settings" style="background-color: var(--green);" (click)="this.setColorSystem('green')"></button>
+    <button class="btn-settings" style="background-color: var(--orange);" (click)="this.setColorSystem('orange')"></button>
+    <button class="btn-settings" style="background-color: var(--yellow);" (click)="this.setColorSystem('yellow')"></button>
+    <button class="btn-settings" style="background-color: var(--gray);" (click)="this.setColorSystem('gray')"></button>
+    <button class="btn-settings" style="background-color: var(--purple);" (click)="this.setColorSystem('purple')"></button>
+  </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Tema</span> </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="button-strip">
+    <button class="btn-settings" (click)="this.setBgColor('light')"> Claro </button>
+    <button class="btn-settings" (click)="this.setBgColor('dark')"> Oscuro </button>
+    <button class="btn-settings" (click)="this.setBgColor('color')"> A color </button>
   </div>
 </mat-expansion-panel>
 
