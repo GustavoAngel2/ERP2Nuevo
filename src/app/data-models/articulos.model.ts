@@ -1,4 +1,4 @@
-export interface articulos {
+export interface articulosModel {
     Id: number;
     Codigo: string;
     Descripcion: string;
@@ -37,8 +37,4 @@ export interface articulos {
     Ieps:string;
     Usuario: String;
   }
-
-   export interface deleteArticuloModel{
-     Id: number;
-   }
   
