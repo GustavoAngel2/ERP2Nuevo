@@ -1,21 +1,17 @@
 export interface insertCompraModel{
     id: number;
     idProveedor: number;
-    FechaLegada: Date;
     idSucursal: number;
     idComprador: number;
-    Fecha: Date;
-    Total: number;
+    usuarioActualiza: number;
 }
 
 export interface updateCompraModel{
     id: number;
     idProveedor: number;
-    FechaLegada: Date;
+    FechaLegada: string;
     idSucursal: number;
     idComprador: number;
-    Fecha: Date;
-    Total: number;
     usuarioActualiza: number;
 }
 
