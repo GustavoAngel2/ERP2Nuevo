@@ -11,6 +11,8 @@ export class OrdenCompraComponent implements OnInit{
 
   }
 
+  isModifying: boolean = true
+
   ngOnInit(): void {
     this.OrdenCompra.getOrdenCompras().subscribe({
       next: (response) => {

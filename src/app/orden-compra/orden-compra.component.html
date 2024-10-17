@@ -1,4 +1,4 @@
-<!-- <h1 class="title">Modulo de compras</h1>
+<h1 class="title">Modulo de compras</h1>
 
 <div class="form-place">
     <div class="form-container">
@@ -41,35 +41,39 @@
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.Id}} </td>
         </ng-container>
         <ng-container matColumnDef="Proveedor">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Proveedor}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.Proveedor}} </td>
         </ng-container>
-        <ng-container matColumnDef="Factura">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Factura </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Factura}}</td>
+        <ng-container matColumnDef="FechadeLlegada">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Llegada </th>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.FechaLlegada}}</td>
         </ng-container>
         <ng-container matColumnDef="Sucursal">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Surcursal}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.Surcursal}} </td>
         </ng-container>
-        <ng-container matColumnDef="FechaEntrega">
+        <ng-container matColumnDef="Comprador">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Entrega </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaEntrega}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.idComprador}} </td>
         </ng-container>
         <ng-container matColumnDef="FechaRegistro">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de alta </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaRegistro}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.FechaRegistro}} </td>
         </ng-container>
         <ng-container matColumnDef="FechaActualiza">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.FechaActualiza}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.FechaActualiza}} </td>
         </ng-container>
         <ng-container matColumnDef="UsuarioActualiza">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.UsuarioActualiza}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let OrdenCompras"> {{OrdenCompras.Total}} </td>
         </ng-container>
         <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
@@ -81,4 +85,4 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </table>
-</div> -->
+</div>

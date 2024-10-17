@@ -22,9 +22,10 @@ export interface updateCompraModel{
 export interface OrdenCompraModel {
     id: number;
     idProveedor: number;
-    FechaLegada: Date;
+    FechaLlegada: string;
     idSucursal: number;
     idComprador: number;
-    Fecha: Date;
+    FechaRegistro: string;
+    UsuarioActualiza: string;
     Total: number;
 }
