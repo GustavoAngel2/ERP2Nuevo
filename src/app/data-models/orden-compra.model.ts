@@ -3,25 +3,25 @@ export interface insertCompraModel{
     idProveedor: number;
     idSucursal: number;
     idComprador: number;
+    fechaLlegada: string;
     usuarioActualiza: number;
 }
 
 export interface updateCompraModel{
     id: number;
     idProveedor: number;
-    FechaLegada: string;
+    fechaLlegada: string;
     idSucursal: number;
     idComprador: number;
     usuarioActualiza: number;
 }
 
 export interface OrdenCompraModel {
-    id: number;
-    idProveedor: number;
-    FechaLlegada: string;
-    idSucursal: number;
-    idComprador: number;
-    FechaRegistro: string;
-    UsuarioActualiza: string;
+    Id: number;
+    IdProveedor: number;
+    FechaLegada: string;
+    IdSucursal: number;
+    IdComprador: number;
+    Fecha: Date;
     Total: number;
 }

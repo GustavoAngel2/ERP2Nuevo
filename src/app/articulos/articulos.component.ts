@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService, currentUser } from '../auth.service';
-import { articulos } from '../data-models/articulos.model';
+import { articulosModel } from '../data-models/articulos.model';
 
 @Component({
   selector: 'app-articulos',
@@ -16,7 +16,7 @@ export class ArticulosComponent implements OnInit, AfterViewInit {
   datosCargados: boolean = false;
 
   displayedColumns: string[] = ['Id', 'Codigo', 'Descripcion', 'UM', 'Usuario', 'Costo', 'Precio', 'Fecha Registro', 'Fecha Actualiza', 'Acciones'];
-  dataSource: MatTableDataSource<articulos>;
+  dataSource: MatTableDataSource<articulosModel>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -26,7 +26,7 @@ export class ArticulosComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private authService: AuthService,  
   ) {
-    this.dataSource = new MatTableDataSource<articulos>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.dataSource = new MatTableDataSource<articulosModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
   Id: number = 0;

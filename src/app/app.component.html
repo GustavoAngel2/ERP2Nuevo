@@ -2,31 +2,61 @@
   
   <mat-drawer #drawer [mode]="'push'">
     <div class="side-list">
-      <div class="card">
-        <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
-        <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
-        <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
-        <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
-        <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
-      </div>
-      <div class="card">
-      <span> Administración </span>
-      <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios Permitidos</button>
-      <button (click)="drawer.toggle()" routerLink="sucursales">Sucursales</button>
-      <button (click)="drawer.toggle()" routerLink="personas">Personas</button>
-      <button (click)="drawer.toggle()" routerLink="entradas">Entradas</button>
-      </div>
-      <div class="card">
-      <span> Ventas </span>  
-      <button (click)="drawer.toggle()" routerLink="proveedores">Proveedores</button>
-      <button (click)="drawer.toggle()" routerLink="articulos">Articulos</button>
-      <button (click)="drawer.toggle()" routerLink="compras">Ordenes de compras</button>
-      </div>
-      <div class="card">
-      <span> Sistema </span>
-      <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios permitidos</button>
-      <button (click)="drawer.toggle()" routerLink="bancos">Bancos registrados</button>
-      </div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>perm_identity</mat-icon> <span class="section-title">Usuario</span></mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="card">
+            <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
+            <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
+            <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
+            <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
+            <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>account_circle</mat-icon> <span class="section-title">Administracion</span></mat-panel-title>
+          </mat-expansion-panel-header>
+            <div class="card">
+              <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios Permitidos</button>
+              <button (click)="drawer.toggle()" routerLink="sucursales">Sucursales</button>
+              <button (click)="drawer.toggle()" routerLink="personas">Personas</button>
+              <button (click)="drawer.toggle()" routerLink="entradas">Entradas</button>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span></mat-panel-title>
+          </mat-expansion-panel-header>
+            <div class="card">
+              <button (click)="drawer.toggle()" routerLink="proveedores">Proveedores</button>
+              <button (click)="drawer.toggle()" routerLink="articulos">Articulos</button>
+              <button (click)="drawer.toggle()" routerLink="compras">Ordenes de compras</button>
+              <button (click)="drawer.toggle()" routerLink="recetas">Recetas</button>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><mat-icon>settings</mat-icon> <span class="section-title">Sistema</span></mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="card">
+            <button (click)="drawer.toggle()" routerLink="usuarios">Usuarios permitidos</button>
+            <button (click)="drawer.toggle()" routerLink="bancos">Bancos</button>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
     </div>
   </mat-drawer>
   
