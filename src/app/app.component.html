@@ -1,21 +1,14 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true" style="position: fixed; left: 0; top: 0; width: 100%; height: 100%;">
-  
+
   <mat-drawer #drawer [mode]="'push'">
     <div class="side-list">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title><mat-icon>perm_identity</mat-icon> <span class="section-title">Usuario</span></mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="card">
-            <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
-            <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
-            <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
-            <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
-            <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <div class="card">
+        <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
+        <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
+        <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
+        <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
+        <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
+      </div>
 
       <mat-accordion>
         <mat-expansion-panel>
@@ -59,21 +52,21 @@
 
     </div>
   </mat-drawer>
-  
+
   <mat-drawer-content>
     <mat-toolbar *ngIf="currentUrl != '/login' && currentUrl != '/'">
       <button mat-icon-button (click)="drawer.toggle()">
         <mat-icon> format_list_bulleted</mat-icon>
       </button>
       <span class="example-spacer"></span>
-      <span> Administrador de recursos empresariales</span>
+      <span> {{this.getTitle()}}</span>
       <div class="actions">
         <span>Hola {{actualUser.NombrePersona}}!</span>
         <a routerLink="inicio"><mat-icon>home</mat-icon></a>
         <a (click)="this.authService.logout()" routerLink="login"><mat-icon>exit_to_app</mat-icon></a>
       </div>
   </mat-toolbar>
-  
+
   <div style="padding: 10px;">
     <router-outlet />
   </div>

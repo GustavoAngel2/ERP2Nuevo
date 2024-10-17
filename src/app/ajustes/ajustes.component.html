@@ -1,38 +1,41 @@
 
-
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Colores</span> </mat-panel-title>
-  </mat-expansion-panel-header>
-  <div class="button-strip">
-    <button class="btn-settings" style="background-color: var(--blue);" (click)="this.setColorSystem('blue')"></button>
-    <button class="btn-settings" style="background-color: var(--red);" (click)="this.setColorSystem('red')"></button>
-    <button class="btn-settings" style="background-color: var(--green);" (click)="this.setColorSystem('green')"></button>
-    <button class="btn-settings" style="background-color: var(--orange);" (click)="this.setColorSystem('orange')"></button>
-    <button class="btn-settings" style="background-color: var(--yellow);" (click)="this.setColorSystem('yellow')"></button>
-    <button class="btn-settings" style="background-color: var(--gray);" (click)="this.setColorSystem('gray')"></button>
-    <button class="btn-settings" style="background-color: var(--purple);" (click)="this.setColorSystem('purple')"></button>
-  </div>
-</mat-expansion-panel>
-
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Tema</span> </mat-panel-title>
-  </mat-expansion-panel-header>
-  <div class="button-strip">
-    <button class="btn-settings" (click)="this.setBgColor('light')"> Claro </button>
-    <button class="btn-settings" (click)="this.setBgColor('dark')"> Oscuro </button>
-    <button class="btn-settings" (click)="this.setBgColor('color')"> A color </button>
-  </div>
-</mat-expansion-panel>
-
-    <div class="section" style="align-items: center; display: flex; flex-direction: column;">
-      <img class="pfp" src="./assets/pfp.jpg" width="128px" height="128px">
-      <p>Estilo de imagen de perfil</p>
-      <button><mat-icon>account_box</mat-icon> En cuadro</button>
-      <button><mat-icon>account_circle</mat-icon> Circular</button>
+<div class="content">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Colores</span> </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="button-strip">
+      <button class="btn-settings" style="background-color: var(--blue);" (click)="this.setColorSystem('blue')"></button>
+      <button class="btn-settings" style="background-color: var(--red);" (click)="this.setColorSystem('red')"></button>
+      <button class="btn-settings" style="background-color: var(--green);" (click)="this.setColorSystem('green')"></button>
+      <button class="btn-settings" style="background-color: var(--orange);" (click)="this.setColorSystem('orange')"></button>
+      <button class="btn-settings" style="background-color: var(--yellow);" (click)="this.setColorSystem('yellow')"></button>
+      <button class="btn-settings" style="background-color: var(--gray);" (click)="this.setColorSystem('gray')"></button>
+      <button class="btn-settings" style="background-color: var(--purple);" (click)="this.setColorSystem('purple')"></button>
     </div>
-    
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Tema</span> </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="button-strip">
+      <button class="btn-settings" (click)="this.setBgColor('light')"> Claro </button>
+      <button class="btn-settings" (click)="this.setBgColor('dark')"> Oscuro </button>
+      <button class="btn-settings" (click)="this.setBgColor('color')"> A color </button>
+    </div>
+  </mat-expansion-panel>
+
+      <div class="section-custom" style="align-items: center; display: flex; flex-direction: column;">
+        <img class="pfp" src="./assets/pfp.jpg" width="128px" height="128px">
+        <p>Estilo de imagen de perfil</p>
+        <button><div class="icon"><mat-icon>account_box</mat-icon></div><div class="text">En cuadro</div></button>
+        <!-- <button><mat-icon>account_circle</mat-icon> Circular</button> -->
+      </div>
+
+</div>
+
+
 <div class="footer">
   <button class="btn btn-outline-success" (click)="save()">Guardar</button>
   <button class="btn btn-outline-danger"routerLink="../inicio">Salir sin guardar</button>
