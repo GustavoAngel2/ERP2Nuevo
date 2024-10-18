@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth.service';
 import { GetPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-personas',
@@ -29,7 +30,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private PersonasService: PersonasService, public dialog:MatDialog, public authService: AuthService) {
+  constructor(private PersonasService: PersonasService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<GetPersonasModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
@@ -55,7 +56,9 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   getData(){
     this.dataSource.filterPredicate = (data: GetPersonasModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
+             data.Id.toString().includes(filter) || 
+             data.ApPaterno.toLowerCase().includes(filter) ||
+             data.ApMaterno.toLowerCase().includes(filter) // Puedes añadir más campos si es necesario
     };
     this.PersonasService.getPersonas().subscribe({
       next: (response) => {
@@ -84,11 +87,11 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
     this.PersonasService.insertarPersona(nuevaPersona).subscribe({
       next: (response) => {
-        // if(response.StatusCode == 200){
-        //   this.toastr.success(response.response.data, 'Personas');
-        // } else {
-        //   this.toastr.error(response.response.data,'Personas')
-        // }
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Personas');
+        } else {
+          this.toastr.error(response.response.data,'Personas')
+        }
         this.getData();
       },
       error: (error) => {
@@ -108,11 +111,11 @@ export class PersonasComponent implements OnInit, AfterViewInit{
       if (result == "yes") {
         this.PersonasService.deletePersonas(Id).subscribe({
           next: (response) => {
-            // if(response.StatusCode == 200){
-            //   this.toastr.success(response.response.data, 'Personas');
-            // } else {
-            //   this.toastr.error(response.response.data,'Personas')
-            // }
+            if(response.StatusCode == 200){
+              this.toastr.success(response.response.data, 'Personas');
+            } else {
+              this.toastr.error(response.response.data,'Personas')
+            }
             this.getData();
           },
           error: (error) => {
@@ -153,11 +156,11 @@ export class PersonasComponent implements OnInit, AfterViewInit{
 
     this.PersonasService.updatePersonas(persona).subscribe({
       next: (response) => {
-        // if(response.StatusCode == 200){
-        //   this.toastr.success(response.response.data, 'Personas');
-        // } else {
-        //   this.toastr.error(response.response.data,'Personas')
-        // }
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Personas');
+        } else {
+          this.toastr.error(response.response.data,'Personas')
+        }
         console.log(response);
         this.getData();
         this.limpiar();

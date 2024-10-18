@@ -31,6 +31,13 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
+import { SucursalesComponent } from './sucursales/sucursales.component';
+import { BancosComponent } from './bancos/bancos.component';
+import { RecetasComponent } from './recetas/recetas.component';
+import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
+import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
+import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
+import { InsumosComponent } from './insumos/insumos.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +50,14 @@ import { EntradasComponent } from './entradas/entradas.component';
     ProveedoresComponent,
     AjustesComponent,
     ArticulosComponent,
-    EntradasComponent
+    EntradasComponent,
+    SucursalesComponent,
+    BancosComponent,
+    RecetasComponent,
+    DetalleRecetasComponent,
+    OrdenCompraComponent,
+    DetalleOrdenCompraComponent,
+    InsumosComponent
   ],
   imports: [
     //Dependencias
@@ -75,8 +89,8 @@ import { EntradasComponent } from './entradas/entradas.component';
     provideAnimationsAsync(),
     provideAnimations(),
     provideToastr({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
   ],

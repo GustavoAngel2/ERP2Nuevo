@@ -10,6 +10,7 @@
     gap: 12px;
 }
 
+
 .actions a{
     cursor: pointer;
     border: 0;
@@ -47,13 +48,25 @@ mat-drawer{
 }
 
 .side-list button{
-    color:white;
+    background-color: var(--mat-toolbar-container-background-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
     font-size: 16px;
-    border: 0;
-    background-color: #00000049;
-    padding: 16px;
-    width: 100%;
-    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Suaviza la transición */
+}
+
+.side-list button:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    font-size: 19px;
+    cursor: pointer;
+    transition: all 0.5s ease; /* Suaviza la transición */
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.389); /* Efecto sutil de sombra */
+
 }
 
 .side-list span{
@@ -62,15 +75,17 @@ mat-drawer{
     text-align: center;
 }
 
+
 .card{
     align-items: center;
     width: calc(100% - 16px);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 12px;
     background-color: #00000048;
     color:white;
+    margin-bottom: 10px;
     gap: 6px;
 }
 

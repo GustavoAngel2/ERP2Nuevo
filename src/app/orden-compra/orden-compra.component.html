@@ -1,0 +1,84 @@
+<!-- <h1 class="title">Modulo de compras</h1>
+
+<div class="form-place">
+    <div class="form-container">
+        <div class="form-title">
+            <h1 [hidden]="isModifying">Registrar compra</h1>
+            <h1 [hidden]="!isModifying">Editando compra con id: {{this.id}}</h1>
+        </div>
+        <div class="form-content">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-truck"></i></span>
+                <input class="form-control" placeholder="Proveedor" [(ngModel)]="idProveedor">
+                <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
+                <input class="form-control" placeholder="Sucursal" [(ngModel)]="idSurcursal">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                <input class="form-control" placeholder="Factura" [(ngModel)]="factura">
+            </div>
+        </div>
+        <div class="form-end">
+            <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+            <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="actionbar" style="width: 70%;">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </div>
+</div>
+<br>
+<div class="table-container">
+    <div class="table-hotbar">
+        <button><i class="bi bi-filetype-xlsx"></i></button>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Proveedor">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Proveedor}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Factura">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Factura </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Factura}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Sucursal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Surcursal}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaEntrega">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Entrega </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaEntrega}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaRegistro">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de alta </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaRegistro}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaActualiza}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UsuarioActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+            <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
+            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
+        </td>
+        </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+</div> -->
