@@ -96,26 +96,27 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     gap: 12px;
     border-radius: 6px;
     background-color: #00000055;
+    
 }
 
 .button-strip button{
-    cursor: pointer;
-    width: 128px;
-    min-width: 128px;
-    height: 128px;
-    border: 0;
-    border-radius: 5px;
-    padding: 4px;
-    background-color: #00000092;
-    color:white;
+    background-color: #000000a0; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
     font-size: 16px;
-    transition: .5s;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Suaviza la transición */
 }
 
 .button-strip button:hover{
-    background-color: #000000b3;
-    font-size: 24px;
-    transition: .5s;
+    background-color: var(--mat-toolbar-container-background-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 19px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Suaviza la transición */
 }
 
 .button-strip button:active{
