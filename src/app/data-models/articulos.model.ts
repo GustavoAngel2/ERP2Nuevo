@@ -30,12 +30,14 @@ export interface articulos {
     Codigo: string;
     Descripcion: string;
     Familia:string;
-    UM: string;
+    UM: number;
+    Costo:number;
+    Precio:number;
     UltimoCosto:string;
     PrecioVenta: string;
     Iva:string;
     Ieps:string;
-    Usuario: String;
+    Usuario: number;
   }
 
    export interface deleteArticuloModel{

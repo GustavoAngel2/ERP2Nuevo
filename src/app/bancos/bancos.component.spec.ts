@@ -13,7 +13,7 @@ describe('BancosComponent', () => {
     .compileComponents();
     
     fixture = TestBed.createComponent(BancosComponent);
-    component = fixture.componentInstance;
+    component = BancosComponent.componentInstance;
     fixture.detectChanges();
   });
 
