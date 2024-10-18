@@ -272,7 +272,8 @@ export class InsumosService {
       insumo:ProveedorData.insumo,
       descripcionInsumo: ProveedorData.descripcionInsumo,
       unidadMedida: ProveedorData.unidadMedida,
-      usuarioActualiza: ProveedorData.usuarioActualiza
+      usuarioActualiza: ProveedorData.usuarioActualiza,
+      insumosUP: ProveedorData.insumosUP
     };
     return this.http.post<defaultApiResponse>(`${this.apiUrl}/Insumos/Insert`, body);
   }
@@ -286,7 +287,8 @@ export class InsumosService {
       insumo:ProveedorData.insumo,
       descripcionInsumo: ProveedorData.descripcionInsumo,
       unidadMedida: ProveedorData.unidadMedida,
-      usuarioActualiza: ProveedorData.usuarioActualiza
+      usuarioActualiza: ProveedorData.usuarioActualiza,
+      insumosUP: ProveedorData.insumosUP
     };
     
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Insumos/Update`, body);
