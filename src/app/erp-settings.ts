@@ -18,10 +18,13 @@ export class ERP{
 
         if(bgColor == 'light'){
             root.setProperty('--mat-sidenav-content-background-color', '#fff')
+            root.setProperty('--title-color','#000')
         } else if (bgColor == 'dark'){
             root.setProperty('--mat-sidenav-content-background-color', '#353535')
+            root.setProperty('--title-color','#fff')
         } else {
             root.setProperty('--mat-sidenav-content-background-color', ('var(--dark-' + theme + ')'))
+            root.setProperty('--title-color','#fff')
         }
         
     }

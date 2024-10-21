@@ -24,23 +24,21 @@
       <h1>Registrar Detalle para la Receta con ID: {{ IdReceta }}</h1>
     </div>
     <div class="form-content">
-      <div class="input-group flex-nowrap">
-        <span class="input-group-text"><i class="bi bi-truck"></i></span>
-        <select class="form-select" [(ngModel)]="Insumo">
-            <option value="0">Seleccione un Insumo</option>
-            <option *ngFor="let articulo of comboArticulos" value="{{articulo.Codigo}}">{{articulo.Descripcion}}</option>
-        </select>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-truck"></i></span>
+            <select class="form-select" [(ngModel)]="Insumo">
+                <option value="0">Seleccione un Insumo</option>
+                <option *ngFor="let articulo of comboArticulos" value="{{articulo.Codigo}}">{{articulo.Descripcion}}</option>
+            </select>
+        </div>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-at"></i></span>
+            <input class="form-control" placeholder="Cantidad" [(ngModel)]="Cantidad">
+        </div>
     </div>
-      <div class="input-group flex-nowrap">
-        <span class="input-group-text"><i class="bi bi-at"></i></span>
-        <input class="form-control" placeholder="Cantidad" [(ngModel)]="Cantidad">
-      </div>
-      <div class="form-end">
-        <button  class="btn btn-outline-success" (click)="insertarDetalle()">
-          <i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle
-        </button>
+    <div class="form-end">
+        <button  class="btn btn-outline-success" (click)="insertarDetalle()"><i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle</button>
         <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
-      </div>
     </div>
   </div>
   

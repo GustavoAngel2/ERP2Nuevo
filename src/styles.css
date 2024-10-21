@@ -21,6 +21,7 @@ html{
     --dark-purple: #4e0443;
     --custom: #000000;
     --dark-custom: #000000;
+    --title-color: #000000;
 
     --mat-toolbar-container-background-color: var(--black);
     --mat-expansion-container-background-color: var(--black);
@@ -129,7 +130,7 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 
 .title{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    color:#000000
+    color:var(--title-color)
 }
 
 .form-container{
