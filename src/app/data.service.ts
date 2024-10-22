@@ -14,6 +14,7 @@ import { detallecomprasInsertModel, detallecoprasUpdateModel } from './data-mode
 import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.model';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
+import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
 
 
 
@@ -444,16 +445,20 @@ export class RecetasService {
     deleteDetRecetas(Id: number): Observable<any> {
       return this.http.put(`${this.apiUrl}/DetalleReceta/Delete`, { Id });
     }
+
+
   updateDetRecetas(RecetasData: updateRecetasModel): Observable<defaultApiResponse> {
-  const body = {
-  id: RecetasData.id,
-  nombre: RecetasData.nombre,
-  usuarioActualiza: RecetasData.usuarioActualiza
-  };
-  console.log("Enviando solicitud con el siguiente cuerpo:", body);
-  return this.http.put<defaultApiResponse>(`${this.apiUrl}/recetas/Update`, body);
+      const body = {
+      id: RecetasData.id,
+      nombre: RecetasData.nombre,
+      usuarioActualiza: RecetasData.usuarioActualiza
+      };
+      console.log("Enviando solicitud con el siguiente cuerpo:", body);
+      return this.http.put<defaultApiResponse>(`${this.apiUrl}/recetas/Update`, body);
+      }
   }
-  }
+
+
 /* ----------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
@@ -470,5 +475,56 @@ export class RecetasService {
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Articulos/Get`,{headers}, );
   }
+  InsertArticulo(ArticuloData: insertArticuloModel): Observable<defaultApiResponse> {
+    const body = {
+      codigo: ArticuloData.Codigo,
+      descripcion:ArticuloData.Descripcion,
+      idFamilia: ArticuloData.Familia,
+      idUm: ArticuloData.UM,
+      ultimoCosto:ArticuloData.UltimoCosto,
+      precioVenta:ArticuloData.PrecioVenta,
+      iva:ArticuloData.Iva,
+      ieps: ArticuloData.Ieps,
+      idUsuario: ArticuloData.Usuario
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Articulos/Insert`, body);
+  }
+
+  updateArticulo(ArticuloData: updateArticuloModel): Observable<defaultApiResponse> {
+    const body = {
+      id: ArticuloData.Id,
+      codigo: ArticuloData.Codigo,
+      descripcion:ArticuloData.Descripcion,
+      idFamilia: ArticuloData.Familia,
+      idUm: ArticuloData.UM,
+      ultimoCosto:ArticuloData.UltimoCosto,
+      precioVenta:ArticuloData.PrecioVenta,
+      iva:ArticuloData.Iva,
+      ieps: ArticuloData.Ieps,
+      idUsuario: ArticuloData.Usuario
+    };
+    console.log("Enviando solicitud con el siguiente cuerpo:", body);
+    return this.http.put<defaultApiResponse>(`${this.apiUrl}/Articulos/Update`, body);
+    }
+
+    deleteArticulo(Id: number): Observable<any> {
+      return this.http.put(`${this.apiUrl}/Articulos/Delete`, { Id });
+    }
+}   
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class UMservice {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getUM(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/UnidadMedida/Get`,{headers});
+  }
 }
-    

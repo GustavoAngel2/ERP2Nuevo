@@ -4,187 +4,226 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService, currentUser } from '../auth.service';
-import { articulosModel } from '../data-models/articulos.model';
+import { articulosModel, updateArticuloModel } from '../data-models/articulos.model';
+import { unidadMedida } from '../data-models/um.model';
+import { ArticulosService } from '../data.service';
+import { UMservice } from '../data.service';
+import { ToastrService } from 'ngx-toastr';
+import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
+
 
 @Component({
   selector: 'app-articulos',
   templateUrl: './articulos.component.html',
   styleUrls: ['./articulos.component.css']
 })
-export class ArticulosComponent implements OnInit, AfterViewInit {
+export class ArticulosComponent implements OnInit {
 
   datosCargados: boolean = false;
 
-  displayedColumns: string[] = ['Id', 'Codigo', 'Descripcion', 'UM', 'Usuario', 'Costo', 'Precio', 'Fecha Registro', 'Fecha Actualiza', 'Acciones'];
+  displayedColumns: string[] = ['Id', 'Codigo','Familia', 'Descripcion', 'UM', 'Usuario', 'UltimoCosto', 'PrecioVenta','Iva','Ieps', 'FechaReg', 'FechaAct', 'Acciones'];
   dataSource: MatTableDataSource<articulosModel>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    //private articulosService: ArticulosService, 
+  private articulosService: ArticulosService, 
+  private umService: UMservice,
     public dialog: MatDialog,
     private authService: AuthService,  
+    private toastr:ToastrService
   ) {
-    this.dataSource = new MatTableDataSource<articulosModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.dataSource = new MatTableDataSource<articulosModel>();
   }
-
+  isModifying:boolean = false;
   Id: number = 0;
   descripcion: string = '';
   codigo: string = '';
+  familia: number = 0;
   um: number = 0;
   costo: number = 0;
   precio: number = 0;
+  iva: number = 0;
+  ieps: number = 0;
   usuario: number = 0;
   ComboUm: any[] = [];
 
   loggedInUser: currentUser = { Id: '', NombreUsuario: '', NombrePersona: '', IdRol: '' };
 
   ngOnInit() {
-    //this.getData();
-    this.loggedInUser = this.authService.getCurrentUser(); // Obtener el usuario logeado
+  this.getData();
+  this.setCombos();
+    this.loggedInUser = this.authService.getCurrentUser(); 
     console.log('Usuario logeado:', this.loggedInUser);
   }
 
-  // insertar(): void {
-  //   const nuevoArticulo = {
-  //     descripcion: this.descripcion,
-  //     codigo: this.codigo,
-  //     UM: this.um, // Cambiar `um` a `UM`
-  //     costo: this.costo,
-  //     precio: this.precio,
-  //     Usuario: parseInt(this.loggedInUser.Id, 10) // Cambiar `usuario` a `Usuario`
-  //   };
-  //   this.articulosService.insertarArticulos(nuevoArticulo).subscribe({
-  //     next: (response) => {
-  //       console.log(response)
-  //       if(response.StatusCode == 200){
-  //         this.descripcion = "";
-  //         this.codigo = "";
-  //         this.um = 0;
-  //         this.costo = 0;
-  //         this.precio = 0;
-  //         this.usuario = 0;
-  //         this.getData();
-  //       //   this.toastr.success(response.response.data, 'Articulos')
-  //       // } else {
-  //       //   this.toastr.error(response.response.data, 'Articulos')
-  //       // }
-  //     }
-  //   });
-  // }
+ insertar(): void {
+  const nuevoArticulo = {
+     Descripcion: this.descripcion,
+     Codigo: this.codigo,
+     Familia: this.familia,
+     UM: this.um,  
+     UltimoCosto: this.costo,
+     PrecioVenta: this.precio,
+     Iva: this.iva,
+     Ieps: this.ieps,
+     Usuario: parseInt(this.loggedInUser.Id, 10) 
+   };
+   console.log(nuevoArticulo)
+   this.articulosService.InsertArticulo(nuevoArticulo).subscribe({
+    next: (response) => {
+      if(response.StatusCode == 200){
+        this.toastr.success(response.response.data, 'Articulos');
+      } else {
+        this.toastr.error(response.response.data,'Articulos')
+      }
+      this.getData();
+      this.limpiar();
+    },
+    error: (error) => {
 
-  // getData() {
-  //   // this.umService.getUM().subscribe((data: any) => {
-  //   //   this.ComboUm = data;
-  //   //   console.log(this.ComboUm);
-  //   // });
-  //   this.dataSource.filterPredicate = (data: articulos, filter: string) => {
-  //     return data.Descripcion.toLowerCase().includes(filter) || 
-  //            data.Id.toString().includes(filter); // Puedes añadir más campos si es necesario
-  //   };
-  //   this.articulosService.getArticulos().subscribe({
-  //     next: (response) => {
-  //       console.log('Respuesta del servidor:', response); 
-  //       if (response && Array.isArray(response) && response.length > 0) {
-  //         this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-  //       } else {
-  //         console.log('No contiene datos');
-  //       }
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
+      console.error('Hubo un error al insertar el articulo', error);
+    }
+  });
+ }
 
-  // // abrirDeleteDialog(Id: number, Name: string) {
-  // //   const dialogRef = this.dialog.open(DeleteMenuComponent, {
-  // //     width: '550px',
-  // //     data: Name
-  // //   });
-  // //   dialogRef.afterClosed().subscribe(result => {
-  // //     if (result == "yes") {
-  // //       this.articulosService.deleteArticulos(Id).subscribe({
-  // //         next: (response) => {
-  // //           if(response.StatusCode == 200){
-  // //             this.getData();
-  // //             this.toastr.success(response.response.data, 'Articulos')
-  // //           } else {
-  // //             this.toastr.info(response.response.data, 'Articulos')
-  // //           }
-  // //         },
-  // //         error: (error) => {
-  // //           console.error('Hubo un error: ', error);
-  // //         }
-  // //       });
-  // //     }
-  // //   });
-  // // }
+ getData() {
+   this.dataSource.filterPredicate = (data: articulosModel, filter: string) => {
+     return data.Descripcion.toLowerCase().includes(filter) || 
+            data.Id.toString().includes(filter); 
+   };
+   this.articulosService.getArticulos().subscribe({
+     next: (response) => {
+       console.log('Respuesta del servidor:', response); 
+       if (response && Array.isArray(response) && response.length > 0) {
+         this.dataSource.data = response; 
+       } else {
+         console.log('No contiene datos');
+       }
+     },
+     error: (error) => {
+       console.error(error);
+     }
+   });
+ }
+
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+ applyFilter(event: Event) {
+   const filterValue = (event.target as HTMLInputElement).value;
+   this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
+   if (this.dataSource.paginator) {
+     this.dataSource.paginator.firstPage();
+   }
+ }
 
-  // actualizar(): void {
-  //   const articuloActualizado: updateArticulos = {
-  //     Id: this.articulo.Id,
-  //     Descripcion: this.descripcion,
-  //     Codigo: this.codigo,
-  //     UM: this.um,
-  //     Costo: this.costo,
-  //     Precio: this.precio,
-  //     Usuario: parseInt(this.loggedInUser.Id, 10)
-  //   };
+ setCombos(){
 
-  //   console.log('Actualizando articulo:', articuloActualizado);
-  //   this.articulosService.updateArticulos(articuloActualizado).subscribe({
-  //     next: (response) => {
-  //       console.log('Respuesta del servidor:', response);
-  //       this.getData(); // Actualizar datos después de la actualización
-  //       if(response.StatusCode == 200){
-  //         this.limpiar();
-  //         this.getData();
-  //       //   this.toastr.success(response.response.data, 'Articulos')
-  //       // } else {
-  //       //   this.toastr.info(response.response.data, 'Articulos')
-  //       // }
-  //     },
-  //     error: (error) => {
-  //       console.error('Error al actualizar el artículo', error);
-  //     }
-  //   });
-  // }
+  this.umService.getUM().subscribe({
+    next: (response) => {
+      console.log('Respuesta del servidor:', response); 
+      if (response && Array.isArray(response)&&response.length>0) {
+        this.ComboUm = response;
+      } else {
+        console.log('no contiene datos');
+      }
+    },
+    error: (error) => {
+      console.error(error);
+    }
+  });
+}
 
-  // cargarDatos(articulo: updateArticuloModel) {
-  //   this.articulo.Id = articulo.Id;
-  //   this.codigo = articulo.Codigo;
-  //   this.descripcion = articulo.Descripcion;
-  //   this.um = articulo.UM;
-  //   this.costo = articulo.Costo;
-  //   this.precio = articulo.Precio;
-  //   this.usuario = articulo.Usuario;
-  //   this.datosCargados = true;
-  // }
 
-  // limpiar(): void {
-  //   this.codigo = "";
-  //   this.descripcion = "";
-  //   this.um = 0;
-  //   this.costo = 0;
-  //   this.precio = 0;
-  //   this.usuario = 0;
-  //   this.datosCargados = false;
+ editar(): void {
+  const Articulo:updateArticuloModel   = {
+    Id: this.Id,
+    Descripcion: this.descripcion,
+    Codigo: this.codigo,
+    Familia: this.familia,
+    UM: this.um,  
+    UltimoCosto: this.costo,
+    PrecioVenta: this.precio,
+    Iva: this.iva,
+    Ieps: this.ieps,
+    Usuario: parseInt(this.loggedInUser.Id, 10) 
+  };
+  console.log(Articulo)
+  this.articulosService.updateArticulo(Articulo).subscribe({
+    next: (response) => {
+      if(response.StatusCode == 200){
+        this.toastr.success(response.response.data, 'Articulo');
+      } else {
+        this.toastr.error(response.response.data,'Articulo')
+      }
+      console.log(response);
+      this.getData();
+      this.limpiar();
+    },
+    error: (error) => {
+      console.error(error);
+    }
+  });
+ }
 
-  // }
+ cargarDatos(articulo: updateArticuloModel) {
+   this.Id = articulo.Id;
+   this.codigo = articulo.Codigo;
+   this.descripcion = articulo.Descripcion;
+   this.um = articulo.UM;
+   this.familia = articulo.Familia
+   this.costo = articulo.UltimoCosto;
+   this.precio = articulo.PrecioVenta;
+   this.iva= articulo.Iva;
+   this.ieps = articulo.Ieps
+   this.datosCargados = true;
+   this.isModifying = true
+   console.log(articulo.Id)
+ }
+
+ limpiar(): void {
+   this.codigo = "";
+   this.descripcion = "";
+   this.um = 0;
+   this.costo = 0;
+   this.precio = 0;
+   this.iva = 0;
+   this.ieps =0;
+   this.usuario = 0;
+   this.datosCargados = false;
+   this.isModifying = false
+ }
+
+ abrirDeleteDialog(Id: number, Name: string) {
+  const dialogRef = this.dialog.open(DeleteMenuComponent, {
+    width: '550px',
+    data: Name
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result == "yes") {
+      this.articulosService.deleteArticulo(Id).subscribe({
+        next: (response) => {
+          if(response.StatusCode == 200){
+            this.toastr.success(response.response.data, 'Articulos');
+          } else {
+            this.toastr.error(response.response.data,'Articulos')
+          }
+          this.getData();
+        },
+        error: (error) => {
+          console.error('Hubo un error al eliminar el Articulo', error);
+        }
+      });
+    }
+  });
+}
+
 }
