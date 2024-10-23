@@ -137,6 +137,12 @@ export class RecetasComponent implements OnInit,AfterViewInit{
         if (response.StatusCode === 200) {
           this.toastr.success(response.response.msg, 'Recetas');
   
+          const recetaId = response.response.data; 
+          this.IdReceta = recetaId;  
+  
+          this.getData(recetaId);  
+  
+          this.isModifying = true;
           // Obtener el Id de la receta insertada
           
           this.IdReceta = response.response.data;  // Almacena el Id de la receta

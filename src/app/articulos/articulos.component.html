@@ -1,131 +1,118 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo de Artículos</title>
-    <link rel="stylesheet" href="articulos.component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <header>
-        <h1>Módulo de Artículos</h1>
-    </header>
-    <main>
-        <section class="articulos">
-            <table id="articulos-table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Código</th>
-                        <th>Descripción</th>
-                        <th>Id Familia</th>
-                        <th>Id UM</th>
-                        <th>Último Costo</th>
-                        <th>Precio Venta</th>
-                        <th>IVA</th>
-                        <th>IEPS</th>
-                        <th>Id Usuario</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>34782</td>
-                        <td>Artículo de ejemplo</td>
-                        <td>Familia 1</td>
-                        <td>UM 1</td>
-                        <td>$100</td>
-                        <td>$120</td>
-                        <td>16%</td>
-                        <td>0%</td>
-                        <td>Usuario 1</td>
-                        <td>
-                            <button class="btn-editar" onclick="editarArticulo(this)">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn-eliminar" onclick="eliminarArticulo(this)">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    <!-- Más filas de artículos pueden ir aquí -->
-                </tbody>
-            </table>
-        </section>
-    </main>
+<div class="form-place">
+    <div class="form-container">
+        <div class="form-title">
+            <h1 [hidden]="isModifying">Registrar Articulo</h1>
+            <h1 [hidden]="!isModifying">Editando articulo con Id: {{this.Id}}</h1>
+        </div>
+        <div class="form-content">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
+                <input class="form-control" placeholder="Codigo del articulo" [(ngModel)]="codigo">
+                <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                <input class="form-control" placeholder="Descripcion" [(ngModel)]="descripcion">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-diagram-3-fill"></i></span>
+                <input class="form-control" placeholder="Correo electronico del proveedor" [(ngModel)]="familia">
+                <span class="input-group-text"><i class="bi bi-rulers"></i></span>
+                <select class="form-select" [(ngModel)]="um">
+                    <option value="0">Seleccione una unidad</option>
+                    <option *ngFor="let um of ComboUm" value="{{um.Id}}">{{um.Nombre}}</option>
+                </select>
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                <input class="form-control" placeholder="Id de banco del proveedor" [(ngModel)]="costo">
+                <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
+                <input class="form-control" placeholder="CLABE del proveedor" [(ngModel)]="precio">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-percent"></i></span>
+                <input class="form-control" placeholder="IVA" [(ngModel)]="iva">
+                <span class="input-group-text"><i class="bi bi-percent"></i></span>
+                <input class="form-control" placeholder="IEPS" [(ngModel)]="ieps">
+            </div>
+        </div>
+        <div class="form-end">
+            <button [hidden]="!isModifying" (click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!isModifying" (click)="limpiar()"   class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+            <button [hidden]=" isModifying" (click)="insertar()"  class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
 
-    <script>
-        // Función para eliminar un artículo
-        function eliminarArticulo(btn) {
-            // Preguntar al usuario si está seguro de eliminar
-            if (confirm("¿Estás seguro de que deseas eliminar este artículo?")) {
-                // Obtener la fila que contiene el botón
-                const row = btn.closest('tr');
-                // Eliminar la fila
-                row.parentNode.removeChild(row);
-            }
-        }
+        </div>
+    </div>
+</div>
+<br>
+<div class="actionbar" style="width: 70%;">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </div>
+</div>
 
-        // Función para editar un artículo
-        function editarArticulo(btn) {
-            // Obtener la fila que contiene el botón
-            const row = btn.closest('tr');
-            // Obtener celdas de la fila
-            const cells = row.getElementsByTagName('td');
-            
-            // Obtener los valores actuales
-            const id = cells[0].innerText; // Obtener el Id
-            const codigo = cells[1].innerText; // Obtener el Código
-            const descripcion = cells[2].innerText; // Obtener la Descripción
-            const idFamilia = cells[3].innerText; // Obtener Id Familia
-            const idUM = cells[4].innerText; // Obtener Id UM
-            const ultimoCosto = cells[5].innerText; // Obtener Último Costo
-            const precioVenta = cells[6].innerText; // Obtener Precio Venta
-            const iva = cells[7].innerText; // Obtener IVA
-            const ieps = cells[8].innerText; // Obtener IEPS
-            const idUsuario = cells[9].innerText; // Obtener Id Usuario
+<br>
 
-            // Solicitar nuevos valores al usuario
-            const nuevoCodigo = prompt("Editar Código", codigo);
-            const nuevaDescripcion = prompt("Editar Descripción", descripcion);
-            const nuevoIdFamilia = prompt("Editar Id Familia", idFamilia);
-            const nuevoIdUM = prompt("Editar Id UM", idUM);
-            const nuevoUltimoCosto = prompt("Editar Último Costo", ultimoCosto);
-            const nuevoPrecioVenta = prompt("Editar Precio Venta", precioVenta);
-            const nuevoIva = prompt("Editar IVA", iva);
-            const nuevoIe = prompt("Editar IEPS", ieps);
-            const nuevoIdUsuario = prompt("Editar Id Usuario", idUsuario);
-
-            // Actualizar celdas con los nuevos valores
-            if (nuevoCodigo !== null) {
-                cells[1].innerText = nuevoCodigo;
-            }
-            if (nuevaDescripcion !== null) {
-                cells[2].innerText = nuevaDescripcion;
-            }
-            if (nuevoIdFamilia !== null) {
-                cells[3].innerText = nuevoIdFamilia;
-            }
-            if (nuevoIdUM !== null) {
-                cells[4].innerText = nuevoIdUM;
-            }
-            if (nuevoUltimoCosto !== null) {
-                cells[5].innerText = nuevoUltimoCosto;
-            }
-            if (nuevoPrecioVenta !== null) {
-                cells[6].innerText = nuevoPrecioVenta;
-            }
-            if (nuevoIva !== null) {
-                cells[7].innerText = nuevoIva;
-            }
-            if (nuevoIe !== null) {
-                cells[8].innerText = nuevoIe;
-            }
-            if (nuevoIdUsuario !== null) {
-                cells[9].innerText = nuevoIdUsuario;
-            }
-        }
-    </script>
-</body>
-</html>
+<div class="table-container">
+    <div class="table-hotbar">
+        <button><i class="bi bi-filetype-xlsx"></i></button>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <table class="table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Codigo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Codigo}}  </td>
+        </ng-container>
+        <ng-container matColumnDef="Familia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Familia </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Familia}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Descripcion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="UM">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidad Medida </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.UM}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UltimoCosto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.UltimoCosto}} </td>
+        </ng-container>
+                <ng-container matColumnDef="PrecioVenta">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                    <td mat-cell *matCellDef="let articulo"> {{articulo.PrecioVenta}} </td>
+                </ng-container>
+        <ng-container matColumnDef="Iva">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Iva </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Iva}}% </td>
+        </ng-container>
+        <ng-container matColumnDef="Ieps">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ieps </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Ieps}}% </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaReg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaReg}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaAct">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaAct}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Usuario}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+            <mat-icon class="action-btn" (click)="cargarDatos(elemento)">edit</mat-icon>
+            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Descripcion)">delete</mat-icon>
+        </td>
+        </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+</div>
