@@ -15,6 +15,8 @@ import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.mod
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
+import { MovModel,insertMovModel,updateMovModel } from './data-models/Movimiento.model';
+import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 
 
 
@@ -338,7 +340,7 @@ export class OrdenComprasService {
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Update`, body);
   }
 }
-
+/* --------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
@@ -379,6 +381,7 @@ export class DetalleOrdenComprasService {
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Update`, body);
   }
 }
+/* --------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
@@ -459,8 +462,6 @@ export class RecetasService {
       return this.http.put<defaultApiResponse>(`${this.apiUrl}/recetas/Update`, body);
       }
   }
-
-
 /* ----------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
@@ -528,5 +529,79 @@ export class UMservice {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/UnidadMedida/Get`,{headers});
+  }
+}
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class MovimientosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getMovimiento(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Movimientos/Get`,{headers});
+  }
+
+
+InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
+  const body = {
+   idAlmacen: MovData.idAlmacen,
+   tipoMovimiento: MovData.tipoMovimiento,
+   usuarioRegistra: MovData.usuarioRegistra,
+   usuarioAutoriza: MovData.usuarioAutoriza,
+   usuarioActualiza:MovData.usuarioActualiza
+  };
+  return this.http.post<defaultApiResponse>(`${this.apiUrl}/Movimientos/Insert`, body);
+}
+}
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class DetMovimientosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getDetalleMov(Id:number): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleMovimientos/Get?idMovimiento=${Id}`,{headers});
+  }
+
+  InsertDetMovimiento(DetMovData: DetMovInsertModel): Observable<defaultApiResponse> {
+    const body = {
+     idMovimiento: DetMovData.IdMovimiento,
+     insumo: DetMovData.insumo,
+     cantidad: DetMovData.cantidad,
+     usuarioActualiza:DetMovData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleMovimientos/Insert`, body);
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class tipoMovimiento {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getTipoMov(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/TipoMovimiento/Get`,{headers});
   }
 }
