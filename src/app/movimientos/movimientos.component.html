@@ -1,15 +1,16 @@
-<h1 class="title">Modulo de traspasos</h1>
+<h1 class="title">Modulo de movimientos</h1>
 
 <div class="form-container">
     <div class="form-title">
-        <h1 [hidden]="isModifying">Registrar traspaso</h1>
+        <h1 [hidden]="isModifying">Registrar movimiento</h1>
         <h1 [hidden]="!isModifying">Editando persona con id: {{this.id}}</h1>
     </div>
     <div class="form-content">
         <div class="input-group flex-nowrap">
-            <input type="text" class="form-control" [(ngModel)]="nombre" placeholder="Almacen de origen" aria-label="Nombre">
-            <input type="text" class="form-control" [(ngModel)]="ApPaterno" placeholder="Almacen de destino" aria-label="Apellido paterno" required>
-            <input type="text" class="form-control" [(ngModel)]="ApMaterno" placeholder="Usuario Envía" aria-label="Apellido materno" required>
+            <select class="form-control" [(ngModel)]="nombre">
+                <option value="">Seleccione un almacen</option>
+            </select>
+            <input type="text" class="form-control" [(ngModel)]="ApPaterno" placeholder="Tipo de movimiento">
         </div>
     </div>
     <div class="form-end">
@@ -36,24 +37,20 @@
             <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
         </ng-container>
         <ng-container matColumnDef="AlmacenOrigen">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Almacen de origen </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de almacen </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Nombre}} </td>
         </ng-container>
         <ng-container matColumnDef="AlmacenDestino">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Almacen de destino </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Movimiento </th>
             <td mat-cell *matCellDef="let persona"> {{persona.ApPaterno}} </td>
         </ng-container>
         <ng-container matColumnDef="UsuarioEnvia">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario origen </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de autorizacion </th>
             <td mat-cell *matCellDef="let persona"> {{persona.ApMaterno}} </td>
         </ng-container>
         <ng-container matColumnDef="UsuarioRecibe">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario que recive </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Autorizado por </th>
             <td mat-cell *matCellDef="let persona"> {{persona.ApMaterno}} </td>
-        </ng-container>
-        <ng-container matColumnDef="UsuarioActualiza">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-            <td mat-cell *matCellDef="let persona"> {{persona.Direccion}} </td>
         </ng-container>
         <ng-container matColumnDef="FechaReg">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </th>
@@ -62,6 +59,10 @@
         <ng-container matColumnDef="FechaAct">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Última Actualización </th>
             <td mat-cell *matCellDef="let persona"> {{persona.FechaAct}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UsuarioActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Direccion}} </td>
         </ng-container>
         <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>

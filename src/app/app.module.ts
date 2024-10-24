@@ -39,6 +39,7 @@ import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
 import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 import { InsumosComponent } from './insumos/insumos.component';
 import { TraspasosComponent } from './traspasos/traspasos.component';
+import { MovimientosComponent } from './movimientos/movimientos.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { TraspasosComponent } from './traspasos/traspasos.component';
     OrdenCompraComponent,
     DetalleOrdenCompraComponent,
     InsumosComponent,
-    TraspasosComponent
+    TraspasosComponent,
+    MovimientosComponent
   ],
   imports: [
     //Dependencias

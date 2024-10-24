@@ -15,6 +15,8 @@ import { RecetasComponent } from './recetas/recetas.component';
 import { BancosComponent } from './bancos/bancos.component';
 import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
+import { TraspasosComponent } from './traspasos/traspasos.component';
+import { MovimientosComponent } from './movimientos/movimientos.component';
 
 
 
@@ -33,7 +35,9 @@ const routes: Routes = [
   { path: "recetas", component:RecetasComponent, canActivate:[AuthGuard], title: "ERP - Recetas" },
   { path: "bancos", component:BancosComponent, canActivate:[AuthGuard], title: "ERP - Bancos" },
   { path: "detallecompras", component:DetalleOrdenCompraComponent, canActivate:[AuthGuard], title: "ERP - Ordenes de compras" },
-  { path: "compras", component:OrdenCompraComponent,canActivate:[AuthGuard],title: "ERP - Compras" },
+  { path: "compras", component:OrdenCompraComponent, canActivate:[AuthGuard],title: "ERP - Compras" },
+  { path: "traspasos", component:TraspasosComponent, canActivate:[AuthGuard], title: "ERP - Traspasos" },
+  { path: "movimientos", component:MovimientosComponent, canActivate:[AuthGuard], title: "ERP - Movimientos" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

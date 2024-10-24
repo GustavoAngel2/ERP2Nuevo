@@ -1,10 +1,9 @@
-<div class="form-place">
-    <div class="form-container">
-        <div class="form-title">
+<div class="form-container">
+    <div class="form-title">
             <h1 [hidden]="isModifying">Registrar Articulo</h1>
             <h1 [hidden]="!isModifying">Editando articulo con Id: {{this.Id}}</h1>
-        </div>
-        <div class="form-content">
+    </div>
+    <div class="form-content">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
                 <input class="form-control" placeholder="Codigo del articulo" [(ngModel)]="codigo">
@@ -13,18 +12,18 @@
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-diagram-3-fill"></i></span>
-                <input class="form-control" placeholder="Correo electronico del proveedor" [(ngModel)]="familia">
+                <input class="form-control" placeholder="Familia" [(ngModel)]="familia">
                 <span class="input-group-text"><i class="bi bi-rulers"></i></span>
-                <select class="form-select" [(ngModel)]="um">
+                <select class="form-control" [(ngModel)]="um">
                     <option value="0">Seleccione una unidad</option>
                     <option *ngFor="let um of ComboUm" value="{{um.Id}}">{{um.Nombre}}</option>
                 </select>
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-cash"></i></span>
-                <input class="form-control" placeholder="Id de banco del proveedor" [(ngModel)]="costo">
+                <input class="form-control" placeholder="Costo" [(ngModel)]="costo">
                 <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
-                <input class="form-control" placeholder="CLABE del proveedor" [(ngModel)]="precio">
+                <input class="form-control" placeholder="Precio" [(ngModel)]="precio">
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-percent"></i></span>
@@ -32,15 +31,14 @@
                 <span class="input-group-text"><i class="bi bi-percent"></i></span>
                 <input class="form-control" placeholder="IEPS" [(ngModel)]="ieps">
             </div>
-        </div>
-        <div class="form-end">
-            <button [hidden]="!isModifying" (click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
-            <button [hidden]="!isModifying" (click)="limpiar()"   class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
-            <button [hidden]=" isModifying" (click)="insertar()"  class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
-
-        </div>
+    </div>
+    <div class="form-end">
+        <button [hidden]="!isModifying" (click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+        <button [hidden]="!isModifying" (click)="limpiar()"   class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+        <button [hidden]=" isModifying" (click)="insertar()"  class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
     </div>
 </div>
+
 <br>
 <div class="actionbar" style="width: 70%;">
     <div class="input-group flex-nowrap">

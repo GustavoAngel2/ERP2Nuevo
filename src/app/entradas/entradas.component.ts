@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EntradasService } from '../data.service';
-import { entradasModel,entradasUpdateModel } from '../data-models/entradas.model';
+import { entradasModel } from '../data-models/entradas.model';
 
 @Component({
   selector: 'app-entradas',

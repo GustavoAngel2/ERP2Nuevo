@@ -10,11 +10,11 @@ import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-traspasos',
-  templateUrl: './traspasos.component.html',
-  styleUrl: './traspasos.component.css'
+  selector: 'app-movimientos',
+  templateUrl: './movimientos.component.html',
+  styleUrl: './movimientos.component.css'
 })
-export class TraspasosComponent implements OnInit, AfterViewInit{
+export class MovimientosComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = [
     'Id', 
     'AlmacenOrigen', 
