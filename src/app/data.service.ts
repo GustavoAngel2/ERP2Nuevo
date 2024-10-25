@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultApiResponse } from './data-models/response.model';
@@ -15,6 +15,9 @@ import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.mod
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
+import { getTraspasosModel, insertTraspasoModel } from './data-models/traspasos.model';
+import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
+import { insertDetalleTraspasoModel } from './data-models/detalletraspaso.model';
 
 
 
@@ -528,5 +531,65 @@ export class UMservice {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/UnidadMedida/Get`,{headers});
+  }
+}
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class TraspasosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getTraspasos(search:getTraspasosModel): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(search)
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Traspasos/Get?pAlmacenOrigen=${search.pAlmacenOrigen}&pAlmacenDestino=${search.pAlmacenDestino}&pFechaInicio=${encodeURIComponent(search.pFechaInicio.replace(/-/g, '/'))}&pFechaFinal=${encodeURIComponent(search.pFechaFinal.replace(/-/g, '/'))}`,{headers});
+  }
+  insertTraspaso(ArticuloData: insertTraspasoModel): Observable<defaultApiResponse> {
+    const body = {
+      idAlmacenOrigen: ArticuloData.idAlmacenOrigen,
+      idAlmacenDestino: ArticuloData.idAlmacenDestino,
+      usuarioEnvia: ArticuloData.usuarioEnvia,
+      usuarioActualiza: ArticuloData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Traspasos/Insert`, body);
+  }
+  deleteTraspaso(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/Traspasos/Delete`, { Id });
+  }
+}
+  /* ---------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class DetalleTraspasosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getDetalleTraspaso(search:number): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(search)
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleTraspaso/Get?idTraspaso=${search}`,{headers});
+  }
+  insertDetalleTraspaso(ArticuloData: insertDetalleTraspasoModel): Observable<defaultApiResponse> {
+    const body = {
+      insumo:ArticuloData.insumo,
+      idTraspaso:ArticuloData.idTraspaso,
+      cantidadEnviada:ArticuloData.cantidadEnviada,
+      usuarioActualiza:ArticuloData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleTraspaso/Insert`, body);
+  }
+  deleteDetalleTraspaso(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/DetalleTraspaso/Delete`, { Id });
   }
 }

@@ -138,8 +138,8 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 }
 
 .form-container{
-    width: 720px;
-    margin-left: calc(50% - 360px);
+    width: 60%;
+    margin-left: calc(50% - 30%);
     height: max-content;
     background-color: whitesmoke;
     display:flex;
