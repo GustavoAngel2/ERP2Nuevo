@@ -17,6 +17,8 @@ import { insertDetRecetaModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
 import { MovModel,insertMovModel,updateMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
+import { getTraspasosModel, insertTraspasoModel } from './data-models/traspasos.model';
+import { insertDetalleTraspasoModel } from './data-models/detalletraspaso.model';
 
 
 
@@ -603,5 +605,65 @@ export class tipoMovimiento {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/TipoMovimiento/Get`,{headers});
+  }
+}
+
+@Injectable({
+  providedIn: "root",
+})
+export class TraspasosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getTraspasos(search:getTraspasosModel): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(search)
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Traspasos/Get?pAlmacenOrigen=${search.pAlmacenOrigen}&pAlmacenDestino=${search.pAlmacenDestino}&pFechaInicio=${encodeURIComponent(search.pFechaInicio.replace(/-/g, '/'))}&pFechaFinal=${encodeURIComponent(search.pFechaFinal.replace(/-/g, '/'))}`,{headers});
+  }
+  insertTraspaso(ArticuloData: insertTraspasoModel): Observable<defaultApiResponse> {
+    const body = {
+      idAlmacenOrigen: ArticuloData.idAlmacenOrigen,
+      idAlmacenDestino: ArticuloData.idAlmacenDestino,
+      usuarioEnvia: ArticuloData.usuarioEnvia,
+      usuarioActualiza: ArticuloData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Traspasos/Insert`, body);
+  }
+  deleteTraspaso(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/Traspasos/Delete`, { Id });
+  }
+}
+  /* ---------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class DetalleTraspasosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getDetalleTraspaso(search:number): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(search)
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleTraspaso/Get?idTraspaso=${search}`,{headers});
+  }
+  insertDetalleTraspaso(ArticuloData: insertDetalleTraspasoModel): Observable<defaultApiResponse> {
+    const body = {
+      insumo:ArticuloData.insumo,
+      idTraspaso:ArticuloData.idTraspaso,
+      cantidadEnviada:ArticuloData.cantidadEnviada,
+      usuarioActualiza:ArticuloData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleTraspaso/Insert`, body);
+  }
+  deleteDetalleTraspaso(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/DetalleTraspaso/Delete`, { Id });
   }
 }
