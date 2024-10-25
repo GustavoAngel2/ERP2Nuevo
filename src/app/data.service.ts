@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultApiResponse } from './data-models/response.model';
@@ -15,9 +15,8 @@ import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.mod
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
-import { getTraspasosModel, insertTraspasoModel } from './data-models/traspasos.model';
-import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
-import { insertDetalleTraspasoModel } from './data-models/detalletraspaso.model';
+import { MovModel,insertMovModel,updateMovModel } from './data-models/Movimiento.model';
+import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 
 
 
@@ -341,7 +340,7 @@ export class OrdenComprasService {
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Update`, body);
   }
 }
-
+/* --------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
@@ -382,6 +381,7 @@ export class DetalleOrdenComprasService {
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Update`, body);
   }
 }
+/* --------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
@@ -462,8 +462,6 @@ export class RecetasService {
       return this.http.put<defaultApiResponse>(`${this.apiUrl}/recetas/Update`, body);
       }
   }
-
-
 /* ----------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
@@ -533,63 +531,77 @@ export class UMservice {
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/UnidadMedida/Get`,{headers});
   }
 }
-/* ---------------------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
-export class TraspasosService {
+export class MovimientosService {
   //Se especifica la url base de la API
   private apiUrl = "http://localhost:5020/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
-  getTraspasos(search:getTraspasosModel): Observable<defaultApiResponse> {
+  getMovimiento(): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    console.log(search)
-    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Traspasos/Get?pAlmacenOrigen=${search.pAlmacenOrigen}&pAlmacenDestino=${search.pAlmacenDestino}&pFechaInicio=${encodeURIComponent(search.pFechaInicio.replace(/-/g, '/'))}&pFechaFinal=${encodeURIComponent(search.pFechaFinal.replace(/-/g, '/'))}`,{headers});
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Movimientos/Get`,{headers});
   }
-  insertTraspaso(ArticuloData: insertTraspasoModel): Observable<defaultApiResponse> {
+
+
+InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
+  const body = {
+   idAlmacen: MovData.idAlmacen,
+   tipoMovimiento: MovData.tipoMovimiento,
+   usuarioRegistra: MovData.usuarioRegistra,
+   usuarioAutoriza: MovData.usuarioAutoriza,
+   usuarioActualiza:MovData.usuarioActualiza
+  };
+  return this.http.post<defaultApiResponse>(`${this.apiUrl}/Movimientos/Insert`, body);
+}
+}
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class DetMovimientosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getDetalleMov(Id:number): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleMovimientos/Get?idMovimiento=${Id}`,{headers});
+  }
+
+  InsertDetMovimiento(DetMovData: DetMovInsertModel): Observable<defaultApiResponse> {
     const body = {
-      idAlmacenOrigen: ArticuloData.idAlmacenOrigen,
-      idAlmacenDestino: ArticuloData.idAlmacenDestino,
-      usuarioEnvia: ArticuloData.usuarioEnvia,
-      usuarioActualiza: ArticuloData.usuarioActualiza
+     idMovimiento: DetMovData.IdMovimiento,
+     insumo: DetMovData.insumo,
+     cantidad: DetMovData.cantidad,
+     usuarioActualiza:DetMovData.usuarioActualiza
     };
-    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Traspasos/Insert`, body);
-  }
-  deleteTraspaso(Id: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/Traspasos/Delete`, { Id });
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleMovimientos/Insert`, body);
   }
 }
-  /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
-export class DetalleTraspasosService {
+export class tipoMovimiento {
   //Se especifica la url base de la API
   private apiUrl = "http://localhost:5020/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
-  getDetalleTraspaso(search:number): Observable<defaultApiResponse> {
+  getTipoMov(): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    console.log(search)
-    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleTraspaso/Get?idTraspaso=${search}`,{headers});
-  }
-  insertDetalleTraspaso(ArticuloData: insertDetalleTraspasoModel): Observable<defaultApiResponse> {
-    const body = {
-      insumo:ArticuloData.insumo,
-      idTraspaso:ArticuloData.idTraspaso,
-      cantidadEnviada:ArticuloData.cantidadEnviada,
-      usuarioActualiza:ArticuloData.usuarioActualiza
-    };
-    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleTraspaso/Insert`, body);
-  }
-  deleteDetalleTraspaso(Id: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/DetalleTraspaso/Delete`, { Id });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/TipoMovimiento/Get`,{headers});
   }
 }
