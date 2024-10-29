@@ -4,3 +4,28 @@
     border-radius: 6px;
     background-color: #00000055;
 }
+
+.button-text{
+
+    padding-top: 60px;
+}
+
+.section-custom button{
+    padding-left: 15px!important;
+  }
+  
+  button .icon mat-icon{
+    width: 64px;
+    height: 64px;
+    font-size: 64px;
+  }
+
+  .button-icon mat-icon:hover{
+
+    font-size: 68px;
+  }
+  
+  .text{
+    position: relative;
+    top: 24px;
+  }

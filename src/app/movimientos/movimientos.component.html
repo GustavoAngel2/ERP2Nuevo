@@ -6,12 +6,12 @@
     </div>
     <div class="form-content">
         <div class="input-group flex-nowrap">
-            <span class="input-group-text"><i class="bi bi-rulers"></i></span>
+            <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
             <select class="form-control" [(ngModel)]="idAlmacen">
                 <option value="0">Seleccione un Almacen</option>
                 <option *ngFor="let sc of comboSuc" value="{{sc.Id}}">{{sc.Nombre}}</option>
             </select>
-            <span class="input-group-text"><i class="bi bi-rulers"></i></span>
+            <span class="input-group-text"><i class="bi bi-shuffle"></i></span>
             <select class="form-control" [(ngModel)]="tipoMovimiento">
                 <option value="0">Seleccione un Tipo de Movimiento</option>
                 <option *ngFor="let tm of comboTM" value="{{tm.Id}}">{{tm.Descripcion}}</option>
