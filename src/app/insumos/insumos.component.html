@@ -31,7 +31,6 @@
             <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
             <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
             <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
-
         </div>
     </div>
 </div>
@@ -48,16 +47,9 @@
 <div class="table-container">
     <div class="table-hotbar">
         <button><i class="bi bi-filetype-xlsx"></i></button>
+        <button><i class="bi bi-filetype-pdf"></i></button>
     </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-
-    <div class="actionbar">
-        <mat-form-field class="search-bar">
-            <mat-label>Filtrar</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
-        </mat-form-field>
-    </div>
-
     <table class="table" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>

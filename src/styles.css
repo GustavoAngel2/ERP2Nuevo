@@ -183,6 +183,9 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     margin-top: 3.5px;
     margin-left: 6px;
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
 }
 
 .table-container .table-hotbar button{
