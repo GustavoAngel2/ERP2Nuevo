@@ -1,1 +1,77 @@
-<p>traspasos works!</p>
+<h1 class="title">Modulo de traspasos</h1>
+
+<div class="form-container">
+    <div class="form-title">
+        <h1 [hidden]="isModifying">Registrar traspaso</h1>
+        <h1 [hidden]="!isModifying">Editando persona con id: {{this.id}}</h1>
+    </div>
+    <div class="form-content">
+        <div class="input-group flex-nowrap">
+            <input type="text" class="form-control" [(ngModel)]="nombre" placeholder="Almacen de origen" aria-label="Nombre">
+            <input type="text" class="form-control" [(ngModel)]="ApPaterno" placeholder="Almacen de destino" aria-label="Apellido paterno" required>
+            <input type="text" class="form-control" [(ngModel)]="ApMaterno" placeholder="Usuario Envía" aria-label="Apellido materno" required>
+        </div>
+    </div>
+    <div class="form-end">
+        <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+        <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+        <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+    </div>
+</div>
+
+<div class="actionbar" style="width: 70%;">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </div>
+</div>
+
+<br>
+
+<div class="table-container">
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <table class="table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="AlmacenOrigen">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Almacen de origen </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="AlmacenDestino">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Almacen de destino </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.ApPaterno}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UsuarioEnvia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario origen </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.ApMaterno}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UsuarioRecibe">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario que recive </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.ApMaterno}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UsuarioActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Direccion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaReg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaReg}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaAct">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Última Actualización </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaAct}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+            <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
+            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
+        </td>
+        </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+    
+</div>

@@ -14,6 +14,9 @@ import { detallecomprasInsertModel, detallecoprasUpdateModel } from './data-mode
 import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.model';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
+import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
+import { MovModel,insertMovModel,updateMovModel } from './data-models/Movimiento.model';
+import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 
 
 
@@ -272,7 +275,8 @@ export class InsumosService {
       insumo:ProveedorData.insumo,
       descripcionInsumo: ProveedorData.descripcionInsumo,
       unidadMedida: ProveedorData.unidadMedida,
-      usuarioActualiza: ProveedorData.usuarioActualiza
+      usuarioActualiza: ProveedorData.usuarioActualiza,
+      insumosUP: ProveedorData.insumosUP
     };
     return this.http.post<defaultApiResponse>(`${this.apiUrl}/Insumos/Insert`, body);
   }
@@ -286,7 +290,8 @@ export class InsumosService {
       insumo:ProveedorData.insumo,
       descripcionInsumo: ProveedorData.descripcionInsumo,
       unidadMedida: ProveedorData.unidadMedida,
-      usuarioActualiza: ProveedorData.usuarioActualiza
+      usuarioActualiza: ProveedorData.usuarioActualiza,
+      insumosUP: ProveedorData.insumosUP
     };
     
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Insumos/Update`, body);
@@ -335,7 +340,7 @@ export class OrdenComprasService {
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Update`, body);
   }
 }
-
+/* --------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
@@ -376,6 +381,7 @@ export class DetalleOrdenComprasService {
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Update`, body);
   }
 }
+/* --------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
 })
@@ -444,15 +450,17 @@ export class RecetasService {
     deleteDetRecetas(Id: number): Observable<any> {
       return this.http.put(`${this.apiUrl}/DetalleReceta/Delete`, { Id });
     }
+
+
   updateDetRecetas(RecetasData: updateRecetasModel): Observable<defaultApiResponse> {
-  const body = {
-  id: RecetasData.id,
-  nombre: RecetasData.nombre,
-  usuarioActualiza: RecetasData.usuarioActualiza
-  };
-  console.log("Enviando solicitud con el siguiente cuerpo:", body);
-  return this.http.put<defaultApiResponse>(`${this.apiUrl}/recetas/Update`, body);
-  }
+      const body = {
+      id: RecetasData.id,
+      nombre: RecetasData.nombre,
+      usuarioActualiza: RecetasData.usuarioActualiza
+      };
+      console.log("Enviando solicitud con el siguiente cuerpo:", body);
+      return this.http.put<defaultApiResponse>(`${this.apiUrl}/recetas/Update`, body);
+      }
   }
 /* ----------------------------------------------------------------------------------------------------------------- */
 @Injectable({
@@ -470,5 +478,130 @@ export class RecetasService {
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Articulos/Get`,{headers}, );
   }
+  InsertArticulo(ArticuloData: insertArticuloModel): Observable<defaultApiResponse> {
+    const body = {
+      codigo: ArticuloData.Codigo,
+      descripcion:ArticuloData.Descripcion,
+      idFamilia: ArticuloData.Familia,
+      idUm: ArticuloData.UM,
+      ultimoCosto:ArticuloData.UltimoCosto,
+      precioVenta:ArticuloData.PrecioVenta,
+      iva:ArticuloData.Iva,
+      ieps: ArticuloData.Ieps,
+      idUsuario: ArticuloData.Usuario
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/Articulos/Insert`, body);
+  }
+
+  updateArticulo(ArticuloData: updateArticuloModel): Observable<defaultApiResponse> {
+    const body = {
+      id: ArticuloData.Id,
+      codigo: ArticuloData.Codigo,
+      descripcion:ArticuloData.Descripcion,
+      idFamilia: ArticuloData.Familia,
+      idUm: ArticuloData.UM,
+      ultimoCosto:ArticuloData.UltimoCosto,
+      precioVenta:ArticuloData.PrecioVenta,
+      iva:ArticuloData.Iva,
+      ieps: ArticuloData.Ieps,
+      idUsuario: ArticuloData.Usuario
+    };
+    console.log("Enviando solicitud con el siguiente cuerpo:", body);
+    return this.http.put<defaultApiResponse>(`${this.apiUrl}/Articulos/Update`, body);
+    }
+
+    deleteArticulo(Id: number): Observable<any> {
+      return this.http.put(`${this.apiUrl}/Articulos/Delete`, { Id });
+    }
+}   
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class UMservice {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getUM(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/UnidadMedida/Get`,{headers});
+  }
 }
-    
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class MovimientosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getMovimiento(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/Movimientos/Get`,{headers});
+  }
+
+
+InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
+  const body = {
+   idAlmacen: MovData.idAlmacen,
+   tipoMovimiento: MovData.tipoMovimiento,
+   usuarioRegistra: MovData.usuarioRegistra,
+   usuarioAutoriza: MovData.usuarioAutoriza,
+   usuarioActualiza:MovData.usuarioActualiza
+  };
+  return this.http.post<defaultApiResponse>(`${this.apiUrl}/Movimientos/Insert`, body);
+}
+}
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class DetMovimientosService {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getDetalleMov(Id:number): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleMovimientos/Get?idMovimiento=${Id}`,{headers});
+  }
+
+  InsertDetMovimiento(DetMovData: DetMovInsertModel): Observable<defaultApiResponse> {
+    const body = {
+     idMovimiento: DetMovData.IdMovimiento,
+     insumo: DetMovData.insumo,
+     cantidad: DetMovData.cantidad,
+     usuarioActualiza:DetMovData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/DetalleMovimientos/Insert`, body);
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class tipoMovimiento {
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getTipoMov(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/TipoMovimiento/Get`,{headers});
+  }
+}

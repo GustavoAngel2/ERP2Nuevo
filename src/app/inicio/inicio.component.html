@@ -1,14 +1,31 @@
 <div class="content">
-  <div class="card">
-    <div class="card-header">
-      <mat-icon>account_circle</mat-icon>
-      <span class="section-title">Administración</span>
-    </div>
-    <div class="card-content">
-      <button class="animated-btn" routerLink="../personas">Personas</button>
-      <button class="animated-btn" routerLink="../usuarios">Usuarios Admitidos</button>
-    </div>
-  </div>
+  <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>account_circle</mat-icon> <span class="section-title">Administración</span> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="button-strip">
+          <button routerLink="../personas" class="icon-button"><i class="bi bi-person"></i><br><span>Personas</span></button>
+          <button routerLink="../movimientos" class="icon-button"><i class="bi bi-arrow-left-right"></i><br><span>Movimientos</span></button>
+          <button routerLink="../usuarios" class="icon-button"><i class="bi bi-people"></i><br><span>Usuarios</span></button>
+        
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="button-strip">
+          <button routerLink="../proveedores" class="icon-button"><i class="bi bi-briefcase"></i><br><span>Proveedores</span></button>
+          <button routerLink="../recetas"class="icon-button"><i class="bi bi-journal-text"></i><br><span>Recetas</span></button>
+          <button routerLink="../articulos"class="icon-button"><i class="bi bi-box"></i><br><span>Articulos</span></button>
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
 
   <div class="card">
     <div class="card-header">

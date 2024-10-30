@@ -44,6 +44,7 @@ main {
 .articulos th {
     background-color: #ffffff; /* Fondo blanco para el encabezado de la tabla */
     color: #000000; /* Texto negro */
+    vertical-align: center !important;
     font-weight: bold;
 }
 

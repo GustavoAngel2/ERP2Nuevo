@@ -3,8 +3,8 @@
 <div class="form-place">
     <div class="form-container">
         <div class="form-title">
-            <h1 [hidden]="isModifying">Registrar proveedor</h1>
-            <h1 [hidden]="!isModifying">Editando proveedor con id: {{this.id}}</h1>
+            <h1 [hidden]="isModifying">Registrar insumo</h1>
+            <h1 [hidden]="!isModifying">Modificar insumo con el id: {{this.id}}</h1>
         </div>
         <div class="form-content">
             <div class="input-group flex-nowrap">
@@ -14,10 +14,17 @@
                 <input class="form-control" placeholder="Descripción" [(ngModel)]="descripcionInsumo">
             </div>
             <div class="input-group flex-nowrap">
-                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
                 <input class="form-control" placeholder="Costo" [(ngModel)]="costo">
-                <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                <span class="input-group-text"><i class="bi bi-rulers"></i></span>
                 <input class="form-control" placeholder="Unidad de medida" [(ngModel)]="unidadMedida">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-truck"></i></span>
+                <select class="form-select" [(ngModel)]="insumoUP">
+                    <option value="0">Seleccione un Insumo</option>
+                    <option *ngFor="let insumo of insumosPadresCombo" value="{{insumo.Descripcion}}">{{insumo.Descripcion}}</option>
+                </select>
             </div>
         </div>
         <div class="form-end">
@@ -67,6 +74,10 @@
         <ng-container matColumnDef="Costo">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Costo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="IUF">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Insumo padre </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.InsumosUP}} </td>
         </ng-container>
         <ng-container matColumnDef="FechaRegistro">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de alta </th>
