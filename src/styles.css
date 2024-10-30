@@ -108,15 +108,23 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     background-color: #000000a0; 
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 20px 20px 20px 20px;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease; /* Suaviza la transición */
+    border-radius: 25px;
+    width: 100px; /* Ancho fijo */
+    height: 100px; /* Alto fijo para hacerlo cuadrado */
+    display: flex; /* Usar flex para centrar el contenido */
+    flex-direction: column; /* Coloca icono y texto en columna */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
 }
+
 
 .button-strip button:hover{
     background-color: var(--mat-toolbar-container-background-color);
-    color: white;
+    color: rgb(255, 255, 255);
     border: none;
     padding: 10px 20px;
     font-size: 19px;
