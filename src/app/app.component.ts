@@ -23,12 +23,15 @@ export class AppComponent implements OnInit,OnDestroy{
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();
         this.currentUrl = this.router.url;
-        console.log('Ruta actual:', this.currentUrl);
       }
     });
     this.userSubscription = this.authService.currentUser.subscribe(user => {
       this.actualUser = user;
     });
+  }
+
+  getTitle():string{
+    return "ERP - " + this.currentUrl.replace(/^\//, '').charAt(0).toUpperCase() + this.currentUrl.slice(2);
   }
 
   actualUser: currentUser = { Id: "", NombreUsuario: "",NombrePersona:"", IdRol:""};
