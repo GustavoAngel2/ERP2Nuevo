@@ -21,9 +21,9 @@ export class AppComponent implements OnInit,OnDestroy{
   };
 
 
-  constructor(private router: Router, 
-    private route: ActivatedRoute, 
-    private erp:ERP, 
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private erp:ERP,
     public authService:AuthService,
     private usuariosService: UsusariosService) {}
   value = 'clear me'
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit,OnDestroy{
     this.profile = this.authService.getCurrentUser();
 
     if (this.profile?.Id) {
-      this.cargarImagenUsuario(+this.profile.Id); // Convierte a número si Id es string
+      this.cargarImagenUsuario(parseInt(this.profile.Id,10)); // Convierte a número si Id es string
     }
   }
 
