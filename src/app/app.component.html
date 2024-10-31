@@ -14,6 +14,7 @@
         <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
         <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
         <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
+
       </div>
 
       <mat-accordion>
@@ -71,6 +72,12 @@
         <span>Hola {{actualUser.NombrePersona}}!</span>
         <a routerLink="inicio"><mat-icon>home</mat-icon></a>
         <a (click)="this.authService.logout()" routerLink="login"><mat-icon>exit_to_app</mat-icon></a>
+        <div *ngIf="imagenUrl">
+          <img [src]="imagenUrl" class="pfp-toolbar" alt="Imagen del usuario" />
+        </div>
+        <div *ngIf="!imagenUrl">
+          <img src="./assets/pfp.jpg" class="pfp-toolbar" alt="Imagen del usuario" />
+        </div>
       </div>
   </mat-toolbar>
 
