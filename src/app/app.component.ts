@@ -1,6 +1,6 @@
-import { Component,OnInit,OnDestroy } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
-import { AuthService,currentUser } from './auth.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService, currentUser } from './auth.service';
 import { Subscription } from 'rxjs';
 import { UsusariosService } from './data.service';
 import { ERP } from './erp-settings';
@@ -10,52 +10,40 @@ import { ERP } from './erp-settings';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit,OnDestroy{
+export class AppComponent implements OnInit, OnDestroy {
   currentUrl: string = '';
   imagenUrl: string | ArrayBuffer | null = null;
-  profile: currentUser = {
-    Id: "",
-    IdRol: "",
-    NombreUsuario: "",
-    NombrePersona: ""
-  };
+  actualUser: currentUser = { Id: "", NombreUsuario: "", NombrePersona: "", IdRol: "" };
+  userSubscription!: Subscription;
 
-
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private erp:ERP,
-    public authService:AuthService,
-    private usuariosService: UsusariosService) {}
-  value = 'clear me'
-
+    private erp: ERP,
+    public authService: AuthService,
+    private usuariosService: UsusariosService
+  ) {}
 
   ngOnInit() {
     this.erp.loadSettings();
     this.currentUrl = this.router.url;
+
+    // Suscripción a cambios en la URL para recargar configuración
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();
         this.currentUrl = this.router.url;
       }
     });
+
+    // Suscripción a cambios de usuario para actualizar imagen y perfil
     this.userSubscription = this.authService.currentUser.subscribe(user => {
       this.actualUser = user;
+      if (this.actualUser?.Id) {
+        this.cargarImagenUsuario(parseInt(this.actualUser.Id, 10));
+      }
     });
-
-
-    this.profile = this.authService.getCurrentUser();
-
-    if (this.profile?.Id) {
-      this.cargarImagenUsuario(parseInt(this.profile.Id,10)); // Convierte a número si Id es string
-    }
   }
-
-  getTitle():string{
-    return "ERP - " + this.currentUrl.replace(/^\//, '').charAt(0).toUpperCase() + this.currentUrl.slice(2);
-  }
-
-  actualUser: currentUser = { Id: "", NombreUsuario: "",NombrePersona:"", IdRol:""};
-  userSubscription!: Subscription;
 
   ngOnDestroy() {
     if (this.userSubscription) {
@@ -76,6 +64,9 @@ export class AppComponent implements OnInit,OnDestroy{
     );
   }
 
+  getTitle(): string {
+    return "ERP - " + this.currentUrl.replace(/^\//, '').charAt(0).toUpperCase() + this.currentUrl.slice(2);
+  }
 
   logout() {
     this.authService.logout();
