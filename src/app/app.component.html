@@ -8,7 +8,7 @@
           <img [src]="imagenUrl" class="pfp" alt="Imagen del usuario" />
         </div>
         <div *ngIf="!imagenUrl">
-          Imagen no encontrada.
+          <img src="./assets/pfp.jpg" class="pfp" alt="Imagen del usuario" />
         </div>
         <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
         <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>

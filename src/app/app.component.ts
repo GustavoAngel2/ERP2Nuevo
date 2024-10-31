@@ -36,6 +36,7 @@ export class AppComponent implements OnInit,OnDestroy{
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();
         this.currentUrl = this.router.url;
+
       }
     });
     this.userSubscription = this.authService.currentUser.subscribe(user => {
@@ -46,7 +47,8 @@ export class AppComponent implements OnInit,OnDestroy{
     this.profile = this.authService.getCurrentUser();
 
     if (this.profile?.Id) {
-      this.cargarImagenUsuario(parseInt(this.profile.Id,10)); // Convierte a número si Id es string
+       // Convierte a número si Id es string
+       this.cargarImagenUsuario(parseInt(this.profile.Id,10));
     }
   }
 

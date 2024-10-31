@@ -13,10 +13,9 @@ import { insertCompraModel, updateCompraModel } from './data-models/orden-compra
 import { insertInsumosModel, updateInsumosModel } from './data-models/insumos.model';
 import { detallecomprasInsertModel, detallecoprasUpdateModel } from './data-models/detalleorden.model';
 import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.model';
-import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
-import { MovModel,insertMovModel,updateMovModel } from './data-models/Movimiento.model';
+import { insertMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.model';
 

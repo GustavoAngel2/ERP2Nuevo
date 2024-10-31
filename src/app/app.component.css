@@ -12,15 +12,12 @@
 
 
 .pfp {
-    max-width: 150px;  
-    max-height: 150px;
-    width: auto;    
-    height: auto;    
-    object-fit: contain; 
-    border-radius: 50%; 
-    margin: 0 auto;      
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
   }
-  
+
 
 .actions a{
     cursor: pointer;
