@@ -8,6 +8,7 @@ export interface MovModel {
     UsuarioAutoriza: string;
     UsuarioActualiza: string;
     FechaActualiza: Date;
+    Estatus: string;
   }
 
   export interface insertMovModel{

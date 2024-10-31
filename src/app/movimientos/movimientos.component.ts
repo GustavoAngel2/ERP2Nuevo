@@ -242,6 +242,26 @@ insertar(): void {
     }
   });
 }
+/* -------------------------------------------------------------------------------------------------------------------------- */
+exportarMovimiento() {
+  this.movimientoService.ExportarMovimiento().subscribe(
+      (response: Blob) => {
+          const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          console.log("descargando");
+          a.download = 'Movimientos.xlsx'; // Nombre del archivo a descargar
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+      },
+      error => {
+          console.error('Error al exportar movimientos:', error);
+      }
+  );
+}
+
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 insertarDetalleMov(){

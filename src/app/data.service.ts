@@ -134,7 +134,14 @@ export class UsusariosService {
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Usuarios/Get`,{headers});
   }
-
+  obtenerImagenUsuario(id: number): Observable<Blob> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Endpoint de la API para obtener la imagen del usuario
+    return this.http.get(`${this.apiUrl}/Imagen/VerImagen/${id}`, { headers, responseType: 'blob' });
+  }
   // insertarPersona(PersonaData: {
   //   nombre: string;
   //   ApPaterno: string;
@@ -548,6 +555,15 @@ export class MovimientosService {
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Movimientos/Get`,{headers});
   }
 
+  ExportarMovimiento(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/Movimientos/ExportarMovimientosAExcel`, { headers, responseType: 'blob' });
+}
+
+
 
 InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
   const body = {
@@ -605,3 +621,4 @@ export class tipoMovimiento {
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/TipoMovimiento/Get`,{headers});
   }
 }
+/* ----------------------------------------------------------------------------------------------------------------------------------- */
