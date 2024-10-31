@@ -3,7 +3,8 @@
   <mat-drawer #drawer [mode]="'push'">
     <div class="side-list">
       <div class="card">
-        <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
+        <!-- <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px"> -->
+        <img *ngIf="imagenUrl" [src]="imagenUrl" class="pfp" alt="Perfil de usuario">
         <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
         <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
         <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>

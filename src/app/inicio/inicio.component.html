@@ -37,4 +37,10 @@
       </mat-expansion-panel>
   </mat-accordion>
 </div>
+<div *ngIf="imagenUrl">
+  <img [src]="imagenUrl" alt="Imagen del usuario" class="user-image"/>
+</div>
+<div *ngIf="!imagenUrl">
+  Imagen no encontrada.
+</div>
 

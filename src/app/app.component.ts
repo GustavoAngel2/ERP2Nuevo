@@ -2,6 +2,7 @@ import { Component,OnInit,OnDestroy } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService,currentUser } from './auth.service';
 import { Subscription } from 'rxjs';
+import { UsusariosService } from './data.service';
 import { ERP } from './erp-settings';
 
 @Component({
@@ -11,8 +12,20 @@ import { ERP } from './erp-settings';
 })
 export class AppComponent implements OnInit,OnDestroy{
   currentUrl: string = '';
+  imagenUrl: string | ArrayBuffer | null = null;
+  profile: currentUser = {
+    Id: "",
+    IdRol: "",
+    NombreUsuario: "",
+    NombrePersona: ""
+  };
 
-  constructor(private router: Router, private route: ActivatedRoute, private erp:ERP, public authService:AuthService) {}
+
+  constructor(private router: Router, 
+    private route: ActivatedRoute, 
+    private erp:ERP, 
+    public authService:AuthService,
+    private usuariosService: UsusariosService) {}
   value = 'clear me'
 
 
@@ -28,6 +41,13 @@ export class AppComponent implements OnInit,OnDestroy{
     this.userSubscription = this.authService.currentUser.subscribe(user => {
       this.actualUser = user;
     });
+
+
+    this.profile = this.authService.getCurrentUser();
+
+    if (this.profile?.Id) {
+      this.cargarImagenUsuario(+this.profile.Id); // Convierte a número si Id es string
+    }
   }
 
   getTitle():string{
@@ -42,6 +62,20 @@ export class AppComponent implements OnInit,OnDestroy{
       this.userSubscription.unsubscribe();
     }
   }
+
+  cargarImagenUsuario(id: number): void {
+    this.usuariosService.obtenerImagenUsuario(id).subscribe(
+      (response: Blob) => {
+        const reader = new FileReader();
+        reader.onload = () => this.imagenUrl = reader.result;
+        reader.readAsDataURL(response);
+      },
+      error => {
+        console.error("Error al cargar la imagen del usuario", error);
+      }
+    );
+  }
+
 
   logout() {
     this.authService.logout();
