@@ -1,3 +1,4 @@
+import { insertDetalleTraspasoModel, detalleTraspasoModel } from './data-models/detalletraspaso.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,13 +13,12 @@ import { insertCompraModel, updateCompraModel } from './data-models/orden-compra
 import { insertInsumosModel, updateInsumosModel } from './data-models/insumos.model';
 import { detallecomprasInsertModel, detallecoprasUpdateModel } from './data-models/detalleorden.model';
 import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.model';
-import { UsuariosComponent } from './usuarios/usuarios.component';
 import { insertDetRecetaModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
-import { MovModel,insertMovModel,updateMovModel } from './data-models/Movimiento.model';
+import { insertMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
-import { getTraspasosModel, insertTraspasoModel } from './data-models/traspasos.model';
-import { insertDetalleTraspasoModel } from './data-models/detalletraspaso.model';
+import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.model';
+
 
 
 
@@ -52,7 +52,7 @@ export class PersonasService {
   deletePersonas(Id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
   }
-  
+
   updatePersonas(PersonaData: UpdatePersonasModel): Observable<defaultApiResponse> {
     const body = {
       id: PersonaData.Id,
@@ -62,7 +62,7 @@ export class PersonasService {
       direccion: PersonaData.Direccion,
       usuario: PersonaData.Usuario
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
   }
 }
@@ -116,7 +116,7 @@ export class ProveedoresService {
       clabe: ProveedorData.clabe,
       usuarioActualiza: ProveedorData.usuarioActualiza
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Proveedores/Update`, body);
   }
 }
@@ -136,7 +136,14 @@ export class UsusariosService {
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Usuarios/Get`,{headers});
   }
-
+  obtenerImagenUsuario(id: number): Observable<Blob> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Endpoint de la API para obtener la imagen del usuario
+    return this.http.get(`${this.apiUrl}/Imagen/VerImagen/${id}`, { headers, responseType: 'blob' });
+  }
   // insertarPersona(PersonaData: {
   //   nombre: string;
   //   ApPaterno: string;
@@ -155,18 +162,18 @@ export class UsusariosService {
   //   };
   //   return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
   // }
-  
+
   // deleteUsuario(Id: number): Observable<any> {
   //   return this.http.put(`${this.apiUrl}/Usuarios/Delete`, { Id });
   // }
-  
+
   updateUsuario(UsuarioData: updateUsuarioModel): Observable<defaultApiResponse> {
     const body = {
       id: UsuarioData.id,
       usuario: UsuarioData.usuario,
       contrasena: UsuarioData.contrasena
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Usuarios/Update`, body);
   }
 }
@@ -205,7 +212,7 @@ export class SucursalesService {
       direccion: SucursalData.direccion,
       idUsuario: SucursalData.idUsuario
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Sucursales/Update`, body);
   }
 }
@@ -252,7 +259,7 @@ export class EntradasService {
       clabe: ProveedorData.clabe,
       usuarioActualiza: ProveedorData.usuarioActualiza
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Entradas/Update`, body);
   }
 }
@@ -295,7 +302,7 @@ export class InsumosService {
       usuarioActualiza: ProveedorData.usuarioActualiza,
       insumosUP: ProveedorData.insumosUP
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Insumos/Update`, body);
   }
 }
@@ -338,7 +345,7 @@ export class OrdenComprasService {
       idComprador: OrdenCompraData.idComprador,
       usuarioActualiza: OrdenCompraData.usuarioActualiza
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Update`, body);
   }
 }
@@ -379,7 +386,7 @@ export class DetalleOrdenComprasService {
       estatus: OrdenCompraData.estatus,
       usuarioActualiza: OrdenCompraData.usuarioActualiza
     };
-    
+
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Update`, body);
   }
 }
@@ -431,7 +438,7 @@ export class RecetasService {
   //Se especifica la url base de la API
   private apiUrl = "http://localhost:5020/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
-  
+
   getDetRecetas(Id: number): Observable<defaultApiResponse> {
   const token = this.authService.getToken();
   const headers = new HttpHeaders({
@@ -439,7 +446,7 @@ export class RecetasService {
   });
   return this.http.get<defaultApiResponse>(`${this.apiUrl}/DetalleReceta/Get?idReceta=${Id}`,{headers}, );
   }
-  
+
     insertDetReceta(DetRecetasData: insertDetRecetaModel): Observable<defaultApiResponse> {
       const body = {
         idReceta: DetRecetasData.idReceta,
@@ -472,7 +479,7 @@ export class RecetasService {
   //Se especifica la url base de la API
   private apiUrl = "http://localhost:5020/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
-  
+
   getArticulos(): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
@@ -515,7 +522,7 @@ export class RecetasService {
     deleteArticulo(Id: number): Observable<any> {
       return this.http.put(`${this.apiUrl}/Articulos/Delete`, { Id });
     }
-}   
+}
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
   providedIn: "root",
@@ -549,6 +556,15 @@ export class MovimientosService {
     });
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/Movimientos/Get`,{headers});
   }
+
+  ExportarMovimiento(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/Movimientos/ExportarMovimientosAExcel`, { headers, responseType: 'blob' });
+}
+
 
 
 InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
@@ -607,6 +623,7 @@ export class tipoMovimiento {
     return this.http.get<defaultApiResponse>(`${this.apiUrl}/TipoMovimiento/Get`,{headers});
   }
 }
+/* ----------------------------------------------------------------------------------------------------------------------------------- */
 
 @Injectable({
   providedIn: "root",

@@ -11,6 +11,20 @@
 }
 
 
+.pfp {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+
+.pfp-toolbar{
+  width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+
 .actions a{
     cursor: pointer;
     border: 0;
