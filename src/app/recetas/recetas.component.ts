@@ -11,7 +11,7 @@ import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticulosService, RecetasService } from '../data.service';
 import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models/recetas.model';
-import { insertDetRecetaModel } from '../data-models/detallereceta.model';
+import { insertDetRecetaModel, recetaDetModel, updateDetRecetasModel } from '../data-models/detallereceta.model';
 import { DetalleRecetasService } from '../data.service';
 import { articulosModel } from '../data-models/articulos.model';
 
@@ -33,8 +33,22 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     "UsuarioAct",
     "Acciones"
   ];
+
+  displayedColumns2: string[] = [
+    "Id",
+    "Nombre",
+    "FechaCreacion",
+    "FechaActualiza",
+    "UsuarioRegistra",
+    "UsuarioActualiza",
+    "Acciones"
+  ];
+
   comboArticulos: articulosModel[] = [];
+
   dataSource: MatTableDataSource<recetaModel>;
+  dataSource2: MatTableDataSource<recetaDetModel>;
+  
   Id: number = 0;
   IdReceta: number = 0;
   Insumo:string = '0';
@@ -42,9 +56,11 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   Nombre: string = '';
   FechaCreacion: string = '';
   FechaActualiza: string = '';
+
   isOnStepOne:boolean = true;
   isOnStepTwo:boolean = false;
   isModifying:boolean = false;
+  
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -59,12 +75,14 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<recetaModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.dataSource2 = new MatTableDataSource<recetaDetModel>();
   }
 
 
   ngOnInit() {
     this.loggedUser = this.authService.getCurrentUser();
     this.setCombos();
+    this.getDataRecetas();
   }
 
   ngAfterViewInit() {
@@ -111,7 +129,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
           console.log('Respuesta del servidor:', response); 
           if (response && Array.isArray(response) && response.length > 0) {
             console.log(response)
-            this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
+            this.dataSource2.data = response; // Asigna los datos al atributo 'data' de dataSource
           } else {
             console.log('No contiene datos');
           }
@@ -136,17 +154,9 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       next: (response) => {
         if (response.StatusCode === 200) {
           this.toastr.success(response.response.msg, 'Recetas');
-  
-          const recetaId = response.response.data; 
-          this.IdReceta = recetaId;  
-  
-          this.getData(recetaId);  
-  
-          this.isModifying = true;
-          // Obtener el Id de la receta insertada
-          
-          this.IdReceta = response.response.data;  // Almacena el Id de la receta
-  
+ 
+          this.IdReceta = response.response.data;;  
+
           // Llamar a getData() para cargar los detalles de la receta usando el IdReceta
           this.getData(this.IdReceta);  // Llamar con el IdReceta generado
   
@@ -254,4 +264,28 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   terminar(){
     location.reload()
   }
+
+  getDataRecetas(): void {
+    // Configura el filtro de búsqueda si es necesario
+    this.dataSource.filterPredicate = (data: recetaModel, filter: string) => {
+      return data.Id.toString().toLowerCase().includes(filter) || 
+             data.Nombre.toString().includes(filter);
+    };
+  
+    // Asegúrate de que se esté utilizando el IdReceta correcto al obtener los detalles
+      this.recetasService.getRecetas().subscribe({
+        next: (response) => {
+          console.log('Respuesta del servidor:', response); 
+          if (response && Array.isArray(response) && response.length > 0) {
+            console.log(response)
+            this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
+          } else {
+            console.log('No contiene datos');
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    } 
 }

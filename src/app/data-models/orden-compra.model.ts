@@ -22,6 +22,7 @@ export interface OrdenCompraModel {
     FechaLegada: string;
     IdSucursal: number;
     IdComprador: number;
+    Estatus: number;
     Fecha: Date;
     Total: number;
 }
