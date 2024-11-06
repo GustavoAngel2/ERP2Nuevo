@@ -20,24 +20,24 @@
       <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Tema</span> </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="button-strip">
-      <button class="btn-settings" (click)="this.setBgColor('light')"> Claro </button>
-      <button class="btn-settings" (click)="this.setBgColor('dark')"> Oscuro </button>
-      <button class="btn-settings" (click)="this.setBgColor('color')"> A color </button>
+      <button (click)="this.setBgColor('light')"><i class="bi bi-brightness-high-fill"></i> Claro </button>
+      <button (click)="this.setBgColor('dark')"><i class="bi bi-moon-fill"></i> Oscuro </button>
+      <button (click)="this.setBgColor('color')"><i class="bi bi-circle-fill" style="color: var(--mat-toolbar-container-background-color);"></i> Color </button>
+      
     </div>
   </mat-expansion-panel>
-
       <div class="section-custom" style="align-items: center; display: flex; flex-direction: column;">
         <img class="pfp" src="./assets/pfp.jpg" width="128px" height="128px">
         <p>Estilo de imagen de perfil</p>
-        <button><div class="icon"><mat-icon>account_box</mat-icon></div><div class="text">En cuadro</div></button>
+        
         <!-- <button><mat-icon>account_circle</mat-icon> Circular</button> -->
       </div>
 
 </div>
 
 
-<div class="footer">
+<!-- <div class="footer" style="background-color: white; border-radius: 6px; padding: 16px;">
   <button class="btn btn-outline-success" (click)="save()">Guardar</button>
   <button class="btn btn-outline-danger"routerLink="../inicio">Salir sin guardar</button>
-</div>
+</div> -->
 
