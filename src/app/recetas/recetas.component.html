@@ -51,45 +51,37 @@
 </div>
 <br>
 
-<div class="table-container">
+<div class="table-container" [hidden]="!isOnStepOne">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Id}} </td>
         </ng-container>
-        <ng-container matColumnDef="IdReceta">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio de receta </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.IdReceta}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Insumo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Insumo </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Insumo}} </td>
+        
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de la receta </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Nombre}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Descripcion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Descripcion}} </td>
+        <ng-container matColumnDef="FechaCreacion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de la creación </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaCreacion}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Cantidad">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Cantidad}} </td>
+        <ng-container matColumnDef="FechaActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaActualiza}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="FechaReg">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaReg}} </td>
+        <ng-container matColumnDef="UsuarioRegistra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado por </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.UsuarioRegistra}} </td>
         </ng-container>
-
-        <ng-container matColumnDef="FechaAct">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Actualización </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaAct}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="UsuarioAct">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario Actualiza </th>
-            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.UsuarioAct}} </td>
+        
+        <ng-container matColumnDef="UsuarioActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.UsuarioActualiza}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Acciones">
@@ -99,12 +91,12 @@
                 <mat-icon class="action-btn" >delete</mat-icon>
             </td>
         </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
     </table>
 </div>
 
-<div class="table-container">
+<div class="table-container" [hidden]="!isOnStepTwo">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource2" matSort>
         <ng-container matColumnDef="Id">
