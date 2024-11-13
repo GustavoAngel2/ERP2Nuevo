@@ -1,24 +1,24 @@
 export interface bancos {
     Id: number;
     nombre: string;
-    Descripcion: string;
+    Direccion: string;
     UsuarioActualiza: String;
   }
 
-  export interface insertBancosModel{
+  export interface insertbancosModel{
     nombre: string;
-    Descripcion: string;
-    UsuarioActualiza: String;
-  }
-
-  export interface updateBancosModel{
-    Id:number;
-    nombre: string;
-    Descripcion: string;
+    Direccion: string;
     UsuarioActualiza: number;
   }
 
-   export interface deleteBancosModel{
+  export interface updatebancosModel{
+    Id:number;
+    nombre: string;
+    Direccion: string;
+    UsuarioActualiza: number;
+  }
+
+   export interface deletebancosModel{
      Id: number;
    }
   

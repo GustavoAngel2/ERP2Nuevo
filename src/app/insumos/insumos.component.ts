@@ -41,6 +41,7 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   ngOnInit() {
     this.loggedUser = this.authService.getCurrentUser()
     this.getData()
+    console.log(this.getData)
   }
 
   ngAfterViewInit() {

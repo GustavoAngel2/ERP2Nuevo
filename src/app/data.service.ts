@@ -10,6 +10,7 @@ import { entradasInsertModel } from './data-models/entradas.model';
 import { sucursalInsertModel, sucursalUpdateModel } from './data-models/sucursales.model';
 import { insertCompraModel, updateCompraModel } from './data-models/orden-compra.model';
 import { insertInsumosModel, updateInsumosModel } from './data-models/insumos.model';
+import { updatebancosModel } from './data-models/bancos.model';
 
 
 @Injectable({
@@ -400,41 +401,44 @@ export class PersonasService {
            @Injectable({
             providedIn: "root",
           })
-          export class BancosService {
+          export class bancosService {
+            deletebancos(Id: number): Observable<any> {
+              return this.http.put(`${this.apiUrl}/bancos/Delete`, { Id });
+            }
+            updatebancos(bancosData: updatebancosModel): Observable<defaultApiResponse> {
+             const body = {
+              id: bancosData.Id,
+              nombre: bancosData.nombre,
+              Direccion: bancosData.Direccion,
+              UsuarioActualiza: bancosData.UsuarioActualiza
+            }
+            console.log("Enviando solicitud con el siguiente cuerpo:", body);
+            return this.http.put<defaultApiResponse>(`${this.apiUrl}/bancos/Update`, body);
+          }
             //Se especifica la url base de la API
             private apiUrl = "http://localhost:5020/api";
             constructor(private http: HttpClient,private authService: AuthService) {}
           
-            getPersonas(): Observable<defaultApiResponse> {
+            getBancos(): Observable<defaultApiResponse> {
               const token = this.authService.getToken();
               const headers = new HttpHeaders({
                 'Authorization': `Bearer ${token}`
               });
-              return this.http.get<defaultApiResponse>(`${this.apiUrl}/Articulos/Get`,{headers});
+              return this.http.get<defaultApiResponse>(`${this.apiUrl}/bancos/Get`,{headers});
             }
           
-            InsertarBancos(BancosData: {
+            Insertarbancos(bancosData: {
               nombre: string;
-              Descripcion: string;
-              UsuarioActualiza: 0;
+              Direccion: string;
+              UsuarioActualiza: number;
             }): Observable<defaultApiResponse> {
               const body = {
-                nombre:BancosData.nombre,
-                Descripcion:BancosData.Descripcion,
-                UsuarioActualiza:BancosData.UsuarioActualiza,
+                nombre:bancosData.nombre,
+                Direccion:bancosData.Direccion,
+                UsuarioActualiza:bancosData.UsuarioActualiza,
               };
-              return this.http.post<defaultApiResponse>(`${this.apiUrl}/Personas/Insert`, body);
-            }
-            deletePersonas(Id: number): Observable<any> {
-              return this.http.put(`${this.apiUrl}/Personas/Delete`, { Id });
-            }
-            updatePersonas(PersonaData: UpdatePersonasModel): Observable<defaultApiResponse> {
-              const body = {
-                nombre: PersonaData.Nombre,
-                direccion: PersonaData.Direccion,
-                usuario: PersonaData.Usuario
-              };
-              console.log("Enviando solicitud con el siguiente cuerpo:", body);
-              return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
+              return this.http.post<defaultApiResponse>(`${this.apiUrl}/bancos/Insert`, body);
             }
           }
+            
+           

@@ -32,7 +32,7 @@ import { AjustesComponent } from './ajustes/ajustes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
-import { BancosComponent } from './bancos/bancos.component';
+import { bancosComponent } from './Bancos/bancos.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
@@ -52,7 +52,7 @@ import { InsumosComponent } from './insumos/insumos.component';
     ArticulosComponent,
     EntradasComponent,
     SucursalesComponent,
-    BancosComponent,
+    bancosComponent,
     RecetasComponent,
     DetalleRecetasComponent,
     OrdenCompraComponent,

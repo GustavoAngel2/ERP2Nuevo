@@ -12,7 +12,7 @@ import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
 import { InsumosComponent } from './insumos/insumos.component';
 import { RecetasComponent } from './recetas/recetas.component';
-import { BancosComponent } from './Bancos/bancos.component';
+import { bancosComponent } from './Bancos/bancos.component';
 import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 
 
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: "sucursales", component:SucursalesComponent, canActivate:[AuthGuard], title: "ERP - Sucursales" },
   {  path: "insumos", component:InsumosComponent, canActivate:[AuthGuard], title: "ERP - Insumos" },
   { path: "recetas", component:RecetasComponent, canActivate:[AuthGuard], title: "ERP - Recetas" },
-  { path: "Bancos", component:BancosComponent, canActivate:[AuthGuard], title: "ERP - Bancos" },
+  { path: "bancos", component:bancosComponent, canActivate:[AuthGuard], title: "ERP - bancos" },
   { path: "detallecompras", component:DetalleOrdenCompraComponent, canActivate:[AuthGuard], title: "ERP - Ordenes de compras" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
