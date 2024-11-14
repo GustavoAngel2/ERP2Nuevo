@@ -4,7 +4,7 @@ import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
 import { AuthService,currentUser } from '../auth.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';

@@ -21,6 +21,7 @@ import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.m
 
 
 
+import { updatebancosModel } from './data-models/bancos.models';
 
 @Injectable({
   providedIn: "root",
@@ -62,7 +63,7 @@ export class PersonasService {
       direccion: PersonaData.Direccion,
       usuario: PersonaData.Usuario
     };
-
+    console.log("Enviando solicitud con el siguiente cuerpo:", body);
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Personas/Update`, body);
   }
 }
@@ -116,7 +117,7 @@ export class ProveedoresService {
       clabe: ProveedorData.clabe,
       usuarioActualiza: ProveedorData.usuarioActualiza
     };
-
+    console.log("Enviando solicitud con el siguiente cuerpo:", body);
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Proveedores/Update`, body);
   }
 }
@@ -212,7 +213,6 @@ export class SucursalesService {
       direccion: SucursalData.direccion,
       idUsuario: SucursalData.idUsuario
     };
-
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Sucursales/Update`, body);
   }
 }
@@ -259,7 +259,6 @@ export class EntradasService {
       clabe: ProveedorData.clabe,
       usuarioActualiza: ProveedorData.usuarioActualiza
     };
-
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Entradas/Update`, body);
   }
 }
@@ -302,7 +301,6 @@ export class InsumosService {
       usuarioActualiza: ProveedorData.usuarioActualiza,
       insumosUP: ProveedorData.insumosUP
     };
-
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/Insumos/Update`, body);
   }
 }
@@ -345,7 +343,6 @@ export class OrdenComprasService {
       idComprador: OrdenCompraData.idComprador,
       usuarioActualiza: OrdenCompraData.usuarioActualiza
     };
-
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/OrdenCompra/Update`, body);
   }
 }
@@ -386,7 +383,6 @@ export class DetalleOrdenComprasService {
       estatus: OrdenCompraData.estatus,
       usuarioActualiza: OrdenCompraData.usuarioActualiza
     };
-
     return this.http.put<defaultApiResponse>(`${this.apiUrl}/DetalleOrdenCompra/Update`, body);
   }
 }
@@ -522,6 +518,50 @@ export class RecetasService {
     deleteArticulo(Id: number): Observable<any> {
       return this.http.put(`${this.apiUrl}/Articulos/Delete`, { Id });
     }
+}   
+
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
+@Injectable({
+  providedIn: "root",
+})
+export class bancosService {
+  deletebancos(Id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/bancos/Delete`, { Id });
+  }
+  updatebancos(bancosData: updatebancosModel): Observable<defaultApiResponse> {
+   const body = {
+    id: bancosData.Id,
+    nombre: bancosData.nombre,
+    Direccion: bancosData.Direccion,
+    UsuarioActualiza: bancosData.UsuarioActualiza
+  }
+  console.log("Enviando solicitud con el siguiente cuerpo:", body);
+  return this.http.put<defaultApiResponse>(`${this.apiUrl}/bancos/Update`, body);
+}
+  //Se especifica la url base de la API
+  private apiUrl = "http://localhost:5020/api";
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  getBancos(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.apiUrl}/bancos/Get`,{headers});
+  }
+
+  Insertarbancos(bancosData: {
+    nombre: string;
+    Direccion: string;
+    UsuarioActualiza: number;
+  }): Observable<defaultApiResponse> {
+    const body = {
+      nombre:bancosData.nombre,
+      Direccion:bancosData.Direccion,
+      UsuarioActualiza:bancosData.UsuarioActualiza,
+    };
+    return this.http.post<defaultApiResponse>(`${this.apiUrl}/bancos/Insert`, body);
+  }
 }
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
