@@ -3,18 +3,14 @@
   <mat-drawer #drawer [mode]="'push'">
     <div class="side-list">
       <div class="card">
+        <div>
+          <div>
+            <img src="./assets/pfp.jpg" class="pfp" alt="Imagen del usuario" />
+          </div>
+        </div>
         <!-- <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px"> -->
-        <div *ngIf="imagenUrl">
-          <img [src]="imagenUrl" class="pfp" alt="Imagen del usuario" />
-        </div>
-        <div *ngIf="!imagenUrl">
-          <img src="./assets/pfp.jpg" class="pfp" alt="Imagen del usuario" />
-        </div>
+        <div></div>
         <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
-        <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
-        <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
-        <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
-
       </div>
 
       <mat-accordion>
@@ -69,7 +65,7 @@
       <span class="example-spacer"></span>
       <span> {{this.getTitle()}}</span>
       <div class="actions">
-        <mat-accordion style="z-index: 99;">
+        <mat-accordion style="width: 360px; z-index: 99;">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
