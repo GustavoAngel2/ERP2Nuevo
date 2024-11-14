@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, currentUser } from '../auth.service';
 import { UsusariosService } from '../data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inicio',
@@ -20,7 +21,7 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     this.profile = this.authService.getCurrentUser();
-
+    Swal.fire('¡Hola!', 'Este es un mensaje de alerta simple', 'info');
     if (this.profile?.Id) {
       this.cargarImagenUsuario(+this.profile.Id); // Convierte a número si Id es string
     }
