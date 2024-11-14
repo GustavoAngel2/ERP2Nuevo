@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private usuariosService: UsusariosService
   ) {}
 
+
   ngOnInit() {
     this.erp.loadSettings();
     this.currentUrl = this.router.url;

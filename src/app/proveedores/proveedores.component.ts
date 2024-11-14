@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-proveedores',
@@ -115,19 +116,21 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   }
 
   abrirDeleteDialog(Id: number, Name: string) {
-    const dialogRef = this.dialog.open(DeleteMenuComponent, {
-      width: '550px',
-      data: Name
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == "yes") {
+    Swal.fire({
+      title: `¿Estás seguro que desea borrar ${Name}?`,
+      text: 'No podrás revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.proveedoresService.deleteProveedor(Id).subscribe({
           next: (response) => {
             if(response.StatusCode == 200){
-              this.toastr.success(response.response.data, 'Proveedores');
+              Swal.fire('Eliminado', 'El archivo ha sido eliminado', 'success');
             } else {
-              this.toastr.error(response.response.data,'Proveedores')
+              Swal.fire('Error', 'Ha ocurrido un error!', 'error');
             }
             this.getData();
           },
@@ -137,6 +140,29 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
         });
       }
     });
+
+    // const dialogRef = this.dialog.open(DeleteMenuComponent, {
+    //   width: '550px',
+    //   data: Name
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result == "yes") {
+    //     this.proveedoresService.deleteProveedor(Id).subscribe({
+    //       next: (response) => {
+    //         if(response.StatusCode == 200){
+    //           this.toastr.success(response.response.data, 'Proveedores');
+    //         } else {
+    //           this.toastr.error(response.response.data,'Proveedores')
+    //         }
+    //         this.getData();
+    //       },
+    //       error: (error) => {
+    //         console.error('Hubo un error al eliminar el almacén', error);
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   cargar(elemento:getProveedoresModel){
