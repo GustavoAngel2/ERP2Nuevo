@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 
 export class ERP{
     
-    public apiUrl = "http://localhost:5020/api";
+    public apiUrl = "http://67.217.245.127:5001/api";
 
     setStyle(theme:string){
         const root = document.documentElement.style;
