@@ -3,11 +3,14 @@
   <mat-drawer #drawer [mode]="'push'">
     <div class="side-list">
       <div class="card">
-        <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px">
+        <div>
+          <div>
+            <img src="./assets/pfp.jpg" class="pfp" alt="Imagen del usuario" />
+          </div>
+        </div>
+        <!-- <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px"> -->
+        <div></div>
         <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
-        <button (click)="drawer.toggle()" routerLink="inicio">Inicio</button>
-        <button routerLink="ajustes" (click)="drawer.toggle();" >Ajustes</button>
-        <button (click)="authService.logout(); drawer.toggle();" routerLink="login" >Cerrar sesión</button>
       </div>
 
       <mat-accordion>
@@ -62,9 +65,26 @@
       <span class="example-spacer"></span>
       <span> {{this.getTitle()}}</span>
       <div class="actions">
-        <span>Hola {{actualUser.NombrePersona}}!</span>
-        <a routerLink="inicio"><mat-icon>home</mat-icon></a>
-        <a (click)="this.authService.logout()" routerLink="login"><mat-icon>exit_to_app</mat-icon></a>
+        <mat-accordion style="width: 360px; z-index: 99;">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <div *ngIf="imagenUrl">
+                  <img [src]="imagenUrl" class="pfp-toolbar" alt="Imagen del usuario" />
+                </div>
+                <div *ngIf="!imagenUrl">
+                  <img src="./assets/pfp.jpg" class="pfp-toolbar" alt="Imagen del usuario" />
+                </div> 
+                <span class="section-title">{{actualUser.NombrePersona}}</span> 
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="button-list">
+              <button routerLink="inicio"><i class="bi bi-house-door-fill"></i> Inicio</button>
+              <button routerLink="ajustes"><i class="bi bi-gear-fill"></i> Ajustes</button>
+              <button (click)="this.authService.logout()" routerLink="login"><i class="bi bi-door-open-fill"></i> Cerrar sesion</button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
   </mat-toolbar>
 

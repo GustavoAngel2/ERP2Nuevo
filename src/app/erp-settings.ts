@@ -3,7 +3,11 @@ import { Injectable } from "@angular/core";
 @Injectable({
     providedIn: "root",
 })
+
 export class ERP{
+    
+    public apiUrl = "http://67.217.245.127:5001/api";
+
     setStyle(theme:string){
         const root = document.documentElement.style;
 
@@ -26,7 +30,6 @@ export class ERP{
             root.setProperty('--mat-sidenav-content-background-color', ('var(--dark-' + theme + ')'))
             root.setProperty('--title-color','#fff')
         }
-        
     }
 
     saveSettings(theme:string, homeStyle:string,bgColor:string){
@@ -42,7 +45,7 @@ export class ERP{
             bgColor: localStorage.getItem('bgColor') ?? 'light',
             pictureStyle: localStorage.getItem('pictureStyle') ?? 'square'
         }
-        console.log(settings)
+
         return settings
     }
 
@@ -51,4 +54,3 @@ export class ERP{
         this.setBgColor(localStorage.getItem('bgColor') ?? 'light',localStorage.getItem('color') ?? 'blue')
     }
 }
-

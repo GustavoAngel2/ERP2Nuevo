@@ -1,4 +1,5 @@
-<br>
+<h1 class="title">Modulo de Movimientos</h1>
+
 <div class="form-container" [hidden]="!isOnStepOne">
     <div class="form-title">
         <h1 [hidden]="isModifying">Registrar movimiento</h1>
@@ -63,6 +64,9 @@
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <div class="table-container" [hidden]="!isOnStepOne">
     <br>
+    <div class="table-hotbar">
+        <button (click)="exportarMovimiento()"><i class="bi bi-filetype-xlsx"></i></button>
+    </div>
     <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table class="table" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
@@ -104,6 +108,7 @@
         <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let elemento">
+                <mat-icon class="action-btn" [hidden]="elemento.Estatus"></mat-icon>
             <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
             <mat-icon class="action-btn" (click)="mostrarDetalles(elemento.Id)">visibility</mat-icon>
         </td>

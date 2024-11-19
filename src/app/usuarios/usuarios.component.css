@@ -4,7 +4,6 @@
     gap: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     flex-wrap: wrap;
 }
 
@@ -14,4 +13,5 @@
     padding: 6px;
     text-align: center;
     width:256px;
+    height: 128px;
 }

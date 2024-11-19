@@ -1,6 +1,6 @@
 .actions{
     position: absolute;
-    padding-top: 14px;
+    padding-top: 8px;
     margin-right: 12px;
     height: var(--mat-toolbar-standard-height - 16px);
     top: 0;
@@ -11,25 +11,46 @@
 }
 
 
-.actions a{
+.pfp {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+
+.pfp-toolbar{
+  width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+
+.actions button{
     cursor: pointer;
     border: 0;
     border-radius: 5px;
-    padding-top: 6px;
-    padding-right: 6px;
-    padding-left: 6px;
+    padding: 20px;
     background-color: #00000092;
     color:white;
     transition: .5s;
 }
 
-.actions a:hover{
+.actions button:hover{
     background-color: #000000b3;
     transition: .5s;
 }
 
-.actions a:active{
+.actions button:active{
     background-color: #000000d3;
+    transition: .5s;
+}
+
+.actions button .bi{
+    transition: .5s;
+}
+
+.actions button:active .bi{
+    color:var(--mat-toolbar-container-background-color);
     transition: .5s;
 }
 
