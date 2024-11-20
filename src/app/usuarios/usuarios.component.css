@@ -10,8 +10,23 @@
 .custom-card{
     background-color: var(--mat-toolbar-container-background-color);
     border-radius: 6px;
-    padding: 6px;
     text-align: center;
     width:256px;
-    height: 128px;
+    overflow: hidden;
+}
+
+.custom-card-info{
+    height: 164px;
+    padding: 6px;
+}
+
+.user-action{
+    border: 0;
+    width: 100%;
+    position: relative;
+    padding: 6px;
+    left:0;
+    bottom: 0;
+    background-color: brown;
+    color: #fff;
 }

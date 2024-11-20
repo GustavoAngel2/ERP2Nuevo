@@ -95,15 +95,11 @@ export class ArticulosComponent implements OnInit {
    };
    this.articulosService.getArticulos().subscribe({
      next: (response) => {
-       console.log('Respuesta del servidor:', response); 
-       if (response && Array.isArray(response) && response.length > 0) {
-         this.dataSource.data = response; 
-       } else {
-         console.log('No contiene datos');
-       }
+      console.log('Respuesta del servidor:', response); 
+      this.dataSource.data = response.Response.data; 
      },
      error: (error) => {
-       console.error(error);
+      console.error(error);
      }
    });
  }

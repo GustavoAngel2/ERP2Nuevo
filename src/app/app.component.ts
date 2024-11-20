@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService, currentUser } from './auth.service';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   imagenUrl: string | ArrayBuffer | null = null;
   actualUser: currentUser = { Id: "", NombreUsuario: "", NombrePersona: "", IdRol: "" };
   userSubscription!: Subscription;
+  isAccordionExpanded = false;
 
   constructor(
     private router: Router,
@@ -70,7 +71,25 @@ export class AppComponent implements OnInit, OnDestroy {
     return "ERP - " + this.currentUrl.replace(/^\//, '').charAt(0).toUpperCase() + this.currentUrl.slice(2);
   }
 
+  detectClickOutside(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    const accordion = document.querySelector('.toolbar-accordion');
+    
+    if (
+      this.isAccordionExpanded &&
+      accordion &&
+      !accordion.contains(clickedElement)
+    ) {
+      this.isAccordionExpanded = false;
+    }
+  }
+
+  closeAccordion() {
+    this.isAccordionExpanded = false;
+  }
+
   logout() {
     this.authService.logout();
+    this.closeAccordion();
   }
 }

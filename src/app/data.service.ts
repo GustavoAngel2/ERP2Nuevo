@@ -34,6 +34,7 @@ export class PersonasService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
+    console.log(this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/Personas/Get`,{headers}))
     return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/Personas/Get`,{headers});
   }
 
