@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { UsusariosService } from '../data.service'; // Ajusta la ruta según tu proyecto
+import { PersonasService, UsusariosService } from '../data.service'; // Ajusta la ruta según tu proyecto
 import { getUsuariosModel } from '../data-models/usuario.model'; // Ajusta la ruta según tu proyecto
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -12,9 +13,70 @@ import Swal from 'sweetalert2';
 export class UsuariosComponent implements OnInit {
   dataSource = new MatTableDataSource<getUsuariosModel>([]);
 
-  constructor(private usuariosService: UsusariosService) {}
+  constructor(private usuariosService: UsusariosService, private personasService:PersonasService) {}
 
   ngOnInit(): void {
+    this.getData()
+  }
+
+  deleteUsuario(id:number, nombre:String){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-outline-success",
+        cancelButton: "btn btn-outline-danger"
+      },
+      buttonsStyling: true
+    });
+    swalWithBootstrapButtons.fire({
+      title: 'Seguro que desea borrar al usuario ' + nombre + " de forma permanente?",
+      text: "eso es mucho tiempo!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Si, borralo! <i class="bi bi-trash-fill"></i>',
+      cancelButtonText: "No, mantenlo!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.personasService.deletePersonas(id).subscribe({
+          next: (response) => {
+            if(response.StatusCode == 200){
+              swalWithBootstrapButtons.fire({
+                title: "Eliminado!",
+                text: "Se ha borrado a " + nombre,
+                icon: "success"
+              });
+            } else {
+              swalWithBootstrapButtons.fire({
+                title: "Error!",
+                text: "Ha ocurrido un error" + response.Response.msg,
+                icon: "success"
+              });
+            }
+            this.getData();
+          },
+          error: (error) => {
+            console.error('Hubo un error al eliminar el almacén', error);
+          }
+        });
+        
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Acción cancelada",
+          text: "no se borró a " + nombre,
+          icon: "error"
+        });
+      }
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getData(){
     this.usuariosService.getUsuarios().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
@@ -24,45 +86,5 @@ export class UsuariosComponent implements OnInit {
         console.error('Error al obtener usuarios:', err); // Manejo de errores
       }
     });
-  }
-
-  deleteUsuario(id:number){
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-outline-success",
-        cancelButton: "btn btn-outline-danger"
-      },
-      buttonsStyling: true
-    });
-    swalWithBootstrapButtons.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire({
-          title: "Cancelled",
-          text: "Your imaginary file is safe :)",
-          icon: "error"
-        });
-      }
-    });
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
