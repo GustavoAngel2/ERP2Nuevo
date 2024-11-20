@@ -36,10 +36,10 @@ import { BancosComponent } from './bancos/bancos.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
-import { DetalleOrdenCompraComponent } from './detalle-orden-compra/detalle-orden-compra.component';
 import { InsumosComponent } from './insumos/insumos.component';
 import { TraspasosComponent } from './traspasos/traspasos.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 
 @NgModule({
@@ -59,10 +59,10 @@ import { MovimientosComponent } from './movimientos/movimientos.component';
     RecetasComponent,
     DetalleRecetasComponent,
     OrdenCompraComponent,
-    DetalleOrdenCompraComponent,
     InsumosComponent,
     TraspasosComponent,
-    MovimientosComponent
+    MovimientosComponent,
+    ReportesComponent
   ],
   imports: [
     //Dependencias

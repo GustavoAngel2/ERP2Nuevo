@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { ERP } from './erp-settings';
 
 export interface currentUser {
   Id: string;
@@ -14,11 +15,10 @@ export interface currentUser {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = "http://67.217.245.127:5001/api";
   private currentUserSubject: BehaviorSubject<currentUser>;
   public currentUser: Observable<currentUser>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private erp:ERP) {
     this.currentUserSubject = new BehaviorSubject<currentUser>(this.getStoredUser());
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   login(credentials: { username: string, idUsername: string, userpassword: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/SignIn`, credentials).pipe(
+    return this.http.post<any>(`${this.erp.apiUrl}/SignIn`, credentials).pipe(
       map(response => {
         console.log('API response:', response);
         if (response && response.Success && response.Response && response.Response.data && response.Response.data.Token) {
