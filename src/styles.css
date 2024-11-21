@@ -70,7 +70,7 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 }
 
 .table-container table {
-    background-color: var(--table-bg-color); /* Usa el color definido en ajustes */
+    background-color: #fff; /* Usa el color definido en ajustes */
     border-color: #000000;
     border-radius: 3px;
 }
@@ -86,12 +86,20 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 }
   
 .table-container td {
+    background-color: #00000000!important;
     text-align: center !important;
     width: 100%;
     height: 40px;
     color: rgb(0, 0, 0) !important;
 }
 
+mat-row:nth-child(odd) {
+    background-color: #ffffff; /* Blanco */
+  }
+  
+  mat-row:nth-child(even) {
+    background-color: var(--mat-toolbar-container-background-color); /* Azul claro */
+  }
 
 .button-strip{
     width: 100%;

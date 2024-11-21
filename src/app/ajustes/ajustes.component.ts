@@ -12,6 +12,7 @@ export class AjustesComponent implements OnInit{
   settings:any;
   color:string = '';
   bgColor:string = '';
+  selectedColor: string = '#ffffff'; // Color inicial
 
   constructor(private erp:ERP){}
 

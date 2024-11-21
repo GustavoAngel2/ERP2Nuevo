@@ -68,26 +68,10 @@
     <button class="btn btn-outline-danger animated-btn" routerLink="../inicio">Salir sin guardar</button>
   </div>
 
-  <div class="settings">
-    <label for="color-selector">Selecciona el color del fondo de la tabla:</label>
-    <input type="color" id="color-selector" value="#ffffff">
+  <!-- settings.component.html -->
+<div class="settings">
+  <label for="color-selector">Selecciona el color del fondo de la tabla:</label>
+  <input type="color" id="color-selector" [(ngModel)]="selectedColor">
 </div>
 
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Encabezado 1</th>
-                <th>Encabezado 2</th>
-                <th>Encabezado 3</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Dato 1</td>
-                <td>Dato 2</td>
-                <td>Dato 3</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
