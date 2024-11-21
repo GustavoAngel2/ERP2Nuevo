@@ -7,4 +7,8 @@ export interface defaultApiResponse {
         data: any;
         msg: string;
     };
+    Response: {
+        data: any;
+        msg: string;
+    };
 }
