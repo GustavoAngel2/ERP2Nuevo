@@ -563,20 +563,20 @@ export class MovimientosService {
         'Authorization': `Bearer ${token}`
     });
     return this.http.get(`${this.erp.apiUrl}/Movimientos/ExportarMovimientosAExcel`, { headers, responseType: 'blob' });
-}
+  }
 
 
 
-InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
-  const body = {
-   idAlmacen: MovData.idAlmacen,
-   tipoMovimiento: MovData.tipoMovimiento,
-   usuarioRegistra: MovData.usuarioRegistra,
-   usuarioAutoriza: MovData.usuarioAutoriza,
-   usuarioActualiza:MovData.usuarioActualiza
-  };
-  return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/Movimientos/Insert`, body);
-}
+  InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
+    const body = {
+    idAlmacen: MovData.idAlmacen,
+    tipoMovimiento: MovData.tipoMovimiento,
+    usuarioRegistra: MovData.usuarioRegistra,
+    usuarioAutoriza: MovData.usuarioAutoriza,
+    usuarioActualiza:MovData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/Movimientos/Insert`, body);
+  }
 }
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
@@ -682,5 +682,21 @@ export class DetalleTraspasosService {
   }
   deleteDetalleTraspaso(Id: number): Observable<any> {
     return this.http.put(`${this.erp.apiUrl}/DetalleTraspaso/Delete`, { Id });
+  }
+}
+/*-------------------------------------------------------*/
+
+@Injectable({
+  providedIn:"root",
+})
+export class reportes{
+  constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
+  
+  ExportarMovimiento(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.erp.apiUrl}/Movimientos/ExportarMovimientosAExcel`, { headers, responseType: 'blob' });
   }
 }
