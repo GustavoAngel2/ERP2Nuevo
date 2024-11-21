@@ -22,8 +22,8 @@ export class UsuariosComponent implements OnInit {
   deleteUsuario(id:number, nombre:String){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-outline-success",
-        cancelButton: "btn btn-outline-danger"
+        confirmButton: "btn btn-outline-danger",
+        cancelButton: "btn btn-outline-success"
       },
       buttonsStyling: true
     });
@@ -32,8 +32,8 @@ export class UsuariosComponent implements OnInit {
       text: "eso es mucho tiempo!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Si, borralo! <i class="bi bi-trash-fill"></i>',
-      cancelButtonText: "No, mantenlo!",
+      confirmButtonText: 'Borrar <i class="bi bi-trash-fill"></i>',
+      cancelButtonText: "Mantener ",
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
