@@ -113,11 +113,8 @@ columnasDetalleCompras: string[] = [
   this.sucursalesService.getSucursales().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboSuc = response;
-        } else {
+          this.comboSuc = response.Response.data;
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -127,11 +124,8 @@ columnasDetalleCompras: string[] = [
     this.TipoMov.getTipoMov().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboTM = response;
-        } else {
+          this.comboTM = response.Response.data;
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -140,12 +134,9 @@ columnasDetalleCompras: string[] = [
     this.InsumosService.getInsumos().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboInsumos = response;
-          console.log(this.comboInsumos)
-        } else {
+          this.comboInsumos = response.Response.data;
           console.log('no contiene datos');
-        }
+        
       },
       error: (error) => {
         console.error(error);
@@ -164,12 +155,9 @@ columnasDetalleCompras: string[] = [
     this.movimientoService.getMovimiento().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-          console.log(response)
-        } else {
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
           console.log('no contiene datos');
-        }
+
       },
       error: (error) => {
         console.error(error);
@@ -181,13 +169,10 @@ columnasDetalleCompras: string[] = [
     this.mostrarFormulario = false;  // Oculta el formulario de inserción
     this.detalleMovService.getDetalleMov(id).subscribe({
       next: (response) => {
-        console.log('Detalles del movimiento:', response);
-        if (response && Array.isArray(response) && response.length > 0) {
-          this.dataSource2.data = response;  // Actualiza la tabla de detalles
-        } else {
+          this.dataSource2.data = response.Response.data;  // Actualiza la tabla de detalles
           console.log('No hay detalles disponibles.');
           this.dataSource2.data = [];  // Limpia los datos si no hay detalles
-        }
+        
       },
       error: (error) => {
         console.error('Error al obtener los detalles:', error);
