@@ -18,6 +18,7 @@ export class ERP{
         root.setProperty('--mat-sidenav-container-background-color',('var(--dark-' + theme + ')'));
         root.setProperty('--mat-paginator-container-background-color',('var(--' + theme + ')'));
         root.setProperty('--table-color',('var(--ligth-' + theme + ')'))
+        root.setProperty('--header-color',('var(--dark-' + theme + ')'))
     }
 
     setBgColor(bgColor:string,theme:string){
