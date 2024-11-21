@@ -118,12 +118,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
 
     this.proveedoresService.getProveedores().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboProveedores = response;
-        } else {
+          this.comboProveedores = response.Response.data;
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -131,12 +127,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     });
     this.sucursalesService.getSucursales().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboSucursales = response;
-        } else {
+          this.comboSucursales = response.Response.data;
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -144,12 +136,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     });
     this.usuariosService.getUsuarios().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboCompradores = response;
-        } else {
+          this.comboCompradores = response.Response.data;
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -157,13 +145,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     });
     this.insumosService.getInsumos().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboInsumos = response;
-          console.log(this.comboInsumos)
-        } else {
+          this.comboInsumos = response.Response.data;
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -179,12 +162,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     };
     this.ordenCompraService.getOrdenCompras().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);

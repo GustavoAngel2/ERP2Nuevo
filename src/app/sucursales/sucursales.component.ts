@@ -64,11 +64,9 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
     };
     this.sucursalesService.getSucursales().subscribe({
       next: (response) => { 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
-          console.log('no contiene datos');
-        }
+        console.log('Respuesta del servidor:', response); 
+        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+        console.log(response)
       },
       error: (error) => {
         console.error(error);

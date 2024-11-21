@@ -124,12 +124,8 @@ export class ArticulosComponent implements OnInit {
 
   this.umService.getUM().subscribe({
     next: (response) => {
-      console.log('Respuesta del servidor:', response); 
-      if (response && Array.isArray(response)&&response.length>0) {
-        this.ComboUm = response;
-      } else {
+        this.ComboUm = response.Response.data;
         console.log('no contiene datos');
-      }
     },
     error: (error) => {
       console.error(error);
