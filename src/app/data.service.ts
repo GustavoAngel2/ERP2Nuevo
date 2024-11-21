@@ -563,20 +563,20 @@ export class MovimientosService {
         'Authorization': `Bearer ${token}`
     });
     return this.http.get(`${this.erp.apiUrl}/Movimientos/ExportarMovimientosAExcel`, { headers, responseType: 'blob' });
-}
+  }
 
 
 
-InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
-  const body = {
-   idAlmacen: MovData.idAlmacen,
-   tipoMovimiento: MovData.tipoMovimiento,
-   usuarioRegistra: MovData.usuarioRegistra,
-   usuarioAutoriza: MovData.usuarioAutoriza,
-   usuarioActualiza:MovData.usuarioActualiza
-  };
-  return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/Movimientos/Insert`, body);
-}
+  InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
+    const body = {
+    idAlmacen: MovData.idAlmacen,
+    tipoMovimiento: MovData.tipoMovimiento,
+    usuarioRegistra: MovData.usuarioRegistra,
+    usuarioAutoriza: MovData.usuarioAutoriza,
+    usuarioActualiza:MovData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/Movimientos/Insert`, body);
+  }
 }
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 @Injectable({
