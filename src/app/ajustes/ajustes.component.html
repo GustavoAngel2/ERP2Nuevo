@@ -1,28 +1,8 @@
-<div class="content">
-  <mat-accordion class="settings-panel">
-    <!-- Panel Colores -->
-    <mat-expansion-panel class="animated-panel">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>color_lens</mat-icon>
-          <span class="section-title">Colores</span>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="button-strip">
-        <button class="btn-settings blue" (click)="this.setColorSystem('blue')"></button>
-        <button class="btn-settings red" (click)="this.setColorSystem('red')"></button>
-        <button class="btn-settings green" (click)="this.setColorSystem('green')"></button>
-        <button class="btn-settings orange" (click)="this.setColorSystem('orange')"></button>
-        <button class="btn-settings yellow" (click)="this.setColorSystem('yellow')"></button>
-        <button class="btn-settings gray" (click)="this.setColorSystem('gray')"></button>
-        <button class="btn-settings purple" (click)="this.setColorSystem('purple')"></button>
-      </div>
-    </mat-expansion-panel>
 
 <div class="content">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Colores (Tan dificil era?)</span> </mat-panel-title>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Colores</span> </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="button-strip-settings">
       <button class="btn-settings" style="background-color: var(--blue);" (click)="this.setColorSystem('blue')"></button>
@@ -35,6 +15,7 @@
     </div>
   </mat-expansion-panel>
 
+
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Tema</span> </mat-panel-title>
@@ -43,35 +24,8 @@
       <button (click)="this.setBgColor('light')"><i class="bi bi-brightness-high-fill"></i> Claro </button>
       <button (click)="this.setBgColor('dark')"><i class="bi bi-moon-fill"></i> Oscuro </button>
       <button (click)="this.setBgColor('color')"><i class="bi bi-circle-fill" style="color: var(--mat-toolbar-container-background-color);"></i> Color </button>
-      
     </div>
   </mat-expansion-panel>
-      <div class="section-custom" style="align-items: center; display: flex; flex-direction: column;">
-        <img class="pfp" src="./assets/pfp.jpg" width="128px" height="128px">
-        <p>Estilo de imagen de perfil</p>
-        
-        <!-- <button><mat-icon>account_circle</mat-icon> Circular</button> -->
-      </div>
-
-</div>
-
-
-<!-- <div class="footer" style="background-color: white; border-radius: 6px; padding: 16px;">
-  <button class="btn btn-outline-success" (click)="save()">Guardar</button>
-  <button class="btn btn-outline-danger"routerLink="../inicio">Salir sin guardar</button>
-</div> -->
-
-
-  <!-- Footer -->
-  <div class="footer">
-    <button class="btn btn-outline-success animated-btn" (click)="save()">Guardar</button>
-    <button class="btn btn-outline-danger animated-btn" routerLink="../inicio">Salir sin guardar</button>
-  </div>
-
-  <!-- settings.component.html -->
-<div class="settings">
-  <label for="color-selector">Selecciona el color del fondo de la tabla:</label>
-  <input type="color" id="color-selector" [(ngModel)]="selectedColor">
 </div>
 
 

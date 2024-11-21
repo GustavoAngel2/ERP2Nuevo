@@ -5,6 +5,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html{
 
+    --ligth-red:#ff9a9a;
+    --ligth-green:#c9ffb2;
+    --ligth-blue:#a2b3ff;
+    --ligth-orange:#ffc787;
+    --ligth-yellow:#fff898;
+    --ligth-gray: #cecece;
+    --ligth-purple: #ffb3f4;
     --red:#ca1c1c;
     --green:#41bc0c;
     --blue:#3f55ba;
@@ -25,6 +32,7 @@ html{
 
     --mat-toolbar-container-background-color: var(--black);
     --mat-expansion-container-background-color: var(--black);
+    --table-color: var(--black);
     --mat-toolbar-standard-height: 64px;
     --mat-toolbar-mobile-height: 56px;
     --mat-sidenav-container-text-color:#fff;
@@ -53,7 +61,7 @@ html{
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-  
+
 mat-toolbar, mat-drawer-container, mat-expansion-panel {
     color: white !important;;
     transition: .5s!important;
@@ -74,7 +82,7 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     border-color: #000000;
     border-radius: 3px;
 }
-  
+
 .table-container th {
     text-align: center !important;
     vertical-align: bottom;
@@ -84,7 +92,7 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     font-size: 12px;
     color: #000000 !important;
 }
-  
+
 .table-container td {
     background-color: #00000000!important;
     text-align: center !important;
@@ -96,9 +104,9 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
 mat-row:nth-child(odd) {
     background-color: #ffffff; /* Blanco */
   }
-  
+
   mat-row:nth-child(even) {
-    background-color: var(--mat-toolbar-container-background-color); /* Azul claro */
+    background-color: var(--table-color); /* Azul claro */
   }
 
 .button-strip{
@@ -126,7 +134,7 @@ mat-row:nth-child(odd) {
 }
 
 .button-strip button{
-    background-color: #000000a0; 
+    background-color: #000000a0;
     color: white;
     border: none;
     width: 128px;

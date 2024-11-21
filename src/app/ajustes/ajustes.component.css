@@ -50,24 +50,8 @@
   color: #ffffff;
 }
 
-/* Animaciones y Paneles */
-.animated-panel {
-  transition: all 0.3s ease;
-  border-radius: 8px;
-}
-
-.animated-panel:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 15px rgb(255, 255, 255);
-}
-
 /* Botones y Estilos */
-.button-strip {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 0;
-}
+
 
 .btn-settings {
   width: 40px;
@@ -81,34 +65,5 @@
   transform: scale(1.1);
 }
 
-.blue { background-color: var(--blue); }
-.red { background-color: var(--red); }
-.green { background-color: var(--green); }
-.orange { background-color: var(--orange); }
-.yellow { background-color: var(--yellow); }
-.gray { background-color: var(--gray); }
-.purple { background-color: var(--purple); }
-
 /* Imagen de perfil */
-.profile-section {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-}
 
-.animated-img {
-  border-radius: 50%;
-  transition: all 0.5s ease;
-}
-
-.animated-img:hover {
-  transform: rotate(360deg);
-}
-
-/* Footer */
-.footer {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px 0;
-}
