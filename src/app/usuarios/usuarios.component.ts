@@ -39,6 +39,7 @@ export class UsuariosComponent implements OnInit {
       if (result.isConfirmed) {
         this.personasService.deletePersonas(id).subscribe({
           next: (response) => {
+            console.log(response)
             if(response.StatusCode == 200){
               swalWithBootstrapButtons.fire({
                 title: "Eliminado!",
@@ -47,9 +48,9 @@ export class UsuariosComponent implements OnInit {
               });
             } else {
               swalWithBootstrapButtons.fire({
-                title: "Error!",
-                text: "Ha ocurrido un error" + response.Response.msg,
-                icon: "success"
+                title: "Ha ocurrido un error!",
+                text: response.response.data,
+                icon: "error"
               });
             }
             this.getData();
