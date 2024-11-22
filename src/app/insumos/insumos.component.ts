@@ -70,12 +70,10 @@ export class InsumosComponent implements OnInit,AfterViewInit{
     this.insumosService.getInsumos().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-          this.insumosPadresCombo = response
-        } else {
-          console.log('no contiene datos');
-        }
+
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+          this.insumosPadresCombo = response.Response.data;
+
       },
       error: (error) => {
         console.error(error);
