@@ -123,7 +123,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
         next: (response) => {
             console.log(response)
             this.dataSource2.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
-                console.log('No contiene datos');
+                console.log(response);
         },
         error: (error) => {
           console.error(error);
@@ -267,12 +267,8 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       this.recetasService.getRecetas().subscribe({
         next: (response) => {
           console.log('Respuesta del servidor:', response); 
-          if (response && Array.isArray(response) && response.length > 0) {
-            console.log(response)
-            this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-          } else {
-            console.log('No contiene datos');
-          }
+
+            this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
         },
         error: (error) => {
           console.error(error);
