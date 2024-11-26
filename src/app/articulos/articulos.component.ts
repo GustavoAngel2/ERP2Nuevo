@@ -173,8 +173,8 @@ export class ArticulosComponent implements OnInit {
    this.familia = articulo.Familia
    this.costo = articulo.UltimoCosto;
    this.precio = articulo.PrecioVenta;
-   this.iva= articulo.Iva;
-   this.ieps = articulo.Ieps
+   this.iva= articulo.Iva *100;
+   this.ieps = articulo.Ieps *100;
    this.datosCargados = true;
    this.isModifying = true
    console.log(articulo.Id)
@@ -204,9 +204,9 @@ export class ArticulosComponent implements OnInit {
       this.articulosService.deleteArticulo(Id).subscribe({
         next: (response) => {
           if(response.StatusCode == 200){
-            this.toastr.success(response.response.data, 'Articulos');
+            this.toastr.success(response.Response.data, 'Articulos');
           } else {
-            this.toastr.error(response.response.data,'Articulos')
+            this.toastr.error(response.Response.data,'Articulos')
           }
           this.getData();
         },
