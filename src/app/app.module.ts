@@ -1,5 +1,6 @@
 //Funciones angular
 import { NgModule } from '@angular/core';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterLink } from '@angular/router';
@@ -88,7 +89,8 @@ import { ReportesComponent } from './reportes/reportes.component';
     MatFormFieldModule,
     MatSidenavModule,
     MatExpansionModule,
-    ToastrModule.forRoot({ positionClass: 'inline' })
+    ToastrModule.forRoot({ positionClass: 'inline' }),
+    MatProgressBarModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { PersonasService, UsusariosService } from '../data.service'; // Ajusta la ruta según tu proyecto
 import { getUsuariosModel } from '../data-models/usuario.model'; // Ajusta la ruta según tu proyecto
 import Swal from 'sweetalert2';
@@ -11,7 +10,8 @@ import Swal from 'sweetalert2';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent implements OnInit {
-  dataSource = new MatTableDataSource<getUsuariosModel>([]);
+  usuarios:getUsuariosModel[] = [];
+  loaded:boolean = false;
 
   constructor(private usuariosService: UsusariosService, private personasService:PersonasService) {}
 
@@ -73,15 +73,12 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   getData(){
     this.usuariosService.getUsuarios().subscribe({
       next: (response) => {
+        this.loaded = true
         console.log('Respuesta del servidor:', response); 
-        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+        this.usuarios = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
       },
       error: (err) => {
         console.error('Error al obtener usuarios:', err); // Manejo de errores
