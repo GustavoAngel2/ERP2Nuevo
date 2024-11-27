@@ -40,20 +40,16 @@
 </div>
 
 <br>
-<div class="actionbar" style="width: 70%;">
-    <div class="input-group flex-nowrap">
+<div class="actionbar" style="width:100%;background-color: var(--mat-toolbar-container-background-color); padding: 2px;" >
+    <div class="input-group flex-nowrap" style="width: 70%;">
         <span class="input-group-text"><i class="bi bi-search"></i></span>
         <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
     </div>
 </div>
-
-<br>
-
 <div class="table-container">
     <div class="table-hotbar">
         <button><i class="bi bi-filetype-xlsx"></i></button>
     </div>
-    <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table class="table" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
@@ -113,4 +109,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>
