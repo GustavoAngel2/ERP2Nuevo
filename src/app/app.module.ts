@@ -22,6 +22,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 //Componentes
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -41,6 +42,8 @@ import { InsumosComponent } from './insumos/insumos.component';
 import { TraspasosComponent } from './traspasos/traspasos.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { RolesComponent } from './roles/roles.component';
+import { PermisosComponent } from './permisos/permisos.component';
 
 
 @NgModule({
@@ -63,7 +66,9 @@ import { ReportesComponent } from './reportes/reportes.component';
     InsumosComponent,
     TraspasosComponent,
     MovimientosComponent,
-    ReportesComponent
+    ReportesComponent,
+    RolesComponent,
+    PermisosComponent
   ],
   imports: [
     //Dependencias
@@ -90,7 +95,8 @@ import { ReportesComponent } from './reportes/reportes.component';
     MatSidenavModule,
     MatExpansionModule,
     ToastrModule.forRoot({ positionClass: 'inline' }),
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule
   ],
   providers: [
     provideAnimationsAsync(),
