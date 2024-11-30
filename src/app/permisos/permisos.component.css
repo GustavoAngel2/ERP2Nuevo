@@ -1,16 +1,17 @@
 .list-box {
     border-radius: 6px;
-    padding: 16px;
+    margin-top: 6px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 6px;
     flex-wrap: wrap;
     height: 320px;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .list-box mat-checkbox {
     background-color: #00000080;
     width: 256px;
-    padding: 4px;
     border-radius: 6px;
 }
