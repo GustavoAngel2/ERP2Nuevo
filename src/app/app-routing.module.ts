@@ -7,7 +7,6 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PersonasComponent } from './personas/personas.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
-import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
 import { InsumosComponent } from './insumos/insumos.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
   { path: "usuarios", component: UsuariosComponent, canActivate:[AuthGuard], title: "ERP - Modulo de usuarios" },
   { path: "proveedores", component: ProveedoresComponent, canActivate:[AuthGuard], title: "ERP - Modulo de proveedores" },
   { path: "ajustes", component: AjustesComponent, canActivate:[AuthGuard], title: "Ajustes" },
-  { path: "articulos", component:ArticulosComponent, canActivate:[AuthGuard], title: "ERP - Administrador de articulos" },
   { path: "entradas", component:EntradasComponent, canActivate:[AuthGuard], title: "ERP - Entradas" },
   { path: "sucursales", component:SucursalesComponent, canActivate:[AuthGuard], title: "ERP - Sucursales" },
   {  path: "insumos", component:InsumosComponent, canActivate:[AuthGuard], title: "ERP - Insumos" },

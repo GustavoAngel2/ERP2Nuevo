@@ -29,7 +29,6 @@ import { PersonasComponent } from './personas/personas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
-import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
 import { bancosComponent } from './Bancos/bancos.component';
@@ -49,7 +48,6 @@ import { InsumosComponent } from './insumos/insumos.component';
     UsuariosComponent,
     ProveedoresComponent,
     AjustesComponent,
-    ArticulosComponent,
     EntradasComponent,
     SucursalesComponent,
     bancosComponent,
