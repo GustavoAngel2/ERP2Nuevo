@@ -5,6 +5,11 @@ import { Injectable } from "@angular/core";
 })
 
 export class ERP{
+
+    public apiUrl = "http://67.217.245.127:5001/api";
+
+    public paginator = [10, 25, 100]
+
     setStyle(theme:string){
         const root = document.documentElement.style;
 
@@ -12,6 +17,8 @@ export class ERP{
         root.setProperty('--mat-expansion-container-background-color', ('var(--' + theme + ')'));
         root.setProperty('--mat-sidenav-container-background-color',('var(--dark-' + theme + ')'));
         root.setProperty('--mat-paginator-container-background-color',('var(--' + theme + ')'));
+        root.setProperty('--table-color',('var(--ligth-' + theme + ')'))
+        root.setProperty('--header-color',('var(--' + theme + ')'))
     }
 
     setBgColor(bgColor:string,theme:string){

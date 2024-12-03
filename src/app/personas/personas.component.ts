@@ -62,12 +62,9 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     this.PersonasService.getPersonas().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-          console.log(response)
-        } else {
-          console.log('no contiene datos');
-        }
+        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+        console.log(response)
+        
       },
       error: (error) => {
         console.error(error);

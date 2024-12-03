@@ -33,17 +33,37 @@
 }
 
 
-.section-custom button{
-  padding: 5px!important;
+/* General */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-button .icon mat-icon{
-  width: 64px;
-  height: 64px;
-  font-size: 64px;
+.settings-panel {
+  margin-bottom: 20px;
 }
 
-.text{
-  position: relative;
-  top: 24px;
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
 }
+
+/* Botones y Estilos */
+
+
+.btn-settings {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-settings:hover {
+  transform: scale(1.1);
+}
+
+/* Imagen de perfil */
+

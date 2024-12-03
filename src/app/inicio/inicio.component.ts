@@ -20,22 +20,5 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     this.profile = this.authService.getCurrentUser();
-
-    if (this.profile?.Id) {
-      this.cargarImagenUsuario(+this.profile.Id); // Convierte a número si Id es string
-    }
-  }
-
-  cargarImagenUsuario(id: number): void {
-    this.usuariosService.obtenerImagenUsuario(id).subscribe(
-      (response: Blob) => {
-        const reader = new FileReader();
-        reader.onload = () => this.imagenUrl = reader.result;
-        reader.readAsDataURL(response);
-      },
-      error => {
-        console.error("Error al cargar la imagen del usuario", error);
-      }
-    );
   }
 }

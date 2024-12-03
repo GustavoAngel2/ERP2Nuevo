@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-proveedores',
@@ -63,18 +64,15 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
 
   getData(){
     this.dataSource.filterPredicate = (data: getProveedoresModel, filter: string) => {
-      return data.Nombre.toLowerCase().includes(filter) || 
+      return data.Nombre.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
              data.Telefono.toString().includes(filter)// Puedes añadir más campos si es necesario
     };
     this.proveedoresService.getProveedores().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
+        console.log('Respuesta del servidor:', response);
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
           console.log('no contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -93,7 +91,7 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
       rfc: this.rfc,
       razonSocial: this.razonSocial,
       clabe: this.clabe,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
@@ -115,19 +113,21 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   }
 
   abrirDeleteDialog(Id: number, Name: string) {
-    const dialogRef = this.dialog.open(DeleteMenuComponent, {
-      width: '550px',
-      data: Name
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == "yes") {
+    Swal.fire({
+      title: `¿Estás seguro que desea borrar ${Name}?`,
+      text: 'No podrás revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.proveedoresService.deleteProveedor(Id).subscribe({
           next: (response) => {
             if(response.StatusCode == 200){
-              this.toastr.success(response.response.data, 'Proveedores');
+              Swal.fire('Eliminado', 'El archivo ha sido eliminado', 'success');
             } else {
-              this.toastr.error(response.response.data,'Proveedores')
+              Swal.fire('Error', 'Ha ocurrido un error!', 'error');
             }
             this.getData();
           },
@@ -137,6 +137,29 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
         });
       }
     });
+
+    // const dialogRef = this.dialog.open(DeleteMenuComponent, {
+    //   width: '550px',
+    //   data: Name
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result == "yes") {
+    //     this.proveedoresService.deleteProveedor(Id).subscribe({
+    //       next: (response) => {
+    //         if(response.StatusCode == 200){
+    //           this.toastr.success(response.response.data, 'Proveedores');
+    //         } else {
+    //           this.toastr.error(response.response.data,'Proveedores')
+    //         }
+    //         this.getData();
+    //       },
+    //       error: (error) => {
+    //         console.error('Hubo un error al eliminar el almacén', error);
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   cargar(elemento:getProveedoresModel){
@@ -179,7 +202,7 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
       rfc: this.rfc,
       razonSocial: this.razonSocial,
       clabe: this.clabe,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     this.proveedoresService.updateProveedor(persona).subscribe({

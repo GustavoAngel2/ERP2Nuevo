@@ -4,14 +4,36 @@
     gap: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.user-settings{
+    border: 0;
+    width: 100%;
+    position: relative;
+    padding: 6px;
+    background-color: rgb(156, 139, 233);
+    color: #fff;
 }
 
 .custom-card{
     background-color: var(--mat-toolbar-container-background-color);
     border-radius: 6px;
-    padding: 6px;
-    text-align: center;
     width:256px;
+    overflow: hidden;
+}
+
+.custom-card-info{
+    text-align: center;
+    height: 164px;
+    padding: 6px;
+}
+
+.user-action{
+    border: 0;
+    width: 100%;
+    position: relative;
+    padding: 6px;
+    background-color: brown;
+    color: #fff;
 }
