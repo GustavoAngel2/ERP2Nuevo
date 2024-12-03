@@ -327,7 +327,7 @@ export class OrdenComprasService {
     const body = {
       idProveedor: OrdenComprasData.idProveedor,
       fechaLlegada:OrdenComprasData.fechaLlegada,
-      idSurcursal: OrdenComprasData.idSucursal,
+      idSucursal: OrdenComprasData.idSucursal,
       idComprador: OrdenComprasData.idComprador,
       usuarioActualiza: OrdenComprasData.usuarioActualiza
     };

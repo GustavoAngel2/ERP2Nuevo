@@ -155,7 +155,7 @@ columnasDetalleCompras: string[] = [
     this.movimientoService.getMovimiento().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+          this.dataSource.data = response.Response.data.Movimientos; // Asigna los datos al atributo 'data' de dataSource
           console.log('no contiene datos');
 
       },

@@ -271,11 +271,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
     this.detalleOrdenCompraService.getDetalleOrdenCompras(id).subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource2.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
-          console.log('no contiene datos');
-        }
+          this.dataSource2.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSourc  
+          console.log('no contiene datos')
       },
       error: (error) => {
         console.error(error);
