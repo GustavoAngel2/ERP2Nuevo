@@ -28,7 +28,7 @@ import { updatebancosModel } from './data-models/bancos.models';
 })
 export class PersonasService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getPersonas(): Observable<defaultApiResponse> {
@@ -74,7 +74,7 @@ export class PersonasService {
 })
 export class ProveedoresService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getProveedores(): Observable<defaultApiResponse> {
@@ -127,7 +127,7 @@ export class ProveedoresService {
 })
 export class UsusariosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getUsuarios(): Observable<defaultApiResponse> {
@@ -184,7 +184,7 @@ export class UsusariosService {
 })
 export class SucursalesService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getSucursales(): Observable<defaultApiResponse> {
@@ -222,7 +222,7 @@ export class SucursalesService {
 })
 export class EntradasService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getEntradas(): Observable<defaultApiResponse> {
@@ -268,7 +268,7 @@ export class EntradasService {
 })
 export class InsumosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
   getInsumos(): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
@@ -310,7 +310,7 @@ export class InsumosService {
 })
 export class OrdenComprasService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getOrdenCompras(): Observable<defaultApiResponse> {
@@ -352,7 +352,7 @@ export class OrdenComprasService {
 })
 export class DetalleOrdenComprasService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getDetalleOrdenCompras(Id:number): Observable<defaultApiResponse> {
@@ -392,7 +392,7 @@ export class DetalleOrdenComprasService {
 })
 export class RecetasService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getRecetas(): Observable<defaultApiResponse> {
@@ -432,7 +432,7 @@ export class RecetasService {
   })
   export class DetalleRecetasService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getDetRecetas(Id: number): Observable<defaultApiResponse> {
@@ -473,7 +473,7 @@ export class RecetasService {
   })
   export class ArticulosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getArticulos(): Observable<defaultApiResponse> {
@@ -569,7 +569,7 @@ export class bancosService {
 })
 export class UMservice {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getUM(): Observable<defaultApiResponse> {
@@ -586,7 +586,7 @@ export class UMservice {
 })
 export class MovimientosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getMovimiento(): Observable<defaultApiResponse> {
@@ -624,7 +624,7 @@ InsertMovimiento(MovData: insertMovModel): Observable<defaultApiResponse> {
 })
 export class DetMovimientosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getDetalleMov(Id:number): Observable<defaultApiResponse> {
@@ -652,7 +652,7 @@ export class DetMovimientosService {
 })
 export class tipoMovimiento {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getTipoMov(): Observable<defaultApiResponse> {
@@ -670,7 +670,7 @@ export class tipoMovimiento {
 })
 export class TraspasosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getTraspasos(search:getTraspasosModel): Observable<defaultApiResponse> {
@@ -700,7 +700,7 @@ export class TraspasosService {
 })
 export class DetalleTraspasosService {
   //Se especifica la url base de la API
-  private apiUrl = "http://localhost:5020/api";
+  private apiUrl = "http://67.217.245.127:5001/api";
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   getDetalleTraspaso(search:number): Observable<defaultApiResponse> {
@@ -724,3 +724,4 @@ export class DetalleTraspasosService {
     return this.http.put(`${this.apiUrl}/DetalleTraspaso/Delete`, { Id });
   }
 }
+
