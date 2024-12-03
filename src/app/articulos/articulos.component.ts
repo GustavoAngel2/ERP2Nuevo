@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService, currentUser } from '../auth.service';
 import { articulosModel, updateArticuloModel } from '../data-models/articulos.model';
-import { unidadMedida } from '../data-models/um.model';
 import { ArticulosService } from '../data.service';
 import { UMservice } from '../data.service';
 import { ToastrService } from 'ngx-toastr';
@@ -152,9 +151,9 @@ export class ArticulosComponent implements OnInit {
     next: (response) => {
       if(response.StatusCode == 200){
         this.toastr.success(response.response.data, 'Articulo');
-      } else {
-        this.toastr.error(response.response.data,'Articulo')
-      }
+      } //else {
+      //   this.toastr.error(response.response.data,'Articulo')
+      // }
       console.log(response);
       this.getData();
       this.limpiar();
@@ -174,7 +173,7 @@ export class ArticulosComponent implements OnInit {
    this.costo = articulo.UltimoCosto;
    this.precio = articulo.PrecioVenta;
    this.iva= articulo.Iva;
-   this.ieps = articulo.Ieps
+   this.ieps = articulo.Ieps;
    this.datosCargados = true;
    this.isModifying = true
    console.log(articulo.Id)
@@ -204,10 +203,10 @@ export class ArticulosComponent implements OnInit {
       this.articulosService.deleteArticulo(Id).subscribe({
         next: (response) => {
           if(response.StatusCode == 200){
-            this.toastr.success(response.response.data, 'Articulos');
-          } else {
-            this.toastr.error(response.response.data,'Articulos')
-          }
+            this.toastr.success(response.Response.data, 'Articulos');
+          } //else {
+          //   this.toastr.error(response.Response.data,'Articulos')
+          // }
           this.getData();
         },
         error: (error) => {
@@ -217,5 +216,4 @@ export class ArticulosComponent implements OnInit {
     }
   });
 }
-
 }

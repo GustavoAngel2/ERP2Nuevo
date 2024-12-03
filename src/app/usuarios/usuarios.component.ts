@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { PersonasService, UsusariosService } from '../data.service'; // Ajusta la ruta según tu proyecto
 import { getUsuariosModel } from '../data-models/usuario.model'; // Ajusta la ruta según tu proyecto
 import Swal from 'sweetalert2';
@@ -11,7 +10,8 @@ import Swal from 'sweetalert2';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent implements OnInit {
-  dataSource = new MatTableDataSource<getUsuariosModel>([]);
+  usuarios:getUsuariosModel[] = [];
+  loaded:boolean = false;
 
   constructor(private usuariosService: UsusariosService, private personasService:PersonasService) {}
 
@@ -22,8 +22,8 @@ export class UsuariosComponent implements OnInit {
   deleteUsuario(id:number, nombre:String){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-outline-success",
-        cancelButton: "btn btn-outline-danger"
+        confirmButton: "btn btn-outline-danger",
+        cancelButton: "btn btn-outline-success"
       },
       buttonsStyling: true
     });
@@ -32,13 +32,14 @@ export class UsuariosComponent implements OnInit {
       text: "eso es mucho tiempo!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Si, borralo! <i class="bi bi-trash-fill"></i>',
-      cancelButtonText: "No, mantenlo!",
+      confirmButtonText: 'Borrar <i class="bi bi-trash-fill"></i>',
+      cancelButtonText: "Mantener ",
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
         this.personasService.deletePersonas(id).subscribe({
           next: (response) => {
+            console.log(response)
             if(response.StatusCode == 200){
               swalWithBootstrapButtons.fire({
                 title: "Eliminado!",
@@ -47,9 +48,9 @@ export class UsuariosComponent implements OnInit {
               });
             } else {
               swalWithBootstrapButtons.fire({
-                title: "Error!",
-                text: "Ha ocurrido un error" + response.Response.msg,
-                icon: "success"
+                title: "Ha ocurrido un error!",
+                text: response.response.data,
+                icon: "error"
               });
             }
             this.getData();
@@ -72,15 +73,12 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   getData(){
     this.usuariosService.getUsuarios().subscribe({
       next: (response) => {
+        this.loaded = true
         console.log('Respuesta del servidor:', response); 
-        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+        this.usuarios = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
       },
       error: (err) => {
         console.error('Error al obtener usuarios:', err); // Manejo de errores

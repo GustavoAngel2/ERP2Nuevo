@@ -4,22 +4,24 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html{
+    --mdc-linear-progress-active-indicator-color:black!important;
+    --mdc-linear-progress-track-color:rgba(0, 0, 0, 0.062)!important;
 
-    --ligth-red:#ff9a9a;
+    --ligth-red:#ffb3b3;
     --ligth-green:#c9ffb2;
     --ligth-blue:#a2b3ff;
     --ligth-orange:#ffc787;
     --ligth-yellow:#fff898;
     --ligth-gray: #cecece;
     --ligth-purple: #ffb3f4;
-    --red:#ca1c1c;
+    --red:brown;
     --green:#41bc0c;
     --blue:#3f55ba;
     --orange:#ce7510;
     --yellow:#cdc005;
     --gray: #5d5d5d;
     --purple: #9e0787;
-    --dark-red:#751010;
+    --dark-red:#4f0909;
     --dark-green:#205608;
     --dark-blue:#111e59;
     --dark-orange:#633c0f;
@@ -29,6 +31,7 @@ html{
     --custom: #000000;
     --dark-custom: #000000;
     --title-color: #000000;
+    --element-bg: #3d3d3d;
 
     --mat-toolbar-container-background-color: var(--black);
     --mat-expansion-container-background-color: var(--black);
@@ -40,6 +43,11 @@ html{
     --mat-sidenav-container-background-color:#424242;
     --mat-sidenav-content-background-color: #fff;
     --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
+}
+
+.mat-mdc-progress-bar{
+    --mdc-linear-progress-active-indicator-color:var(--mat-toolbar-container-background-color);
+    --mdc-linear-progress-track-color: var(--table-color);
 }
 
 /* Estilo de la barra de scroll */
@@ -101,7 +109,7 @@ mat-toolbar, mat-drawer-container, mat-expansion-panel {
     color: rgb(0, 0, 0) !important;
 }
 
-::ng-deep mat-paginator {
+mat-paginator {
     margin-top: 0 !important;
 }
 

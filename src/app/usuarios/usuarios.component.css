@@ -7,15 +7,24 @@
     flex-wrap: wrap;
 }
 
+.user-settings{
+    border: 0;
+    width: 100%;
+    position: relative;
+    padding: 6px;
+    background-color: rgb(156, 139, 233);
+    color: #fff;
+}
+
 .custom-card{
     background-color: var(--mat-toolbar-container-background-color);
     border-radius: 6px;
-    text-align: center;
     width:256px;
     overflow: hidden;
 }
 
 .custom-card-info{
+    text-align: center;
     height: 164px;
     padding: 6px;
 }
@@ -25,8 +34,6 @@
     width: 100%;
     position: relative;
     padding: 6px;
-    left:0;
-    bottom: 0;
     background-color: brown;
     color: #fff;
 }

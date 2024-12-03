@@ -3,17 +3,16 @@
         <div class="form-title">
             <h1 [hidden]="isModifying">Registrar Receta</h1>
             <h1 [hidden]="!isModifying">Editando receta con id: {{this.Id}}</h1>
-     </div>
+        </div>
         <div class="form-content">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-at"></i></span>
                 <input class="form-control" placeholder="Nombre" [(ngModel)]="Nombre">
             </div>
-       
         <div class="form-end">
-            <button [hidden]="!isModifying" (click)="editar()"  class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!isModifying" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
             <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
-            <button [hidden]="isModifying"   (click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+            <button [hidden]="isModifying"  (click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
     </div>
 </div>

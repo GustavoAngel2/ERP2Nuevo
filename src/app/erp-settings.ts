@@ -8,7 +8,7 @@ export class ERP{
 
     public apiUrl = "http://67.217.245.127:5001/api";
 
-    public paginator = [5, 10, 25, 100]
+    public paginator = [10, 25, 100]
 
     setStyle(theme:string){
         const root = document.documentElement.style;
