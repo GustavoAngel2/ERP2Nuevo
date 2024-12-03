@@ -11,4 +11,5 @@ export interface defaultApiResponse {
         data: any;
         msg: string;
     };
+    data:any[]
 }

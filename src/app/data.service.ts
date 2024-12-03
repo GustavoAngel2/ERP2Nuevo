@@ -19,6 +19,7 @@ import { insertMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.model';
 import { ERP } from './erp-settings';
+import { ReporteKardexMov, ReporteKardexMovSearch } from './data-models/reportes.model';
 
 
 @Injectable({
@@ -26,7 +27,7 @@ import { ERP } from './erp-settings';
 })
 export class PersonasService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getPersonas(): Observable<defaultApiResponse> {
@@ -73,7 +74,7 @@ export class PersonasService {
 })
 export class ProveedoresService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getProveedores(): Observable<defaultApiResponse> {
@@ -126,7 +127,7 @@ export class ProveedoresService {
 })
 export class UsusariosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getUsuarios(): Observable<defaultApiResponse> {
@@ -183,7 +184,7 @@ export class UsusariosService {
 })
 export class SucursalesService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getSucursales(): Observable<defaultApiResponse> {
@@ -222,7 +223,7 @@ export class SucursalesService {
 })
 export class EntradasService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getEntradas(): Observable<defaultApiResponse> {
@@ -269,7 +270,7 @@ export class EntradasService {
 })
 export class InsumosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
   getInsumos(): Observable<defaultApiResponse> {
     const token = this.authService.getToken();
@@ -312,7 +313,7 @@ export class InsumosService {
 })
 export class OrdenComprasService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getOrdenCompras(): Observable<defaultApiResponse> {
@@ -355,7 +356,7 @@ export class OrdenComprasService {
 })
 export class DetalleOrdenComprasService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getDetalleOrdenCompras(Id:number): Observable<defaultApiResponse> {
@@ -396,7 +397,7 @@ export class DetalleOrdenComprasService {
 })
 export class RecetasService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getRecetas(): Observable<defaultApiResponse> {
@@ -436,7 +437,7 @@ export class RecetasService {
   })
   export class DetalleRecetasService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getDetRecetas(Id: number): Observable<defaultApiResponse> {
@@ -477,7 +478,7 @@ export class RecetasService {
   })
   export class ArticulosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getArticulos(): Observable<defaultApiResponse> {
@@ -529,7 +530,7 @@ export class RecetasService {
 })
 export class UMservice {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getUM(): Observable<defaultApiResponse> {
@@ -546,7 +547,7 @@ export class UMservice {
 })
 export class MovimientosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getMovimiento(): Observable<defaultApiResponse> {
@@ -584,7 +585,7 @@ export class MovimientosService {
 })
 export class DetMovimientosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getDetalleMov(Id:number): Observable<defaultApiResponse> {
@@ -612,7 +613,7 @@ export class DetMovimientosService {
 })
 export class tipoMovimiento {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getTipoMov(): Observable<defaultApiResponse> {
@@ -630,7 +631,7 @@ export class tipoMovimiento {
 })
 export class TraspasosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getTraspasos(search:getTraspasosModel): Observable<defaultApiResponse> {
@@ -660,7 +661,7 @@ export class TraspasosService {
 })
 export class DetalleTraspasosService {
   //Se especifica la url base de la API
-  
+
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getDetalleTraspaso(search:number): Observable<defaultApiResponse> {
@@ -691,12 +692,21 @@ export class DetalleTraspasosService {
 })
 export class reportes{
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
-  
-  ExportarMovimiento(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos
+
+  ExportarReporte(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
     });
-    return this.http.get(`${this.erp.apiUrl}/Movimientos/ExportarMovimientosAExcel`, { headers, responseType: 'blob' });
+    return this.http.get(`${this.erp.apiUrl}/ReportKardexMov/ExportarReportKardexMovAExcel`, { headers, responseType: 'blob' });
+  }
+
+  getKardex(search:ReporteKardexMovSearch): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(search)
+    return this.http.get<any>(`${this.erp.apiUrl}/ReportKardexMov/Get?${encodeURIComponent(search.FechaInicio.replace(/-/g, '/'))}&pFechaFinal=${encodeURIComponent(search.FechaFin.replace(/-/g, '/'))}`,{headers});
   }
 }

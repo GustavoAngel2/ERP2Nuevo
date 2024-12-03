@@ -64,13 +64,13 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
 
   getData(){
     this.dataSource.filterPredicate = (data: getProveedoresModel, filter: string) => {
-      return data.Nombre.toLowerCase().includes(filter) || 
+      return data.Nombre.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
              data.Telefono.toString().includes(filter)// Puedes añadir más campos si es necesario
     };
     this.proveedoresService.getProveedores().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+        console.log('Respuesta del servidor:', response);
           this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
           console.log('no contiene datos');
       },
@@ -91,7 +91,7 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
       rfc: this.rfc,
       razonSocial: this.razonSocial,
       clabe: this.clabe,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
@@ -202,7 +202,7 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
       rfc: this.rfc,
       razonSocial: this.razonSocial,
       clabe: this.clabe,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     this.proveedoresService.updateProveedor(persona).subscribe({
