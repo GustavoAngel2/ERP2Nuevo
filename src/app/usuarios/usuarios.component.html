@@ -1,48 +1,21 @@
-<!-- <div class="table-container">
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-<table class="table" mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-        <td mat-cell *matCellDef="let usuario"> {{usuario.Id}} </td>
-    </ng-container>
-    <ng-container matColumnDef="Nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let usuario"> {{usuario.Nombre}} </td>
-    </ng-container>
-    <ng-container matColumnDef="NombreP">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de la Persona </th>
-        <td mat-cell *matCellDef="let usuario"> {{usuario.NombreP}} </td>
-    </ng-container>
-    <ng-container matColumnDef="FechaReg">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </th>
-        <td mat-cell *matCellDef="let usuario"> {{usuario.FechaReg}} </td>
-    </ng-container>
-    <ng-container matColumnDef="FechaAct">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Modificación </th>
-        <td mat-cell *matCellDef="let usuario"> {{usuario.FechaAct}} </td>
-    </ng-container>
-            <ng-container matColumnDef="Usuario">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
-                <td mat-cell *matCellDef="let usuario"> {{usuario.Usuario}} </td>
-            </ng-container>
-    <ng-container matColumnDef="Acciones">
-    <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let elemento">
-        <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
-        <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
-    </td>
-    </ng-container> 
-<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</table>
-</div> -->
-<div class="cards-container">
-    <div class="custom-card" *ngFor="let item of dataSource.data">
+<mat-progress-bar mode="indeterminate" [hidden]="loaded"></mat-progress-bar>
+
+<div class="cards-container" [hidden]="!loaded">
+    <div class="custom-card" routerLink="../personas" style="background-color: rgb(18, 156, 18); justify-content: center;">
+        <div class="custom-card-info"  style="margin-top: 24px;">
+            <i class="bi bi-person-fill-gear" style="font-size: 64px;"></i>
+            <h3 style="margin-top: 12px;"> Gestor de usuarios </h3>
+        </div>
+    </div>
+    <div class="custom-card" *ngFor="let item of usuarios">
         <div class="custom-card-info">
             <h3>{{ item.Nombre }}</h3>
             <p>ID: {{ item.Id }}</p>
+            <p>Rol: {{item.Rol}}</p>
             <p>Nombre del responsable: {{item.NombreP}}</p>
             <p>Fecha de alta:{{item.FechaReg}}</p>
         </div>
+        <button class="user-settings"><i class="bi bi-sliders"></i></button>
+        <button class="user-action" (click)="deleteUsuario(item.Id,item.NombreP)"><i class="bi bi-trash-fill"></i></button>
     </div>
 </div>

@@ -1,4 +1,4 @@
-export interface articulos {
+export interface articulosModel {
     Id: number;
     Codigo: string;
     Descripcion: string;
@@ -16,13 +16,13 @@ export interface articulos {
   export interface insertArticuloModel{
     Codigo: string;
     Descripcion: string;
-    Familia:string;
-    UM: string;
-    UltimoCosto:string;
-    PrecioVenta: string;
-    Iva:string;
-    Ieps:string;
-    Usuario: String;
+    Familia:number;
+    UM: number;
+    UltimoCosto:number;
+    PrecioVenta: number;
+    Iva:  number;
+    Ieps:number;
+    Usuario: number;
   }
 
   export interface updateArticuloModel{
@@ -39,8 +39,4 @@ export interface articulos {
     Ieps:string;
     Usuario: number;
   }
-
-   export interface deleteArticuloModel{
-     Id: number;
-   }
   

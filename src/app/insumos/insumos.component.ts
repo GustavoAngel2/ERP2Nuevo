@@ -18,16 +18,19 @@ import { insertInsumosModel, insumosModel, updateInsumosModel } from '../data-mo
   styleUrl: './insumos.component.css'
 })
 export class InsumosComponent implements OnInit,AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion','Costo','IdBanco', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion','Costo', 'IUF', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
   dataSource: MatTableDataSource<insumosModel>;
 
   id: number = 0;
   insumo: string = '';
+  insumoUP: string= '';
   descripcionInsumo: string = '';
   costo: number = 0;
   unidadMedida: number = 0;
   usuarioActualiza: number = 0;
   isModifying:boolean = false;
+
+  insumosPadresCombo:insumosModel[] = [];
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
@@ -68,11 +71,10 @@ export class InsumosComponent implements OnInit,AfterViewInit{
     this.insumosService.getInsumos().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
-          console.log('no contiene datos');
-        }
+
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+          this.insumosPadresCombo = response.Response.data;
+
       },
       error: (error) => {
         console.error(error);
@@ -86,7 +88,8 @@ export class InsumosComponent implements OnInit,AfterViewInit{
       descripcionInsumo: this.descripcionInsumo,
       costo: this.costo,
       unidadMedida: this.unidadMedida,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10), 
+      insumosUP: this.insumoUP
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
@@ -135,8 +138,9 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   cargar(elemento:insumosModel){
     this.id = elemento.Id
     this.insumo = elemento.Insumo
-    this.descripcionInsumo = elemento.DescripcionInsumo
-    this.costo = this.costo
+    this.descripcionInsumo = elemento.Descripcion
+    this.costo = elemento.Costo
+    this.insumoUP = elemento.InsumosUP
     this.isModifying = true
   }
 
@@ -155,6 +159,7 @@ export class InsumosComponent implements OnInit,AfterViewInit{
       descripcionInsumo: this.descripcionInsumo,
       costo: this.costo,
       unidadMedida: this.unidadMedida,
+      insumosUP: this.insumoUP,
       usuarioActualiza: parseInt(this.loggedUser.Id,10) 
     };
 

@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth.service';
-import { GetPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
+import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,7 +22,6 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   ApPaterno : string = '';
   ApMaterno : string = '';
   direccion: string = '';
-  usuario: number = 0;
   isModifying:boolean = false;
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -63,11 +62,9 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     this.PersonasService.getPersonas().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
-          console.log('no contiene datos');
-        }
+        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+        console.log(response)
+        
       },
       error: (error) => {
         console.error(error);
@@ -76,12 +73,12 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   }
 
   insertar():void {
-    const nuevaPersona = {
-      nombre: this.nombre,
+    const nuevaPersona:InsertPersonasModel = {
+      Nombre: this.nombre,
       ApPaterno:this.ApPaterno,
       ApMaterno:this.ApMaterno,
-      direccion: this.direccion,
-      usuario: parseInt(this.loggedUser.Id,10) 
+      Direccion: this.direccion,
+      Usuario: parseInt(this.loggedUser.Id,10) 
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento

@@ -1,35 +1,46 @@
 <div class="content">
   <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title><mat-icon>account_circle</mat-icon> <span class="section-title">Administración</span> </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="button-strip">
-          <button routerLink="../personas">Personas</button>
-          <button routerLink="../usuarios">Usuarios Admitidos</button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-    
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span> </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="button-strip">
-          <button routerLink="../proveedores">Proveedores</button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title><mat-icon>assessment</mat-icon> <span class="section-title">Estadísticas</span> </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="expansion-content">
-        </div>
-      </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>account_circle</mat-icon> <span class="section-title">Administración</span> </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-strip">
+        <button routerLink="../bancos"class="icon-button"><i class="bi bi-box"></i><br><span>Bancos</span></button>
+        <button routerLink="../traspasos"class="icon-button"><i class="bi bi-box"></i><br><span>Traspasos</span></button>
+        <button routerLink="../reportes" class="icon-button"><i class="bi bi-arrow-left-right"></i><br><span>Reportes</span></button>
+        <button routerLink="../personas" class="icon-button"><i class="bi bi-person"></i><br><span>Personas</span></button>
+        <button routerLink="../movimientos" class="icon-button"><i class="bi bi-arrow-left-right"></i><br><span>Movimientos</span></button>
+        
+      </div>
+    </mat-expansion-panel>
   </mat-accordion>
-</div>
 
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span> </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-strip">
+        <button routerLink="../sucursales"class="icon-button"><i class="bi bi-box"></i><br><span>Sucursales</span></button>
+        <button routerLink="../proveedores" class="icon-button"><i class="bi bi-briefcase"></i><br><span>Proveedores</span></button>
+        <button routerLink="../recetas"class="icon-button"><i class="bi bi-journal-text"></i><br><span>Recetas</span></button>
+        <button routerLink="../articulos"class="icon-button"><i class="bi bi-box"></i><br><span>Articulos</span></button>
+        <button routerLink="../insumos"class="icon-button"><i class="bi bi-box"></i><br><span>Insumos</span></button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>account_circle</mat-icon> <span class="section-title">Sistema</span> </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-strip">
+        <button routerLink="../usuarios" class="icon-button"><i class="bi bi-person"></i><br><span>Usuarios permitidos</span></button>
+        <button routerLink="../ajustes" class="icon-button"><i class="bi bi-person"></i><br><span>Ajustes</span></button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>

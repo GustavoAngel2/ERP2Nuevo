@@ -1,143 +1,150 @@
-<!-- <div class="title-container">
-    <br>
-    <label class="title">Punto de venta</label>
-    <br>
-    <img src="./assets/Almacenes.png" class="module-logo">
-  </div>
-  
-  
-  <div class="form-place" *ngIf="isOnStepOne" >
-  <div class="form-container">
-      <div class="form-content">
-          <mat-form-field>
-              <mat-label>Almacén</mat-label>
-              <mat-select [formControl]="IdSucursalControl" [(ngModel)]="IdSucursal" name="IdSucursal" required>
-                  <mat-option value="0">Seleccione</mat-option>
-                  <mat-option *ngFor="let cod of ComboSucursales" [value]="cod.Id">{{ cod.Nombre }}</mat-option>
-              </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Cliente1</mat-label>
-            <mat-select [formControl]="IdClienteControl" [(ngModel)]="IdCliente" name="IdCliente" required>
-              <mat-option value="0">Seleccione</mat-option>
-              <mat-option *ngFor="let cod of ComboClientes" [value]="cod.Id">{{ cod.Nombre }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>UUID</mat-label>
-            <input matInput type="text" placeholder="Ingresa una id unica universal" [(ngModel)]="uuid" name="uuid">
-          </mat-form-field>
-          <button (click)="insertarTicket();" class="btn right">Generar ticket<i class="underline"></i></button>
-        </div>
-        
-        
-    </div>
-
-    </div>
-    <br>
-
-    <div class="form-place" *ngIf="isOnStepTwo">
-        <div class="form-container">
-            <div class="form-title">
-            <h1 mat-dialog-title>Nuevo elemento del Ticket</h1>
+<div class="form-place">
+    <div class="form-container" [hidden]="!isOnStepOne">
+        <div class="form-title">
+            <h1 [hidden]="isModifying">Registrar Receta</h1>
+            <h1 [hidden]="!isModifying">Editando receta con id: {{this.Id}}</h1>
         </div>
         <div class="form-content">
-            <mat-form-field>
-                <mat-label>Ticket</mat-label>
-                <input  matInput [formControl]="IdTicketControl" placeholder="Ingresa el ticket" [(ngModel)]="idTicket" name="idTicket">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>UUID</mat-label>
-                <input matInput disabled="true" type="text" placeholder="Ingresa una id unica universal" [(ngModel)]="uuid" name="uuid">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Articulo" [formControl]="IdArticuloControl" [matAutocomplete]="autoArticulo" [ngModel]="selectedArticulo" [value]="displayArticuloFn(selectedArticulo)" />
-                <mat-autocomplete #autoArticulo="matAutocomplete" (optionSelected)="articuloSelected($event)" [displayWith]="displayArticuloFn">
-                    <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
-                        {{ option.Descripcion}}
-                    </mat-option>
-                  </mat-autocomplete>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Código" [formControl]="CodigoControl" [matAutocomplete]="autoCodigo" [ngModel]="selectedCodigo" [value]="displayArticuloCodFn(selectedCodigo)" />
-                <mat-autocomplete #autoCodigo="matAutocomplete" (optionSelected)="articuloCodSelected($event)" [displayWith]="displayArticuloCodFn">
-                    <mat-option *ngFor="let option of filteredArticulosCod | async" [value]="option">
-                    {{ option.Codigo }}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Cantidad</mat-label>
-            <input matInput type="number" [formControl]="CantidadControl" placeholder="Ingresa la cantidad" [(ngModel)]="cantidad" name="cantidad">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Precio de venta</mat-label>
-            <input matInput [formControl]="PrecioControl" placeholder="Ingresa el precio de venta" [(ngModel)]="precioVenta" name="precioVenta">
-        </mat-form-field>
-            <button (click)="refrescarPagina()" class="btn">Terminar<i class="underline"></i></button>
-            <button (click)="insertarDetalleTicket();" class="btn">Insertar al Ticket<i class="underline"></i></button>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                <input class="form-control" placeholder="Nombre" [(ngModel)]="Nombre">
+            </div>
+        <div class="form-end">
+            <button [hidden]="!isModifying" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+            <button [hidden]="isModifying"  (click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
     </div>
-  
-  
-  <br>
-  <div class="actionbar">
-      <mat-form-field class="search-bar">
-          <mat-label>Filtrar</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
-      </mat-form-field>
-      <div class="form-title">
-        <h1 mat-dialog-title style="color: rgb(211, 49, 20);">Total Ticket: {{ totalTicket | currency }}</h1>
-      </div>
+</div>
+
+
+<div class="form-container" [hidden]="!isOnStepTwo">
+    <div class="form-title">
+      <h1>Registrar Detalle para la Receta con ID: {{ IdReceta }}</h1>
+    </div>
+    <div class="form-content">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-truck"></i></span>
+            <select class="form-select" [(ngModel)]="Insumo">
+                <option value="0">Seleccione un Insumo</option>
+                <option *ngFor="let articulo of comboArticulos" value="{{articulo.Codigo}}">{{articulo.Descripcion}}</option>
+            </select>
+        </div>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-at"></i></span>
+            <input class="form-control" placeholder="Cantidad" [(ngModel)]="Cantidad">
+        </div>
+    </div>
+    <div class="form-end">
+        <button  class="btn btn-outline-success" (click)="insertarDetalle()"><i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle</button>
+        <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
+    </div>
   </div>
   
-  <br>
-  <div class="table-container">
-    <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" showFirstLastButtons></mat-paginator>
+<br>
+<div class="actionbar" style="width: 70%;">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </div>
+</div>
+<br>
+
+<div class="table-container" [hidden]="!isOnStepOne">
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Id}} </td>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Id}} </td>
         </ng-container>
-        <ng-container matColumnDef="IdTicket">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id del Ticket </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.IdTicket}} </td>
+        
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de la receta </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Nombre}} </td>
         </ng-container>
-        <ng-container matColumnDef="Codigo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Codigo}} </td>
+
+        <ng-container matColumnDef="FechaCreacion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de la creación </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaCreacion}} </td>
         </ng-container>
-        <ng-container matColumnDef="Articulo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Artículo </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Articulo}} </td>
+
+        <ng-container matColumnDef="FechaActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaActualiza}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="UsuarioRegistra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado por </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.UsuarioRegistra}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="UsuarioActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.UsuarioActualiza}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+                <!-- <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon> -->
+                <mat-icon class="action-btn" >pageview</mat-icon>
+                <mat-icon class="action-btn"  >delete</mat-icon>
+            </td>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+    </table>
+</div>
+
+<div class="table-container" [hidden]="!isOnStepTwo">
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <table mat-table [dataSource]="dataSource2" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="IdReceta">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio de receta </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.IdReceta}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Insumo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Insumo </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Insumo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Descripcion}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="Cantidad">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Cantidad}} </td>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.Cantidad}} </td>
         </ng-container>
-        <ng-container matColumnDef="PrecioVenta">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio Venta </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.PrecioVenta}} </td>
+
+        <ng-container matColumnDef="FechaReg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaReg}} </td>
         </ng-container>
-        <ng-container matColumnDef="Total">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Total}} </td>
+
+        <ng-container matColumnDef="FechaAct">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Actualización </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.FechaAct}} </td>
         </ng-container>
-        <ng-container matColumnDef="Usuario">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Usuario}} </td>
+
+        <ng-container matColumnDef="UsuarioAct">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario Actualiza </th>
+            <td mat-cell *matCellDef="let recetaDet"> {{recetaDet.UsuarioAct}} </td>
         </ng-container>
-        <ng-container matColumnDef="Estatus">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-            <td mat-cell *matCellDef="let detalleticket"> {{detalleticket.Estatus}} </td>
-        </ng-container>
+
         <ng-container matColumnDef="Acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let elemento">
-            <mat-icon class="action-btn" (click)="eliminarDetalle(elemento.Id, elemento.Articulo)">delete</mat-icon>
-        </td>
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+                <!-- <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon> -->
+                <mat-icon class="action-btn" >delete</mat-icon>
+            </td>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </table>
-    </div> -->
+</div>

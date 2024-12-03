@@ -4,7 +4,8 @@ export interface insertInsumosModel{
     costo: number;
     unidadMedida: number;
     usuarioActualiza: number;
-}
+    insumosUP: string;
+  }
 
 export interface updateInsumosModel{
     id: number;
@@ -13,15 +14,17 @@ export interface updateInsumosModel{
     costo: number;
     unidadMedida: number;
     usuarioActualiza: number;
+    insumosUP: string;
 }
 
 export interface insumosModel {
-    Costo: number
-    DescripcionInsumo: string
-    FechaActualiza: string
-    FechaRegistro: string
-    Id: number
-    Insumo: string
-    UnidadMedida: string
-    UsuarioActualiza: string
+    Costo: number;
+    Descripcion: string;
+    FechaActualiza: string;
+    FechaRegistro: string;
+    Id: number;
+    Insumo: string;
+    UnidadMedida: string;
+    UsuarioActualiza: string;
+    InsumosUP: string;
 }

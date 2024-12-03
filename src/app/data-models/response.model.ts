@@ -7,4 +7,9 @@ export interface defaultApiResponse {
         data: any;
         msg: string;
     };
+    Response: {
+        data: any;
+        msg: string;
+    };
+    data:any[]
 }
