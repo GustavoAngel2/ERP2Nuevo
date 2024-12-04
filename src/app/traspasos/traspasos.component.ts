@@ -20,11 +20,11 @@ import { detalleTraspasoModel, insertDetalleTraspasoModel } from '../data-models
 })
 export class TraspasosComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = [
-    'Id', 
-    'AlmacenOrigen', 
+    'Id',
+    'AlmacenOrigen',
     'AlmacenDestino',
     'UsuarioEnvia',
-    'UsuarioRecibe', 
+    'UsuarioRecibe',
     'UsuarioActualiza',
     'FechaAct',
     'FechaReg',
@@ -83,10 +83,10 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
     private sucursalesServise: SucursalesService,
     private usuariosService: UsusariosService,
     private insumosService: InsumosService,
-    public dialog:MatDialog, 
-    public authService: AuthService, 
+    public dialog:MatDialog,
+    public authService: AuthService,
     private toastr:ToastrService
-  ) 
+  )
   {
     this.dataSource = new MatTableDataSource<traspasoModel>();
     this.dataSource2 = new MatTableDataSource<detalleTraspasoModel>();
@@ -120,13 +120,13 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   setCombos(){
     this.sucursalesServise.getSucursales().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboSucursales = response; // Asigna los datos al atributo 'data' de dataSource
-          
-        } else {
-          console.log('no contiene datos');
-        }
+        console.log('Respuesta del servidor:', response);
+
+          this.comboSucursales = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+
+
+
+
       },
       error: (error) => {
         console.error(error);
@@ -134,13 +134,9 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
     });
     this.usuariosService.getUsuarios().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboUsuarios = response; // Asigna los datos al atributo 'data' de dataSource
-          
-        } else {
-          console.log('no contiene datos');
-        }
+        console.log('Respuesta del servidor:', response);
+          this.comboUsuarios = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+
       },
       error: (error) => {
         console.error(error);
@@ -148,12 +144,9 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
     });
     this.insumosService.getInsumos().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)&&response.length>0) {
-          this.comboInsumos = response; // Asigna los datos al atributo 'data' de dataSource
-        } else {
-          console.log('no contiene datos');
-        }
+        console.log('Respuesta del servidor:', response);
+          this.comboInsumos = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+
       },
       error: (error) => {
         console.error(error);
@@ -163,17 +156,15 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
 
   getData(){
     this.dataSource.filterPredicate = (data: traspasoModel, filter: string) => {
-      return data.UsuarioActualiza.toLowerCase().includes(filter) || 
+      return data.UsuarioActualiza.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter)
     };
     this.traspasosService.getTraspasos(this.search).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)) {
-          this.dataSource.data = response;
-        } else {
-          console.log('no contiene datos');
-        }
+        console.log('Respuesta del servidor:', response);
+
+          this.dataSource.data = response.Response.data;
+
       },
       error: (error) => {
         console.error(error);
@@ -184,14 +175,8 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   getDetalleData(){
     this.detalleTraspasoService.getDetalleTraspaso(this.idTraspaso).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-        if (response && Array.isArray(response)) {
-
-          this.dataSource2.data = response;
-          console.log(this.dataSource2.data)
-        } else {
-          console.log('no contiene datos');
-        }
+        console.log('Respuesta del servidor:', response);
+          this.dataSource2.data = response.Response.data;
       },
       error: (error) => {
         console.error(error);
@@ -204,7 +189,7 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
       idAlmacenOrigen: this.almacenOrigen,
       idAlmacenDestino: this.almacenDestino,
       usuarioEnvia: parseInt(this.loggedUser.Id,10) ,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
@@ -325,7 +310,7 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   //     Nombre: this.nombre,
   //     ApPaterno:this.ApPaterno,
   //     ApMaterno:this.ApMaterno,
-  //     Direccion: this.direccion,  
+  //     Direccion: this.direccion,
   //     Usuario: parseInt(this.loggedUser.Id,10)
   //   };
 
