@@ -20,6 +20,7 @@ import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.model';
 import { ERP } from './erp-settings';
 import { ReporteKardexMov, ReporteKardexMovSearch } from './data-models/reportes.model';
+import { updatebancosModel } from './data-models/bancos.model';
 
 
 @Injectable({
@@ -708,5 +709,49 @@ export class reportes{
     });
     console.log(search)
     return this.http.get<any>(`${this.erp.apiUrl}/ReportKardexMov/Get?${encodeURIComponent(search.FechaInicio.replace(/-/g, '/'))}&pFechaFinal=${encodeURIComponent(search.FechaFin.replace(/-/g, '/'))}`,{headers});
+  }
+}
+ /*---------------------------------------*/
+ @Injectable({
+  providedIn: "root",
+})
+export class bancosService {
+
+  constructor(private http: HttpClient,private authService: AuthService,private erp:ERP) {}
+
+  deletebancos(Id: number): Observable<any> {
+    return this.http.put(`${this.erp.apiUrl}/bancos/Delete`, { Id });
+  }
+
+  updatebancos(bancosData: updatebancosModel): Observable<defaultApiResponse> {
+   const body = {
+    id: bancosData.Id,
+    nombre: bancosData.nombre,
+    Direccion: bancosData.Direccion,
+    UsuarioActualiza: bancosData.UsuarioActualiza
+  }
+  console.log("Enviando solicitud con el siguiente cuerpo:", body);
+  return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/bancos/Update`, body);
+  }
+
+  getBancos(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/bancos/Get`,{headers});
+  }
+
+  Insertarbancos(bancosData: {
+    nombre: string;
+    Direccion: string;
+    UsuarioActualiza: number;
+  }): Observable<defaultApiResponse> {
+    const body = {
+      nombre:bancosData.nombre,
+      Direccion:bancosData.Direccion,
+      UsuarioActualiza:bancosData.UsuarioActualiza,
+    };
+    return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/bancos/Insert`, body);
   }
 }

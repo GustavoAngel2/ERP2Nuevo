@@ -33,7 +33,7 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
-import { bancosComponent } from './Bancos/bancos.component';
+import { BancosComponent } from './Bancos/bancos.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
@@ -57,7 +57,7 @@ import { PermisosComponent } from './permisos/permisos.component';
     AjustesComponent,
     EntradasComponent,
     SucursalesComponent,
-    bancosComponent,
+    BancosComponent,
     RecetasComponent,
     DetalleRecetasComponent,
     OrdenCompraComponent,
@@ -77,7 +77,7 @@ import { PermisosComponent } from './permisos/permisos.component';
     NgIf,
     HttpClientModule,
     HighchartsChartModule,
-    
+
     //Materials
     MatHeaderCell,
     MatHeaderRow,

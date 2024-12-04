@@ -18,7 +18,7 @@ import { insertbancosModel, bancos, updatebancosModel,} from '../data-models/ban
   templateUrl: './bancos.component.html',
   styleUrl: './bancos.component.css'
 })
-export class bancosComponent implements OnInit,AfterViewInit {
+export class BancosComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = ['Id', 'Nombre', 'Direccion','FechaRegistro','FechaActualiza', 'UsuarioActualiza', 'Acciones'];
   dataSource: MatTableDataSource<bancos>;
 
@@ -59,12 +59,12 @@ export class bancosComponent implements OnInit,AfterViewInit {
 
   getData(){
     this.dataSource.filterPredicate = (data: bancos, filter: string) => {
-      return data.nombre.toLowerCase().includes(filter) || 
+      return data.nombre.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
              data.Direccion.toString().includes(filter)// Puedes añadir más campos si es necesario
     };
     this.bancosService.getBancos().subscribe({
-      next: (response) => { 
+      next: (response) => {
         if (response && Array.isArray(response)&&response.length>0) {
           this.dataSource.data = response; // Asigna los datos al atributo 'data' de dataSource
         } else {
@@ -81,7 +81,7 @@ export class bancosComponent implements OnInit,AfterViewInit {
     const nuevobancos:insertbancosModel = {
       nombre: this.nombre,
       Direccion: this.direccion,
-      UsuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      UsuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     console.log(nuevobancos)
@@ -147,7 +147,7 @@ export class bancosComponent implements OnInit,AfterViewInit {
       Id: this.id,
       nombre: this.nombre,
       Direccion: this.direccion,
-      UsuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      UsuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     this.bancosService.updatebancos(bancos).subscribe({
