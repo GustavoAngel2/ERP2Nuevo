@@ -31,10 +31,9 @@ import { PersonasComponent } from './personas/personas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
-import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
-import { BancosComponent } from './bancos/bancos.component';
+import { bancosComponent } from './Bancos/bancos.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
@@ -56,10 +55,9 @@ import { PermisosComponent } from './permisos/permisos.component';
     UsuariosComponent,
     ProveedoresComponent,
     AjustesComponent,
-    ArticulosComponent,
     EntradasComponent,
     SucursalesComponent,
-    BancosComponent,
+    bancosComponent,
     RecetasComponent,
     DetalleRecetasComponent,
     OrdenCompraComponent,

@@ -29,12 +29,14 @@ export interface articulosModel {
     Id:number;
     Codigo: string;
     Descripcion: string;
-    Familia:number;
+    Familia:string;
     UM: number;
-    UltimoCosto:number;
-    PrecioVenta: number;
-    Iva:  number;
-    Ieps:number;
+    Costo:number;
+    Precio:number;
+    UltimoCosto:string;
+    PrecioVenta: string;
+    Iva:string;
+    Ieps:string;
     Usuario: number;
   }
   
