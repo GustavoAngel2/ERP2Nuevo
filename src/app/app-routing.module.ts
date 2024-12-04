@@ -18,6 +18,7 @@ import { TraspasosComponent } from './traspasos/traspasos.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { PermisosComponent } from './permisos/permisos.component';
+import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.component';
 
 
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: "movimientos", component:MovimientosComponent, canActivate:[AuthGuard], title: "ERP - Movimientos" },
   { path: "reportes", component:ReportesComponent, canActivate:[AuthGuard], title: "ERP - Reportes" },
   { path: "permisos", component:PermisosComponent, canActivate:[AuthGuard], title: "ERP - Permisos" },
+  { path: "dev", component:DevEnviromentComponent, canActivate:[AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

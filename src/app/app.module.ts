@@ -4,7 +4,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +23,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {AsyncPipe} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 //Componentes
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -44,6 +46,7 @@ import { MovimientosComponent } from './movimientos/movimientos.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { RolesComponent } from './roles/roles.component';
 import { PermisosComponent } from './permisos/permisos.component';
+import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.component';
 
 
 @NgModule({
@@ -68,7 +71,8 @@ import { PermisosComponent } from './permisos/permisos.component';
     MovimientosComponent,
     ReportesComponent,
     RolesComponent,
-    PermisosComponent
+    PermisosComponent,
+    DevEnviromentComponent
   ],
   imports: [
     //Dependencias
@@ -96,7 +100,10 @@ import { PermisosComponent } from './permisos/permisos.component';
     MatExpansionModule,
     ToastrModule.forRoot({ positionClass: 'inline' }),
     MatProgressBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    AsyncPipe,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync(),
@@ -105,6 +112,7 @@ import { PermisosComponent } from './permisos/permisos.component';
       timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
+
     }),
   ],
   bootstrap: [AppComponent] //Interfaz de Inicio

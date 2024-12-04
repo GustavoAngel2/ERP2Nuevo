@@ -1,50 +1,52 @@
-<div class="table-container">
-    <div class="toolbar">
-      <input
-        matInput
-        placeholder="Filtrar"
-        (input)="applyFilter($event)"
-        class="filter-input"
-      />
-      <button mat-raised-button color="primary" (click)="limpiar()">Nuevo</button>
-    </div>
-  
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let element">{{ element.Id }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="Direccion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </th>
-        <td mat-cell *matCellDef="let element">{{ element.Direccion }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="Acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="accent" (click)="cargarDatos(element)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="abrirDeleteDialog(element.Id, element.nombre)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+<div class="form-container">
+  <div class="form-title">
+          <h1 [hidden]="isModifying">Registrar banco</h1>
+          <h1 [hidden]="!isModifying">Editando banco con Id: {{this.id}}</h1>
   </div>
-  
+  <div class="form-content">
+          <div class="input-group flex-nowrap">
+              <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
+              <input class="form-control" placeholder="Nombre" [(ngModel)]="nombre">
+              <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+              <input class="form-control" placeholder="Direccion" [(ngModel)]="direccion">
+          </div>
+  </div>
+  <div class="form-end">
+      <button [hidden]="!isModifying" (click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+      <button [hidden]="!isModifying" (click)="limpiar()"   class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+      <button [hidden]=" isModifying" (click)="insertar()"  class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+  </div>
+</div>
+
+<br>
+<div class="input-group flex-nowrap" style="width: 70%;">
+  <span class="input-group-text"><i class="bi bi-search"></i></span>
+  <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+</div>
+<br>
+<div class="table-container">
+  <table class="table" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <td mat-cell *matCellDef="let articulo"> {{articulo.Id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del banco </th>
+          <td mat-cell *matCellDef="let articulo"> {{articulo.Nombre}}  </td>
+      </ng-container>
+      <ng-container matColumnDef="Direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion del banco </th>
+          <td mat-cell *matCellDef="let articulo"> {{articulo.Direccion}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let elemento">
+          <mat-icon class="action-btn" (click)="cargarDatos(elemento)">edit</mat-icon>
+          <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Descripcion)">delete</mat-icon>
+      </td>
+      </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>

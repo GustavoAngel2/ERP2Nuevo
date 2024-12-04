@@ -1,6 +1,6 @@
 export interface bancos {
     Id: number;
-    nombre: string;
+    Nombre: string;
     Direccion: string;
     UsuarioActualiza: String;
   }

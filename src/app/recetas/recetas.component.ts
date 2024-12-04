@@ -1,3 +1,4 @@
+import { DetalleRecetasService } from './../data.service';
 import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
@@ -11,8 +12,7 @@ import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticulosService, RecetasService } from '../data.service';
 import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models/recetas.model';
-import { insertDetRecetaModel, recetaDetModel, updateDetRecetasModel } from '../data-models/detallereceta.model';
-import { DetalleRecetasService } from '../data.service';
+import { insertDetRecetaModel, recetaDetModel } from '../data-models/detallereceta.model';
 import { articulosModel } from '../data-models/articulos.model';
 
 
@@ -48,7 +48,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
 
   dataSource: MatTableDataSource<recetaModel>;
   dataSource2: MatTableDataSource<recetaDetModel>;
-  
+
   Id: number = 0;
   IdReceta: number = 0;
   Insumo:string = '0';
@@ -60,7 +60,9 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   isOnStepOne:boolean = true;
   isOnStepTwo:boolean = false;
   isModifying:boolean = false;
-  
+
+  viewDetail:boolean = false;
+
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -70,8 +72,8 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     private recetasService: RecetasService,
     private articulosService:ArticulosService,
     private detalleRecetas: DetalleRecetasService,
-    public dialog:MatDialog, 
-    public authService: AuthService, 
+    public dialog:MatDialog,
+    public authService: AuthService,
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<recetaModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
@@ -114,10 +116,10 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   getData(id:number): void {
     // Configura el filtro de búsqueda si es necesario
     this.dataSource.filterPredicate = (data: recetaModel, filter: string) => {
-      return data.Id.toString().toLowerCase().includes(filter) || 
+      return data.Id.toString().toLowerCase().includes(filter) ||
              data.Nombre.toString().includes(filter);
     };
-  
+
     // Asegúrate de que se esté utilizando el IdReceta correcto al obtener los detalles
       this.detalleRecetas.getDetRecetas(id).subscribe({
         next: (response) => {
@@ -129,9 +131,9 @@ export class RecetasComponent implements OnInit,AfterViewInit{
           console.error(error);
         }
       });
-    } 
-  
-  
+    }
+
+
 
 
   insertar(): void {
@@ -145,12 +147,12 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       next: (response) => {
         if (response.StatusCode === 200) {
           this.toastr.success(response.response.msg, 'Recetas');
- 
-          this.IdReceta = response.response.data;;  
+
+          this.IdReceta = response.response.data;;
 
           // Llamar a getData() para cargar los detalles de la receta usando el IdReceta
           this.getData(this.IdReceta);  // Llamar con el IdReceta generado
-  
+
           // Mostrar el formulario de detalle o cualquier otra acción que quieras hacer
           this.isOnStepOne = false;
           this.isOnStepTwo = true;
@@ -164,7 +166,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       }
     });
   }
-  
+
 
   insertarDetalle(): void {
     const detalleReceta: insertDetRecetaModel = {
@@ -189,7 +191,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       }
     });
   }
-  
+
 
   abrirDeleteDialog(Id: number, Name: string) {
     const dialogRef = this.dialog.open(DeleteMenuComponent, {
@@ -216,11 +218,36 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     });
   }
 
+  abrirDeleteDetalleDialog(Id: number, Name: string) {
+    const dialogRef = this.dialog.open(DeleteMenuComponent, {
+      width: '550px',
+      data: Name
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "yes") {
+        this.detalleRecetas.deleteDetRecetas(Id).subscribe({
+          next: (response) => {
+            if(response.StatusCode == 200){
+              this.toastr.success(response.response.data, 'Recetas');
+            } else {
+              this.toastr.error(response.response.data,'Recetas')
+            }
+            this.getData(this.IdReceta);
+          },
+          error: (error) => {
+            console.error('Hubo un error al eliminar la Receta', error);
+          }
+        });
+      }
+    });
+  }
+
   editar(){
     const receta:updateRecetasModel  = {
       id: this.Id,
       nombre:this.Nombre,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     this.recetasService.updateRecetas(receta).subscribe({
@@ -259,14 +286,14 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   getDataRecetas(): void {
     // Configura el filtro de búsqueda si es necesario
     this.dataSource.filterPredicate = (data: recetaModel, filter: string) => {
-      return data.Id.toString().toLowerCase().includes(filter) || 
+      return data.Id.toString().toLowerCase().includes(filter) ||
              data.Nombre.toString().includes(filter);
     };
-  
+
     // Asegúrate de que se esté utilizando el IdReceta correcto al obtener los detalles
       this.recetasService.getRecetas().subscribe({
         next: (response) => {
-          console.log('Respuesta del servidor:', response); 
+          console.log('Respuesta del servidor:', response);
 
             this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
         },
@@ -274,5 +301,23 @@ export class RecetasComponent implements OnInit,AfterViewInit{
           console.error(error);
         }
       });
-    } 
+    }
+
+
+
+    mostrarDetalles(id: number) {
+      this.IdReceta = id; // Almacena el ID del movimiento actual
+      this.isOnStepOne = false; // Oculta la primera tabla
+      this.isOnStepTwo = true; // Muestra la segunda tabla con detalles
+      this.viewDetail = true;  // Asegúrate de ocultar el formulario aquí
+      this.getData(id); // Llama al método que obtiene los detalles del movimiento
+    }
+
+
+    volverALista() {
+      this.isOnStepOne = true;
+      this.isOnStepTwo = false;
+      this.viewDetail = false;
+    }
+
 }

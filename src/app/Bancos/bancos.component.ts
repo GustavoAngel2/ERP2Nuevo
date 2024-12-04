@@ -15,7 +15,7 @@ import { bancos, insertbancosModel, updatebancosModel } from '../data-models/ban
   styleUrls: ['./bancos.component.css']
 })
 export class bancosComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['Id', 'nombre', 'Direccion', 'FechaRegistro', 'FechaActualiza', 'UsuarioActualiza', 'Acciones'];
+  displayedColumns: string[] = ['Id', 'nombre', 'Direccion',  'Acciones'];
   dataSource: MatTableDataSource<bancos>;
 
   id: number = 0;
@@ -60,13 +60,9 @@ export class bancosComponent implements OnInit, AfterViewInit {
   getData() {
     this.bancosService.getBancos().subscribe({
       next: (response) => {
-        if (response && Array.isArray(response) && response.length > 0) {
-          this.dataSource.data = response;
+          this.dataSource.data = response.Response.data;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-        } else {
-          console.log('No contiene datos');
-        }
       },
       error: (error) => {
         console.error(error);
@@ -124,7 +120,7 @@ export class bancosComponent implements OnInit, AfterViewInit {
 
   cargarDatos(elemento: bancos) {
     this.id = elemento.Id;
-    this.nombre = elemento.nombre;
+    this.nombre = elemento.Nombre;
     this.direccion = elemento.Direccion;
     this.isModifying = true;
   }
