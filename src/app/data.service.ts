@@ -19,6 +19,7 @@ import { insertMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.model';
 import { ERP } from './erp-settings';
+import { bancos,insertbancosModel,updatebancosModel,deletebancosModel } from './data-models/bancos.model';
 import { ReporteKardexMov, ReporteKardexMovSearch } from './data-models/reportes.model';
 
 
@@ -69,6 +70,50 @@ export class PersonasService {
 }
 
 //----------------------------------------------------------------------------------------------
+@Injectable({
+  providedIn: "root",
+})
+export class bancosService {
+
+  constructor(private http: HttpClient,private authService: AuthService,private erp:ERP) {}
+
+  deletebancos(Id: number): Observable<any> {
+    return this.http.put(`${this.erp.apiUrl}/bancos/Delete`, { Id });
+  }
+
+  updatebancos(bancosData: updatebancosModel): Observable<defaultApiResponse> {
+   const body = {
+    id: bancosData.Id,
+    nombre: bancosData.nombre,
+    Direccion: bancosData.Direccion,
+    UsuarioActualiza: bancosData.UsuarioActualiza
+  }
+  console.log("Enviando solicitud con el siguiente cuerpo:", body);
+  return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/bancos/Update`, body);
+  }
+
+  getBancos(): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/bancos/Get`,{headers});
+  }
+
+  Insertarbancos(bancosData: {
+    nombre: string;
+    Direccion: string;
+    UsuarioActualiza: number;
+  }): Observable<defaultApiResponse> {
+    const body = {
+      nombre:bancosData.nombre,
+      Direccion:bancosData.Direccion,
+      UsuarioActualiza:bancosData.UsuarioActualiza,
+    };
+    return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/bancos/Insert`, body);
+  }
+}
+//----------------------------------------------------------------------------------------------------
 @Injectable({
   providedIn: "root",
 })
