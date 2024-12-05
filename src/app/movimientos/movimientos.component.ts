@@ -164,6 +164,7 @@ columnasDetalleCompras: string[] = [
       }
     });
   }
+
   getDetalle(id: number) {
     this.detalleMovService.getDetalleMov(id).subscribe({
       next: (response) => {

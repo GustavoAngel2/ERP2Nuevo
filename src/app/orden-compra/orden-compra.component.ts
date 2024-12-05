@@ -72,20 +72,22 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
   isOnStepTwo:boolean = false;
   isOnDetail:boolean = false;
 
+  mostrarFormulario:boolean=true;
+
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private proveedoresService:ProveedoresService, 
-    private ordenCompraService: OrdenComprasService, 
+    private proveedoresService:ProveedoresService,
+    private ordenCompraService: OrdenComprasService,
     private sucursalesService:SucursalesService,
     private usuariosService:UsusariosService,
     private detalleOrdenCompraService:DetalleOrdenComprasService,
     private insumosService:InsumosService,
-    public dialog:MatDialog, 
-    public authService: AuthService, 
+    public dialog:MatDialog,
+    public authService: AuthService,
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<OrdenCompraModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
@@ -156,8 +158,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
 
   getData(){
     this.dataSource.filterPredicate = (data: OrdenCompraModel, filter: string) => {
-      return data.Id.toString().toLowerCase().includes(filter) || 
-      data.IdComprador.toString().includes(filter)|| 
+      return data.Id.toString().toLowerCase().includes(filter) ||
+      data.IdComprador.toString().includes(filter)||
       data.IdProveedor.toString().includes(filter)
     };
     this.ordenCompraService.getOrdenCompras().subscribe({
@@ -178,7 +180,7 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
       idComprador: this.idComprador,
       idSucursal: this.idSucursal,
       idProveedor: this.idProveedor,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10)  
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     }
 
     console.log(nuevaPersona)
@@ -248,7 +250,7 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
       idProveedor:this.idProveedor,
       idSucursal:this.idSucursal,
       fechaLlegada:this.fechaLlegada,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
     console.log(persona)
     this.ordenCompraService.updateOrdenCompra(persona).subscribe({
@@ -270,8 +272,8 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
   getDetalle(id:number){
     this.detalleOrdenCompraService.getDetalleOrdenCompras(id).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-          this.dataSource2.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSourc  
+        console.log('Respuesta del servidor:', response);
+          this.dataSource2.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSourc
           console.log('no contiene datos')
       },
       error: (error) => {
@@ -301,4 +303,20 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
   terminar(){
     location.reload()
   }
+
+  mostrarDetalles(id: number) {
+    this.idOrdenCompra = id; // Almacena el ID del movimiento actual
+    this.isOnStepOne = false; // Oculta la primera tabla
+    this.isOnStepTwo = true; // Muestra la segunda tabla con detalles
+    this.mostrarFormulario = false;  // Asegúrate de ocultar el formulario aquí
+    this.getDetalle(id); // Llama al método que obtiene los detalles del movimiento
+  }
+
+
+  volverALista() {
+    this.isOnStepOne = true;
+    this.isOnStepTwo = false;
+    this.mostrarFormulario = true;
+  }
+
 }

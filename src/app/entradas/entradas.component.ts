@@ -1,4 +1,4 @@
-import { DetalleEntradasService } from './../data.service';
+import { DetalleEntradasService, ArticulosService, SucursalesService, ProveedoresService } from './../data.service';
 import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
@@ -13,6 +13,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { EntradasService } from '../data.service';
 import { entradasModel } from '../data-models/entradas.model';
 import { detalleEntradaModel, insertDetalleEntradaModel } from '../data-models/detalleentrada.model';
+import { articulosModel } from '../data-models/articulos.model';
+import { getProveedoresModel } from '../data-models/proveedores.model';
+import { sucursalModel } from '../data-models/sucursales.model';
 
 @Component({
   selector: 'app-entradas',
@@ -62,6 +65,12 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   costo: number= 0;
   descuento: number= 0;
 
+  articulosList:articulosModel[] = [];
+  proveedorList:getProveedoresModel[] = [];
+  sucursalList:sucursalModel[]=[];
+
+  idArticulo:number=0;
+
   fechaInicio:string = ''
   fechaFin:string = ''
 
@@ -76,12 +85,45 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private detalleEntradaService:DetalleEntradasService, private entradasService: EntradasService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
+  constructor(
+    private sucursalesService:SucursalesService,
+    private proveedoresService:ProveedoresService,
+    private articulosService:ArticulosService,
+    private detalleEntradaService:DetalleEntradasService,
+    private entradasService: EntradasService,
+    public dialog:MatDialog,
+    public authService: AuthService,
+    private toastr:ToastrService
+  ) {
     this.dataSource = new MatTableDataSource<entradasModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
     this.dataSourceDetalle = new MatTableDataSource<detalleEntradaModel>();
   }
 
   ngOnInit() {
+    this.articulosService.getArticulos().subscribe({
+      next:(response)=>{
+        this.articulosList = response.Response.data
+      },
+      error:(err)=>{
+
+      }
+    })
+    this.proveedoresService.getProveedores().subscribe({
+      next:(response)=>{
+        this.proveedorList = response.Response.data
+      },
+      error:(err)=>{
+
+      }
+    })
+    this.sucursalesService.getSucursales().subscribe({
+      next:(response)=>{
+        this.sucursalList = response.Response.data
+      },
+      error:(err)=>{
+
+      }
+    })
     this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
@@ -103,7 +145,9 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   getData(){
     this.dataSource.filterPredicate = (data: entradasModel, filter: string) => {
       return data.Factura.toString().toLowerCase().includes(filter) ||
-             data.Id.toString().includes(filter);
+             data.Id.toString().includes(filter) ||
+             data.FechaEntrega.includes(filter) ||
+             data.Surcursal.includes(filter)
     };
     this.entradasService.getEntradas().subscribe({
       next: (response) => {
@@ -118,14 +162,10 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   }
 
   getDetalleData(){
-    this.dataSource.filterPredicate = (data: entradasModel, filter: string) => {
-      return data.Factura.toString().toLowerCase().includes(filter) ||
-             data.Id.toString().includes(filter);
-    };
     this.detalleEntradaService.getDetalleEntrada(this.idEntrada).subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response);
-        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+        this.dataSourceDetalle.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
         console.log(response)
       },
       error: (error) => {
@@ -169,9 +209,9 @@ export class EntradasComponent implements OnInit, AfterViewInit{
         this.entradasService.deleteEntrada(Id).subscribe({
           next: (response) => {
             if(response.StatusCode == 200){
-              this.toastr.success(response.response.data, 'Proveedores');
+              this.toastr.success(response.response.data, 'Entradas');
             } else {
-              this.toastr.error(response.response.data,'Proveedores')
+              this.toastr.error(response.response.data,'Entradas')
             }
             this.getData();
           },
@@ -194,9 +234,9 @@ export class EntradasComponent implements OnInit, AfterViewInit{
         this.detalleEntradaService.deleteDetalleEntrada(Id).subscribe({
           next: (response) => {
             if(response.StatusCode == 200){
-              this.toastr.success(response.response.data, 'Proveedores');
+              this.toastr.success(response.response.data, 'Entradas');
             } else {
-              this.toastr.error(response.response.data,'Proveedores')
+              this.toastr.error(response.response.data,'Entradas')
             }
             this.getData();
           },
@@ -220,11 +260,11 @@ export class EntradasComponent implements OnInit, AfterViewInit{
     this.detalleEntradaService.insertDetalleEntrada(detalle).subscribe({
       next: (response) => {
         if(response.StatusCode == 200){
-          this.toastr.success(response.response.data, 'Proveedores');
+          this.toastr.success(response.response.data, 'Entradas');
         } else {
-          this.toastr.error(response.response.data,'Proveedores')
+          this.toastr.error(response.response.data,'Entradas')
         }
-        this.getData();
+        this.getDetalleData();
         this.limpiar();
       },
       error: (error) => {
@@ -233,22 +273,6 @@ export class EntradasComponent implements OnInit, AfterViewInit{
       }
     });
   }
-
-
-
-  // cargar(elemento:entradasModel){
-  //   this.id = elemento.Id
-  //   this.nombre = elemento.Nombre
-  //   this.direccion = elemento.Direccion
-  //   this.telefono = elemento.Telefono
-  //   this.idBanco=elemento.IdBanco
-  //   this.plazoPago=elemento.PlazoPago
-  //   this.correo=elemento.Correo
-  //   this.rfc=elemento.RFC
-  //   this.razonSocial=elemento.RazonSocial
-  //   this.clabe=elemento.CLABE
-  //   this.isModifying = true
-  // }
 
   limpiar(){
     this.id = 0
@@ -280,27 +304,16 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   terminar(){
     location.reload();
   }
-  // editar(){
-  //   const entrada:entradasUpdateModel   = {
-  //     id: this.id,
-  //     usuarioActualiza: parseInt(this.loggedUser.Id,10) ,
 
-  //   };
-
-  //   this.this.entradasService(entrada).subscribe({
-  //     next: (response) => {
-  //       if(response.StatusCode == 200){
-  //         this.toastr.success(response.response.data, 'Proveedores');
-  //       } else {
-  //         this.toastr.error(response.response.data,'Proveedores')
-  //       }
-  //       console.log(response);
-  //       this.getData();
-  //       this.limpiar();
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
+  onSelectChange(event:Event){
+    const selectedId = +(event.target as HTMLSelectElement).value; // Convertimos a número
+    const selectedItem = this.articulosList.find(item => item.Id === selectedId);
+    if (selectedItem) {
+      this.costo = parseInt(selectedItem.PrecioVenta,10);
+      this.codigo = selectedItem.Codigo
+    } else {
+      this.costo = 0;
+      this.codigo = '';
+    }
+  }
 }
