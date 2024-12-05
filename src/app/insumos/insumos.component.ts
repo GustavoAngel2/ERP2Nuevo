@@ -30,6 +30,8 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   usuarioActualiza: number = 0;
   isModifying:boolean = false;
 
+  insumosFiltrados: insumosModel[] = [];
+  descripcionFiltro: string = ''; // Nuevo campo para el filtro
   insumosPadresCombo:insumosModel[] = [];
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -69,11 +71,9 @@ export class InsumosComponent implements OnInit,AfterViewInit{
     };
     this.insumosService.getInsumos().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
-
-          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
-          this.insumosPadresCombo = response.Response.data;
-
+        this.dataSource.data = response.Response.data;
+        this.insumosPadresCombo = response.Response.data;
+        this.insumosFiltrados = [...this.insumosPadresCombo]; // Copia inicial para filtro
       },
       error: (error) => {
         console.error(error);
@@ -107,6 +107,23 @@ export class InsumosComponent implements OnInit,AfterViewInit{
         console.error('Hubo un error al insertar el almacen', error);
       }
     });
+  }
+
+  filtrarInsumos(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement)?.value || '';
+    this.insumosFiltrados = this.insumosPadresCombo.filter(insumo =>
+      insumo.Descripcion.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+  
+  
+  
+  seleccionarInsumo(descripcion: string): void {
+    const insumoSeleccionado = this.insumosPadresCombo.find(insumo => insumo.Descripcion === descripcion);
+    if (insumoSeleccionado) {
+      this.insumoUP = insumoSeleccionado.Insumo;
+      this.descripcionInsumo = insumoSeleccionado.Descripcion;
+    }
   }
 
   abrirDeleteDialog(Id: number, Name: string) {
