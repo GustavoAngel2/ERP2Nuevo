@@ -112,6 +112,7 @@
             <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let elemento">
                 <!-- <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon> -->
+                <mat-icon class="action-btn" (click)="mostrarDetalles(elemento.Id)">pageview</mat-icon>
                 <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
             </td>
         </ng-container>
@@ -120,8 +121,8 @@
     </table>
 
 </div>
-
-<div class="table-container" [hidden]="!isOnStepTwo">
+<button style="position: absolute; right: 10px;" class="btn btn-success" (click)="volverALista()" *ngIf="viewDetail != false">Cerrar</button><br> <br>
+<div class="table-container" [hidden]="!isOnStepTwo && viewDetail==false">
     <table class="table" mat-table [dataSource]="dataSource2">
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>

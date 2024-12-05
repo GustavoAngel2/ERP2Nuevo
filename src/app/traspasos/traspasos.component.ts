@@ -68,6 +68,8 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   isOnStepOne:boolean = true;
   isOnStepTwo:boolean = false;
 
+  viewDetail:boolean = false;
+
   comboSucursales:sucursalModel[] = [];
   comboUsuarios:getUsuariosModel[] = [];
   comboInsumos:insumosModel[] = [];
@@ -338,6 +340,21 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
 
   terminar(){
     location.reload()
+  }
+
+  mostrarDetalles(id: number) {
+    this.idTraspaso = id; // Almacena el ID del movimiento actual
+    this.isOnStepOne = false; // Oculta la primera tabla
+    this.isOnStepTwo = true; // Muestra la segunda tabla con detalles
+    this.viewDetail = true;  // Asegúrate de ocultar el formulario aquí
+    this.getDetalleData(); // Llama al método que obtiene los detalles del movimiento
+  }
+
+
+  volverALista() {
+    this.isOnStepOne = true;
+    this.isOnStepTwo = false;
+    this.viewDetail = false;
   }
 }
 

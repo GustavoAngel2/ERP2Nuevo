@@ -8,14 +8,15 @@
         <div class="input-group flex-nowrap">
             <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
             <select class="form-control" [(ngModel)]="idAlmacen">
-                <option value="0">Seleccione un Almacen</option>
+                <option value="0">Seleccione una sucursal</option>
                 <option *ngFor="let sc of comboSuc" value="{{sc.Id}}">{{sc.Nombre}}</option>
             </select>
             <span class="input-group-text"><i class="bi bi-shuffle"></i></span>
             <select class="form-control" [(ngModel)]="tipoMovimiento">
                 <option value="0">Seleccione un Tipo de Movimiento</option>
                 <option *ngFor="let tm of comboTM" value="{{tm.Id}}">{{tm.Descripcion}}</option>
-            </select>        </div>
+            </select>
+        </div>
     </div>
     <div class="form-end">
         <button [hidden]="!isModifying" (click)="insertar()" class="btn btn-outline-warning"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
@@ -37,7 +38,7 @@
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-truck"></i></span>
                 <select class="form-select" [(ngModel)]="Insumo">
-                    <option value="0">Seleccione un Insumo</option>
+                    <option value="">Seleccione un Insumo</option>
                     <option *ngFor="let proveedor of comboInsumos" value="{{proveedor.Insumo}}">{{proveedor.Descripcion}}</option>
                 </select>
             </div>
@@ -48,7 +49,7 @@
         </div>
         <div class="form-end">
             <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
-            <button (click)="insertarDetalleMov()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+            <button (click)="insertarDetalleMov(); limpiar();" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
     </div>
 </div>

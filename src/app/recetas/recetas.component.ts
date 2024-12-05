@@ -15,7 +15,6 @@ import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models
 import { insertDetRecetaModel, recetaDetModel } from '../data-models/detallereceta.model';
 import { articulosModel } from '../data-models/articulos.model';
 
-
 @Component({
   selector: 'app-recetas',
   templateUrl: './recetas.component.html',
@@ -294,8 +293,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       this.recetasService.getRecetas().subscribe({
         next: (response) => {
           console.log('Respuesta del servidor:', response);
-
-            this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
         },
         error: (error) => {
           console.error(error);
@@ -320,4 +318,9 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       this.viewDetail = false;
     }
 
+
+    limpiarDetalle(){
+      this.Insumo = '';
+      this.Cantidad = 0;
+    }
 }

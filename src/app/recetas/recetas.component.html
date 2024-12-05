@@ -26,7 +26,7 @@
         <div class="input-group flex-nowrap">
             <span class="input-group-text"><i class="bi bi-truck"></i></span>
             <select class="form-select" [(ngModel)]="Insumo">
-                <option value="0">Seleccione un Insumo</option>
+                <option value="">Seleccione un Insumo</option>
                 <option *ngFor="let articulo of comboArticulos" value="{{articulo.Codigo}}">{{articulo.Descripcion}}</option>
             </select>
         </div>
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="form-end">
-        <button  class="btn btn-outline-success" (click)="insertarDetalle()"><i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle</button>
+        <button  class="btn btn-outline-success" (click)="insertarDetalle(); limpiarDetalle();"><i class="bi bi-cloud-upload-fill icon"></i> Insertar Detalle</button>
         <button (click)="terminar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Terminar<i class="underline"></i></button>
     </div>
   </div>

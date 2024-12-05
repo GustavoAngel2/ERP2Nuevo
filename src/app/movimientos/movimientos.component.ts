@@ -24,11 +24,11 @@ import { InsumosService } from '../data.service';
 })
 export class MovimientosComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = [
-    'Id', 
-    'NombreAlmacen', 
+    'Id',
+    'NombreAlmacen',
     'TipoMovimiento',
     'UsuarioRegistra',
-    'UsuarioAutoriza', 
+    'UsuarioAutoriza',
     'UsuarioActualiza',
     'FechaActualiza',
     'FechaCreacion',
@@ -75,9 +75,9 @@ columnasDetalleCompras: string[] = [
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private PersonasService: PersonasService, 
-    public dialog:MatDialog, 
-    public authService: AuthService, 
+    private PersonasService: PersonasService,
+    public dialog:MatDialog,
+    public authService: AuthService,
     private sucursalesService:SucursalesService,
     private TipoMov: tipoMovimiento,
     private movimientoService:MovimientosService,
@@ -112,7 +112,7 @@ columnasDetalleCompras: string[] = [
   setCombos(){
   this.sucursalesService.getSucursales().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+        console.log('Respuesta del servidor:', response);
           this.comboSuc = response.Response.data;
           console.log('no contiene datos');
       },
@@ -123,7 +123,7 @@ columnasDetalleCompras: string[] = [
 
     this.TipoMov.getTipoMov().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+        console.log('Respuesta del servidor:', response);
           this.comboTM = response.Response.data;
           console.log('no contiene datos');
       },
@@ -133,10 +133,10 @@ columnasDetalleCompras: string[] = [
     });
     this.InsumosService.getInsumos().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+        console.log('Respuesta del servidor:', response);
           this.comboInsumos = response.Response.data;
           console.log('no contiene datos');
-        
+
       },
       error: (error) => {
         console.error(error);
@@ -147,14 +147,14 @@ columnasDetalleCompras: string[] = [
 /* ---------------------------------------------------------------------------------------------------------------------- */
   getData(){
     this.dataSource.filterPredicate = (data: MovModel, filter: string) => {
-      return data.NombreAlmacen.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter) || 
+      return data.NombreAlmacen.toLowerCase().includes(filter) ||
+             data.Id.toString().includes(filter) ||
              data.TipoMovimiento.toLowerCase().includes(filter) ||
              data.UsuarioRegistra.toLowerCase().includes(filter) // Puedes añadir más campos si es necesario
     };
     this.movimientoService.getMovimiento().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+        console.log('Respuesta del servidor:', response);
           this.dataSource.data = response.Response.data.Movimientos; // Asigna los datos al atributo 'data' de dataSource
           console.log('no contiene datos');
 
@@ -165,23 +165,18 @@ columnasDetalleCompras: string[] = [
     });
   }
   getDetalle(id: number) {
-    this.dataSource2.data = [];  // Limpia los datos antiguos antes de cargar nuevos
-    this.mostrarFormulario = false;  // Oculta el formulario de inserción
     this.detalleMovService.getDetalleMov(id).subscribe({
       next: (response) => {
-          this.dataSource2.data = response.Response.data;  // Actualiza la tabla de detalles
-          console.log('No hay detalles disponibles.');
-          this.dataSource2.data = [];  // Limpia los datos si no hay detalles
-        
+          this.dataSource2.data = response.Response.data;
       },
       error: (error) => {
         console.error('Error al obtener los detalles:', error);
       }
     });
   }
-  
-  
-  
+
+
+
   /* --------------------------------------------------------------------------------------------------------------------- */
   mostrarDetalles(id: number) {
     this.IdMovimiento = id; // Almacena el ID del movimiento actual
@@ -190,13 +185,14 @@ columnasDetalleCompras: string[] = [
     this.mostrarFormulario = false;  // Asegúrate de ocultar el formulario aquí
     this.getDetalle(id); // Llama al método que obtiene los detalles del movimiento
   }
-  
+
 
   volverALista() {
     this.isOnStepOne = true;
     this.isOnStepTwo = false;
+    this.mostrarFormulario = true;
   }
-  
+
 /* ---------------------------------------------------------------------------------------------------------------------- */
 insertar(): void {
   const nuevoMov: insertMovModel = {
@@ -214,9 +210,9 @@ insertar(): void {
         this.toastr.success(response.message, 'Movimiento');
         this.isOnStepOne = false;
         this.isOnStepTwo = true;
-        this.IdMovimiento = response.response.data; 
+        this.IdMovimiento = response.response.data;
         this.mostrarFormulario = true;  // Aquí asegúrate de mostrar el formulario de nuevo
-        
+
         this.getData();
       } else {
         this.toastr.error(response.message, 'Movimiento');
@@ -251,7 +247,7 @@ exportarMovimiento() {
 /* ------------------------------------------------------------------------------------------------------------------------- */
 insertarDetalleMov(){
   this.dataSource2.data = [];
-  this.mostrarFormulario = true; 
+  this.mostrarFormulario = true;
   const detalle:DetMovInsertModel = {
     IdMovimiento:this.IdMovimiento,
     insumo:this.Insumo,
@@ -270,7 +266,7 @@ insertarDetalleMov(){
   },
   error: (error) => {
     console.error(error)
-      
+
     }
   })
 }
@@ -303,51 +299,11 @@ terminar(){
         });
       }
     });
-  }/* -------------------------------------------------------------------------------------------------------------------- */
-
-/*   cargar(elemento:GetPersonasModel){
-    this.id = elemento.Id
-    this.nombre = elemento.Nombre
-    this.ApPaterno = elemento.ApPaterno
-    this.ApMaterno = elemento.ApMaterno
-    this.direccion = elemento.Direccion
-    this.isModifying = true
   }
 
   limpiar(){
-    this.id = 0
-    this.nombre = ''
-    this.ApPaterno = ''
-    this.ApMaterno = ''
-    this.direccion = ''
-    this.isModifying = false
+    this.Insumo = '';
+    this.cantidad = 0;
   }
- */
-/*   editar(){
-    const persona:UpdatePersonasModel   = {
-      Id: this.id,
-      Nombre: this.nombre,
-      ApPaterno:this.ApPaterno,
-      ApMaterno:this.ApMaterno,
-      Direccion: this.direccion,  
-      Usuario: parseInt(this.loggedUser.Id,10)
-    };
-
-    this.PersonasService.updatePersonas(persona).subscribe({
-      next: (response) => {
-        if(response.StatusCode == 200){
-          this.toastr.success(response.response.data, 'Personas');
-        } else {
-          this.toastr.error(response.response.data,'Personas')
-        }
-        console.log(response);
-        this.getData();
-        this.limpiar();
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-  } */
 }
 
