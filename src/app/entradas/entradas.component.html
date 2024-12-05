@@ -8,9 +8,15 @@
         <div class="form-content">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-truck"></i></span>
-                <input class="form-control" placeholder="Proveedor" [(ngModel)]="idProveedor">
+                <select class="form-control" [(ngModel)]="idProveedor">
+                  <option value="0">Seleccione un proveedor</option>
+                  <option *ngFor="let prov of proveedorList" value="{{prov.Id}}">{{prov.Nombre}}</option>
+                </select>
                 <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
-                <input class="form-control" placeholder="Sucursal" [(ngModel)]="idSurcursal">
+                <select class="form-control" [(ngModel)]="idSurcursal">
+                  <option value="0">Seleccione una sucursal</option>
+                  <option *ngFor="let suc of sucursalList" value="{{suc.Id}}">{{suc.Nombre}}</option>
+                </select>
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-at"></i></span>
@@ -28,18 +34,21 @@
 <div class="form-place" [hidden]="!isOnStepTwo">
   <div class="form-container">
       <div class="form-title">
-          <h1>Registrar detalle de entrada</h1>
+          <h1>Registrar detalle de entrada con Folio: {{idEntrada}}</h1>
       </div>
       <div class="form-content">
           <div class="input-group flex-nowrap">
               <span class="input-group-text"><i class="bi bi-truck"></i></span>
-              <input class="form-control" placeholder="Codigo" [(ngModel)]="codigo">
-              <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
-              <input class="form-control" placeholder="Cantidad" [(ngModel)]="cantidad">
+              <select class="form-control" (change)="onSelectChange($event)">
+                <option value="">Seleccione un articulo</option>
+                <option *ngFor="let art of articulosList" value="{{art.Id}}">{{art.Descripcion}}</option>
+              </select>
+              <input class="form-control" disabled placeholder="Costo" [(ngModel)]="costo">
+              <input class="form-control" disabled placeholder="Codigo de producto" [(ngModel)]="codigo">
           </div>
           <div class="input-group flex-nowrap">
               <span class="input-group-text"><i class="bi bi-at"></i></span>
-              <input class="form-control" placeholder="Costo" [(ngModel)]="costo">
+              <input class="form-control" placeholder="Cantidad" [(ngModel)]="cantidad">
               <input class="form-control" placeholder="Descuento" [(ngModel)]="descuento">
           </div>
       </div>
@@ -117,52 +126,52 @@
           <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
       </ng-container>
       <ng-container matColumnDef="IdEntrada">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.Proveedor}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio de entrada </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.IdEntrada}} </td>
       </ng-container>
       <ng-container matColumnDef="Codigo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Factura </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.Factura}}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo de articulo </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.Codigo}}</td>
       </ng-container>
       <ng-container matColumnDef="Articulo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.Surcursal}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Articulo </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.Articulo}} </td>
       </ng-container>
       <ng-container matColumnDef="Cantidad">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Entrega </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.FechaEntrega}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.Cantidad}} </td>
       </ng-container>
       <ng-container matColumnDef="Costo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de alta </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.FechaRegistro}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.Costo}} </td>
       </ng-container>
       <ng-container matColumnDef="Descuento">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.FechaActualiza}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descuento </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.Descuento}} </td>
       </ng-container>
       <ng-container matColumnDef="MontoDescuento">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-          <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto de descuento </th>
+          <td mat-cell *matCellDef="let persona"> {{persona.MontoDescuento}} </td>
       </ng-container>
       <ng-container matColumnDef="CantSinCargo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-        <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad sin cargos </th>
+        <td mat-cell *matCellDef="let persona"> {{persona.CantidadSinCargo}} </td>
       </ng-container>
       <ng-container matColumnDef="Total">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-        <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+        <td mat-cell *matCellDef="let persona"> {{persona.Total}} </td>
       </ng-container>
       <ng-container matColumnDef="FechaReg">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-        <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de registro </th>
+        <td mat-cell *matCellDef="let persona"> {{persona.FechaReg}} </td>
       </ng-container>
       <ng-container matColumnDef="FechaAct">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-        <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificacion </th>
+        <td mat-cell *matCellDef="let persona"> {{persona.FechaAct}} </td>
       </ng-container>
       <ng-container matColumnDef="UsuarioAct">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
-        <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        <td mat-cell *matCellDef="let persona"> {{persona.UsuarioAct}} </td>
       </ng-container>
       <ng-container matColumnDef="Acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
