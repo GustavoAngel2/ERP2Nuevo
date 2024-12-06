@@ -31,7 +31,7 @@
 </div>
 
 <!--Entradas detalles-->
-<div class="form-place" [hidden]="!isOnStepTwo">
+<div class="form-place" *ngIf="isOnStepTwo && mostrarFormulario && !isModifying">
   <div class="form-container">
       <div class="form-title">
           <h1>Registrar detalle de entrada con Folio: {{idEntrada}}</h1>
@@ -52,12 +52,37 @@
               <input class="form-control" placeholder="Descuento" [(ngModel)]="descuento">
           </div>
       </div>
+
       <div class="form-end">
-          <button [hidden]="!isModifying" (click)="terminar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
-          <button [hidden]="isModifying"(click)="insertarDetalleEntrada()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+          <button (click)="terminar()"  class="btn btn-outline-info"><i class="bi bi-x-circle"></i> Terminar</button>
+          <button (click)="insertarDetalleEntrada()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
       </div>
   </div>
 </div>
+
+
+<div class="form-place" *ngIf="isModifying">
+  <div class="form-container">
+      <div class="form-title">
+          <h1>Registrar detalle de entrada con Folio: {{idEntrada}}</h1>
+      </div>
+      <div class="form-content">
+
+      <div class="form-content">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-at"></i></span>
+            <input class="form-control" placeholder="Cantidad" [(ngModel)]="cantSinCargos">
+        </div>
+    </div>
+
+      <div class="form-end">
+          <button (click)="cancelarCantSinCargo()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+          <button (click)="updateCantSinCargo()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+      </div>
+  </div>
+  </div>
+</div>
+
 <br>
 <div class="actionbar" style="width: 70%;">
   <div class="input-group flex-nowrap">
@@ -69,9 +94,6 @@
 
 <!--Entradas generales-->
 <div class="table-container" [hidden]="!isOnStepOne">
-    <div class="table-hotbar">
-        <button><i class="bi bi-filetype-xlsx" (click)="exportarEntradas()" ></i></button>
-    </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
@@ -109,8 +131,9 @@
         <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let elemento">
-            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
-        </td>
+              <mat-icon class="action-btn" (click)="mostrarDetalles(elemento.Id)">pageview</mat-icon>
+              <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
+            </td>
         </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -118,6 +141,7 @@
 </div>
 
   <!--Detalle entrada-->
+<button style="position: absolute; right: 10px;" class="btn btn-success" (click)="volverALista()" *ngIf="isOnStepTwo  && !mostrarFormulario">Volver a lista</button><br> <br>
 
 <div class="table-container" [hidden]="!isOnStepTwo">
   <table mat-table [dataSource]="dataSourceDetalle" matSort>
@@ -155,7 +179,7 @@
       </ng-container>
       <ng-container matColumnDef="CantSinCargo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad sin cargos </th>
-        <td mat-cell *matCellDef="let persona"> {{persona.CantidadSinCargo}} </td>
+        <td mat-cell *matCellDef="let persona"> {{persona.CantidadSinCargo}} <mat-icon class="action-btn" (click)="updateCantSinCargos(persona.Id)">edit</mat-icon></td>
       </ng-container>
       <ng-container matColumnDef="Total">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>

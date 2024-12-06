@@ -1,3 +1,4 @@
+import { updateCantSinCargo } from './../data-models/detalleentrada.model';
 import { DetalleEntradasService, ArticulosService, SucursalesService, ProveedoresService } from './../data.service';
 import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
@@ -60,6 +61,8 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   usuarioActualiza: number = 0;
 
   idEntrada: number= 0;
+  idDetalleEntrada:number = 0;
+  cantSinCargos:number=0;
   codigo: string= '';
   cantidad: number= 0;
   costo: number= 0;
@@ -76,6 +79,7 @@ export class EntradasComponent implements OnInit, AfterViewInit{
 
   isOnStepOne:boolean = true;
   isOnStepTwo:boolean = false;
+  mostrarFormulario:boolean = true;
 
 
   isModifying:boolean = false;
@@ -164,9 +168,7 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   getDetalleData(){
     this.detalleEntradaService.getDetalleEntrada(this.idEntrada).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response);
-        this.dataSourceDetalle.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
-        console.log(response)
+        this.dataSourceDetalle.data = response.Response.data;
       },
       error: (error) => {
         console.error(error);
@@ -185,9 +187,9 @@ export class EntradasComponent implements OnInit, AfterViewInit{
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
     this.entradasService.insertarEntrada(nuevaEntrada).subscribe({
       next: (response) => {
-          this.idEntrada = response.response.data;
-          this.isOnStepTwo = true;
-          this.isOnStepOne = false;
+        this.idEntrada = response.response.data;
+        this.isOnStepTwo = true;
+        this.isOnStepOne = false;
         this.getData();
         this.limpiar();
       },
@@ -276,29 +278,9 @@ export class EntradasComponent implements OnInit, AfterViewInit{
 
   limpiar(){
     this.id = 0
-    this.idProveedor = 0;
-    this.factura = '';
-    this.idSurcursal = 0;
-    this.isModifying = false
-  }
-
-  exportarEntradas() {
-    this.detalleEntradaService.ExportarReporte().subscribe(
-        (response: Blob) => {
-            const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            console.log("descargando");
-            a.download = 'Entradas.xlsx'; // Nombre del archivo a descargar
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        },
-        error => {
-            console.error('Error al exportar movimientos:', error);
-        }
-    );
+    this.idArticulo = 0;
+    this.descuento = 0;
+    this.cantidad = 0;
   }
 
   terminar(){
@@ -316,4 +298,55 @@ export class EntradasComponent implements OnInit, AfterViewInit{
       this.codigo = '';
     }
   }
+
+  mostrarDetalles(id: number) {
+    this.idEntrada = id;
+    this.isOnStepOne = false;
+    this.isOnStepTwo = true;
+    this.mostrarFormulario = false;
+    this.getDetalleData();
+  }
+
+
+  volverALista() {
+    this.isOnStepOne = true;
+    this.isOnStepTwo = false;
+    this.mostrarFormulario = true;
+  }
+
+  updateCantSinCargos(id:number){
+    this.idDetalleEntrada = id;
+    this.cantSinCargos = 0;
+    this.isModifying = true;
+  }
+
+  cancelarCantSinCargo(){
+    this.idDetalleEntrada = 0;
+    this.cantSinCargos = 0;
+    this.isModifying = false;
+  }
+
+  updateCantSinCargo(){
+    const cant:updateCantSinCargo = {
+      id:this.idDetalleEntrada,
+      cantidad:this.cantSinCargos
+    }
+    this.detalleEntradaService.updateCatSinCargo(cant).subscribe({
+      next:(response)=>{
+        this.getDetalleData();
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data)
+          this.cancelarCantSinCargo();
+        }
+        else{
+          this.toastr.error(response.response.data)
+          this.cancelarCantSinCargo();
+        }
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    })
+  }
+
 }

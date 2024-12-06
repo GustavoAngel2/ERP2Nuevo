@@ -20,7 +20,10 @@
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-bank2"></i></span>
-                <input class="form-control" placeholder="Id de banco del proveedor" [(ngModel)]="idBanco">
+                <select class="form-control" [(ngModel)]="idBanco">
+                  <option value="0">Seleccione un banco</option>
+                  <option *ngFor="let banco of bancoList" value="{{banco.Id}}">{{banco.Nombre + ' - ' + banco.Direccion}}</option>
+                </select>
                 <span class="input-group-text"><i class="bi bi-bank2"></i></span>
                 <input class="form-control" placeholder="CLABE del proveedor" [(ngModel)]="clabe">
             </div>

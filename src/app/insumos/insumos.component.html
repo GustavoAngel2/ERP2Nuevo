@@ -16,12 +16,15 @@
                 <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
                 <input class="form-control" placeholder="Costo" [(ngModel)]="costo">
                 <span class="input-group-text"><i class="bi bi-rulers"></i></span>
-                <input class="form-control" placeholder="Unidad de medida" [(ngModel)]="unidadMedida">
+                <select class="form-select" [(ngModel)]="idUnidadMedida">
+                  <option value="0">Unidad de menida</option>
+                  <option *ngFor="let um of umList" value="{{um.Id}}">{{um.Nombre}}</option>
+              </select>
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-truck"></i></span>
                 <select class="form-select" [(ngModel)]="insumoUP">
-                    <option value="">Seleccione un Insumo</option>
+                    <option value="">Seleccione un insumo padre</option>
                     <option *ngFor="let insumo of insumosPadresCombo" value="{{insumo.Descripcion}}">{{insumo.Descripcion}}</option>
                 </select>
             </div>
