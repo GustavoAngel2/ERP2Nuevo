@@ -1,20 +1,34 @@
-# Usa una imagen de Node.js como base
-FROM node:18-alpine
+# Etapa de construcción
+FROM node:18-alpine AS build
 
-# Establece el directorio de trabajo dentro del contenedor
+# Crea un directorio de trabajo
 WORKDIR /app
 
-# Copia el archivo package.json y package-lock.json
+# Copia los archivos de configuración de dependencias
 COPY package*.json ./
 
-# Instala las dependencias
-RUN npm install
+# Instala las dependencias de Angular
+RUN npm install -g @angular/cli@latest
 
-# Copia todo el proyecto Angular al contenedor
+# Instala las dependencias con la opción --legacy-peer-deps
+RUN npm install --legacy-peer-deps
+
+# Copia todo el código de la aplicación al contenedor
 COPY . .
 
-# Expone el puerto en el que el servidor de Angular estará escuchando
-EXPOSE 7001
+# Construye la aplicación para producción
+RUN ng build 
 
-# Comando para iniciar el servidor de desarrollo
-CMD ["npm", "run", "start", "--", "--host", "0.0.0.0"]
+# Etapa de producción
+FROM nginx:alpine
+
+
+COPY --from=build /app/dist/* /usr/share/nginx/html/
+# Copy the nginx file to fix fallback issue on refreshing.
+#COPY /nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expone el puerto que usa Nginx
+EXPOSE 80
+
+# Comando por defecto para ejecutar Nginx
+CMD ["nginx", "-g", "daemon off;"]
