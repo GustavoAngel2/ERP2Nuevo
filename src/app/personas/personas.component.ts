@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService } from '../data.service';
+import { PersonasService, SucursalesService } from '../data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -8,6 +8,7 @@ import { AuthService,currentUser } from '../auth.service';
 import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
+import { sucursalModel } from '../data-models/sucursales.model';
 
 @Component({
   selector: 'app-personas',
@@ -18,19 +19,28 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['Id', 'Nombre', 'ApPaterno','ApMaterno','Direccion', 'FechaAct','FechaReg', 'Acciones'];
   dataSource: MatTableDataSource<GetPersonasModel>;
   id: number = 0;
+  idSucursal: number = 0;
   nombre: string = '';
   ApPaterno : string = '';
   ApMaterno : string = '';
   direccion: string = '';
   isModifying:boolean = false;
 
+  sucursalesList:sucursalModel[] = []
+
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private PersonasService: PersonasService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
-    this.dataSource = new MatTableDataSource<GetPersonasModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+  constructor(
+    private PersonasService: PersonasService, 
+    public dialog:MatDialog, 
+    public authService: AuthService, 
+    private toastr:ToastrService, 
+    private sucursalesService:SucursalesService
+  ) {
+    this.dataSource = new MatTableDataSource<GetPersonasModel>();
   }
 
   ngOnInit() {
@@ -70,6 +80,15 @@ export class PersonasComponent implements OnInit, AfterViewInit{
         console.error(error);
       }
     });
+
+    this.sucursalesService.getSucursales().subscribe({
+      next:(response)=>{
+        this.sucursalesList = response.Response.data
+      },
+      error(err) {
+        
+      },
+    })
   }
 
   insertar():void {

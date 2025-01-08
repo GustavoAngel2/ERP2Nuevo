@@ -157,7 +157,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
           this.isOnStepOne = false;
           this.isOnStepTwo = true;
         } else {
-          this.toastr.error(response.response.msg, 'Recetas');
+          this.toastr.error(response.response.data, 'Recetas');
         }
         this.limpiar();
       },
