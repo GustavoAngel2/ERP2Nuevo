@@ -19,9 +19,9 @@ import { insertMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
 import { insertTraspasoModel,getTraspasosModel } from './data-models/traspasos.model';
 import { ERP } from './erp-settings';
-import { bancos,insertbancosModel,updatebancosModel,deletebancosModel } from './data-models/bancos.model';
-import { ReporteKardexMov, ReporteKardexMovSearch } from './data-models/reportes.model';
-import { getReportEntradas, getReportEntradasSearch, insertDetalleEntradaModel, updateCantSinCargo } from './data-models/detalleentrada.model';
+import { insertbancosModel,updatebancosModel,deletebancosModel } from './data-models/bancos.model';
+import { ReporteKardexMovSearch } from './data-models/reportes.model';
+import { getReportEntradasSearch, insertDetalleEntradaModel, updateCantSinCargo } from './data-models/detalleentrada.model';
 
 
 @Injectable({
