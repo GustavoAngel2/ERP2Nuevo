@@ -1,6 +1,7 @@
+import { unidadMedida } from './../data-models/um.model';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { InsumosService } from '../data.service';
+import { InsumosService, UMservice } from '../data.service';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
@@ -26,9 +27,10 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   insumoUP: string= '';
   descripcionInsumo: string = '';
   costo: number = 0;
-  unidadMedida: number = 0;
+  idUnidadMedida: number = 0;
   usuarioActualiza: number = 0;
   isModifying:boolean = false;
+  umList:unidadMedida[] = [];
 
   insumosFiltrados: insumosModel[] = [];
   descripcionFiltro: string = ''; // Nuevo campo para el filtro
@@ -39,7 +41,7 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private insumosService: InsumosService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
+  constructor(private unidadMedidaService:UMservice, private insumosService: InsumosService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<insumosModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
@@ -64,16 +66,25 @@ export class InsumosComponent implements OnInit,AfterViewInit{
 
   getData(){
     this.dataSource.filterPredicate = (data: insumosModel, filter: string) => {
-      return data.UsuarioActualiza.toLowerCase().includes(filter) || 
+      return data.UsuarioActualiza.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
              data.FechaActualiza.toString().includes(filter)
-             
+
     };
+
+    this.unidadMedidaService.getUM().subscribe({
+      next:(response) => {
+        this.umList = response.Response.data
+      }
+    })
+
     this.insumosService.getInsumos().subscribe({
       next: (response) => {
-        this.dataSource.data = response.Response.data;
-        this.insumosPadresCombo = response.Response.data;
-        this.insumosFiltrados = [...this.insumosPadresCombo]; // Copia inicial para filtro
+        console.log('Respuesta del servidor:', response);
+
+          this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+          this.insumosPadresCombo = response.Response.data;
+
       },
       error: (error) => {
         console.error(error);
@@ -86,8 +97,8 @@ export class InsumosComponent implements OnInit,AfterViewInit{
       insumo: this.insumo,
       descripcionInsumo: this.descripcionInsumo,
       costo: this.costo,
-      unidadMedida: this.unidadMedida,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10), 
+      unidadMedida: this.idUnidadMedida,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10),
       insumosUP: this.insumoUP
     };
 
@@ -174,9 +185,9 @@ export class InsumosComponent implements OnInit,AfterViewInit{
       insumo: this.insumo,
       descripcionInsumo: this.descripcionInsumo,
       costo: this.costo,
-      unidadMedida: this.unidadMedida,
+      unidadMedida: this.idUnidadMedida,
       insumosUP: this.insumoUP,
-      usuarioActualiza: parseInt(this.loggedUser.Id,10) 
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
     };
 
     this.insumosService.updateInsumo(persona).subscribe({

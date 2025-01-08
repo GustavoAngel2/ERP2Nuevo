@@ -30,7 +30,6 @@
   <div class="table-hotbar">
       <button><i class="bi bi-filetype-xlsx" (click)="this.exportarReporte()"></i></button>
   </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 
   <table class="table" mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="Id">
@@ -75,5 +74,54 @@
       </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+</div>
+
+
+<br>
+<br>
+
+
+<div class="form-place">
+  <div class="form-container">
+      <div class="form-title">
+          <h1>Reportes de entradas</h1>
+      </div>
+      <div class="form-content">
+          <div class="input-group flex-nowrap">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input class="form-control" type="date" placeholder="Fecha de inicio" [(ngModel)]="this.searchEntradas.FechaInicio">
+              <input class="form-control" type="date" placeholder="FechaFin" [(ngModel)]="this.searchEntradas.FechaFinal">
+          </div>
+      </div>
+      <div class="form-end">
+          <button (click)="getDataEntradas()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Buscar<i class="underline"></i></button>
+
+      </div>
+  </div>
+</div>
+<br>
+<div class="actionbar" style="width: 70%;">
+  <div class="input-group flex-nowrap">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input class="form-control" (keyup)="applyFilterEntradas($event)" placeholder="Buscar..." #input>
+  </div>
+</div>
+
+<br>
+
+<div class="table-container">
+  <div class="table-hotbar">
+      <button><i class="bi bi-filetype-xlsx" (click)="this.exportarEntradas()"></i></button>
+  </div>
+  <table class="table" mat-table [dataSource]="dataSourceDetalle" matSort>
+    @for (column of displayedColumnsEntradas; track column) {
+      <ng-container [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+    }
+  <mat-header-row *matHeaderRowDef="displayedColumnsEntradas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumnsEntradas"></mat-row>
   </table>
 </div>

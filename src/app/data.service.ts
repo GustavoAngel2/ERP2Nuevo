@@ -1,4 +1,4 @@
-import { insertDetalleTraspasoModel, detalleTraspasoModel } from './data-models/detalletraspaso.model';
+import { insertDetalleTraspasoModel, detalleTraspasoModel, updateDetalleTraspasoModel } from './data-models/detalletraspaso.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -727,6 +727,18 @@ export class DetalleTraspasosService {
     };
     return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/DetalleTraspaso/Insert`, body);
   }
+
+  updateDetalleTraspaso(ArticuloData: updateDetalleTraspasoModel): Observable<defaultApiResponse> {
+    const body = {
+      id: ArticuloData.id,
+      insumo:ArticuloData.insumo,
+      cantidadEnviada: ArticuloData.cantidadEnviada,
+      cantidadRecibida:ArticuloData.cantidadRecibida,
+      usuarioActualiza:ArticuloData.usuarioActualiza
+    };
+    return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/DetalleTraspaso/Update`, body);
+  }
+
   deleteDetalleTraspaso(Id: number): Observable<any> {
     return this.http.put(`${this.erp.apiUrl}/DetalleTraspaso/Delete`, { Id });
   }
@@ -790,20 +802,20 @@ export class DetalleEntradasService{
     return this.http.put(`${this.erp.apiUrl}/DetalleEntrada/Delete`, { Id });
   }
 
-  updateCatSinCargo(cantCar:updateCantSinCargo){
+  updateCatSinCargo(cantCar:updateCantSinCargo): Observable<defaultApiResponse>{
     const body:updateCantSinCargo = {
       id: cantCar.id,
       cantidad: cantCar.cantidad
     }
-    return this.http.put(`${this.erp.apiUrl}/DetalleEntrada/UpdateCantSinCArgo`,body);
+    return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/DetalleEntrada/UpdateCantSinCArgo`,body);
   }
 
-  getDetalleEntradaReport(search:getReportEntradasSearch): Observable<defaultApiResponse> {
+  getDetalleEntradaReport(search:getReportEntradasSearch): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/DetalleEntrada/GetReportEntradas?FechaInicio=${search.FechaInicio}&FechaFinal=${search.FechaFinal}`,{headers});
+    return this.http.get<any>(`${this.erp.apiUrl}/DetalleEntrada/GetReportEntradas?FechaInicio=${search.FechaInicio}&FechaFinal=${search.FechaFinal}`,{headers});
   }
 
   ExportarReporte(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos

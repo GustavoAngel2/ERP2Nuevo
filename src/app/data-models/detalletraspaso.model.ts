@@ -15,3 +15,11 @@ export interface insertDetalleTraspasoModel {
     cantidadEnviada: number;
     usuarioActualiza: number;
 }
+
+export interface updateDetalleTraspasoModel {
+  id: number;
+  insumo: string,
+  cantidadEnviada: number;
+  cantidadRecibida: number;
+  usuarioActualiza: number;
+}

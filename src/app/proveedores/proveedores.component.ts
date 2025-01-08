@@ -3,7 +3,7 @@ import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
-import { ProveedoresService } from '../data.service';
+import { bancosService, ProveedoresService } from '../data.service';
 import { getProveedoresModel, updateProveedorModel } from '../data-models/proveedores.model';
 import { AuthService,currentUser } from '../auth.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { bancos } from '../data-models/bancos.model';
 
 @Component({
   selector: 'app-proveedores',
@@ -33,13 +34,14 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   razonSocial: string = '';
   clabe: string = '';
   isModifying:boolean = false;
+  bancoList:bancos[] = []
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private proveedoresService: ProveedoresService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
+  constructor(private bancosService:bancosService, private proveedoresService: ProveedoresService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<getProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
   }
 
@@ -56,13 +58,16 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   getData(){
+
+    this.bancosService.getBancos().subscribe({
+      next:(response)=>{
+        this.bancoList = response.Response.data
+      }
+    })
+
     this.dataSource.filterPredicate = (data: getProveedoresModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
