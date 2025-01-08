@@ -11,7 +11,8 @@ import { getTraspasosModel, insertTraspasoModel, traspasoModel } from '../data-m
 import { sucursalModel } from '../data-models/sucursales.model';
 import { getUsuariosModel } from '../data-models/usuario.model';
 import { insumosModel } from '../data-models/insumos.model';
-import { detalleTraspasoModel, insertDetalleTraspasoModel } from '../data-models/detalletraspaso.model';
+import { detalleTraspasoModel, insertDetalleTraspasoModel, updateDetalleTraspasoModel } from '../data-models/detalletraspaso.model';
+import { updateDetalleEntradaModel } from '../data-models/detalleentrada.model';
 
 @Component({
   selector: 'app-traspasos',
@@ -54,6 +55,7 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   idTraspaso: number = 0;
   insumo: string = '';
   cantidadEnviada: number = 0;
+  cantidadRecivida:number = 0
   usuarioActualiza: number = 0;
 
   isModifying:boolean = false;
@@ -68,7 +70,7 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   isOnStepOne:boolean = true;
   isOnStepTwo:boolean = false;
 
-  viewDetail:boolean = false;
+  mostrarFormulario:boolean = true;
 
   comboSucursales:sucursalModel[] = [];
   comboUsuarios:getUsuariosModel[] = [];
@@ -226,6 +228,7 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
       next: (response) => {
         if(response.StatusCode == 200){
           this.toastr.success(response.response.data, 'Traspasos');
+          this.limpiar();
         } else {
           this.toastr.error(response.response.data,'Traspasos')
         }
@@ -288,50 +291,26 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
     });
   }
 
-  // cargar(elemento:GetTraspasosModel){
-  //   this.id = elemento.Id
-  //   this.nombre = elemento.Nombre
-  //   this.ApPaterno = elemento.ApPaterno
-  //   this.ApMaterno = elemento.ApMaterno
-  //   this.direccion = elemento.Direccion
-  //   this.isModifying = true
-  // }
-
-  limpiar(){
-    this.id = 0
-    // this.nombre = ''
-    // this.ApPaterno = ''
-    // this.ApMaterno = ''
-    // this.direccion = ''
-    this.isModifying = false
+  cargar(elemento:detalleTraspasoModel){
+    this.id = elemento.Id;
+    this.idTraspaso = elemento.IdTraspaso;
+    this.insumo = elemento.Insumo.toString();
+    this.cantidadEnviada = elemento.CantidadEnviada;
+    this.cantidadRecivida = elemento.CatidadRecibida;
+    this.isModifying = true;
   }
 
-  // editar(){
-  //   const persona:UpdateTraspasosModel   = {
-  //     Id: this.id,
-  //     Nombre: this.nombre,
-  //     ApPaterno:this.ApPaterno,
-  //     ApMaterno:this.ApMaterno,
-  //     Direccion: this.direccion,
-  //     Usuario: parseInt(this.loggedUser.Id,10)
-  //   };
+  limpiarEdit(){
+    this.cantidadEnviada = 0
+    this.cantidadRecivida = 0
+    this.insumo = ''
+    this.isModifying=false;
+  }
 
-  //   this.TraspasosService.updateTraspasos(persona).subscribe({
-  //     next: (response) => {
-  //       if(response.StatusCode == 200){
-  //         this.toastr.success(response.response.data, 'Traspasos');
-  //       } else {
-  //         this.toastr.error(response.response.data,'Traspasos')
-  //       }
-  //       ;
-  //       this.getData();
-  //       this.limpiar();
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //     }
-  //   });
-  //}
+  limpiar(){
+    this.cantidadEnviada = 0
+    this.insumo = ''
+  }
 
   dateNow():string{
     const fecha = new Date();
@@ -346,15 +325,43 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
     this.idTraspaso = id; // Almacena el ID del movimiento actual
     this.isOnStepOne = false; // Oculta la primera tabla
     this.isOnStepTwo = true; // Muestra la segunda tabla con detalles
-    this.viewDetail = true;  // Asegúrate de ocultar el formulario aquí
+    this.mostrarFormulario = false;  // Asegúrate de ocultar el formulario aquí
     this.getDetalleData(); // Llama al método que obtiene los detalles del movimiento
   }
-
 
   volverALista() {
     this.isOnStepOne = true;
     this.isOnStepTwo = false;
-    this.viewDetail = false;
+    this.mostrarFormulario = true
+  }
+
+  cancelar(){
+    this.limpiarEdit();
+  }
+
+  updateDetalleTraspaso(){
+    const det:updateDetalleTraspasoModel = {
+      id: this.id,
+      insumo: this.insumo,
+      cantidadEnviada: this.cantidadEnviada,
+      cantidadRecibida: this.cantidadRecivida,
+      usuarioActualiza: parseInt(this.loggedUser.Id,10)
+    }
+    this.detalleTraspasoService.updateDetalleTraspaso(det).subscribe({
+      next:(response)=>{
+        if(response.StatusCode == 200){
+          this.toastr.success(response.response.data, 'Traspasos');
+          this.limpiarEdit();
+          this.cancelar();
+        } else {
+          this.toastr.error(response.response.data,'Traspasos')
+        }
+        this.getDetalleData();
+      },
+      error:(err)=>{
+
+      }
+    })
   }
 }
 

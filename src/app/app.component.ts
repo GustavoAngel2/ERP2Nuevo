@@ -42,9 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
     // Suscripción a cambios de usuario para actualizar imagen y perfil
     this.userSubscription = this.authService.currentUser.subscribe(user => {
       this.actualUser = user;
-      if (this.actualUser?.Id) {
-        this.cargarImagenUsuario(parseInt(this.actualUser.Id, 10));
-      }
     });
   }
 
@@ -74,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
   detectClickOutside(event: MouseEvent) {
     const clickedElement = event.target as HTMLElement;
     const accordion = document.querySelector('.toolbar-accordion');
-    
+
     if (
       this.isAccordionExpanded &&
       accordion &&

@@ -18,7 +18,7 @@
 </div>
 
 
-<div class="form-container" [hidden]="!isOnStepTwo">
+<div class="form-container" *ngIf="isOnStepTwo && mostrarFormulario">
     <div class="form-title">
       <h1>Registrar Detalle para la Receta con ID: {{ IdReceta }}</h1>
     </div>
@@ -96,7 +96,7 @@
     </table>
 </div>
 
-<button style="position: absolute; right: 10px;" class="btn btn-success" (click)="volverALista()" *ngIf="viewDetail != false">Cerrar</button><br> <br>
+<button style="position: absolute; right: 10px;" class="btn btn-success" (click)="volverALista()" *ngIf="isOnStepTwo  && !mostrarFormulario">Volver a lista</button><br> <br>
 <div class="table-container" [hidden]="!isOnStepTwo && viewDetail==false">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource2" matSort>

@@ -59,6 +59,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   isOnStepOne:boolean = true;
   isOnStepTwo:boolean = false;
   isModifying:boolean = false;
+  mostrarFormulario:boolean = true;
 
   viewDetail:boolean = false;
 
@@ -307,7 +308,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       this.IdReceta = id; // Almacena el ID del movimiento actual
       this.isOnStepOne = false; // Oculta la primera tabla
       this.isOnStepTwo = true; // Muestra la segunda tabla con detalles
-      this.viewDetail = true;  // Asegúrate de ocultar el formulario aquí
+      this.mostrarFormulario = false;  // Asegúrate de ocultar el formulario aquí
       this.getData(id); // Llama al método que obtiene los detalles del movimiento
     }
 
@@ -315,7 +316,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     volverALista() {
       this.isOnStepOne = true;
       this.isOnStepTwo = false;
-      this.viewDetail = false;
+      this.mostrarFormulario = true;
     }
 
 
