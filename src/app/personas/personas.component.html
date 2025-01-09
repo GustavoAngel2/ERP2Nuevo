@@ -17,9 +17,9 @@
         </div>
         <div class="input-group flex-nowrap">
             <span class="input-group-text"><i class="bi bi-truck"></i></span>
-            <select class="form-select" [(ngModel)]="idSucursal">
+            <select title="Sucursal" class="form-select" [(ngModel)]="idSucursal">
                 <option value="0">Seleccione una sucursal</option>
-                <option *ngFor="let articulo of sucursalesList" value="{{articulo.Id}}">{{articulo.Nombre}}</option>
+                <option *ngFor="let sucursal of sucursalesList" value="{{sucursal.Id}}">{{sucursal.Nombre}}</option>
             </select>
         </div>
     </div>
