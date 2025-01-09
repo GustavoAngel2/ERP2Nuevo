@@ -4,7 +4,7 @@ import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
-import { AuthService,currentUser } from '../auth.service';
+import { AuthService,currentUser } from '../features/auth/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';

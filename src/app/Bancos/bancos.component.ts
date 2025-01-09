@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { bancosService } from '../data.service';
-import { AuthService, currentUser } from '../auth.service';
+import { AuthService, currentUser } from '../features/auth/auth.service';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { bancos, insertbancosModel, updatebancosModel } from '../data-models/bancos.model';
 

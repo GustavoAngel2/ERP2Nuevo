@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { AuthService,currentUser } from '../auth.service';
+import { AuthService,currentUser } from '../features/auth/auth.service';
 import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../data-models/personas.model';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
@@ -34,10 +34,10 @@ export class PersonasComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private PersonasService: PersonasService, 
-    public dialog:MatDialog, 
-    public authService: AuthService, 
-    private toastr:ToastrService, 
+    private PersonasService: PersonasService,
+    public dialog:MatDialog,
+    public authService: AuthService,
+    private toastr:ToastrService,
     private sucursalesService:SucursalesService
   ) {
     this.dataSource = new MatTableDataSource<GetPersonasModel>();
@@ -64,17 +64,17 @@ export class PersonasComponent implements OnInit, AfterViewInit{
 
   getData(){
     this.dataSource.filterPredicate = (data: GetPersonasModel, filter: string) => {
-      return data.Nombre.toLowerCase().includes(filter) || 
-             data.Id.toString().includes(filter) || 
+      return data.Nombre.toLowerCase().includes(filter) ||
+             data.Id.toString().includes(filter) ||
              data.ApPaterno.toLowerCase().includes(filter) ||
              data.ApMaterno.toLowerCase().includes(filter) // Puedes añadir más campos si es necesario
     };
     this.PersonasService.getPersonas().subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); 
+        console.log('Respuesta del servidor:', response);
         this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
         console.log(response)
-        
+
       },
       error: (error) => {
         console.error(error);
@@ -86,7 +86,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
         this.sucursalesList = response.Response.data
       },
       error(err) {
-        
+
       },
     })
   }
@@ -97,7 +97,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
       ApPaterno:this.ApPaterno,
       ApMaterno:this.ApMaterno,
       Direccion: this.direccion,
-      Usuario: parseInt(this.loggedUser.Id,10) 
+      Usuario: parseInt(this.loggedUser.Id,10)
     };
 
     // Aquí asumo que tienes un método en tu servicio para insertar el departamento
@@ -166,7 +166,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
       Nombre: this.nombre,
       ApPaterno:this.ApPaterno,
       ApMaterno:this.ApMaterno,
-      Direccion: this.direccion,  
+      Direccion: this.direccion,
       Usuario: parseInt(this.loggedUser.Id,10)
     };
 

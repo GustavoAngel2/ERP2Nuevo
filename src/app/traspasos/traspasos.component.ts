@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { AuthService,currentUser } from '../auth.service';
+import { AuthService,currentUser } from '../features/auth/auth.service';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
 import { getTraspasosModel, insertTraspasoModel, traspasoModel } from '../data-models/traspasos.model';

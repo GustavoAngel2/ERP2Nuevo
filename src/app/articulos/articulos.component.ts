@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { AuthService, currentUser } from '../auth.service';
+import { AuthService, currentUser } from '../features/auth/auth.service';
 import { articulosModel, updateArticuloModel } from '../data-models/articulos.model';
 import { ArticulosService } from '../data.service';
 import { UMservice } from '../data.service';
@@ -27,10 +27,10 @@ export class ArticulosComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-  private articulosService: ArticulosService, 
+  private articulosService: ArticulosService,
   private umService: UMservice,
     public dialog: MatDialog,
-    private authService: AuthService,  
+    private authService: AuthService,
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<articulosModel>();
@@ -53,7 +53,7 @@ export class ArticulosComponent implements OnInit {
   ngOnInit() {
   this.getData();
   this.setCombos();
-    this.loggedInUser = this.authService.getCurrentUser(); 
+    this.loggedInUser = this.authService.getCurrentUser();
     console.log('Usuario logeado:', this.loggedInUser);
   }
 
@@ -62,12 +62,12 @@ export class ArticulosComponent implements OnInit {
      Descripcion: this.descripcion,
      Codigo: this.codigo,
      Familia: this.familia,
-     UM: this.um,  
+     UM: this.um,
      UltimoCosto: this.costo,
      PrecioVenta: this.precio,
      Iva: this.iva,
      Ieps: this.ieps,
-     Usuario: parseInt(this.loggedInUser.Id, 10) 
+     Usuario: parseInt(this.loggedInUser.Id, 10)
    };
    console.log(nuevoArticulo)
    this.articulosService.InsertArticulo(nuevoArticulo).subscribe({
@@ -89,13 +89,13 @@ export class ArticulosComponent implements OnInit {
 
  getData() {
    this.dataSource.filterPredicate = (data: articulosModel, filter: string) => {
-     return data.Descripcion.toLowerCase().includes(filter) || 
-            data.Id.toString().includes(filter); 
+     return data.Descripcion.toLowerCase().includes(filter) ||
+            data.Id.toString().includes(filter);
    };
    this.articulosService.getArticulos().subscribe({
      next: (response) => {
-      console.log('Respuesta del servidor:', response); 
-      this.dataSource.data = response.Response.data; 
+      console.log('Respuesta del servidor:', response);
+      this.dataSource.data = response.Response.data;
      },
      error: (error) => {
       console.error(error);
@@ -139,12 +139,12 @@ export class ArticulosComponent implements OnInit {
     Descripcion: this.descripcion,
     Codigo: this.codigo,
     Familia: this.familia,
-    UM: this.um,  
+    UM: this.um,
     UltimoCosto: this.costo,
     PrecioVenta: this.precio,
     Iva: this.iva,
     Ieps: this.ieps,
-    Usuario: parseInt(this.loggedInUser.Id, 10) 
+    Usuario: parseInt(this.loggedInUser.Id, 10)
   };
   console.log(Articulo)
   this.articulosService.updateArticulo(Articulo).subscribe({

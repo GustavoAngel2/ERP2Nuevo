@@ -28,11 +28,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 //Componentes
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './features/auth/login/login.component';
 import { PersonasComponent } from './personas/personas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { AjustesComponent } from './ajustes/ajustes.component';
+import { AjustesComponent } from './features/ajustes/ajustes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { EntradasComponent } from './entradas/entradas.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';

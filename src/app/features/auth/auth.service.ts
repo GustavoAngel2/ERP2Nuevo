@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ERP } from './erp-settings';
+import { ERP } from '../../erp-settings';
 
 export interface currentUser {
   Id: string;
@@ -75,7 +75,7 @@ export class AuthService {
     sessionStorage.setItem('NombreUsuario', username);
     console.log('Username set in sessionStorage:', username);
   }
-  
+
   setRol(rol: string) {
     sessionStorage.setItem('NombrePersona', rol);
     console.log('Rol set in sessionStorage:', rol);

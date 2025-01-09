@@ -3,7 +3,7 @@ import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
-import { AuthService,currentUser } from '../auth.service';
+import { AuthService,currentUser } from '../features/auth/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
@@ -58,13 +58,13 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
 
   getData(){
     this.dataSource.filterPredicate = (data: sucursalModel, filter: string) => {
-      return data.Nombre.toLowerCase().includes(filter) || 
+      return data.Nombre.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
              data.Direccion.toString().includes(filter)// Puedes añadir más campos si es necesario
     };
     this.sucursalesService.getSucursales().subscribe({
-      next: (response) => { 
-        console.log('Respuesta del servidor:', response); 
+      next: (response) => {
+        console.log('Respuesta del servidor:', response);
         this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
         console.log(response)
       },
@@ -78,7 +78,7 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
     const nuevaSucursal:sucursalInsertModel = {
       nombre: this.nombre,
       direccion: this.direccion,
-      idUsuario: parseInt(this.loggedUser.Id,10) 
+      idUsuario: parseInt(this.loggedUser.Id,10)
     };
 
     console.log(nuevaSucursal)
@@ -144,7 +144,7 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
       id: this.id,
       nombre: this.nombre,
       direccion: this.direccion,
-      idUsuario: parseInt(this.loggedUser.Id,10) 
+      idUsuario: parseInt(this.loggedUser.Id,10)
     };
 
     this.sucursalesService.updateSucursal(persona).subscribe({

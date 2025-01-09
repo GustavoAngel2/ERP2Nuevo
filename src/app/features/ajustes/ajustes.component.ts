@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ERP } from '../erp-settings';
+import { ERP } from '../../erp-settings';
 import { OnInit } from '@angular/core';
 
 @Component({

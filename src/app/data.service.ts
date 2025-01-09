@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultApiResponse } from './data-models/response.model';
-import { AuthService } from './auth.service';
+import { AuthService } from './features/auth/auth.service';
 import { InsertPersonasModel, UpdatePersonasModel } from './data-models/personas.model';
 import { updateUsuarioModel } from './data-models/usuario.model';
 import { insertProveedorModel, updateProveedorModel } from './data-models/proveedores.model';

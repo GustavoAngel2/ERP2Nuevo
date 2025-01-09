@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService, currentUser } from './auth.service';
+import { AuthService, currentUser } from './features/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { UsusariosService } from './data.service';
 import { ERP } from './erp-settings';

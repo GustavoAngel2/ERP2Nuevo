@@ -5,7 +5,7 @@ import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
 import { bancosService, ProveedoresService } from '../data.service';
 import { getProveedoresModel, updateProveedorModel } from '../data-models/proveedores.model';
-import { AuthService,currentUser } from '../auth.service';
+import { AuthService,currentUser } from '../features/auth/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
