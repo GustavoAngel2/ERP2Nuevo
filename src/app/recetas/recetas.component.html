@@ -9,6 +9,7 @@
                 <span class="input-group-text"><i class="bi bi-at"></i></span>
                 <input class="form-control" placeholder="Nombre" [(ngModel)]="Nombre">
             </div>
+        </div>
         <div class="form-end">
             <button [hidden]="!isModifying" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
             <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
