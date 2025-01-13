@@ -73,7 +73,6 @@ import { SharedModule } from './core/components/shared.module';
     ReportesComponent,
     RolesComponent,
     PermisosComponent,
-    ButtonListComponent,
   ],
   imports: [
     //Dependencias

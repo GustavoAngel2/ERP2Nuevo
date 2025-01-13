@@ -22,7 +22,6 @@
 .interface-button {
   padding: 20px;
   margin: 10px;
-  font-size: 32px;
   background-color: var(--mat-toolbar-container-background-color);
   font-weight: bold;
   color: white;
