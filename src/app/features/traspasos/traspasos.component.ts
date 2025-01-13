@@ -5,7 +5,7 @@ import {
   SucursalesService,
   TraspasosService,
   UsusariosService,
-} from '../../core/data/data.service';
+} from '../../core/services/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,12 +13,12 @@ import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth/auth.service';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
-import { getTraspasosModel, insertTraspasoModel, traspasoModel } from '../../core/data/models/traspasos.model';
-import { sucursalModel } from '../../core/data/models/sucursales.model';
-import { getUsuariosModel } from '../../core/data/models/usuario.model';
-import { insumosModel } from '../../core/data/models/insumos.model';
-import { detalleTraspasoModel, insertDetalleTraspasoModel, updateDetalleTraspasoModel } from '../../core/data/models/detalletraspaso.model';
-import { updateDetalleEntradaModel } from '../../core/data/models/detalleentrada.model';
+import { getTraspasosModel, insertTraspasoModel, traspasoModel } from '../../core/models/traspasos.model';
+import { sucursalModel } from '../../core/models/sucursales.model';
+import { getUsuariosModel } from '../../core/models/usuario.model';
+import { insumosModel } from '../../core/models/insumos.model';
+import { detalleTraspasoModel, insertDetalleTraspasoModel, updateDetalleTraspasoModel } from '../../core/models/detalletraspaso.model';
+import { updateDetalleEntradaModel } from '../../core/models/detalleentrada.model';
 
 @Component({
   selector: 'app-traspasos',

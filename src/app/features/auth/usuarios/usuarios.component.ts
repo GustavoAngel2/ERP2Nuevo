@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonasService, UsusariosService } from '../../../core/data/data.service';
-import { getUsuariosModel } from '../../../core/data/models/usuario.model'; // Ajusta la ruta según tu proyecto
+import { PersonasService, UsusariosService } from '../../../core/services/data.service';
+import { getUsuariosModel } from '../../../core/models/usuario.model'; // Ajusta la ruta según tu proyecto
 import Swal from 'sweetalert2';
 
 

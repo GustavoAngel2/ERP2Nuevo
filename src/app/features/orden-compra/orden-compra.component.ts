@@ -15,14 +15,14 @@ import {
   OrdenComprasService,
   SucursalesService,
   UsusariosService,
-} from '../../core/data/data.service';
-import { ProveedoresService } from '../../core/data/data.service';
-import { insertCompraModel, OrdenCompraModel, updateCompraModel } from '../../core/data/models/orden-compra.model';
-import { getProveedoresModel } from '../../core/data/models/proveedores.model';
-import { sucursalModel } from '../../core/data/models/sucursales.model';
-import { getUsuariosModel } from '../../core/data/models/usuario.model';
-import { insumosModel } from '../../core/data/models/insumos.model';
-import { detallecomprasGetModel, detallecomprasInsertModel } from '../../core/data/models/detalleorden.model';
+} from '../../core/services/data.service';
+import { ProveedoresService } from '../../core/services/data.service';
+import { insertCompraModel, OrdenCompraModel, updateCompraModel } from '../../core/models/orden-compra.model';
+import { getProveedoresModel } from '../../core/models/proveedores.model';
+import { sucursalModel } from '../../core/models/sucursales.model';
+import { getUsuariosModel } from '../../core/models/usuario.model';
+import { insumosModel } from '../../core/models/insumos.model';
+import { detallecomprasGetModel, detallecomprasInsertModel } from '../../core/models/detalleorden.model';
 
 @Component({
   selector: 'app-orden-compra',

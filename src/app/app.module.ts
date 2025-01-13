@@ -47,7 +47,7 @@ import { RolesComponent } from './features/roles/roles.component';
 import { PermisosComponent } from './features/permisos/permisos.component';
 import { InsumosComponent } from './features/insumos/insumos.component';
 import { ButtonListComponent } from './core/components/button-list/button-list.component';
-import { SharedModule } from './core/components/shared.module';
+import { SharedModule } from './core/components/shared-modules.module';
 
 
 @NgModule({

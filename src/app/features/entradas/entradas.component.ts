@@ -1,5 +1,5 @@
-import { updateCantSinCargo } from '../../core/data/models/detalleentrada.model';
-import { DetalleEntradasService, ArticulosService, SucursalesService, ProveedoresService } from '../../core/data/data.service';
+import { updateCantSinCargo } from '../../core/models/detalleentrada.model';
+import { DetalleEntradasService, ArticulosService, SucursalesService, ProveedoresService } from '../../core/services/data.service';
 import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
@@ -11,12 +11,12 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { EntradasService } from '../../core/data/data.service';
-import { entradasModel } from '../../core/data/models/entradas.model';
-import { detalleEntradaModel, insertDetalleEntradaModel } from '../../core/data/models/detalleentrada.model';
-import { articulosModel } from '../../core/data/models/articulos.model';
-import { getProveedoresModel } from '../../core/data/models/proveedores.model';
-import { sucursalModel } from '../../core/data/models/sucursales.model';
+import { EntradasService } from '../../core/services/data.service';
+import { entradasModel } from '../../core/models/entradas.model';
+import { detalleEntradaModel, insertDetalleEntradaModel } from '../../core/models/detalleentrada.model';
+import { articulosModel } from '../../core/models/articulos.model';
+import { getProveedoresModel } from '../../core/models/proveedores.model';
+import { sucursalModel } from '../../core/models/sucursales.model';
 
 @Component({
   selector: 'app-entradas',

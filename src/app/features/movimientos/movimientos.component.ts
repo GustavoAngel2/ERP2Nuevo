@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService } from '../../core/data/data.service';
+import { PersonasService } from '../../core/services/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth/auth.service';
-import { MovModel,insertMovModel } from '../../core/data/models/Movimiento.model';
+import { MovModel,insertMovModel } from '../../core/models/Movimiento.model';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
-import { SucursalesService } from '../../core/data/data.service';
-import { tipoMovimiento } from '../../core/data/data.service';
-import { DetMovimientosService } from '../../core/data/data.service';
-import { MovimientosService } from '../../core/data/data.service';
-import { DetMovGetModel, DetMovInsertModel } from '../../core/data/models/detallemovimiento.model';
-import { InsumosService } from '../../core/data/data.service';
+import { SucursalesService } from '../../core/services/data.service';
+import { tipoMovimiento } from '../../core/services/data.service';
+import { DetMovimientosService } from '../../core/services/data.service';
+import { MovimientosService } from '../../core/services/data.service';
+import { DetMovGetModel, DetMovInsertModel } from '../../core/models/detallemovimiento.model';
+import { InsumosService } from '../../core/services/data.service';
 
 
 @Component({

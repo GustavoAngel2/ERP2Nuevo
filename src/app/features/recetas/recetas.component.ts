@@ -1,4 +1,4 @@
-import { DetalleRecetasService } from '../../core/data/data.service';
+import { DetalleRecetasService } from '../../core/services/data.service';
 import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
@@ -10,10 +10,10 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ArticulosService, RecetasService } from '../../core/data/data.service';
-import { recetaModel,insertRecetaModel,updateRecetasModel } from '../../core/data/models/recetas.model';
-import { insertDetRecetaModel, recetaDetModel } from '../../core/data/models/detallereceta.model';
-import { articulosModel } from '../../core/data/models/articulos.model';
+import { ArticulosService, RecetasService } from '../../core/services/data.service';
+import { recetaModel,insertRecetaModel,updateRecetasModel } from '../../core/models/recetas.model';
+import { insertDetRecetaModel, recetaDetModel } from '../../core/models/detallereceta.model';
+import { articulosModel } from '../../core/models/articulos.model';
 
 @Component({
   selector: 'app-recetas',

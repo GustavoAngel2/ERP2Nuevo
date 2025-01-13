@@ -1,27 +1,27 @@
-import { insertDetalleTraspasoModel, detalleTraspasoModel, updateDetalleTraspasoModel } from './models/detalletraspaso.model';
+import { insertDetalleTraspasoModel, detalleTraspasoModel, updateDetalleTraspasoModel } from '../models/detalletraspaso.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { defaultApiResponse } from './models/response.model';
+import { defaultApiResponse } from '../models/response.model';
 import { AuthService } from '../../features/auth/auth.service';
-import { InsertPersonasModel, UpdatePersonasModel } from './models/personas.model';
-import { updateUsuarioModel } from './models/usuario.model';
-import { insertProveedorModel, updateProveedorModel } from './models/proveedores.model';
-import { entradasInsertModel } from './models/entradas.model';
-import { sucursalInsertModel, sucursalUpdateModel } from './models/sucursales.model';
-import { insertCompraModel, updateCompraModel } from './models/orden-compra.model';
-import { insertInsumosModel, updateInsumosModel } from './models/insumos.model';
-import { detallecomprasInsertModel, detallecoprasUpdateModel } from './models/detalleorden.model';
-import { insertRecetaModel, updateRecetasModel } from './models/recetas.model';
-import { insertDetRecetaModel } from './models/detallereceta.model';
-import { insertArticuloModel, updateArticuloModel } from './models/articulos.model';
-import { insertMovModel } from './models/Movimiento.model';
-import { DetMovInsertModel } from './models/detallemovimiento.model';
-import { insertTraspasoModel,getTraspasosModel } from './models/traspasos.model';
+import { InsertPersonasModel, UpdatePersonasModel } from '../models/personas.model';
+import { updateUsuarioModel } from '../models/usuario.model';
+import { insertProveedorModel, updateProveedorModel } from '../models/proveedores.model';
+import { entradasInsertModel } from '../models/entradas.model';
+import { sucursalInsertModel, sucursalUpdateModel } from '../models/sucursales.model';
+import { insertCompraModel, updateCompraModel } from '../models/orden-compra.model';
+import { insertInsumosModel, updateInsumosModel } from '../models/insumos.model';
+import { detallecomprasInsertModel, detallecoprasUpdateModel } from '../models/detalleorden.model';
+import { insertRecetaModel, updateRecetasModel } from '../models/recetas.model';
+import { insertDetRecetaModel } from '../models/detallereceta.model';
+import { insertArticuloModel, updateArticuloModel } from '../models/articulos.model';
+import { insertMovModel } from '../models/Movimiento.model';
+import { DetMovInsertModel } from '../models/detallemovimiento.model';
+import { insertTraspasoModel,getTraspasosModel } from '../models/traspasos.model';
 import { ERP } from '../../erp-settings';
-import { insertbancosModel,updatebancosModel,deletebancosModel } from './models/bancos.model';
-import { ReporteKardexMovSearch } from './models/reportes.model';
-import { getReportEntradasSearch, insertDetalleEntradaModel, updateCantSinCargo } from './models/detalleentrada.model';
+import { insertbancosModel,updatebancosModel,deletebancosModel } from '../models/bancos.model';
+import { ReporteKardexMovSearch } from '../models/reportes.model';
+import { getReportEntradasSearch, insertDetalleEntradaModel, updateCantSinCargo } from '../models/detalleentrada.model';
 
 
 @Injectable({

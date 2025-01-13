@@ -9,8 +9,8 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { SucursalesService } from '../../core/data/data.service';
-import { sucursalInsertModel, sucursalModel, sucursalUpdateModel } from '../../core/data/models/sucursales.model';
+import { SucursalesService } from '../../core/services/data.service';
+import { sucursalInsertModel, sucursalModel, sucursalUpdateModel } from '../../core/models/sucursales.model';
 
 
 @Component({

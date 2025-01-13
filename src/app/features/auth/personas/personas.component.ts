@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService,SucursalesService } from '../../../core/data/data.service';
+import { PersonasService,SucursalesService } from '../../../core/services/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth.service';
-import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../../../core/data/models/personas.model';
+import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../../../core/models/personas.model';
 import { DeleteMenuComponent } from '../../../core/components/delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
-import { sucursalModel } from '../../../core/data/models/sucursales.model';
+import { sucursalModel } from '../../../core/models/sucursales.model';
 
 @Component({
   selector: 'app-personas',

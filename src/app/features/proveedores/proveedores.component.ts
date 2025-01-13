@@ -3,8 +3,8 @@ import { ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
-import { bancosService, ProveedoresService } from '../../core/data/data.service';
-import { getProveedoresModel, updateProveedorModel } from '../../core/data/models/proveedores.model';
+import { bancosService, ProveedoresService } from '../../core/services/data.service';
+import { getProveedoresModel, updateProveedorModel } from '../../core/models/proveedores.model';
 import { AuthService,currentUser } from '../auth/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { bancos } from '../../core/data/models/bancos.model';
+import { bancos } from '../../core/models/bancos.model';
 
 @Component({
   selector: 'app-proveedores',

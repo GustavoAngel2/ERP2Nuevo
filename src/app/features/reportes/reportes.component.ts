@@ -1,11 +1,11 @@
-import { DetalleEntradasService } from '../../core/data/data.service';
+import { DetalleEntradasService } from '../../core/services/data.service';
 import { Component, OnInit } from '@angular/core';
-import { reportes } from '../../core/data/data.service';
-import { ReporteKardexMov, ReporteKardexMovSearch } from '../../core/data/models/reportes.model';
+import { reportes } from '../../core/services/data.service';
+import { ReporteKardexMov, ReporteKardexMovSearch } from '../../core/models/reportes.model';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { getReportEntradas, getReportEntradasSearch } from '../../core/data/models/detalleentrada.model';
+import { getReportEntradas, getReportEntradasSearch } from '../../core/models/detalleentrada.model';
 
 @Component({
   selector: 'app-reportes',

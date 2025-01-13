@@ -1,7 +1,7 @@
-import { unidadMedida } from '../../core/data/models/um.model';
+import { unidadMedida } from '../../core/models/um.model';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { InsumosService, UMservice } from '../../core/data/data.service';
+import { InsumosService, UMservice } from '../../core/services/data.service';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { insertInsumosModel,updateInsumosModel,insumosModel } from '../../core/data/models/insumos.model';
+import { insertInsumosModel,updateInsumosModel,insumosModel } from '../../core/models/insumos.model';
 
 @Component({
   selector: 'app-insumos',
