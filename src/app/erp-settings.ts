@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 
 export class ERP{
 
-    public apiUrl = "http://localhost:5020/api";
+    public apiUrl = "http://localhost:8081/api";
 
     public paginator = [10, 25, 100]
 
