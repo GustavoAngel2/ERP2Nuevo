@@ -10,10 +10,10 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ArticulosService, RecetasService } from '../data.service';
+import { ArticulosService, RecetasService, InsumosService} from '../data.service';
 import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models/recetas.model';
 import { insertDetRecetaModel, recetaDetModel } from '../data-models/detallereceta.model';
-import { articulosModel } from '../data-models/articulos.model';
+import { insumosModel } from '../data-models/insumos.model';
 
 @Component({
   selector: 'app-recetas',
@@ -43,7 +43,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     "Acciones"
   ];
 
-  comboArticulos: articulosModel[] = [];
+  comboInsumo: insumosModel[] = [];
 
   dataSource: MatTableDataSource<recetaModel>;
   dataSource2: MatTableDataSource<recetaDetModel>;
@@ -70,7 +70,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
 
   constructor(
     private recetasService: RecetasService,
-    private articulosService:ArticulosService,
+    private insumoService:InsumosService,
     private detalleRecetas: DetalleRecetasService,
     public dialog:MatDialog,
     public authService: AuthService,
@@ -102,9 +102,9 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   }
 
   setCombos(){
-    this.articulosService.getArticulos().subscribe({
+    this.insumoService.getInsumos().subscribe({
       next: (response) => {
-          this.comboArticulos = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
+          this.comboInsumo = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
           console.log('No contiene datos');
       },
       error: (error) => {

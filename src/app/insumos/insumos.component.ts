@@ -32,6 +32,8 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   isModifying:boolean = false;
   umList:unidadMedida[] = [];
 
+  insumosFiltrados: insumosModel[] = [];
+  descripcionFiltro: string = ''; // Nuevo campo para el filtro
   insumosPadresCombo:insumosModel[] = [];
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -116,6 +118,23 @@ export class InsumosComponent implements OnInit,AfterViewInit{
         console.error('Hubo un error al insertar el almacen', error);
       }
     });
+  }
+
+  filtrarInsumos(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement)?.value || '';
+    this.insumosFiltrados = this.insumosPadresCombo.filter(insumo =>
+      insumo.Descripcion.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+  
+  
+  
+  seleccionarInsumo(descripcion: string): void {
+    const insumoSeleccionado = this.insumosPadresCombo.find(insumo => insumo.Descripcion === descripcion);
+    if (insumoSeleccionado) {
+      this.insumoUP = insumoSeleccionado.Insumo;
+      this.descripcionInsumo = insumoSeleccionado.Descripcion;
+    }
   }
 
   abrirDeleteDialog(Id: number, Name: string) {
