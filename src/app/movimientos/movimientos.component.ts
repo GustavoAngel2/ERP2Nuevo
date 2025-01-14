@@ -39,6 +39,7 @@ columnasDetalleCompras: string[] = [
   "Id",
   "IdMovimiento",
   "Insumo",
+  "Descripcion",
   "Cantidad",
   "FechaRegistro",
   "FechaActualiza",

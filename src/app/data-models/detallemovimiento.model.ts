@@ -11,6 +11,7 @@ export interface DetMovGetModel
   Id: number;
   IdMovimiento: number;
   Insumo: string;
+  Descripcion :string;
   Cantidad: number;
   FechaRegistro: string;
   FechaActualiza: string;
