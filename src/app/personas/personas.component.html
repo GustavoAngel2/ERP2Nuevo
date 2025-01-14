@@ -15,6 +15,13 @@
             <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
             <input type="text" class="form-control" [(ngModel)]="direccion" placeholder="Direccion" aria-label="Direccion" required>
         </div>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"><i class="bi bi-truck"></i></span>
+            <select class="form-select" [(ngModel)]="idSucursal">
+                <option value="0">Seleccione una sucursal</option>
+                <option *ngFor="let articulo of sucursalesList" value="{{articulo.Id}}">{{articulo.Nombre}}</option>
+            </select>
+        </div>
     </div>
     <div class="form-end">
         <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-warning"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
@@ -39,6 +46,10 @@
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Sucursal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Sucursal}} </td>
         </ng-container>
         <ng-container matColumnDef="Nombre">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>

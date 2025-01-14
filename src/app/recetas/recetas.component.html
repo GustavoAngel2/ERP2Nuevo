@@ -9,6 +9,7 @@
                 <span class="input-group-text"><i class="bi bi-at"></i></span>
                 <input class="form-control" placeholder="Nombre" [(ngModel)]="Nombre">
             </div>
+        </div>
         <div class="form-end">
             <button [hidden]="!isModifying" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
             <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
@@ -27,7 +28,7 @@
             <span class="input-group-text"><i class="bi bi-truck"></i></span>
             <select class="form-select" [(ngModel)]="Insumo">
                 <option value="">Seleccione un Insumo</option>
-                <option *ngFor="let articulo of comboArticulos" value="{{articulo.Codigo}}">{{articulo.Descripcion}}</option>
+                <option *ngFor="let articulo of comboInsumo" value="{{articulo.Insumo}}">{{articulo.Descripcion}}</option>
             </select>
         </div>
         <div class="input-group flex-nowrap">
