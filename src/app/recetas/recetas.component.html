@@ -28,7 +28,7 @@
             <span class="input-group-text"><i class="bi bi-truck"></i></span>
             <select class="form-select" [(ngModel)]="Insumo">
                 <option value="">Seleccione un Insumo</option>
-                <option *ngFor="let articulo of comboArticulos" value="{{articulo.Codigo}}">{{articulo.Descripcion}}</option>
+                <option *ngFor="let articulo of comboInsumo" value="{{articulo.Insumo}}">{{articulo.Descripcion}}</option>
             </select>
         </div>
         <div class="input-group flex-nowrap">
