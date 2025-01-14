@@ -6,10 +6,12 @@ export interface insertDetRecetaModel{
 }
 
 export interface updateDetRecetasModel{
-    id: number;
-    nombre: string;
-    usuarioActualiza: number;
-}
+    id: number,
+    insumo: string,
+    cantidad: number,
+    usuarioActualiza: number,
+    estatus: number
+  }
 
 export interface recetaDetModel{
     Id: number;

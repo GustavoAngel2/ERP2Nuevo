@@ -1,8 +1,8 @@
 <div class="form-place">
-    <div class="form-container" [hidden]="!isOnStepOne">
+    <div class="form-container" *ngIf="insertReceta">
         <div class="form-title">
-            <h1 [hidden]="isModifying">Registrar Receta</h1>
-            <h1 [hidden]="!isModifying">Editando receta con id: {{this.Id}}</h1>
+            <h1 [hidden]="editReceta">Registrar Receta</h1>
+            <h1 [hidden]="!editReceta">Editando receta con id: {{this.Id}}</h1>
         </div>
         <div class="form-content">
             <div class="input-group flex-nowrap">
@@ -11,15 +11,15 @@
             </div>
         </div>
         <div class="form-end">
-            <button [hidden]="!isModifying" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
-            <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
-            <button [hidden]="isModifying"  (click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+            <button [hidden]="!editReceta" (click)="editar()"   class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!editReceta" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+            <button [hidden]="editReceta"  (click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
         </div>
     </div>
 </div>
 
 
-<div class="form-container" *ngIf="isOnStepTwo && mostrarFormulario">
+<div class="form-container" *ngIf="insertDetalleReceta">
     <div class="form-title">
       <h1>Registrar Detalle para la Receta con ID: {{ IdReceta }}</h1>
     </div>
@@ -51,7 +51,7 @@
 </div>
 <br>
 
-<div class="table-container" [hidden]="!isOnStepOne && viewDetail==false">
+<div class="table-container" *ngIf="insertReceta">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Id">
@@ -97,8 +97,8 @@
     </table>
 </div>
 
-<button style="position: absolute; right: 10px;" class="btn btn-success" (click)="volverALista()" *ngIf="isOnStepTwo  && !mostrarFormulario">Volver a lista</button><br> <br>
-<div class="table-container" [hidden]="!isOnStepTwo && viewDetail==false">
+<button style="position: absolute; right: 10px;" class="btn btn-success" (click)="volverALista()" *ngIf="viewReceta">Volver a lista</button><br> <br>
+<div class="table-container" *ngIf="insertDetalleReceta || viewReceta">
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource2" matSort>
         <ng-container matColumnDef="Id">

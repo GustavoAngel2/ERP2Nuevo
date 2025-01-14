@@ -14,6 +14,7 @@ import { ArticulosService, RecetasService, InsumosService} from '../data.service
 import { recetaModel,insertRecetaModel,updateRecetasModel } from '../data-models/recetas.model';
 import { insertDetRecetaModel, recetaDetModel } from '../data-models/detallereceta.model';
 import { insumosModel } from '../data-models/insumos.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recetas',
@@ -51,15 +52,18 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   Id: number = 0;
   IdReceta: number = 0;
   Insumo:string = '0';
-  Cantidad:number =0;
+  Cantidad:number = 0;
   Nombre: string = '';
   FechaCreacion: string = '';
   FechaActualiza: string = '';
 
-  isOnStepOne:boolean = true;
-  isOnStepTwo:boolean = false;
-  isModifying:boolean = false;
-  mostrarFormulario:boolean = true;
+
+  insertReceta:boolean = true;
+  insertDetalleReceta:boolean = false;
+  editReceta:boolean = false;
+  editDetalleReceta:boolean = false;
+  viewReceta:boolean = false;
+
 
   viewDetail:boolean = false;
 
@@ -105,7 +109,6 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     this.insumoService.getInsumos().subscribe({
       next: (response) => {
           this.comboInsumo = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
-          console.log('No contiene datos');
       },
       error: (error) => {
         console.error(error);
@@ -133,31 +136,27 @@ export class RecetasComponent implements OnInit,AfterViewInit{
       });
     }
 
-
-
-
   insertar(): void {
     const nuevaReceta: insertRecetaModel = {
       nombre: this.Nombre,
       usuarioRegistra: parseInt(this.loggedUser.Id, 10),
       usuarioActualiza: parseInt(this.loggedUser.Id, 10)
     };
-    console.log(nuevaReceta)
     this.recetasService.insertarReceta(nuevaReceta).subscribe({
       next: (response) => {
-        if (response.StatusCode === 200) {
-          this.toastr.success(response.response.msg, 'Recetas');
-
+        if (response.StatusCode == 200) {
+          this.toastr.success(response.response.data, 'Recetas');
           this.IdReceta = response.response.data;;
 
           // Llamar a getData() para cargar los detalles de la receta usando el IdReceta
           this.getData(this.IdReceta);  // Llamar con el IdReceta generado
 
           // Mostrar el formulario de detalle o cualquier otra acción que quieras hacer
-          this.isOnStepOne = false;
-          this.isOnStepTwo = true;
+          this.insertReceta = false;
+          this.insertDetalleReceta = true;
         } else {
-          this.toastr.error(response.response.data, 'Recetas');
+          console.log(response)
+          Swal.fire("Ha ocurrido un error!", response.response.data, "error");
         }
         this.limpiar();
       },
@@ -179,11 +178,11 @@ export class RecetasComponent implements OnInit,AfterViewInit{
     this.detalleRecetas.insertDetReceta(detalleReceta).subscribe({
       next: (response) => {
         if (response.StatusCode == 200) {
-          this.toastr.success(response.response.data, 'Detalle Receta');
+          this.toastr.success(response.response.data, 'Detalle receta');
           this.getData(this.IdReceta)
           this.limpiar(); // Limpia los campos si es necesario
         } else {
-          this.toastr.error(response.response.data, 'Detalle Receta');
+          Swal.fire("Ha ocurrido un error!", response.response.data, "error");
         }
       },
       error: (error) => {
@@ -206,7 +205,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
             if(response.StatusCode == 200){
               this.toastr.success(response.response.data, 'Recetas');
             } else {
-              this.toastr.error(response.response.data,'Recetas')
+              Swal.fire("Ha ocurrido un error!", response.response.data, "error");
             }
             this.getData(this.IdReceta);
           },
@@ -229,9 +228,9 @@ export class RecetasComponent implements OnInit,AfterViewInit{
         this.detalleRecetas.deleteDetRecetas(Id).subscribe({
           next: (response) => {
             if(response.StatusCode == 200){
-              this.toastr.success(response.response.data, 'Recetas');
+              this.toastr.success(response.response.data, 'Detalle recetas');
             } else {
-              this.toastr.error(response.response.data,'Recetas')
+              Swal.fire("Ha ocurrido un error!", response.response.data, "error");
             }
             this.getData(this.IdReceta);
           },
@@ -255,9 +254,8 @@ export class RecetasComponent implements OnInit,AfterViewInit{
         if(response.StatusCode == 200){
           this.toastr.success(response.response.data, 'Recetas');
         } else {
-          this.toastr.error(response.response.data,'Recetas')
+          Swal.fire("Ha ocurrido un error!", response.response.data, "error");
         }
-        console.log(response);
         this.getData(this.IdReceta);
         this.limpiar();
       },
@@ -271,12 +269,12 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   cargar(elemento:recetaModel){
     this.Id = elemento.Id
     this.Nombre = elemento.Nombre
-    this.isModifying = true
+    this.editReceta = true
   }
 
   limpiar(){
     this.Nombre = ""
-    this.isModifying = false
+    this.editReceta = false
   }
 
   terminar(){
@@ -305,18 +303,12 @@ export class RecetasComponent implements OnInit,AfterViewInit{
 
 
     mostrarDetalles(id: number) {
-      this.IdReceta = id; // Almacena el ID del movimiento actual
-      this.isOnStepOne = false; // Oculta la primera tabla
-      this.isOnStepTwo = true; // Muestra la segunda tabla con detalles
-      this.mostrarFormulario = false;  // Asegúrate de ocultar el formulario aquí
       this.getData(id); // Llama al método que obtiene los detalles del movimiento
     }
 
 
     volverALista() {
-      this.isOnStepOne = true;
-      this.isOnStepTwo = false;
-      this.mostrarFormulario = true;
+      
     }
 
 

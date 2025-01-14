@@ -13,7 +13,7 @@ import { insertCompraModel, updateCompraModel } from './data-models/orden-compra
 import { insertInsumosModel, updateInsumosModel } from './data-models/insumos.model';
 import { detallecomprasInsertModel, detallecoprasUpdateModel } from './data-models/detalleorden.model';
 import { insertRecetaModel, updateRecetasModel } from './data-models/recetas.model';
-import { insertDetRecetaModel } from './data-models/detallereceta.model';
+import { insertDetRecetaModel, updateDetRecetasModel } from './data-models/detallereceta.model';
 import { insertArticuloModel, updateArticuloModel } from './data-models/articulos.model';
 import { insertMovModel } from './data-models/Movimiento.model';
 import { DetMovInsertModel } from './data-models/detallemovimiento.model';
@@ -487,32 +487,34 @@ export class RecetasService {
   constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
 
   getDetRecetas(Id: number): Observable<defaultApiResponse> {
-  const token = this.authService.getToken();
-  const headers = new HttpHeaders({
-  'Authorization': `Bearer ${token}`
-  });
-  return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/DetalleReceta/Get?idReceta=${Id}`,{headers}, );
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/DetalleReceta/Get?idReceta=${Id}`,{headers}, );
   }
 
-    insertDetReceta(DetRecetasData: insertDetRecetaModel): Observable<defaultApiResponse> {
-      const body = {
-        idReceta: DetRecetasData.idReceta,
-        insumo:DetRecetasData.insumo,
-        cantidad:DetRecetasData.cantidad,
-        usuarioActualiza: DetRecetasData.usuarioActualiza
-      };
-      return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/DetalleReceta/Insert`, body);
-    }
-    deleteDetRecetas(Id: number): Observable<any> {
-      return this.http.put(`${this.erp.apiUrl}/DetalleReceta/Delete`, { Id });
-    }
+  insertDetReceta(DetRecetasData: insertDetRecetaModel): Observable<defaultApiResponse> {
+    const body = {
+      idReceta: DetRecetasData.idReceta,
+      insumo:DetRecetasData.insumo,
+      cantidad:DetRecetasData.cantidad,
+      usuarioActualiza: DetRecetasData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/DetalleReceta/Insert`, body);
+  }
 
-
-  updateDetRecetas(RecetasData: updateRecetasModel): Observable<defaultApiResponse> {
+  deleteDetRecetas(Id: number): Observable<any> {
+    return this.http.put(`${this.erp.apiUrl}/DetalleReceta/Delete`, { Id });
+  }
+  
+  updateDetRecetas(RecetasData: updateDetRecetasModel): Observable<defaultApiResponse> {
       const body = {
-      id: RecetasData.id,
-      nombre: RecetasData.nombre,
-      usuarioActualiza: RecetasData.usuarioActualiza
+        id: RecetasData.id,
+        insumo: RecetasData.insumo,
+        cantidad: RecetasData.cantidad,
+        usuarioActualiza: RecetasData.usuarioActualiza,
+        estatus: RecetasData.estatus
       };
       console.log("Enviando solicitud con el siguiente cuerpo:", body);
       return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/recetas/Update`, body);
