@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { LanguageService } from "./core/services/language.service";
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,8 @@ export class ERP {
       ]
     }
   ];
+
+  constructor(private languageService: LanguageService) {}
 
   setStyle(theme: string) {
     const root = document.documentElement.style;
@@ -111,5 +114,6 @@ export class ERP {
       localStorage.getItem('bgColor') ?? 'light',
       localStorage.getItem('color') ?? 'blue'
     );
+    this.languageService.setLang('es-mx').subscribe();
   }
 }

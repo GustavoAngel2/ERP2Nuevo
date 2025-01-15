@@ -1,0 +1,11 @@
+{
+    "settings" : {
+        "title" : "Ajustes",
+        "language" : "Idioma",
+        "theme" : "Tema",
+        "dark" : "Oscuro",
+        "light" : "Claro",
+        "color": "A color",
+        "save" : "Guardar"
+    }
+}

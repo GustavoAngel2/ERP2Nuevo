@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ERP } from '../../erp-settings';
 import { OnInit } from '@angular/core';
+import { LanguageService } from '../../core/services/language.service';
 
 @Component({
   selector: 'app-ajustes',
@@ -14,12 +15,19 @@ export class AjustesComponent implements OnInit{
   bgColor:string = '';
   selectedColor: string = '#ffffff'; // Color inicial
 
-  constructor(private erp:ERP){}
+  currentLang: any;
+
+  constructor(private erp:ERP, private languageService:LanguageService){}
 
   ngOnInit(): void {
     this.settings = this.erp.getSettings();
     this.color = this.settings.color
     this.bgColor = this.settings.bgColor
+
+    this.languageService.langData$.subscribe((data) => {
+      this.currentLang = data;
+      console.log('Current language data:', data);
+    });
   }
 
   setColorSystem(theme:string){
