@@ -1,0 +1,32 @@
+.cursor{
+    z-index: 9999;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--title-color) ;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: .1s;
+}
+
+.cursor2{
+    z-index: 9999;
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--title-color) ;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.cursor.hovered {
+    transform: translate(-50%, -50%) scale(1.5);
+    transition: .1s;
+}
+  
