@@ -10,6 +10,8 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.8) 70%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.7) 50%);
 }
 
 .login-container {

@@ -20,15 +20,16 @@
 }
 
 .interface-button {
-  padding: 20px;
-  margin: 10px;
-  background-color: var(--mat-toolbar-container-background-color);
-  font-weight: bold;
+  border: 0;
+  padding: 0;
+  border-left: 20px solid red;
+  font-size: 32px;
+  padding-left: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 0;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: #00000000;
 }
 
 .interface-button:hover {

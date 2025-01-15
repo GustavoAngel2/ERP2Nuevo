@@ -5,16 +5,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService,currentUser } from '../auth/auth.service';
-import { MovModel,insertMovModel } from '../../core/models/Movimiento.model';
+import { MovModel, insertMovModel, updateMovModel } from '../../core/models/Movimiento.model';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
-import { SucursalesService } from '../../core/services/data.service';
+import { SucursalesService } from '../../core/services/sucursales.service';
 import { tipoMovimiento } from '../../core/services/data.service';
 import { DetMovimientosService } from '../../core/services/data.service';
 import { MovimientosService } from '../../core/services/data.service';
-import { DetMovGetModel, DetMovInsertModel } from '../../core/models/detallemovimiento.model';
+import { DetMovInsertModel, DetMovGetModel } from '../../core/models/detallemovimiento.model';
 import { InsumosService } from '../../core/services/data.service';
-
 
 @Component({
   selector: 'app-movimientos',
@@ -38,6 +37,7 @@ columnasDetalleCompras: string[] = [
   "Id",
   "IdMovimiento",
   "Insumo",
+  "Descripcion",
   "Cantidad",
   "FechaRegistro",
   "FechaActualiza",

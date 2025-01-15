@@ -21,13 +21,27 @@
                   <option *ngFor="let um of umList" value="{{um.Id}}">{{um.Nombre}}</option>
               </select>
             </div>
-            <div class="input-group flex-nowrap">
+          <!--   <div class="input-group flex-nowrap">
                 <span class="input-group-text"><i class="bi bi-truck"></i></span>
                 <select class="form-select" [(ngModel)]="insumoUP">
                     <option value="">Seleccione un insumo padre</option>
                     <option *ngFor="let insumo of insumosPadresCombo" value="{{insumo.Descripcion}}">{{insumo.Descripcion}}</option>
                 </select>
-            </div>
+            </div> -->
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Buscar Insumo</mat-label>
+                <input type="text" 
+                       matInput 
+                       [(ngModel)]="descripcionFiltro" 
+                       [matAutocomplete]="auto" 
+                       (input)="filtrarInsumos($event)">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="seleccionarInsumo($event.option.value)">
+                  <mat-option *ngFor="let insumo of insumosFiltrados" [value]="insumo.Descripcion">
+                    {{ insumo.Descripcion }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              
         </div>
         <div class="form-end">
             <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>

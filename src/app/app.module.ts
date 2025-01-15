@@ -55,7 +55,6 @@ import { SharedModule } from './core/components/shared-modules.module';
     AppComponent,
     InicioComponent,
     LoginComponent,
-    PersonasComponent,
     UsuariosComponent,
     ProveedoresComponent,
     AjustesComponent,
@@ -72,6 +71,7 @@ import { SharedModule } from './core/components/shared-modules.module';
     ReportesComponent,
     RolesComponent,
     PermisosComponent,
+    PersonasComponent
   ],
   imports: [
     //Dependencias

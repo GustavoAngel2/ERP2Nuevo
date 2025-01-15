@@ -4,9 +4,38 @@ import { Injectable } from "@angular/core";
   providedIn: 'root',
 })
 export class ERP {
-  public apiUrl = 'http://67.217.245.127:5001/api';
+  public apiUrl = 'https://localhost:5001/api';
 
   public paginator = [10, 25, 100];
+
+  public modules = [
+    {
+      name: 'Sistema',
+      items: [
+        { path: '/personas', name: 'Personas' },
+        { path: '/usuarios', name: 'Usuarios' },
+        { path: '/roles', name: 'Roles' },
+        { path: '/permisos', name: 'Permisos' }
+      ]
+    },
+    {
+      name: 'Ventas',
+      items: [
+        { path: '/compras', name: 'Ordenes de compras' },
+        { path: '/movimientos', name: 'Movimientos' },
+        { path: '/articulos', name: 'Artículos' }
+      ]
+    },
+    {
+      name: 'Administración',
+      items: [
+        { path: '/bancos', name: 'Bancos' },
+        { path: '/recetas', name: 'Recetas' },
+        { path: '/reportes', name: 'Reportes' },
+        { path: '/entradas', name: 'Entradas' }
+      ]
+    }
+  ];
 
   setStyle(theme: string) {
     const root = document.documentElement.style;
@@ -27,8 +56,18 @@ export class ERP {
       '--mat-paginator-container-background-color',
       'var(--' + theme + ')'
     );
-    root.setProperty('--table-color', 'var(--ligth-' + theme + ')');
-    root.setProperty('--header-color', 'var(--' + theme + ')');
+    root.setProperty(
+      '--table-color',
+      'var(--ligth-' + theme + ')'
+    );
+    root.setProperty(
+      '--header-color',
+      'var(--' + theme + ')'
+    );
+    root.setProperty(
+      '--darkAccent',
+      'var(--'
+    )
   }
 
   setBgColor(bgColor: string, theme: string) {

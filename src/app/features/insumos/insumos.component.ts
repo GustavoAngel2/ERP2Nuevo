@@ -1,7 +1,7 @@
 import { unidadMedida } from '../../core/models/um.model';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { InsumosService, UMservice } from '../../core/services/data.service';
+import { InsumosService,UMservice } from '../../core/services/data.service';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';
@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { insertInsumosModel,updateInsumosModel,insumosModel } from '../../core/models/insumos.model';
+import { insertInsumosModel,insumosModel,updateInsumosModel } from '../../core/models/insumos.model';
 
 @Component({
   selector: 'app-insumos',
@@ -32,6 +32,8 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   isModifying:boolean = false;
   umList:unidadMedida[] = [];
 
+  insumosFiltrados: insumosModel[] = [];
+  descripcionFiltro: string = ''; // Nuevo campo para el filtro
   insumosPadresCombo:insumosModel[] = [];
 
   loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
@@ -116,6 +118,23 @@ export class InsumosComponent implements OnInit,AfterViewInit{
         console.error('Hubo un error al insertar el almacen', error);
       }
     });
+  }
+
+  filtrarInsumos(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement)?.value || '';
+    this.insumosFiltrados = this.insumosPadresCombo.filter(insumo =>
+      insumo.Descripcion.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+
+
+
+  seleccionarInsumo(descripcion: string): void {
+    const insumoSeleccionado = this.insumosPadresCombo.find(insumo => insumo.Descripcion === descripcion);
+    if (insumoSeleccionado) {
+      this.insumoUP = insumoSeleccionado.Insumo;
+      this.descripcionInsumo = insumoSeleccionado.Descripcion;
+    }
   }
 
   abrirDeleteDialog(Id: number, Name: string) {

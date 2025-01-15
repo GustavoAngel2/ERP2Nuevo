@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService,SucursalesService } from '../../../core/services/data.service';
+import { PersonasService } from '../../../core/services/data.service';
+import { SucursalesService } from '../../../core/services/sucursales.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { AuthService,currentUser } from '../auth.service';
+import { AuthService, currentUser } from '../../auth/auth.service';
 import { GetPersonasModel, InsertPersonasModel, UpdatePersonasModel } from '../../../core/models/personas.model';
 import { DeleteMenuComponent } from '../../../core/components/delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';

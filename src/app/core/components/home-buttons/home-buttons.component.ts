@@ -1,5 +1,6 @@
 import { Component,Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ERP } from '../../../erp-settings';
 
 @Component({
   selector: 'home-buttons',
@@ -8,38 +9,9 @@ import { Router } from '@angular/router';
 })
 export class HomeButtonsComponent {
 
+  constructor(private router:Router, private erp:ERP){}
 
-
-  modules = [
-    {
-      name: 'Sistema',
-      items: [
-        { path: '/personas', name: 'Personas' },
-        { path: '/usuarios', name: 'Usuarios' },
-        { path: '/roles', name: 'Roles' },
-        { path: '/permisos', name: 'Permisos' }
-      ]
-    },
-    {
-      name: 'Ventas',
-      items: [
-        { path: '/compras', name: 'Ordenes de compras' },
-        { path: '/movimientos', name: 'Movimientos' },
-        { path: '/articulos', name: 'Artículos' }
-      ]
-    },
-    {
-      name: 'Administración',
-      items:[
-        { path: '/bancos', name: 'Bancos' },
-        { path: '/recetas', name: 'Recetas' },
-        { path: '/reportes', name: 'Reportes' },
-        { path: '/entradas', name: 'Entradas' }
-      ]
-    }
-  ];
-
-  constructor(private router:Router){}
+  modules = this.erp.modules;
 
   navigateTo(path: string): void {
     this.router.navigate([path]);
