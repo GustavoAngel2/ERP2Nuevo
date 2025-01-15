@@ -17,7 +17,7 @@ export class AjustesComponent implements OnInit{
 
   currentLang: any;
 
-  constructor(private erp:ERP, private languageService:LanguageService){}
+  constructor(private erp:ERP, public languageService:LanguageService){}
 
   ngOnInit(): void {
     this.settings = this.erp.getSettings();

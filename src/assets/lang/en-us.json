@@ -1,4 +1,25 @@
 {
-    "hello": "hello",
-    "world": "world"
+    "settings" : {
+        "title" : "Settings",
+        "language" : "Language",
+        "theme" : "Theme",
+        "dark" : "Dark",
+        "light" : "Light",
+        "color": "Color",
+        "save" : "Save"
+    },
+    "login":{
+        "title":"Sign in",
+        "placeholder_user":"User",
+        "placeholder_password":"Password"
+    },
+    "buttons":{
+        "confirm":"Confirm",
+        "delete":"Delete",
+        "cancel":"Cancel",
+        "edit":"Edit",
+        "add":"Insert",
+        "login":"Login",
+        "signin":"Sign in"
+    }
 }

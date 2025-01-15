@@ -9,7 +9,7 @@
     top: 0;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    transition: .1s;
+    transition: .05s;
 }
 
 .cursor2{
@@ -27,6 +27,5 @@
 
 .cursor.hovered {
     transform: translate(-50%, -50%) scale(1.5);
-    transition: .1s;
+    transition: .05s;
 }
-  

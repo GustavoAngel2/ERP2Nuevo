@@ -114,6 +114,6 @@ export class ERP {
       localStorage.getItem('bgColor') ?? 'light',
       localStorage.getItem('color') ?? 'blue'
     );
-    this.languageService.setLang('es-mx').subscribe();
+    this.languageService.setLang('en-us').subscribe();
   }
 }

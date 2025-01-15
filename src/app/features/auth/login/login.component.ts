@@ -1,20 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   username: string = '';
   idUsername: string = '';
   userpassword: string = '';
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private toastr:ToastrService) {}
+  currentLang:any;
+
+  constructor(private authService: AuthService, private router: Router, private toastr:ToastrService,private languageService:LanguageService) {}
+
+  ngOnInit(): void {
+    this.languageService.langData$.subscribe((data) => {
+      this.currentLang = data;
+      console.log('Current language data:', data);
+    });
+  }
 
   login() {
     const credentials = { username: this.username, idUsername: this.idUsername, userpassword: this.userpassword };
