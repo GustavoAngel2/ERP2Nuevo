@@ -30,35 +30,23 @@ export class CursorComponent implements OnInit{
 
   @HostListener('document:mouseover', ['$event'])
   onMouseOver(event: MouseEvent): void {
-  const target = event.target as HTMLElement;
-  if (
-    target.tagName === 'INPUT' ||
-    target.tagName === 'BUTTON' ||
-    target.tagName === 'A' ||
-    target.tagName === 'SELECT' ||
-    target.tagName === 'TEXTAREA' ||
-    target.tagName === 'MAT-EXPANSION-PANEL-HEADER' ||
-    target.tagName === 'MAT-PANEL-TITLE'
-  ) {
-    this.cursor?.classList.add('hovered');
+    const target = event.target as HTMLElement;
+    if (
+      target.tagName === 'INPUT' ||
+      target.tagName === 'BUTTON' ||
+      target.tagName === 'A' ||
+      target.tagName === 'SELECT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.tagName === 'MAT-EXPANSION-PANEL-HEADER' ||
+      target.tagName === 'MAT-PANEL-TITLE'
+    ) {
+      this.cursor?.classList.add('hovered');
+    }
+    else {
+      this.cursor?.classList.remove('hovered');
+    }
   }
-}
 
-@HostListener('document:mouseout', ['$event'])
-onMouseOut(event: MouseEvent): void {
-  const target = event.target as HTMLElement;
-  if (
-    target.tagName === 'INPUT' ||
-    target.tagName === 'BUTTON' ||
-    target.tagName === 'A' ||
-    target.tagName === 'SELECT' ||
-    target.tagName === 'TEXTAREA' ||
-    target.tagName === 'MAT-EXPANSION-PANEL-HEADER' ||
-    target.tagName === 'MAT-PANEL-TITLE'
-  ) {
-    this.cursor?.classList.remove('hovered');
-  }
-}
 
   @HostListener('document:mousedown') onMouseDown() {
     this.cursor?.classList.add('clicking')
