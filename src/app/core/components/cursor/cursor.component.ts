@@ -27,15 +27,16 @@ export class CursorComponent implements OnInit{
       this.cursor2.style.cssText = style;
     }
   }
+
   @HostListener('document:mouseover', ['$event'])
   onMouseOver(event: MouseEvent): void {
   const target = event.target as HTMLElement;
   if (
-    target.tagName === 'INPUT' || 
-    target.tagName === 'BUTTON' || 
-    target.tagName === 'A' || 
-    target.tagName === 'SELECT' || 
-    target.tagName === 'TEXTAREA' || 
+    target.tagName === 'INPUT' ||
+    target.tagName === 'BUTTON' ||
+    target.tagName === 'A' ||
+    target.tagName === 'SELECT' ||
+    target.tagName === 'TEXTAREA' ||
     target.tagName === 'MAT-EXPANSION-PANEL-HEADER' ||
     target.tagName === 'MAT-PANEL-TITLE'
   ) {
@@ -47,16 +48,25 @@ export class CursorComponent implements OnInit{
 onMouseOut(event: MouseEvent): void {
   const target = event.target as HTMLElement;
   if (
-    target.tagName === 'INPUT' || 
-    target.tagName === 'BUTTON' || 
-    target.tagName === 'A' || 
-    target.tagName === 'SELECT' || 
-    target.tagName === 'TEXTAREA' || 
+    target.tagName === 'INPUT' ||
+    target.tagName === 'BUTTON' ||
+    target.tagName === 'A' ||
+    target.tagName === 'SELECT' ||
+    target.tagName === 'TEXTAREA' ||
     target.tagName === 'MAT-EXPANSION-PANEL-HEADER' ||
     target.tagName === 'MAT-PANEL-TITLE'
   ) {
     this.cursor?.classList.remove('hovered');
   }
 }
+
+  @HostListener('document:mousedown') onMouseDown() {
+    this.cursor?.classList.add('clicking')
+  }
+
+  // Restaura el color de fondo al soltar el botón del mouse
+  @HostListener('document:mouseup') onMouseUp() {
+    this.cursor?.classList.remove('clicking')
+  }
 
 }
