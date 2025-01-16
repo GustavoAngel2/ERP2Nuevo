@@ -70,3 +70,8 @@
 
 /* Imagen de perfil */
 
+.colpick{
+  width: 64px;
+  height: 64px;
+  border: 0;
+}

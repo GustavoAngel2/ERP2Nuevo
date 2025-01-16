@@ -50,4 +50,8 @@ export class AjustesComponent implements OnInit{
   save(){
     this.erp.saveSettings(this.color, 'group', this.bgColor)
   }
+
+  dev(){
+    console.log("changed tolor to: ", this.color)
+  }
 }
