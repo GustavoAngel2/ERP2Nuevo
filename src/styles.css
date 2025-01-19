@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+* {
+    cursor: none!important;
+}	
+
 html{
     --mdc-linear-progress-active-indicator-color:black!important;
     --mdc-linear-progress-track-color:rgba(0, 0, 0, 0.062)!important;
@@ -14,6 +18,7 @@ html{
     --ligth-yellow:#fff898;
     --ligth-gray: #cecece;
     --ligth-purple: #ffb3f4;
+    --ligth-cyan:rgb(158, 221, 221);
     --red:brown;
     --green:#41bc0c;
     --blue:#3f55ba;
@@ -21,6 +26,7 @@ html{
     --yellow:#cdc005;
     --gray: #5d5d5d;
     --purple: #9e0787;
+    --cyan:rgb(23, 141, 141);
     --dark-red:#4f0909;
     --dark-green:#205608;
     --dark-blue:#111e59;
@@ -28,15 +34,17 @@ html{
     --dark-yellow:#80780f;
     --dark-gray: #1a1a1a;
     --dark-purple: #4e0443;
+    --dark-cyan:rgb(0, 49, 49);
+    --ligth-custom: #000000;
     --custom: #000000;
     --dark-custom: #000000;
     --title-color: #000000;
     --element-bg: #3d3d3d;
 
-    --mat-toolbar-container-background-color: var(--black);
-    --mat-expansion-container-background-color: var(--black);
-    --table-color: var(--black);
-    --header-color: var(--black);
+    --mat-toolbar-container-background-color: var(--black); /*Accento normal*/
+    --mat-expansion-container-background-color: var(--black); /*Fondo*/
+    --table-color: var(--black);/*Accento claro*/
+    --header-color: var(--black);/*Accento normal*/
     --mat-toolbar-standard-height: 64px;
     --mat-toolbar-mobile-height: 56px;
     --mat-sidenav-container-text-color:#fff;

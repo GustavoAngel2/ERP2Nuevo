@@ -1,0 +1,11 @@
+<div class="inicio-container">
+  <h1>Inicio</h1>
+  <div *ngFor="let module of modules" class="category">
+    <h2>{{ module.name }}</h2>
+    <div class="button-grid">
+      <button *ngFor="let item of module.items" (click)="navigateTo(item.path)" class="interface-button">
+        {{ item.name }}
+      </button>
+    </div>
+  </div>
+</div>

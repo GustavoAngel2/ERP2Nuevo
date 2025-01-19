@@ -1,6 +1,6 @@
 //Funciones angular
 import { NgModule } from '@angular/core';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterLink } from '@angular/router';
@@ -22,31 +22,31 @@ import { MatPaginator } from '@angular/material/paginator';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {AsyncPipe} from '@angular/common';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AsyncPipe } from '@angular/common';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 //Componentes
 import { AppComponent } from './app.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { LoginComponent } from './login/login.component';
-import { PersonasComponent } from './personas/personas.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { AjustesComponent } from './ajustes/ajustes.component';
-import { ArticulosComponent } from './articulos/articulos.component';
-import { EntradasComponent } from './entradas/entradas.component';
-import { SucursalesComponent } from './sucursales/sucursales.component';
-import { bancosComponent } from './bancos/bancos.component';
-import { RecetasComponent } from './recetas/recetas.component';
-import { DetalleRecetasComponent } from './detalle-recetas/detalle-recetas.component';
-import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
-import { InsumosComponent } from './insumos/insumos.component';
-import { TraspasosComponent } from './traspasos/traspasos.component';
-import { MovimientosComponent } from './movimientos/movimientos.component';
-import { ReportesComponent } from './reportes/reportes.component';
-import { RolesComponent } from './roles/roles.component';
-import { PermisosComponent } from './permisos/permisos.component';
-import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.component';
+import { InicioComponent } from './features/inicio/inicio.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { PersonasComponent } from './features/auth/personas/personas.component';
+import { UsuariosComponent } from './features/auth/usuarios/usuarios.component';
+import { ProveedoresComponent } from './features/proveedores/proveedores.component';
+import { AjustesComponent } from './features/ajustes/ajustes.component';
+import { ArticulosComponent } from './features/articulos/articulos.component';
+import { EntradasComponent } from './features/entradas/entradas.component';
+import { SucursalesComponent } from './features/sucursales/sucursales.component';
+import { bancosComponent } from './features/bancos/bancos.component';
+import { RecetasComponent } from './features/recetas/recetas.component';
+import { DetalleRecetasComponent } from './features/detalle-recetas/detalle-recetas.component';
+import { OrdenCompraComponent } from './features/orden-compra/orden-compra.component';
+import { TraspasosComponent } from './features/traspasos/traspasos.component';
+import { MovimientosComponent } from './features/movimientos/movimientos.component';
+import { ReportesComponent } from './features/reportes/reportes.component';
+import { RolesComponent } from './features/roles/roles.component';
+import { PermisosComponent } from './features/permisos/permisos.component';
+import { InsumosComponent } from './features/insumos/insumos.component';
+import { SharedModule } from './core/components/shared-modules.module';
 
 
 @NgModule({
@@ -55,7 +55,6 @@ import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.componen
     AppComponent,
     InicioComponent,
     LoginComponent,
-    PersonasComponent,
     UsuariosComponent,
     ProveedoresComponent,
     AjustesComponent,
@@ -72,7 +71,7 @@ import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.componen
     ReportesComponent,
     RolesComponent,
     PermisosComponent,
-    DevEnviromentComponent
+    PersonasComponent
   ],
   imports: [
     //Dependencias
@@ -83,7 +82,6 @@ import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.componen
     NgIf,
     HttpClientModule,
     HighchartsChartModule,
-
     //Materials
     MatHeaderCell,
     MatHeaderRow,
@@ -103,7 +101,8 @@ import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.componen
     MatCheckboxModule,
     AsyncPipe,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     provideAnimationsAsync(),

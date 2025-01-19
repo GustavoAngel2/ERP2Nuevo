@@ -1,0 +1,27 @@
+<div class="login">
+    <div class="login-container">
+      <h2>{{currentLang.login.title}}</h2>
+      <br>
+        <div class="login-form">
+            <!-- <div class="login-icon">
+                <i class="bi bi-clipboard-data" style="font-size: 9rem"></i>
+              </div> -->
+            <div class="login-fields">
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text"><i class="bi bi-person-bounding-box"></i></span>
+                        <input type="text" class="form-control" [(ngModel)]="username" placeholder="{{currentLang.login.placeholder_user}}" aria-label="Nombre de usuario">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text"><i class="bi bi-input-cursor-text"></i></span>
+                        <input type="password" class="form-control" [(ngModel)]="userpassword" placeholder="{{currentLang.login.placeholder_password}}" aria-label="Contraseña" required>
+                    </div>
+                </div>
+                <button class="login-button" (click)="login()" type="submit"><i class="bi bi-box-arrow-in-right"></i>  {{currentLang.buttons.login}}</button>
+            </div>
+
+        </div>
+    </div>
+</div>

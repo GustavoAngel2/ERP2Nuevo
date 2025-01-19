@@ -1,0 +1,65 @@
+
+<div class="content">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">Colores</span> </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="button-strip-settings">
+      <button class="btn-settings" style="background-color: var(--blue);" (click)="this.setColorSystem('blue')"></button>
+      <button class="btn-settings" style="background-color: var(--red);" (click)="this.setColorSystem('red')"></button>
+      <button class="btn-settings" style="background-color: var(--green);" (click)="this.setColorSystem('green')"></button>
+      <button class="btn-settings" style="background-color: var(--orange);" (click)="this.setColorSystem('orange')"></button>
+      <button class="btn-settings" style="background-color: var(--yellow);" (click)="this.setColorSystem('yellow')"></button>
+      <button class="btn-settings" style="background-color: var(--gray);" (click)="this.setColorSystem('gray')"></button>
+      <button class="btn-settings" style="background-color: var(--purple);" (click)="this.setColorSystem('purple')"></button>
+      <button class="btn-settings" style="background-color: var(--cyan);" (click)="this.setColorSystem('cyan')"></button>
+      <button class="btn-settings" style="background-color: var(--custom);" (click)="this.setColorSystem('custom')"></button>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">customcolor</span> </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <input class="colpick" [disabled]="this.color != 'custom'" type="color" (change)="dev()" value="#ffaaaa">
+    <input class="colpick" [disabled]="this.color != 'custom'" type="color" (change)="dev()" value="#ff0000">
+    <input class="colpick" [disabled]="this.color != 'custom'" type="color" (change)="dev()" value="#660000">
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">preview</span> </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-strip-settings">
+      </div>
+    </mat-expansion-panel>
+  </mat-expansion-panel>
+
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">{{currentLang.settings.theme}}</span> </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="button-strip">
+      <button (click)="this.setBgColor('light')"><i class="bi bi-brightness-high-fill"></i> {{currentLang.settings.light}} </button>
+      <button (click)="this.setBgColor('dark')"><i class="bi bi-moon-fill"></i> {{currentLang.settings.dark}} </button>
+      <button (click)="this.setBgColor('color')"><i class="bi bi-circle-fill" style="color: var(--mat-toolbar-container-background-color);"></i> {{currentLang.settings.color}} </button>
+    </div>
+  </mat-expansion-panel>
+
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">{{currentLang.settings.language}}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="button-strip">
+      <button (click)="this.languageService.setLang('es-mx')"><i class="bi bi-brightness-high-fill"></i> Espanol - Mexico</button>
+      <button (click)="this.languageService.setLang('en-us')"><i class="bi bi-moon-fill"></i> English - United States </button>
+    </div>
+  </mat-expansion-panel>
+</div>
+
+

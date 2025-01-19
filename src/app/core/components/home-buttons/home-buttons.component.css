@@ -1,0 +1,37 @@
+.inicio-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.category {
+  margin-bottom: 30px;
+}
+
+.category h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  justify-content: center;
+}
+
+.interface-button {
+  border: 0;
+  padding: 0;
+  border-left: 20px solid red;
+  font-size: 32px;
+  padding-left: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 0;
+  color: white;
+  background-color: #00000000;
+}
+
+.interface-button:hover {
+  background-color: var(--table-color);
+}
