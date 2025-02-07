@@ -47,6 +47,7 @@ import { RolesComponent } from './features/roles/roles.component';
 import { PermisosComponent } from './features/permisos/permisos.component';
 import { InsumosComponent } from './features/insumos/insumos.component';
 import { SharedModule } from './core/components/shared-modules.module';
+import { PerfilUsuarioComponent } from './features/auth/perfil-usuario/perfil-usuario.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { SharedModule } from './core/components/shared-modules.module';
     ReportesComponent,
     RolesComponent,
     PermisosComponent,
-    PersonasComponent
+    PersonasComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     //Dependencias

@@ -5,7 +5,7 @@ import { LanguageService } from "./core/services/language.service";
   providedIn: 'root',
 })
 export class ERP {
-  public apiUrl = 'https://localhost:5001/api';
+  public apiUrl = 'http://67.217.245.127:5001/api';
 
   public paginator = [10, 25, 100];
 

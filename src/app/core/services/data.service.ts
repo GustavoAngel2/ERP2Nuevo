@@ -47,6 +47,7 @@ export class PersonasService {
       apPaterno: PersonaData.ApPaterno,
       apMaterno: PersonaData.ApMaterno,
       direccion: PersonaData.Direccion,
+      sucursal: PersonaData.Sucursal,
       usuario: PersonaData.Usuario
     };
     return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/Personas/Insert`, body);
