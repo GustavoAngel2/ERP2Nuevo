@@ -53,6 +53,10 @@ html{
     --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
 }
 
+body{
+    background-color: var(--mat-toolbar-container-background-color);
+}
+
 .mat-mdc-progress-bar{
     --mdc-linear-progress-active-indicator-color:var(--mat-toolbar-container-background-color);
     --mdc-linear-progress-track-color: var(--table-color);

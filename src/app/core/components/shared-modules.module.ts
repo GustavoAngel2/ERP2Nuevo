@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { HomeButtonsComponent } from './home-buttons/home-buttons.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { CursorComponent } from './cursor/cursor.component';
+import { UserModalComponent } from './user-modal/user-modal.component';
 
 @NgModule({
   declarations: [
     HomeButtonsComponent,
     MenuListComponent,
-    CursorComponent
+    CursorComponent,
+    UserModalComponent
   ],
   imports: [
     CommonModule
@@ -16,7 +18,8 @@ import { CursorComponent } from './cursor/cursor.component';
   exports: [
     HomeButtonsComponent,
     MenuListComponent,
-    CursorComponent
+    CursorComponent,
+    UserModalComponent
   ]
 })
 

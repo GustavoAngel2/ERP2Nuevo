@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { PersonasService, UsusariosService } from '../../../core/services/data.service';
 import { getUsuariosModel } from '../../../core/models/usuario.model'; // Ajusta la ruta según tu proyecto
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -9,14 +9,21 @@ import Swal from 'sweetalert2';
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, AfterViewInit {
   usuarios:getUsuariosModel[] = [];
   loaded:boolean = false;
+
+  private blendyInstance: any;
 
   constructor(private usuariosService: UsusariosService, private personasService:PersonasService) {}
 
   ngOnInit(): void {
     this.getData()
+    console.log('Usuarios:', this.blendyInstance);
+  }
+
+  ngAfterViewInit(): void {
+    
   }
 
   deleteUsuario(id:number, nombre:String){

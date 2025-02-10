@@ -89,7 +89,7 @@ mat-accordion{
   width: 100%;
   background: #333;
   color: white;
-  padding: 10px 20px;
+  padding: 15px;
   display: flex;
   align-items: center;
 }
@@ -97,15 +97,16 @@ mat-accordion{
 .menu-label {
   font-size: 24px;
   cursor: pointer;
-  margin-right: 15px;
+  margin-right: 32px;
   color: white;
 }
 
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 32px;
   left: 0;
+  padding: 6px;
   width: 250px;
   height: 100%;
   background: #444;
@@ -132,7 +133,7 @@ mat-accordion{
 
 /* Contenido principal */
 .content-page {
-  margin-top: 50px;
+  margin-top: 78px;
   /* Para no quedar debajo de la toolbar */
   padding: 20px;
   margin-left: 250px;

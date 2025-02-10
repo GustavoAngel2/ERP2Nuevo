@@ -1,71 +1,68 @@
-
-<div class="toolbar" *ngIf="currentUrl != '/login' && currentUrl != '/'">
-  <label for="menu-toggle" class="menu-label">☰</label>
-  <h1>Mi Aplicación</h1>
-</div>
-
-<!-- Checkbox para controlar la visibilidad del sidebar -->
-<input type="checkbox" id="menu-toggle">
-
-<!-- Sidebar -->
-<div class="sidebar" *ngIf="currentUrl != '/login' && currentUrl != '/'">
-<div class="card">
-  <div>
-    <div>
-      <img src="./assets/pfp.png" class="pfp" alt="Imagen del usuario" />
-    </div>
+<div style="position: relative;background-color: var(--mat-sidenav-scrim-color);">
+  <div class="toolbar" *ngIf="currentUrl != '/login' && currentUrl != '/'">
+    <h1 class="menu-label">{{getTitle()}}</h1>
   </div>
-  <!-- <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px"> -->
-  <div></div>
-  <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
-</div>
-
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title><mat-icon>account_circle</mat-icon> <span
-          class="section-title">Administracion</span></mat-panel-title>
-    </mat-expansion-panel-header>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" *ngIf="currentUrl != '/login' && currentUrl != '/'">
     <div class="card">
-      <button routerLink="usuarios">Usuarios Permitidos</button>
-      <button routerLink="sucursales">Sucursales</button>
-      <button routerLink="personas">Personas</button>
-      <button routerLink="entradas">Entradas</button>
-      <button routerLink="movimientos">Movimientos</button>
+      <div>
+        <div>
+          <img src="./assets/pfp.png" class="pfp" alt="Imagen del usuario" />
+        </div>
+      </div>
+      <!-- <img class="pfp" width="128px" src="./assets/pfp.jpg" height="128px"> -->
+      <div></div>
+      <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
     </div>
-  </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span></mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="card">
-      <button routerLink="proveedores">Proveedores</button>
-      <button routerLink="articulos">Articulos</button>
-      <button routerLink="compras">Ordenes de compras</button>
-      <button routerLink="recetas">Recetas</button>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title><mat-icon>settings</mat-icon> <span class="section-title">Sistema</span></mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="card">
-      <button routerLink="usuarios">Usuarios permitidos</button>
-      <button routerLink="bancos">Bancos</button>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+  
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>account_circle</mat-icon> <span
+              class="section-title">Administracion</span></mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="card">
+          <button routerLink="usuarios">Usuarios Permitidos</button>
+          <button routerLink="sucursales">Sucursales</button>
+          <button routerLink="personas">Personas</button>
+          <button routerLink="entradas">Entradas</button>
+          <button routerLink="movimientos">Movimientos</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span></mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="card">
+          <button routerLink="proveedores">Proveedores</button>
+          <button routerLink="articulos">Articulos</button>
+          <button routerLink="compras">Ordenes de compras</button>
+          <button routerLink="recetas">Recetas</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>settings</mat-icon> <span class="section-title">Sistema</span></mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="card">
+          <button routerLink="usuarios">Usuarios permitidos</button>
+          <button routerLink="bancos">Bancos</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  
+  <div class="content-page">
+    <router-outlet/>
+  </div>
+  
+  <app-cursor></app-cursor>
+  
 </div>
-
-<!-- Contenido principal -->
-<div class="content-page">
-      <router-outlet />
-</div>
-
-<app-cursor></app-cursor>

@@ -60,19 +60,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  cargarImagenUsuario(id: number): void {
-    this.usuariosService.obtenerImagenUsuario(id).subscribe(
-      (response: Blob) => {
-        const reader = new FileReader();
-        reader.onload = () => this.imagenUrl = reader.result;
-        reader.readAsDataURL(response);
-      },
-      error => {
-        console.error("Error al cargar la imagen del usuario", error);
-      }
-    );
-  }
-
   getTitle(): string {
     return "ERP - " + this.currentUrl.replace(/^\//, '').charAt(0).toUpperCase() + this.currentUrl.slice(2);
   }
