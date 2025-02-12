@@ -1,0 +1,3 @@
+<div *ngFor="let modulo in modules" class="side-bar">
+  <button class="sidebar-button" (click)="navigateTo(modulo.path)">{{modulo.name}}</button>
+</div>

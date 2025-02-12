@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService, currentUser } from './auth.service';
+import { AuthService, currentUser } from './features/auth/auth.service';
 import { Subscription } from 'rxjs';
-import { UsusariosService } from './data.service';
+import { UsusariosService } from './core/services/data.service';
 import { ERP } from './erp-settings';
+import { LanguageService } from './core/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +18,15 @@ export class AppComponent implements OnInit, OnDestroy {
   userSubscription!: Subscription;
   isAccordionExpanded = false;
 
+  currentLang: any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private erp: ERP,
     public authService: AuthService,
-    private usuariosService: UsusariosService
+    private usuariosService: UsusariosService,
+    private languageService: LanguageService
   ) {}
 
 
@@ -30,11 +34,22 @@ export class AppComponent implements OnInit, OnDestroy {
     this.erp.loadSettings();
     this.currentUrl = this.router.url;
 
+    this.languageService.langData$.subscribe((data) => {
+      this.currentLang = data;
+      console.log('Current language data:', data);
+    });
+
     // Suscripción a cambios en la URL para recargar configuración
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();
         this.currentUrl = this.router.url;
+        const root = document.documentElement.style;
+        if (this.currentUrl != "/login"){
+          root.setProperty('--margin-toolbar', '78px');
+        } else {
+          root.setProperty('--margin-toolbar','-40px')
+        }
 
       }
     });
@@ -49,19 +64,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
-  }
-
-  cargarImagenUsuario(id: number): void {
-    this.usuariosService.obtenerImagenUsuario(id).subscribe(
-      (response: Blob) => {
-        const reader = new FileReader();
-        reader.onload = () => this.imagenUrl = reader.result;
-        reader.readAsDataURL(response);
-      },
-      error => {
-        console.error("Error al cargar la imagen del usuario", error);
-      }
-    );
   }
 
   getTitle(): string {

@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { AuthGuard } from './auth.guard';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { PersonasComponent } from './personas/personas.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { AjustesComponent } from './ajustes/ajustes.component';
-import { ArticulosComponent } from './articulos/articulos.component';
-import { EntradasComponent } from './entradas/entradas.component';
-import { SucursalesComponent } from './sucursales/sucursales.component';
-import { InsumosComponent } from './insumos/insumos.component';
-import { RecetasComponent } from './recetas/recetas.component';
-import { bancosComponent } from './bancos/bancos.component';
-import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
-import { TraspasosComponent } from './traspasos/traspasos.component';
-import { MovimientosComponent } from './movimientos/movimientos.component';
-import { ReportesComponent } from './reportes/reportes.component';
-import { PermisosComponent } from './permisos/permisos.component';
-import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { InicioComponent } from './features/inicio/inicio.component';
+import { AuthGuard } from './features/auth/auth.guard';
+import { UsuariosComponent } from './features/auth/usuarios/usuarios.component';
+import { PersonasComponent } from './features/auth/personas/personas.component';
+import { ProveedoresComponent } from './features/proveedores/proveedores.component';
+import { AjustesComponent } from './features/ajustes/ajustes.component';
+import { ArticulosComponent } from './features/articulos/articulos.component';
+import { EntradasComponent } from './features/entradas/entradas.component';
+import { SucursalesComponent } from './features/sucursales/sucursales.component';
+import { InsumosComponent } from './features/insumos/insumos.component';
+import { RecetasComponent } from './features/recetas/recetas.component';
+import { bancosComponent } from './features/bancos/bancos.component';
+import { OrdenCompraComponent } from './features/orden-compra/orden-compra.component';
+import { TraspasosComponent } from './features/traspasos/traspasos.component';
+import { MovimientosComponent } from './features/movimientos/movimientos.component';
+import { ReportesComponent } from './features/reportes/reportes.component';
+import { PermisosComponent } from './features/permisos/permisos.component';
 
 
 
@@ -41,7 +40,6 @@ const routes: Routes = [
   { path: "movimientos", component:MovimientosComponent, canActivate:[AuthGuard], title: "ERP - Movimientos" },
   { path: "reportes", component:ReportesComponent, canActivate:[AuthGuard], title: "ERP - Reportes" },
   { path: "permisos", component:PermisosComponent, canActivate:[AuthGuard], title: "ERP - Permisos" },
-  { path: "dev", component:DevEnviromentComponent, canActivate:[AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

@@ -1,0 +1,25 @@
+{
+    "settings" : {
+        "title" : "Ajustes",
+        "language" : "Idioma",
+        "theme" : "Tema",
+        "dark" : "Oscuro",
+        "light" : "Claro",
+        "color": "A color",
+        "save" : "Guardar"
+    },
+    "login":{
+        "title":"Inicio de sesion",
+        "placeholder_user":"Usuario",
+        "placeholder_password":"Contraseña"
+    },
+    "buttons":{
+        "confirm":"Confirmar",
+        "delete":"Borrar",
+        "cancel":"Cancelar",
+        "edit":"Editar",
+        "add":"Añadir",
+        "login":"Iniciar sesion",
+        "signin":"Registrarse"
+    }
+}

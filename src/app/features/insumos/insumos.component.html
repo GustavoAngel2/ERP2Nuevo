@@ -1,0 +1,112 @@
+
+<div class="form-place">
+    <div class="form-container">
+        <div class="form-title">
+            <h1 [hidden]="isModifying">Registrar insumo</h1>
+            <h1 [hidden]="!isModifying">Modificar insumo con el id: {{this.id}}</h1>
+        </div>
+        <div class="form-content">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-truck"></i></span>
+                <input class="form-control" placeholder="Nombre del insumo" [(ngModel)]="insumo">
+                <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
+                <input class="form-control" placeholder="Descripción" [(ngModel)]="descripcionInsumo">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                <input class="form-control" placeholder="Costo" [(ngModel)]="costo">
+                <span class="input-group-text"><i class="bi bi-rulers"></i></span>
+                <select class="form-select" [(ngModel)]="idUnidadMedida">
+                  <option value="0">Unidad de menida</option>
+                  <option *ngFor="let um of umList" value="{{um.Id}}">{{um.Nombre}}</option>
+              </select>
+            </div>
+          <!--   <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-truck"></i></span>
+                <select class="form-select" [(ngModel)]="insumoUP">
+                    <option value="">Seleccione un insumo padre</option>
+                    <option *ngFor="let insumo of insumosPadresCombo" value="{{insumo.Descripcion}}">{{insumo.Descripcion}}</option>
+                </select>
+            </div> -->
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Buscar Insumo</mat-label>
+                <input type="text" 
+                       matInput 
+                       [(ngModel)]="descripcionFiltro" 
+                       [matAutocomplete]="auto" 
+                       (input)="filtrarInsumos($event)">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="seleccionarInsumo($event.option.value)">
+                  <mat-option *ngFor="let insumo of insumosFiltrados" [value]="insumo.Descripcion">
+                    {{ insumo.Descripcion }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              
+        </div>
+        <div class="form-end">
+            <button [hidden]="!isModifying"(click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+            <button [hidden]="!isModifying" (click)="limpiar()"  class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+            <button [hidden]="isModifying"(click)="insertar()" class="btn btn-outline-success"><i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="actionbar" style="width: 70%;">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </div>
+</div>
+
+<br>
+
+<div class="table-container">
+    <div class="table-hotbar">
+        <button><i class="bi bi-filetype-xlsx"></i></button>
+        <button><i class="bi bi-filetype-pdf"></i></button>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <table class="table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Insumo </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Insumo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Descripcion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Costo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.Costo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="IUF">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Insumo padre </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.InsumosUP}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaRegistro">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de alta </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaRegistro}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de modificación </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaActualiza}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UsuarioActualiza">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.UsuarioActualiza}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+            <mat-icon class="action-btn" (click)="cargar(elemento)">edit</mat-icon>
+            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Nombre)">delete</mat-icon>
+        </td>
+        </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+</div>
