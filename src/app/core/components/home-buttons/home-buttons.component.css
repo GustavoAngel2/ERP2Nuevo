@@ -1,7 +1,49 @@
 button{
+  padding: 0;
   border: 0;
-  border-radius: 0;
-  padding: 20px;
-  background-color: #00000092;
+  border-radius: 4px;
   color: #fff;
+  background-color: var(--mat-toolbar-container-background-color);
+  overflow: hidden;
+  width:420px;
 }
+
+button .button-header{
+  width: 100%;
+  padding: 32px;
+}
+
+button .button-header span{
+  font-size: 26px;
+  margin-right: 78px;
+  margin-bottom: 64px;
+}
+
+button .button-header i{
+  color: var(--bg);
+  font-size: 64px;
+}
+
+.button-ribbon {
+  background-color: rgba(0, 0, 0, 0.295);
+  width: 100%;
+  position:relative;
+  bottom: 0;
+  left: 0;
+}
+
+.button-ribbon span{
+  margin-right: 72px;
+  transition: margin-right .5s;
+}
+
+.button-ribbon i {
+  position: relative;
+  top: 2px;
+}
+
+button:hover .button-ribbon span{
+  margin-right: 102px;
+  transition: margin-right .5s;
+}
+

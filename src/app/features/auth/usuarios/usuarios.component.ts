@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { PersonasService, UsusariosService } from '../../../core/services/data.service';
 import { getUsuariosModel } from '../../../core/models/usuario.model'; // Ajusta la ruta según tu proyecto
 import Swal from 'sweetalert2'
+import { MatDialog } from '@angular/material/dialog';
+import { UserModalComponent } from '../../../core/components/user-modal/user-modal.component';
 
 
 @Component({
@@ -15,7 +17,7 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
 
   private blendyInstance: any;
 
-  constructor(private usuariosService: UsusariosService, private personasService:PersonasService) {}
+  constructor(private usuariosService: UsusariosService, private personasService: PersonasService, public dialog: MatDialog,) {}
 
   ngOnInit(): void {
     this.getData()
@@ -23,7 +25,7 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
+
   }
 
   deleteUsuario(id:number, nombre:String){
@@ -90,6 +92,13 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
       error: (err) => {
         console.error('Error al obtener usuarios:', err); // Manejo de errores
       }
+    });
+  }
+
+  abrirDeleteDialog(elemento:getUsuariosModel) {
+    const dialogRef = this.dialog.open(UserModalComponent, {
+        width: '550px',
+        data: elemento
     });
   }
 }

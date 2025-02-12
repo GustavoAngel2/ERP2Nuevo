@@ -1,4 +1,9 @@
-<button (click)="navigateTo(this.path)" class="interface-button">
-  <i class="bi {{this.icon}}"></i>
-  {{ this.text }}
+<button (click)="navigateTo(this.path)" [ngStyle]="{'background-color': 'var(--'+ color +')'}" class="interface-button">
+  <div class="button-header">
+    <span>{{ this.text }}</span>
+    <i class="bi {{this.icon}}" [ngStyle]="{'color': 'var(--dark-'+ color +')'}"></i>
+  </div>
+  <div class="button-ribbon">
+    <span>Ir al modulo </span> <i class="bi bi-arrow-right-square"></i>
+  </div>
 </button>

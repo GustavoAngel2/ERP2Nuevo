@@ -91,6 +91,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
       },
     })
   }
+
   insertar():void {
     const nuevaPersona:InsertPersonasModel = {
       Nombre: this.nombre,

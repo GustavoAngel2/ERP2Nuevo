@@ -44,6 +44,12 @@ export class AppComponent implements OnInit, OnDestroy {
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();
         this.currentUrl = this.router.url;
+        const root = document.documentElement.style;
+        if (this.currentUrl != "/login"){
+          root.setProperty('--margin-toolbar', '78px');
+        } else {
+          root.setProperty('--margin-toolbar','-40px')
+        }
 
       }
     });

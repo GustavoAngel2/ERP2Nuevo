@@ -133,8 +133,7 @@ mat-accordion{
 
 /* Contenido principal */
 .content-page {
-  margin-top: 78px;
-  /* Para no quedar debajo de la toolbar */
+  margin-top: var(--margin-toolbar);
   padding: 20px;
   margin-left: 250px;
   transition: margin-left 0.3s;

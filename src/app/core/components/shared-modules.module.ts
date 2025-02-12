@@ -4,13 +4,15 @@ import { HomeButtonsComponent } from './home-buttons/home-buttons.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { CursorComponent } from './cursor/cursor.component';
 import { UserModalComponent } from './user-modal/user-modal.component';
+import { SilentInputComponent } from './silent-input/silent-input.component';
 
 @NgModule({
   declarations: [
     HomeButtonsComponent,
     MenuListComponent,
     CursorComponent,
-    UserModalComponent
+    UserModalComponent,
+    SilentInputComponent
   ],
   imports: [
     CommonModule
@@ -19,7 +21,8 @@ import { UserModalComponent } from './user-modal/user-modal.component';
     HomeButtonsComponent,
     MenuListComponent,
     CursorComponent,
-    UserModalComponent
+    UserModalComponent,
+    SilentInputComponent
   ]
 })
 

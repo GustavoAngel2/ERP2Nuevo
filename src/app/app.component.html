@@ -1,8 +1,8 @@
-<div style="position: relative;background-color: var(--mat-sidenav-scrim-color);">
+<div style="position: relative;">
   <div class="toolbar" *ngIf="currentUrl != '/login' && currentUrl != '/'">
     <h1 class="menu-label">{{getTitle()}}</h1>
   </div>
-  
+
   <!-- Sidebar -->
   <div class="sidebar" *ngIf="currentUrl != '/login' && currentUrl != '/'">
     <div class="card">
@@ -15,7 +15,7 @@
       <div></div>
       <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
     </div>
-  
+
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -31,7 +31,7 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-  
+
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -45,7 +45,7 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-  
+
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -58,11 +58,9 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  
+
   <div class="content-page">
     <router-outlet/>
   </div>
-  
-  <app-cursor></app-cursor>
-  
 </div>
+<app-cursor></app-cursor>
