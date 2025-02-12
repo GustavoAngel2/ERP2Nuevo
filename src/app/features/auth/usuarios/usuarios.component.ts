@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { PersonasService, UsusariosService } from '../../../core/services/data.service';
 import { getUsuariosModel } from '../../../core/models/usuario.model'; // Ajusta la ruta según tu proyecto
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+import { MatDialog } from '@angular/material/dialog';
+import { UserModalComponent } from '../../../core/components/user-modal/user-modal.component';
 
 
 @Component({
@@ -9,14 +11,21 @@ import Swal from 'sweetalert2';
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, AfterViewInit {
   usuarios:getUsuariosModel[] = [];
   loaded:boolean = false;
 
-  constructor(private usuariosService: UsusariosService, private personasService:PersonasService) {}
+  private blendyInstance: any;
+
+  constructor(private usuariosService: UsusariosService, private personasService: PersonasService, public dialog: MatDialog,) {}
 
   ngOnInit(): void {
     this.getData()
+    console.log('Usuarios:', this.blendyInstance);
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   deleteUsuario(id:number, nombre:String){
@@ -83,6 +92,13 @@ export class UsuariosComponent implements OnInit {
       error: (err) => {
         console.error('Error al obtener usuarios:', err); // Manejo de errores
       }
+    });
+  }
+
+  abrirDeleteDialog(elemento:getUsuariosModel) {
+    const dialogRef = this.dialog.open(UserModalComponent, {
+        width: '550px',
+        data: elemento
     });
   }
 }

@@ -1,0 +1,126 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.bg{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top:0;
+
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  flex-wrap: wrap;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+.bg span{
+  position: relative;
+  display: block;
+  width: calc(6.25vw - 2px);
+  height: clac(6.25vh - 2px);
+  background-color: #181818;
+  z-index: 10001;
+}
+
+.bg .login{
+  position: absolute;
+  width: 400px;
+  background: #222;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.bg .login .contentlogin {
+  position: relative;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+  overflow: hidden;
+}
+
+/* h2 {
+  position: relative;
+  padding-left: 23px;
+  border-left: 20px solid var(--mat-toolbar-container-background-color);
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 32px;
+  left: 0px;
+  top: 32px;
+  margin-bottom: 20px;
+  color: var(--title-color);
+} */
+
+.bg .login .contentlogin .form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.bg .login .contentlogin .form .inputBx{
+  position: relative;
+  width: 100%;
+}
+
+.bg .login .contentlogin .form .inputBx input{
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.bg .login .contentlogin .form .inputBx i {
+  position: absolute;
+  /* background-color: #333; */
+  left: 0 ;
+  padding: 10px 8px;
+  font-style: normal;
+  color: #aaa;
+  transition: .5s;
+  pointer-events: none;
+}
+
+.bg .login .contentlogin .form .inputBx input:focus ~ i,
+.bg .login .contentlogin .form .inputBx input:valid ~ i {
+  transform: translateY(-7.5px);
+  font-size: .8em;
+  color: #fff;
+}
+
+.bg .login .contentlogin .form button{
+  padding: 10px;
+  background: var(--mat-toolbar-container-background-color);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  font-size: 1.25em;
+  letter-spacing: .05em;
+}

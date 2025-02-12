@@ -1,37 +1,49 @@
-.inicio-container {
-  text-align: center;
-  margin: 20px;
-}
-
-.category {
-  margin-bottom: 30px;
-}
-
-.category h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
-}
-
-.button-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  justify-content: center;
-}
-
-.interface-button {
-  border: 0;
+button{
   padding: 0;
-  border-left: 20px solid red;
-  font-size: 32px;
-  padding-left: 20px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-right: 0;
-  color: white;
-  background-color: #00000000;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  background-color: var(--mat-toolbar-container-background-color);
+  overflow: hidden;
+  width:420px;
 }
 
-.interface-button:hover {
-  background-color: var(--table-color);
+button .button-header{
+  width: 100%;
+  padding: 32px;
 }
+
+button .button-header span{
+  font-size: 26px;
+  margin-right: 78px;
+  margin-bottom: 64px;
+}
+
+button .button-header i{
+  color: var(--bg);
+  font-size: 64px;
+}
+
+.button-ribbon {
+  background-color: rgba(0, 0, 0, 0.295);
+  width: 100%;
+  position:relative;
+  bottom: 0;
+  left: 0;
+}
+
+.button-ribbon span{
+  margin-right: 72px;
+  transition: margin-right .5s;
+}
+
+.button-ribbon i {
+  position: relative;
+  top: 2px;
+}
+
+button:hover .button-ribbon span{
+  margin-right: 102px;
+  transition: margin-right .5s;
+}
+

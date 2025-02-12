@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService, currentUser } from '../auth/auth.service';
 import { UsusariosService } from '../../core/services/data.service';
 import { Router } from '@angular/router';
+import { ERP } from '../../erp-settings';
 
 @Component({
   selector: 'app-inicio',
@@ -17,40 +18,21 @@ export class InicioComponent implements OnInit {
     NombrePersona: ""
   };
 
-  modules = [
-    {
-      name: 'Sistema',
-      items: [
-        { path: '/personas', name: 'Personas' },
-        { path: '/usuarios', name: 'Usuarios' },
-        { path: '/roles', name: 'Roles' },
-        { path: '/permisos', name: 'Permisos' }
-      ]
-    },
-    {
-      name: 'Ventas',
-      items: [
-        { path: '/compras', name: 'Compras' },
-        { path: '/movimientos', name: 'Movimientos' },
-        { path: '/reportes', name: 'Reportes' },
-        { path: '/articulos', name: 'Artículos' }
-      ]
-    },
-    {
-      name: 'Administración',
-      items: [
-        { path: '/ajustes', name: 'Ajustes' },
-        { path: '/bancos', name: 'Bancos' },
-        { path: '/recetas', name: 'Recetas' },
-        { path: '/entradas', name: 'Entradas' }
-      ]
-    }
-  ];
+  test:string = 'lds';
+  modules:any;
 
-  constructor(private authService: AuthService, private usuariosService: UsusariosService, private router:Router) { }
+  constructor(
+    private authService: AuthService,
+    private usuariosService: UsusariosService,
+    private router:Router,
+    private erp:ERP
+  ) {
+
+  }
 
   ngOnInit() {
     this.profile = this.authService.getCurrentUser();
+    this.modules = this.erp.modules
   }
 
   navigateTo(path: string): void {

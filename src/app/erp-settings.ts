@@ -5,7 +5,7 @@ import { LanguageService } from "./core/services/language.service";
   providedIn: 'root',
 })
 export class ERP {
-  public apiUrl = 'https://localhost:5001/api';
+  public apiUrl = 'http://67.217.245.127:5001/api';
 
   public paginator = [10, 25, 100];
   
@@ -13,27 +13,27 @@ export class ERP {
     {
       name: 'Sistema',
       items: [
-        { path: '/personas', name: 'Personas' },
-        { path: '/usuarios', name: 'Usuarios' },
-        { path: '/roles', name: 'Roles' },
-        { path: '/permisos', name: 'Permisos' }
+        { path: '/personas', name: 'Personas', color: 'blue', icon:'bi-person-bounding-box' },
+        { path: '/usuarios', name: 'Usuarios', color: 'red', icon: 'bi-person-bounding-box' },
+        { path: '/roles', name: 'Roles', color: 'orange', icon: 'bi-key' },
+        { path: '/permisos', name: 'Permisos', color: 'purple', icon: 'bi-person-lock' }
       ]
     },
     {
       name: 'Ventas',
       items: [
-        { path: '/compras', name: 'Ordenes de compras' },
-        { path: '/movimientos', name: 'Movimientos' },
-        { path: '/articulos', name: 'Artículos' }
+        { path: '/compras', name: 'Ordenes de compras', color: 'blue', icon: 'bi-folder' },
+        { path: '/movimientos', name: 'Movimientos', color: 'blue', icon: 'bi-folder' },
+        { path: '/articulos', name: 'Artículos', color: 'blue', icon: 'bi-folder' }
       ]
     },
     {
       name: 'Administración',
       items: [
-        { path: '/bancos', name: 'Bancos' },
-        { path: '/recetas', name: 'Recetas' },
-        { path: '/reportes', name: 'Reportes' },
-        { path: '/entradas', name: 'Entradas' }
+        { path: '/bancos', name: 'Bancos', color: 'blue', icon: 'bi-folder' },
+        { path: '/recetas', name: 'Recetas', color: 'blue', icon: 'bi-folder' },
+        { path: '/reportes', name: 'Reportes', color: 'blue', icon: 'bi-folder' },
+        { path: '/entradas', name: 'Entradas', color: 'blue', icon: 'bi-folder' }
       ]
 
     }
@@ -78,14 +78,14 @@ export class ERP {
     const root = document.documentElement.style;
 
     if (bgColor == 'light') {
-      root.setProperty('--mat-sidenav-content-background-color', '#fff');
+      root.setProperty('--bg', '#fff');
       root.setProperty('--title-color', '#000');
     } else if (bgColor == 'dark') {
-      root.setProperty('--mat-sidenav-content-background-color', '#353535');
+      root.setProperty('--bg', '#353535');
       root.setProperty('--title-color', '#fff');
     } else {
       root.setProperty(
-        '--mat-sidenav-content-background-color',
+        '--bg',
         'var(--dark-' + theme + ')'
       );
       root.setProperty('--title-color', '#fff');
@@ -115,6 +115,6 @@ export class ERP {
       localStorage.getItem('bgColor') ?? 'light',
       localStorage.getItem('color') ?? 'blue'
     );
-    this.languageService.setLang('en-us').subscribe();
+    this.languageService.setLang('es-mx').subscribe();
   }
 }

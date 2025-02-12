@@ -44,6 +44,12 @@ export class AppComponent implements OnInit, OnDestroy {
       if (event.constructor.name === 'NavigationEnd') {
         this.erp.loadSettings();
         this.currentUrl = this.router.url;
+        const root = document.documentElement.style;
+        if (this.currentUrl != "/login"){
+          root.setProperty('--margin-toolbar', '78px');
+        } else {
+          root.setProperty('--margin-toolbar','-40px')
+        }
 
       }
     });
@@ -58,19 +64,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
-  }
-
-  cargarImagenUsuario(id: number): void {
-    this.usuariosService.obtenerImagenUsuario(id).subscribe(
-      (response: Blob) => {
-        const reader = new FileReader();
-        reader.onload = () => this.imagenUrl = reader.result;
-        reader.readAsDataURL(response);
-      },
-      error => {
-        console.error("Error al cargar la imagen del usuario", error);
-      }
-    );
   }
 
   getTitle(): string {

@@ -1,0 +1,16 @@
+<div class="window-header">
+    <h1 mat-dialog-title>Borrar Elemento</h1>
+</div>
+
+<div class="window-content">
+    <p>usuario: {{elemento.Id}}</p>
+    <p>Nombre: {{elemento.Nombre}}</p>
+    <p>Nombre del responsable: {{elemento.NombreP}}</p>
+    <p>Fecha de alta: {{elemento.FechaReg}}</p>
+</div>
+
+<div mat-dialog-actions class="window-footer-delete">
+    <button class="btn btn-outline-secondary" cdkFocusInitial (click)="buttonAction('')">Cancelar<i class="underline"></i></button>
+    <button class="btn btn-outline-danger" cdkFocusInitial (click)="buttonAction('yes')">Borrar<i class="underline"></i></button>
+</div>
+  

@@ -1,11 +1,9 @@
 /* SilentStyles */
-
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 * {
     cursor: none!important;
-}	
+}
 
 html{
     --mdc-linear-progress-active-indicator-color:black!important;
@@ -42,7 +40,7 @@ html{
     --element-bg: #3d3d3d;
 
     --mat-toolbar-container-background-color: var(--black); /*Accento normal*/
-    --mat-expansion-container-background-color: var(--black); /*Fondo*/
+    --bg: var(--black); /*Fondo*/
     --table-color: var(--black);/*Accento claro*/
     --header-color: var(--black);/*Accento normal*/
     --mat-toolbar-standard-height: 64px;
@@ -51,10 +49,15 @@ html{
     --mat-sidenav-container-background-color:#424242;
     --mat-sidenav-content-background-color: #fff;
     --mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6);
+    --margin-toolbar: 78px;
+}
+
+body{
+    background: var(--bg)!important;
 }
 
 .mat-mdc-progress-bar{
-    --mdc-linear-progress-active-indicator-color:var(--mat-toolbar-container-background-color);
+    --mdc-linear-progress-active-indicator-color:var(--mat-sidenav-content-background-color);
     --mdc-linear-progress-track-color: var(--table-color);
 }
 
@@ -79,7 +82,7 @@ html{
     background: #555;
 }
 
-mat-toolbar, mat-drawer-container, mat-expansion-panel {
+mat-toolbar, mat-drawer-container, mat-expansion-panel, body {
     color: white !important;;
     transition: .5s!important;
 }

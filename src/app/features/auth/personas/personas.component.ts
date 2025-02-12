@@ -98,6 +98,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
       ApPaterno:this.ApPaterno,
       ApMaterno:this.ApMaterno,
       Direccion: this.direccion,
+      Sucursal: this.idSucursal,
       Usuario: parseInt(this.loggedUser.Id,10)
     };
 

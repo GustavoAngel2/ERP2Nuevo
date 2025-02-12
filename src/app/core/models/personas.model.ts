@@ -14,6 +14,7 @@ export interface InsertPersonasModel {
     ApPaterno:string
     ApMaterno:string;
     Direccion:string;
+    Sucursal:number;
     Usuario:number;
 }
 
