@@ -9,7 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import { SucursalesService } from '../../core/services/data.service';
+import { SucursalesService } from '../../core/services/sucursales.service';
 import { sucursalInsertModel, sucursalModel, sucursalUpdateModel } from '../../core/models/sucursales.model';
 
 

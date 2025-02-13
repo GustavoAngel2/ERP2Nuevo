@@ -33,9 +33,9 @@
             </div>
     </div>
     <div class="form-end">
-        <button [hidden]="!isModifying" (click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
-        <button [hidden]="!isModifying" (click)="limpiar()"   class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
-        <button [hidden]=" isModifying" (click)="insertar()"  class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+        <button class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+        <button class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+        <button class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
     </div>
 </div>
 
@@ -43,14 +43,14 @@
 <div class="actionbar" style="width:100%;background-color: var(--mat-toolbar-container-background-color); padding: 2px;" >
     <div class="input-group flex-nowrap" style="width: 70%;">
         <span class="input-group-text"><i class="bi bi-search"></i></span>
-        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+        <input class="form-control" placeholder="Buscar..." #input>
     </div>
 </div>
 <div class="table-container">
     <div class="table-hotbar">
         <button><i class="bi bi-filetype-xlsx"></i></button>
     </div>
-    <table class="table" mat-table [dataSource]="dataSource" matSort>
+    <table class="table" mat-table matSort>
         <ng-container matColumnDef="Id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
             <td mat-cell *matCellDef="let articulo"> {{articulo.Id}} </td>
@@ -102,12 +102,12 @@
         <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let elemento">
-            <mat-icon class="action-btn" (click)="cargarDatos(elemento)">edit</mat-icon>
-            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Descripcion)">delete</mat-icon>
+            <mat-icon class="action-btn" >edit</mat-icon>
+            <mat-icon class="action-btn" >delete</mat-icon>
         </td>
         </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row ></mat-header-row>
+    <mat-row *matRowDef="let row;" ></mat-row>
     </table>
     <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>

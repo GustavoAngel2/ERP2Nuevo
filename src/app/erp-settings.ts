@@ -5,7 +5,7 @@ import { LanguageService } from "./core/services/language.service";
   providedIn: 'root',
 })
 export class ERP {
-  public apiUrl = 'http://67.217.245.127:5001/api';
+  public apiUrl = 'http://localhost:5020/api';
 
   public paginator = [10, 25, 100];
   
@@ -36,6 +36,12 @@ export class ERP {
         { path: '/entradas', name: 'Entradas', color: '', icon: 'bi-folder' }
       ]
 
+    },
+    {
+      name: 'test',
+      items: [
+        { path: '/ajustes', name: 'Ajustes', color: 'red', icon: 'bi-tools' },
+      ]
     }
   ];
 
@@ -80,15 +86,21 @@ export class ERP {
     if (bgColor == 'light') {
       root.setProperty('--bg', '#fff');
       root.setProperty('--title-color', '#000');
+      root.setProperty('--input-bg', '#eee');
+      root.setProperty('--input-text-color', '#000');
     } else if (bgColor == 'dark') {
       root.setProperty('--bg', '#353535');
       root.setProperty('--title-color', '#fff');
+      root.setProperty('--input-bg', '#222');
+      root.setProperty('--input-text-color', '#fff');
     } else {
       root.setProperty(
         '--bg',
         'var(--dark-' + theme + ')'
       );
       root.setProperty('--title-color', '#fff');
+      root.setProperty('--input-bg', 'var(--table-color)');
+      root.setProperty('--input-text-color', '#000');
     }
   }
 

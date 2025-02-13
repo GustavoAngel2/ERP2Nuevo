@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } fro
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService, currentUser } from './features/auth/auth.service';
 import { Subscription } from 'rxjs';
-import { UsusariosService } from './core/services/data.service';
+import { UsusariosService } from './core/services/usuarios.service';
 import { ERP } from './erp-settings';
 import { LanguageService } from './core/services/language.service';
 

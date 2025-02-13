@@ -1,6 +1,6 @@
-import { DetalleEntradasService } from '../../core/services/data.service';
+import { DetalleEntradasService } from '../../core/services/entradas.service';
 import { Component, OnInit } from '@angular/core';
-import { reportes } from '../../core/services/data.service';
+import { reportes } from '../../core/services/reportes.service';
 import { ReporteKardexMov, ReporteKardexMovSearch } from '../../core/models/reportes.model';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';

@@ -1,9 +1,9 @@
 /* SilentStyles */
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-* {
+/* {
     cursor: none!important;
-}
+} */
 
 html{
     --mdc-linear-progress-active-indicator-color:black!important;

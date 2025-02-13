@@ -6,11 +6,11 @@
 .inputBx input {
   position: relative;
   width: 100%;
-  background: #222;
+  background: var(--input-bg);
   border: none;
   outline: none;
   padding: 25px 10px 7.5px;
-  color: #fff;
+  color: var(--input-text-color);
   font-weight: 500;
   font-size: 1em;
 }
@@ -21,7 +21,7 @@
   left: 0;
   padding: 20px 8px;
   font-style: normal;
-  color: #aaa;
+  color: var(--input-text-color);
   transition: .5s;
   pointer-events: none;
 }
@@ -30,5 +30,4 @@
 .inputBx input:valid~i {
   transform: translateY(-15px);
   font-size: .8em;
-  color: #fff;
 }

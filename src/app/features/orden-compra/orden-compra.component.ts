@@ -9,14 +9,12 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  DetalleOrdenComprasService,
-  InsumosService,
-  OrdenComprasService,
-  SucursalesService,
-  UsusariosService,
-} from '../../core/services/data.service';
-import { ProveedoresService } from '../../core/services/data.service';
+import { DetalleOrdenComprasService } from '../../core/services/compas.service';
+import { ProveedoresService } from '../../core/services/proveedores.service';
+import { OrdenComprasService } from '../../core/services/compas.service';
+import { SucursalesService } from '../../core/services/sucursales.service';
+import { UsusariosService } from '../../core/services/usuarios.service';
+import { InsumosService } from '../../core/services/insumos.service';
 import { insertCompraModel, OrdenCompraModel, updateCompraModel } from '../../core/models/orden-compra.model';
 import { getProveedoresModel } from '../../core/models/proveedores.model';
 import { sucursalModel } from '../../core/models/sucursales.model';

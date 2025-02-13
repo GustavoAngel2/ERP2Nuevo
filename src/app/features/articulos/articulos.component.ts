@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService, currentUser } from '../auth/auth.service';
 import { articulosModel, updateArticuloModel } from '../../core/models/articulos.model';
-import { ArticulosService } from '../../core/services/data.service';
-import { UMservice } from '../../core/services/data.service';
+import { ArticulosService } from '../../core/services/articulos.service';
+import { UMservice } from '../../core/services/um.service';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 

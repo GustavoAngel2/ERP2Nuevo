@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { defaultApiResponse } from '../models/response.model';
 import { AuthService } from '../../features/auth/auth.service';
 import { entradasInsertModel } from '../models/entradas.model';
+import { updateCantSinCargo,insertDetalleEntradaModel, updateDetalleEntradaModel, getReportEntradasSearch } from '../models/detalleentrada.model';
 import { ERP } from '../../erp-settings';
 
 @Injectable({
@@ -52,4 +53,62 @@ export class EntradasService {
 
   //   return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/Entradas/Update`, body);
   // }
+}
+//--------------------------------------------------------------------------------------------------------
+@Injectable({
+  providedIn: "root",
+})
+export class DetalleEntradasService{
+  //Se especifica la url base de la API
+
+  constructor(private http: HttpClient,private authService: AuthService, private erp:ERP) {}
+
+  getDetalleEntrada(id:number): Observable<defaultApiResponse> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<defaultApiResponse>(`${this.erp.apiUrl}/DetalleEntrada/Get?idEntrada=${id}`,{headers});
+  }
+
+  insertDetalleEntrada(ArticuloData: insertDetalleEntradaModel): Observable<defaultApiResponse> {
+    const body = {
+      idEntrada: ArticuloData.idEntrada,
+      codigo: ArticuloData.codigo,
+      cantidad: ArticuloData.cantidad,
+      costo: ArticuloData.costo,
+      descuento: ArticuloData.descuento,
+      usuarioActualiza:ArticuloData.usuarioActualiza
+    };
+    return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/DetalleEntrada/Insert`, body);
+  }
+
+  deleteDetalleEntrada(Id: number): Observable<any> {
+    return this.http.put(`${this.erp.apiUrl}/DetalleEntrada/Delete`, { Id });
+  }
+
+  updateCatSinCargo(cantCar:updateCantSinCargo): Observable<defaultApiResponse>{
+    const body:updateCantSinCargo = {
+      id: cantCar.id,
+      cantidad: cantCar.cantidad
+    }
+    return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/DetalleEntrada/UpdateCantSinCArgo`,body);
+  }
+
+  getDetalleEntradaReport(search:getReportEntradasSearch): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.erp.apiUrl}/DetalleEntrada/GetReportEntradas?FechaInicio=${search.FechaInicio}&FechaFinal=${search.FechaFinal}`,{headers});
+  }
+
+  ExportarReporte(): Observable<Blob> { // Actualiza el tipo de retorno a Blob para el manejo de archivos
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.erp.apiUrl}/DetalleEntrada/ExportarReportEntradasAExcel`, { headers, responseType: 'blob' });
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService } from '../../../core/services/data.service';
+import { PersonasService } from '../../../core/services/personas.service';
 import { SucursalesService } from '../../../core/services/sucursales.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';

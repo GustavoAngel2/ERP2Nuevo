@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { PersonasService, UsusariosService } from '../../../core/services/data.service';
+import { PersonasService } from '../../../core/services/personas.service';
 import { getUsuariosModel } from '../../../core/models/usuario.model'; // Ajusta la ruta según tu proyecto
+import { UsusariosService } from '../../../core/services/usuarios.service';
 import Swal from 'sweetalert2'
 import { MatDialog } from '@angular/material/dialog';
 import { UserModalComponent } from '../../../core/components/user-modal/user-modal.component';

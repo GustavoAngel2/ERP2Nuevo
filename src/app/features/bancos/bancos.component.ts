@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { bancosService } from '../../core/services/data.service';
+import { bancosService } from '../../core/services/bancos.service';
 import { AuthService, currentUser } from '../auth/auth.service';
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { bancos, insertbancosModel, updatebancosModel } from '../../core/models/bancos.model';

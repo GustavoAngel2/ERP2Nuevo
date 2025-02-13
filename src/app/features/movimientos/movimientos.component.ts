@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PersonasService } from '../../core/services/data.service';
+import { PersonasService } from '../../core/services/personas.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,11 +9,11 @@ import { MovModel, insertMovModel, updateMovModel } from '../../core/models/Movi
 import { DeleteMenuComponent } from '../../core/components/delete-menu/delete-menu.component';
 import { ToastrService } from 'ngx-toastr';
 import { SucursalesService } from '../../core/services/sucursales.service';
-import { tipoMovimiento } from '../../core/services/data.service';
-import { DetMovimientosService } from '../../core/services/data.service';
-import { MovimientosService } from '../../core/services/data.service';
+import { tipoMovimiento } from '../../core/services/movimientos.service';
+import { DetMovimientosService } from '../../core/services/movimientos.service';
+import { MovimientosService } from '../../core/services/movimientos.service';
 import { DetMovInsertModel, DetMovGetModel } from '../../core/models/detallemovimiento.model';
-import { InsumosService } from '../../core/services/data.service';
+import { InsumosService } from '../../core/services/insumos.service';
 
 @Component({
   selector: 'app-movimientos',

@@ -1,7 +1,8 @@
 import { unidadMedida } from '../../core/models/um.model';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { InsumosService,UMservice } from '../../core/services/data.service';
+import { InsumosService } from '../../core/services/insumos.service';	
+import { UMservice } from '../../core/services/um.service';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { MatTableDataSource} from '@angular/material/table';

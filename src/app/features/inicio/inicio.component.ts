@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, currentUser } from '../auth/auth.service';
-import { UsusariosService } from '../../core/services/data.service';
+import { UsusariosService } from '../../core/services/usuarios.service';
 import { Router } from '@angular/router';
 import { ERP } from '../../erp-settings';
 
@@ -18,7 +18,7 @@ export class InicioComponent implements OnInit {
     NombrePersona: ""
   };
 
-  test:string = 'lds';
+  test:string = 'Texto de prueba para input';
   modules:any;
 
   constructor(
@@ -37,5 +37,9 @@ export class InicioComponent implements OnInit {
 
   navigateTo(path: string): void {
     this.router.navigate([path]);
+  }
+
+  dev(value:string): void {
+    console.log(this.test)
   }
 }

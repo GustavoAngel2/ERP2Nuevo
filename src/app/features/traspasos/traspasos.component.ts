@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import {
-  DetalleTraspasosService,
-  InsumosService,
-  SucursalesService,
-  TraspasosService,
-  UsusariosService,
-} from '../../core/services/data.service';
+import { DetalleTraspasosService } from '../../core/services/traspasos.service';
+import { InsumosService } from '../../core/services/insumos.service';
+import { SucursalesService } from '../../core/services/sucursales.service';
+import { TraspasosService } from '../../core/services/traspasos.service';
+import { UsusariosService } from '../../core/services/usuarios.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,7 +16,6 @@ import { sucursalModel } from '../../core/models/sucursales.model';
 import { getUsuariosModel } from '../../core/models/usuario.model';
 import { insumosModel } from '../../core/models/insumos.model';
 import { detalleTraspasoModel, insertDetalleTraspasoModel, updateDetalleTraspasoModel } from '../../core/models/detalletraspaso.model';
-import { updateDetalleEntradaModel } from '../../core/models/detalleentrada.model';
 
 @Component({
   selector: 'app-traspasos',

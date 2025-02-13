@@ -38,7 +38,6 @@ import { EntradasComponent } from './features/entradas/entradas.component';
 import { SucursalesComponent } from './features/sucursales/sucursales.component';
 import { bancosComponent } from './features/bancos/bancos.component';
 import { RecetasComponent } from './features/recetas/recetas.component';
-import { DetalleRecetasComponent } from './features/detalle-recetas/detalle-recetas.component';
 import { OrdenCompraComponent } from './features/orden-compra/orden-compra.component';
 import { TraspasosComponent } from './features/traspasos/traspasos.component';
 import { MovimientosComponent } from './features/movimientos/movimientos.component';
@@ -55,17 +54,16 @@ import { ColaboradoresComponent } from './features/colaboradores/colaboradores.c
   declarations: [
     //Componentes
     AppComponent,
+    ArticulosComponent,
     InicioComponent,
     LoginComponent,
     UsuariosComponent,
     ProveedoresComponent,
     AjustesComponent,
-    ArticulosComponent,
     EntradasComponent,
     SucursalesComponent,
     bancosComponent,
     RecetasComponent,
-    DetalleRecetasComponent,
     OrdenCompraComponent,
     InsumosComponent,
     TraspasosComponent,
