@@ -1,0 +1,114 @@
+<div class="form-container">
+    <div class="form-title">
+            <h1 [hidden]="">Registrar Articulo</h1>
+            <h1 [hidden]="">Editando articulo con Id:</h1>
+    </div>
+    <div class="form-content">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
+                <input class="form-control" placeholder="Codigo del articulo" >
+                <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                <input class="form-control" placeholder="Descripcion" >
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-diagram-3-fill"></i></span>
+                <input class="form-control" placeholder="Familia">
+                <span class="input-group-text"><i class="bi bi-rulers"></i></span>
+                <select class="form-control" >
+                    <option value="0">Seleccione una unidad</option>
+                    <option></option>
+                </select>
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                <input class="form-control" placeholder="Costo" >
+                <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
+                <input class="form-control" placeholder="Precio" >
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"><i class="bi bi-percent"></i></span>
+                <input class="form-control" placeholder="IVA" >
+                <span class="input-group-text"><i class="bi bi-percent"></i></span>
+                <input class="form-control" placeholder="IEPS" >
+            </div>
+    </div>
+    <div class="form-end">
+        <button [hidden]="!isModifying" (click)="editar()" class="btn btn-outline-info"><i class="bi bi-check-circle"></i> Confirmar<i class="underline"></i></button>
+        <button [hidden]="!isModifying" (click)="limpiar()"   class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+        <button [hidden]=" isModifying" (click)="insertar()"  class="btn btn-outline-success"> <i class="bi bi-cloud-upload-fill icon"></i> Insertar<i class="underline"></i></button>
+    </div>
+</div>
+
+<br>
+<div class="actionbar" style="width:100%;background-color: var(--mat-toolbar-container-background-color); padding: 2px;" >
+    <div class="input-group flex-nowrap" style="width: 70%;">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </div>
+</div>
+<div class="table-container">
+    <div class="table-hotbar">
+        <button><i class="bi bi-filetype-xlsx"></i></button>
+    </div>
+    <table class="table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Codigo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Codigo}}  </td>
+        </ng-container>
+        <ng-container matColumnDef="Familia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Familia </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Familia}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Descripcion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="UM">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidad Medida </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.UM}} </td>
+        </ng-container>
+        <ng-container matColumnDef="UltimoCosto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Costo </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.UltimoCosto}} </td>
+        </ng-container>
+        <ng-container matColumnDef="PrecioVenta">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.PrecioVenta}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Iva">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Iva </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Iva}}% </td>
+        </ng-container>
+        <ng-container matColumnDef="Ieps">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ieps </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Ieps}}% </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaReg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaReg}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaAct">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado </th>
+            <td mat-cell *matCellDef="let persona"> {{persona.FechaAct}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado por </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Usuario}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let elemento">
+            <mat-icon class="action-btn" (click)="cargarDatos(elemento)">edit</mat-icon>
+            <mat-icon class="action-btn" (click)="abrirDeleteDialog(elemento.Id, elemento.Descripcion)">delete</mat-icon>
+        </td>
+        </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+<p>colaboradores works!</p>

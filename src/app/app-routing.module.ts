@@ -18,28 +18,30 @@ import { TraspasosComponent } from './features/traspasos/traspasos.component';
 import { MovimientosComponent } from './features/movimientos/movimientos.component';
 import { ReportesComponent } from './features/reportes/reportes.component';
 import { PermisosComponent } from './features/permisos/permisos.component';
+import { ColaboradoresComponent } from './features/colaboradores/colaboradores.component';
 
-
+//canActivate:[AuthGuard] , 
 
 const routes: Routes = [
   { path: "", redirectTo: '/login', pathMatch: 'full' },
   { path: "login", component: LoginComponent, title: "Iniciar sesión" },
-  { path: "inicio", component: InicioComponent, canActivate:[AuthGuard] , title: "ERP - Inicio" },
-  { path: "personas", component: PersonasComponent, canActivate:[AuthGuard], title: "ERP - Modulo personas" },
-  { path: "usuarios", component: UsuariosComponent, canActivate:[AuthGuard], title: "ERP - Modulo de usuarios" },
-  { path: "proveedores", component: ProveedoresComponent, canActivate:[AuthGuard], title: "ERP - Modulo de proveedores" },
-  { path: "ajustes", component: AjustesComponent, canActivate:[AuthGuard], title: "Ajustes" },
-  { path: "articulos", component:ArticulosComponent, canActivate:[AuthGuard], title: "ERP - Administrador de articulos" },
-  { path: "entradas", component:EntradasComponent, canActivate:[AuthGuard], title: "ERP - Entradas" },
-  { path: "sucursales", component:SucursalesComponent, canActivate:[AuthGuard], title: "ERP - Sucursales" },
-  { path: "insumos", component:InsumosComponent, canActivate:[AuthGuard], title: "ERP - Insumos" },
-  { path: "recetas", component:RecetasComponent, canActivate:[AuthGuard], title: "ERP - Recetas" },
-  { path: "bancos", component:bancosComponent, canActivate:[AuthGuard], title: "ERP - Bancos" },
-  { path: "compras", component:OrdenCompraComponent, canActivate:[AuthGuard],title: "ERP - Compras" },
-  { path: "traspasos", component:TraspasosComponent, canActivate:[AuthGuard], title: "ERP - Traspasos" },
-  { path: "movimientos", component:MovimientosComponent, canActivate:[AuthGuard], title: "ERP - Movimientos" },
-  { path: "reportes", component:ReportesComponent, canActivate:[AuthGuard], title: "ERP - Reportes" },
-  { path: "permisos", component:PermisosComponent, canActivate:[AuthGuard], title: "ERP - Permisos" },
+  { path: "inicio", component: InicioComponent, title: "ERP - Inicio" },
+  { path: "personas", component: PersonasComponent, title: "ERP - Modulo personas" },
+  { path: "usuarios", component: UsuariosComponent, title: "ERP - Modulo de usuarios" },
+  { path: "proveedores", component: ProveedoresComponent,  title: "ERP - Modulo de proveedores" },
+  { path: "ajustes", component: AjustesComponent,  title: "Ajustes" },
+  { path: "articulos", component:ArticulosComponent,  title: "ERP - Administrador de articulos" },
+  { path: "entradas", component:EntradasComponent,  title: "ERP - Entradas" },
+  { path: "sucursales", component:SucursalesComponent,  title: "ERP - Sucursales" },
+  { path: "insumos", component:InsumosComponent, title: "ERP - Insumos" },
+  { path: "recetas", component:RecetasComponent, title: "ERP - Recetas" },
+  { path: "bancos", component:bancosComponent, title: "ERP - Bancos" },
+  { path: "compras", component:OrdenCompraComponent, title: "ERP - Compras" },
+  { path: "traspasos", component:TraspasosComponent,  title: "ERP - Traspasos" },
+  { path: "movimientos", component:MovimientosComponent, title: "ERP - Movimientos" },
+  { path: "reportes", component:ReportesComponent, title: "ERP - Reportes" },
+  { path: "permisos", component:PermisosComponent, title: "ERP - Permisos" },
+  {path: "colaboradores", component:ColaboradoresComponent, title: "ERP - Colaboradores"},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
