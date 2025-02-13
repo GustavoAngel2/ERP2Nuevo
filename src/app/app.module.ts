@@ -47,6 +47,7 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { RolesComponent } from './roles/roles.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.component';
+import { UsuariosDetComponent } from './features/usuarios-det/usuarios-det.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { DevEnviromentComponent } from './dev-enviroment/dev-enviroment.componen
     ReportesComponent,
     RolesComponent,
     PermisosComponent,
-    DevEnviromentComponent
+    DevEnviromentComponent,
+    UsuariosDetComponent
   ],
   imports: [
     //Dependencias
