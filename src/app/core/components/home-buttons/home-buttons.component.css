@@ -10,18 +10,23 @@ button{
 
 button .button-header{
   width: 100%;
-  padding: 32px;
+  padding: 24px;
+  height: 128px;
 }
 
 button .button-header span{
-  font-size: 26px;
+  font-size: 20px;
   margin-right: 78px;
-  margin-bottom: 64px;
+  margin-bottom: 128px;
 }
 
 button .button-header i{
-  color: var(--bg);
+
+  position: relative;
+  width: 64px;
+  height: 64px;
   font-size: 64px;
+  transition: .5s;
 }
 
 .button-ribbon {
@@ -47,3 +52,7 @@ button:hover .button-ribbon span{
   transition: margin-right .5s;
 }
 
+button:hover .button-header i {
+  font-size: 72px;
+  color: #fff!important;
+}

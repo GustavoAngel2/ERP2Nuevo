@@ -1,15 +1,17 @@
+<div class="list">
+  <app-silent-input placeholder="3000" [(value)]="test"></app-silent-input>
 
-<app-silent-input placeholder="3000" [(value)]="test"></app-silent-input>
-
-<mat-accordion *ngFor="let module of modules">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title><span
-          class="section-title">{{ module.name }}</span></mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="card">
-      <home-buttons *ngFor="let item of module.items" [text]="item.name" [color]="item.color" [path]="item.path"
-        [icon]="item.icon"></home-buttons>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+  <mat-accordion *ngFor="let module of modules">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><span class="section-title">{{ module.name }}</span></mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="card">
+        <div class="button-grid">
+          <home-buttons *ngFor="let item of module.items" [text]="item.name" [color]="item.color" [path]="item.path"
+            [icon]="item.icon"></home-buttons>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

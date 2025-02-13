@@ -22,18 +22,18 @@ export class ERP {
     {
       name: 'Ventas',
       items: [
-        { path: '/compras', name: 'Ordenes de compras', color: 'blue', icon: 'bi-folder' },
-        { path: '/movimientos', name: 'Movimientos', color: 'blue', icon: 'bi-folder' },
-        { path: '/articulos', name: 'Artículos', color: 'blue', icon: 'bi-folder' }
+        { path: '/compras', name: 'Ordenes de compras', color: 'yellow', icon: 'bi-folder' },
+        { path: '/movimientos', name: 'Movimientos', color: 'green', icon: 'bi-folder' },
+        { path: '/articulos', name: 'Artículos', color: 'cyan', icon: 'bi-folder' }
       ]
     },
     {
       name: 'Administración',
       items: [
-        { path: '/bancos', name: 'Bancos', color: 'blue', icon: 'bi-folder' },
-        { path: '/recetas', name: 'Recetas', color: 'blue', icon: 'bi-folder' },
-        { path: '/reportes', name: 'Reportes', color: 'blue', icon: 'bi-folder' },
-        { path: '/entradas', name: 'Entradas', color: 'blue', icon: 'bi-folder' }
+        { path: '/bancos', name: 'Bancos', color: '', icon: 'bi-folder' },
+        { path: '/recetas', name: 'Recetas', color: '', icon: 'bi-folder' },
+        { path: '/reportes', name: 'Reportes', color: '', icon: 'bi-folder' },
+        { path: '/entradas', name: 'Entradas', color: '', icon: 'bi-folder' }
       ]
     }
   ];

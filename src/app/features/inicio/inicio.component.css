@@ -1,0 +1,14 @@
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.button-grid{
+  padding: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

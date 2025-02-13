@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   styleUrl: './home-buttons.component.css'
 })
 export class HomeButtonsComponent {
-  @Input() text: string = 'blue';
-  @Input() color: string = '';
+  @Input() text: string = '';
+  @Input() color: string = 'blue';
   @Input() icon: string = '';
   @Input() path: string = '/inicio';
 
