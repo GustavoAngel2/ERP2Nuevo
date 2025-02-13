@@ -8,7 +8,7 @@ export class ERP {
   public apiUrl = 'http://67.217.245.127:5001/api';
 
   public paginator = [10, 25, 100];
-
+  
   public modules = [
     {
       name: 'Sistema',
@@ -35,6 +35,7 @@ export class ERP {
         { path: '/reportes', name: 'Reportes', color: '', icon: 'bi-folder' },
         { path: '/entradas', name: 'Entradas', color: '', icon: 'bi-folder' }
       ]
+
     }
   ];
 
