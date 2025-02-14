@@ -48,12 +48,14 @@ import { InsumosComponent } from './features/insumos/insumos.component';
 import { SharedModule } from './core/components/shared-modules.module';
 import { PerfilUsuarioComponent } from './features/auth/perfil-usuario/perfil-usuario.component';
 import { ColaboradoresComponent } from './features/colaboradores/colaboradores.component';
+import { UsuariosDetComponent } from './features/usuarios-det/usuarios-det.component';
 
 
 @NgModule({
   declarations: [
     //Componentes
     AppComponent,
+    UsuariosDetComponent,
     ArticulosComponent,
     InicioComponent,
     LoginComponent,
