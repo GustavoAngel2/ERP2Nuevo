@@ -63,7 +63,7 @@ export class RecetasComponent implements OnInit,AfterViewInit{
 
   viewDetail:boolean = false;
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -78,11 +78,11 @@ export class RecetasComponent implements OnInit,AfterViewInit{
   ) {
     this.dataSource = new MatTableDataSource<recetaModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
     this.dataSource2 = new MatTableDataSource<recetaDetModel>();
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser();
     this.setCombos();
     this.getDataRecetas();
   }

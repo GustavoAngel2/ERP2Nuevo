@@ -79,7 +79,7 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   comboUsuarios:getUsuariosModel[] = [];
   comboInsumos:insumosModel[] = [];
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -97,12 +97,12 @@ export class TraspasosComponent implements OnInit, AfterViewInit{
   {
     this.dataSource = new MatTableDataSource<traspasoModel>();
     this.dataSource2 = new MatTableDataSource<detalleTraspasoModel>();
+    this.loggedUser = this.authService.getCurrentUser();
   }
 
   ngOnInit() {
     this.search.pFechaInicio = this.dateNow();
     this.search.pFechaFinal = this.dateNow();
-    this.loggedUser = this.authService.getCurrentUser();
     this.setCombos();
     this.getData();
   }

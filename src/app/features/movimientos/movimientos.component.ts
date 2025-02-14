@@ -57,7 +57,7 @@ columnasDetalleCompras: string[] = [
   comboInsumos: any[] = [];
   isModifying:boolean = false;
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
 
   isOnStepOne:boolean = true;
@@ -82,14 +82,15 @@ columnasDetalleCompras: string[] = [
     private movimientoService:MovimientosService,
     private detalleMovService: DetMovimientosService,
     private InsumosService:InsumosService,
-    private toastr:ToastrService) {
+    private toastr:ToastrService
+  ) {
     this.dataSource = new MatTableDataSource<MovModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
     this.dataSource2 = new MatTableDataSource<DetMovGetModel>();
+    this.loggedUser = this.authService.getCurrentUser()
   }
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
     this.getData()
     this.setCombos();
   }

@@ -27,17 +27,17 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
   direccion: string = '';
   isModifying:boolean = false;
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private sucursalesService:SucursalesService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService){
     this.dataSource = new MatTableDataSource<sucursalModel>()
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
 

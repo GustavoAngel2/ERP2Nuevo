@@ -33,7 +33,10 @@ export class ArticulosComponent implements OnInit {
     private toastr:ToastrService
   ) {
     this.dataSource = new MatTableDataSource<articulosModel>();
+    this.loggedInUser = this.authService.getCurrentUser();
   }
+
+
   isModifying:boolean = false;
   Id: number = 0;
   descripcion: string = '';
@@ -47,12 +50,11 @@ export class ArticulosComponent implements OnInit {
   usuario: number = 0;
   ComboUm: any[] = [];
 
-  loggedInUser: currentUser = { Id: '', NombreUsuario: '', NombrePersona: '', IdRol: '' };
+  loggedInUser: currentUser;
 
   ngOnInit() {
   this.getData();
   this.setCombos();
-    this.loggedInUser = this.authService.getCurrentUser();
     console.log('Usuario logeado:', this.loggedInUser);
   }
 

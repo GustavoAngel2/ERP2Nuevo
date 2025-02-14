@@ -11,13 +11,7 @@ import { ERP } from '../../erp-settings';
 })
 export class InicioComponent implements OnInit {
   imagenUrl: string | ArrayBuffer | null = null;
-  profile: currentUser = {
-    Id: "",
-    IdRol: "",
-    NombreUsuario: "",
-    NombrePersona: ""
-  };
-
+  profile: currentUser;
   test:string = 'Texto de prueba para input';
   modules:any;
 
@@ -27,7 +21,7 @@ export class InicioComponent implements OnInit {
     private router:Router,
     private erp:ERP
   ) {
-
+    this.profile = this.authService.getCurrentUser()
   }
 
   ngOnInit() {

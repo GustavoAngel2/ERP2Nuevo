@@ -13,4 +13,5 @@ export interface getUsuariosModel{
     Usuario:string;
     FechaAct:String;
     FechaReg:string;
+    Theme:string;
 }

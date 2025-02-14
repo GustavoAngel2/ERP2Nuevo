@@ -87,7 +87,7 @@ export class EntradasComponent implements OnInit, AfterViewInit{
 
   isModifying:boolean = false;
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser ;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -104,6 +104,7 @@ export class EntradasComponent implements OnInit, AfterViewInit{
   ) {
     this.dataSource = new MatTableDataSource<entradasModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
     this.dataSourceDetalle = new MatTableDataSource<detalleEntradaModel>();
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
@@ -131,7 +132,6 @@ export class EntradasComponent implements OnInit, AfterViewInit{
 
       }
     })
-    this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
 

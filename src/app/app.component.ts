@@ -14,7 +14,7 @@ import { LanguageService } from './core/services/language.service';
 export class AppComponent implements OnInit, OnDestroy {
   currentUrl: string = '';
   imagenUrl: string | ArrayBuffer | null = null;
-  actualUser: currentUser = { Id: "", NombreUsuario: "", NombrePersona: "", IdRol: "" };
+  actualUser: currentUser;
   userSubscription!: Subscription;
   isAccordionExpanded = false;
 
@@ -27,7 +27,12 @@ export class AppComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private usuariosService: UsusariosService,
     private languageService: LanguageService
-  ) {}
+  ) {
+    this.userSubscription = this.authService.currentUser.subscribe(user => {
+      this.actualUser = user;
+    });
+    this.actualUser = this.authService.getCurrentUser()
+  }
 
 
   ngOnInit() {
@@ -52,11 +57,6 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
       }
-    });
-
-    // Suscripción a cambios de usuario para actualizar imagen y perfil
-    this.userSubscription = this.authService.currentUser.subscribe(user => {
-      this.actualUser = user;
     });
   }
 
@@ -90,5 +90,6 @@ export class AppComponent implements OnInit, OnDestroy {
   logout() {
     this.authService.logout();
     this.closeAccordion();
+    this.router.navigateByUrl('/login')
   }
 }

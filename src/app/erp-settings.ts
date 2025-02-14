@@ -8,7 +8,7 @@ export class ERP {
   public apiUrl = 'http://localhost:5020/api';
 
   public paginator = [10, 25, 100];
-  
+
   public modules = [
     {
       name: 'Sistema',
@@ -35,7 +35,6 @@ export class ERP {
         { path: '/reportes', name: 'Reportes', color: '', icon: 'bi-folder' },
         { path: '/entradas', name: 'Entradas', color: '', icon: 'bi-folder' }
       ]
-
     },
     {
       name: 'test',
@@ -77,6 +76,10 @@ export class ERP {
     root.setProperty(
       '--darkAccent',
       'var(--'
+    )
+    root.setProperty(
+      '--module-background',
+      'var(--dark-' + theme + ')'
     )
   }
 

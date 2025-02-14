@@ -16,47 +16,14 @@
       <p>Has iniciado sesión como: {{actualUser.NombreUsuario}}</p>
     </div>
 
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title><mat-icon>account_circle</mat-icon> <span
-              class="section-title">Administracion</span></mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="card">
-          <button routerLink="usuarios">Usuarios Permitidos</button>
-          <button routerLink="sucursales">Sucursales</button>
-          <button routerLink="personas">Personas</button>
-          <button routerLink="entradas">Entradas</button>
-          <button routerLink="movimientos">Movimientos</button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <button> Mi perfil </button>
 
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title><mat-icon>attach_money</mat-icon> <span class="section-title">Ventas</span></mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="card">
-          <button routerLink="proveedores">Proveedores</button>
-          <button routerLink="articulos">Articulos</button>
-          <button routerLink="compras">Ordenes de compras</button>
-          <button routerLink="recetas">Recetas</button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <div class="separator"></div>
 
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title><mat-icon>settings</mat-icon> <span class="section-title">Sistema</span></mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="card">
-          <button routerLink="usuarios">Usuarios permitidos</button>
-          <button routerLink="bancos">Bancos</button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <button routerLink="/inicio"> Inicio </button>
+    <button routerLink="/ajustes"> Ajustes </button>
+    <button (click)="logout()" > Cerrar sesion </button>
+
   </div>
 
   <div class="content-page">

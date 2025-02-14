@@ -37,17 +37,17 @@ export class ProveedoresComponent implements OnInit, AfterViewInit{
   isModifying:boolean = false;
   bancoList:bancos[] = []
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private bancosService:bancosService, private proveedoresService: ProveedoresService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<getProveedoresModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
 

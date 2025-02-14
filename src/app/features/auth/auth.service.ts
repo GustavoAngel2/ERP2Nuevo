@@ -9,6 +9,7 @@ export interface currentUser {
   NombreUsuario: string;
   NombrePersona: string;
   IdRol: string;
+  Theme: string;
 }
 
 @Injectable({
@@ -28,6 +29,7 @@ export class AuthService {
       Id: sessionStorage.getItem('Id') ?? '',
       NombreUsuario: sessionStorage.getItem('NombreUsuario') ?? '',
       NombrePersona: sessionStorage.getItem('NombrePersona') ?? '',
+      Theme: sessionStorage.getItem('Theme') ?? 'blue',
       IdRol : ''
     };
   }
@@ -59,7 +61,8 @@ export class AuthService {
     sessionStorage.removeItem('Id');
     sessionStorage.removeItem('NombreUsuario');
     sessionStorage.removeItem('NombrePersona');
-    this.updateCurrentUser({ Id: '', NombreUsuario: '' ,NombrePersona:'', IdRol:''});
+    sessionStorage.removeItem('Theme');
+    this.updateCurrentUser({ Id: '', NombreUsuario: '' ,NombrePersona:'', IdRol:'' , Theme: 'blue'});
   }
 
   getToken() {
@@ -81,6 +84,10 @@ export class AuthService {
     console.log('Rol set in sessionStorage:', rol);
   }
 
+  setTheme(Theme:string){
+    sessionStorage.setItem('Theme',Theme)
+  }
+
   getIdUsername(): string {
     return sessionStorage.getItem('Id') ?? '';
   }
@@ -91,6 +98,10 @@ export class AuthService {
 
   getRol():string{
     return sessionStorage.getItem('NombrePersona') ?? '';
+  }
+
+  getTheme(): string {
+    return sessionStorage.getItem('Theme') ?? 'blue';
   }
 
   isLoggedIn(): boolean {

@@ -24,7 +24,7 @@ export class bancosComponent implements OnInit, AfterViewInit {
   usuarioActualiza: string = '';
   isModifying: boolean = false;
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' };
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -36,10 +36,10 @@ export class bancosComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService
   ) {
     this.dataSource = new MatTableDataSource<bancos>();
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser();
     this.getData();
   }
 

@@ -78,7 +78,7 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
 
   mostrarFormulario:boolean=true;
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -96,10 +96,10 @@ export class OrdenCompraComponent implements OnInit, AfterViewInit{
   ) {
     this.dataSource = new MatTableDataSource<OrdenCompraModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
     this.dataSource2 = new MatTableDataSource<detallecomprasGetModel>();
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
     this.setCombos();
     this.getData()
   }

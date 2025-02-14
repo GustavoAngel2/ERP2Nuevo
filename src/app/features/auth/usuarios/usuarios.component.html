@@ -7,7 +7,7 @@
             <h3 style="margin-top: 12px;"> Gestor de usuarios </h3>
         </div>
     </div>
-    <div class="custom-card" *ngFor="let item of usuarios">
+    <div class="custom-card" [ngStyle]="{'background-color': 'var(--'+ item.Theme + ')' }" *ngFor="let item of usuarios">
         <div class="custom-card-info">
             <h3>{{ item.Nombre }}</h3>
             <p>ID: {{ item.Id }}</p>

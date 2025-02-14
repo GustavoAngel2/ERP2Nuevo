@@ -1,7 +1,7 @@
 import { unidadMedida } from '../../core/models/um.model';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { InsumosService } from '../../core/services/insumos.service';	
+import { InsumosService } from '../../core/services/insumos.service';
 import { UMservice } from '../../core/services/um.service';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
@@ -37,17 +37,17 @@ export class InsumosComponent implements OnInit,AfterViewInit{
   descripcionFiltro: string = ''; // Nuevo campo para el filtro
   insumosPadresCombo:insumosModel[] = [];
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private unidadMedidaService:UMservice, private insumosService: InsumosService, public dialog:MatDialog, public authService: AuthService, private toastr:ToastrService) {
     this.dataSource = new MatTableDataSource<insumosModel>(); // Inicializa dataSource como una instancia de MatTableDataSource
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
 

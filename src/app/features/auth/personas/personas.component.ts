@@ -29,7 +29,7 @@ export class PersonasComponent implements OnInit, AfterViewInit{
 
   sucursalesList:sucursalModel[] = []
 
-  loggedUser: currentUser = { Id: '', NombreUsuario: '', IdRol: '', NombrePersona: '' }
+  loggedUser: currentUser ;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,10 +42,10 @@ export class PersonasComponent implements OnInit, AfterViewInit{
     private sucursalesService:SucursalesService
   ) {
     this.dataSource = new MatTableDataSource<GetPersonasModel>();
+    this.loggedUser = this.authService.getCurrentUser()
   }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getCurrentUser()
     this.getData()
   }
 
