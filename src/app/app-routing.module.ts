@@ -19,6 +19,7 @@ import { MovimientosComponent } from './features/movimientos/movimientos.compone
 import { ReportesComponent } from './features/reportes/reportes.component';
 import { PermisosComponent } from './features/permisos/permisos.component';
 import { ColaboradoresComponent } from './features/colaboradores/colaboradores.component';
+import { UsuariosDetComponent } from './features/usuarios-det/usuarios-det.component';
 
 //canActivate:[AuthGuard] , 
 
@@ -41,7 +42,8 @@ const routes: Routes = [
   { path: "movimientos", component:MovimientosComponent, title: "ERP - Movimientos" },
   { path: "reportes", component:ReportesComponent, title: "ERP - Reportes" },
   { path: "permisos", component:PermisosComponent, title: "ERP - Permisos" },
-  {path: "colaboradores", component:ColaboradoresComponent, title: "ERP - Colaboradores"},
+  { path: "colaboradores", component:ColaboradoresComponent, title: "ERP - Colaboradores"},
+  { path: "usuarios_det", component:UsuariosDetComponent, title: "ERP - Modulo de usuarios detalles" },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
