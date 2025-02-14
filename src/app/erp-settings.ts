@@ -113,9 +113,9 @@ export class ERP {
     localStorage.setItem('bgColor', bgColor);
   }
 
-  getSettings() {
+  getSettings(theme:string) {
     const settings = {
-      color: localStorage.getItem('color') ?? 'blue',
+      color: theme,
       homeStyle: localStorage.getItem('homeStyle') ?? 'group',
       bgColor: localStorage.getItem('bgColor') ?? 'light',
       pictureStyle: localStorage.getItem('pictureStyle') ?? 'square',
@@ -124,11 +124,11 @@ export class ERP {
     return settings;
   }
 
-  loadSettings() {
-    this.setStyle(localStorage.getItem('color') ?? 'blue');
+  loadSettings(theme: string) {
+    this.setStyle(theme);
     this.setBgColor(
       localStorage.getItem('bgColor') ?? 'light',
-      localStorage.getItem('color') ?? 'blue'
+      theme
     );
     this.languageService.setLang('es-mx').subscribe();
   }

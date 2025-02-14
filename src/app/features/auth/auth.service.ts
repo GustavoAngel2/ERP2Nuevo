@@ -9,7 +9,7 @@ export interface currentUser {
   NombreUsuario: string;
   NombrePersona: string;
   IdRol: string;
-  Theme: string;
+  theme: string;
 }
 
 @Injectable({
@@ -29,7 +29,7 @@ export class AuthService {
       Id: sessionStorage.getItem('Id') ?? '',
       NombreUsuario: sessionStorage.getItem('NombreUsuario') ?? '',
       NombrePersona: sessionStorage.getItem('NombrePersona') ?? '',
-      Theme: sessionStorage.getItem('Theme') ?? 'blue',
+      theme: sessionStorage.getItem('Theme') ?? 'blue',
       IdRol : ''
     };
   }
@@ -43,6 +43,7 @@ export class AuthService {
           this.setIdUsername(response.Response.data.Usuario.Id.toString());
           this.setUsername(response.Response.data.Usuario.NombreUsuario);
           this.setRol(response.Response.data.Usuario.NombrePersona);
+          this.setTheme(response.Response.data.Usuario.theme);
           this.updateCurrentUser(response.Response.data.Usuario);
           return response.Response.data;
         } else {
@@ -62,7 +63,7 @@ export class AuthService {
     sessionStorage.removeItem('NombreUsuario');
     sessionStorage.removeItem('NombrePersona');
     sessionStorage.removeItem('Theme');
-    this.updateCurrentUser({ Id: '', NombreUsuario: '' ,NombrePersona:'', IdRol:'' , Theme: 'blue'});
+    this.updateCurrentUser({ Id: '', NombreUsuario: '' ,NombrePersona:'', IdRol:'' , theme: 'blue'});
   }
 
   getToken() {

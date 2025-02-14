@@ -15,3 +15,8 @@ export interface getUsuariosModel{
     FechaReg:string;
     Theme:string;
 }
+
+export interface updateThemeModel{
+    id:number;
+    theme:string;
+}

@@ -36,7 +36,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.erp.loadSettings();
+    console.log('Current user:', this.actualUser);
+    this.erp.loadSettings(this.actualUser.theme.toLowerCase());
     this.currentUrl = this.router.url;
 
     this.languageService.langData$.subscribe((data) => {
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Suscripción a cambios en la URL para recargar configuración
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
-        this.erp.loadSettings();
+        this.erp.loadSettings(this.actualUser.theme.toLowerCase());
         this.currentUrl = this.router.url;
         const root = document.documentElement.style;
         if (this.currentUrl != "/login"){

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultApiResponse } from '../models/response.model';
 import { AuthService } from '../../features/auth/auth.service';
-import { updateUsuarioModel } from '../models/usuario.model';
+import { updateThemeModel, updateUsuarioModel } from '../models/usuario.model';
 import { ERP } from '../../erp-settings';
 
 @Injectable({
@@ -57,6 +57,15 @@ export class UsusariosService {
       id: UsuarioData.id,
       usuario: UsuarioData.usuario,
       contrasena: UsuarioData.contrasena
+    };
+
+    return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/Usuarios/Update`, body);
+  }
+
+  updateTheme(data:updateThemeModel): Observable<defaultApiResponse> {
+    const body = {
+      id: data.id,
+      theme: data.theme
     };
 
     return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/Usuarios/Update`, body);

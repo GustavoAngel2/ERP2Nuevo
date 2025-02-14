@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ERP } from '../../erp-settings';
 import { OnInit } from '@angular/core';
 import { LanguageService } from '../../core/services/language.service';
+import { AuthService,currentUser } from '../auth/auth.service';
 
 @Component({
   selector: 'app-ajustes',
@@ -15,13 +16,17 @@ export class AjustesComponent implements OnInit{
   bgColor:string = '';
   selectedColor: string = '#ffffff'; // Color inicial
 
+  logedinUser: currentUser;
+
   currentLang: any;
 
-  constructor(private erp:ERP, public languageService:LanguageService){}
+  constructor(private erp:ERP, public languageService:LanguageService, private authService:AuthService){
+    this.logedinUser = this.authService.getCurrentUser()
+  }
 
   ngOnInit(): void {
-    this.settings = this.erp.getSettings();
-    this.color = this.settings.color
+    this.settings = this.erp.getSettings(this.logedinUser.theme.toLowerCase());
+    this.color = this.logedinUser.theme.toLowerCase()
     this.bgColor = this.settings.bgColor
 
     this.languageService.langData$.subscribe((data) => {

@@ -15,29 +15,8 @@
       <button class="btn-settings" style="background-color: var(--cyan);" (click)="this.setColorSystem('cyan')"></button>
       <button class="btn-settings" style="background-color: var(--mintgreen);" (click)="this.setColorSystem('mintgreen')"></button>
       <button class="btn-settings" style="background-color: var(--brown);"(click)="this.setColorSystem('brown')"></button>
-      <button class="btn-settings" style="background-color: var(--custom);" (click)="this.setColorSystem('custom')"></button>
     </div>
   </mat-expansion-panel>
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">customcolor</span> </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <input class="colpick" [disabled]="this.color != 'custom'" type="color" (change)="dev()" value="#ffaaaa">
-    <input class="colpick" [disabled]="this.color != 'custom'" type="color" (change)="dev()" value="#ff0000">
-    <input class="colpick" [disabled]="this.color != 'custom'" type="color" (change)="dev()" value="#660000">
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title><mat-icon>color_lens</mat-icon> <span class="section-title">preview</span> </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="button-strip-settings">
-      </div>
-    </mat-expansion-panel>
-  </mat-expansion-panel>
-
-
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
