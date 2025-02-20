@@ -2,13 +2,16 @@ export interface sucursalUpdateModel{
     id: number;
     nombre: string;
     direccion: string;
-    idUsuario: number;
+    usuarioAct: number;
+    abreviatura: string;
 }
 
 export interface sucursalInsertModel{
     nombre: string;
     direccion: string;
-    idUsuario: number;
+    usuarioReg: number;
+    usuarioAct: number;
+    abreviatura: string;
 }
 
 export interface sucursalModel{
@@ -17,5 +20,7 @@ export interface sucursalModel{
     FechaReg: string;
     Id: number;
     Nombre: string;
-    Usuario: string;
+    UsuarioReg: string;
+    UsuarioAct: string;
+    Abreviatura: string;
 }

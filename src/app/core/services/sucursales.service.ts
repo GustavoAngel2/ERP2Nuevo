@@ -26,8 +26,11 @@ export class SucursalesService {
     const body = {
       nombre: SucursalData.nombre,
       direccion: SucursalData.direccion,
-      idUsuario: SucursalData.idUsuario
+      usuarioReg: SucursalData.usuarioReg,
+      usuarioAct: SucursalData.usuarioAct,
+      abreviatura: SucursalData.abreviatura
     };
+    console.log('Body:', body);
     return this.http.post<defaultApiResponse>(`${this.erp.apiUrl}/Sucursales/Insert`, body);
   }
   deleteSucursal(Id: number): Observable<any> {
@@ -38,7 +41,8 @@ export class SucursalesService {
       id: SucursalData.id,
       nombre: SucursalData.nombre,
       direccion: SucursalData.direccion,
-      idUsuario: SucursalData.idUsuario
+      usuarioAct: SucursalData.usuarioAct,
+      abreviatura: SucursalData.abreviatura
     };
 
     return this.http.put<defaultApiResponse>(`${this.erp.apiUrl}/Sucursales/Update`, body);

@@ -19,12 +19,13 @@ import { sucursalInsertModel, sucursalModel, sucursalUpdateModel } from '../../c
   styleUrl: './sucursales.component.css'
 })
 export class SucursalesComponent implements OnInit,AfterViewInit {
-  displayedColumns: string[] = ['Id', 'Nombre', 'Direccion','FechaReg','FechaAct', 'Usuario', 'Acciones'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'Abr','Direccion','FechaReg','FechaAct', 'Usuario', 'Acciones'];
   dataSource: MatTableDataSource<sucursalModel>;
 
   id: number = 0;
   nombre: string = '';
   direccion: string = '';
+  abr:string = '';
   isModifying:boolean = false;
 
   loggedUser: currentUser;
@@ -45,7 +46,7 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  // Método para realizar el filtrado
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -60,13 +61,12 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
     this.dataSource.filterPredicate = (data: sucursalModel, filter: string) => {
       return data.Nombre.toLowerCase().includes(filter) ||
              data.Id.toString().includes(filter) ||
-             data.Direccion.toString().includes(filter)// Puedes añadir más campos si es necesario
-    };
+             data.Direccion.toString().includes(filter)
+      };
     this.sucursalesService.getSucursales().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response);
-        this.dataSource.data = response.Response.data; // Asigna los datos al atributo 'data' de dataSource
-        console.log(response)
+        this.dataSource.data = response.Response.data;
       },
       error: (error) => {
         console.error(error);
@@ -78,11 +78,11 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
     const nuevaSucursal:sucursalInsertModel = {
       nombre: this.nombre,
       direccion: this.direccion,
-      idUsuario: parseInt(this.loggedUser.Id,10)
+      abreviatura: this.abr,
+      usuarioAct: parseInt(this.loggedUser.Id,10),
+      usuarioReg: parseInt(this.loggedUser.Id,10)
     };
-
     console.log(nuevaSucursal)
-    // Aquí asumo que tienes un método en tu servicio para insertar el departamento
     this.sucursalesService.insertarSucursal(nuevaSucursal).subscribe({
       next: (response) => {
         if(response.StatusCode == 200){
@@ -94,7 +94,6 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
         this.limpiar();
       },
       error: (error) => {
-        // Manejar el error aquí
         console.error('Hubo un error al insertar el almacen', error);
       }
     });
@@ -129,6 +128,7 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
     this.id = elemento.Id
     this.nombre = elemento.Nombre
     this.direccion = elemento.Direccion
+    this.abr = elemento.Abreviatura
     this.isModifying = true
   }
 
@@ -144,7 +144,8 @@ export class SucursalesComponent implements OnInit,AfterViewInit {
       id: this.id,
       nombre: this.nombre,
       direccion: this.direccion,
-      idUsuario: parseInt(this.loggedUser.Id,10)
+      abreviatura: this.abr,
+      usuarioAct: parseInt(this.loggedUser.Id,10)
     };
 
     this.sucursalesService.updateSucursal(persona).subscribe({
